@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class SignupRequest {
+public class SignUpRequest {
     @Schema(example = "user3")
     @NotBlank
     private String username;

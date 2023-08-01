@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Security;
 
+import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,10 +34,10 @@ public class Configuration_WebSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN, USER)
-                        .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN, USER)
-                        .requestMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN)
-                        .requestMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN.toString())
+                        .requestMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
@@ -53,6 +54,7 @@ public class Configuration_WebSecurity {
         return new BCryptPasswordEncoder();
     }
 
-    public static final String ADMIN = "ADMIN";
-    public static final String USER = "USER";
+    public static final UserCategories ADMIN = UserCategories.Administrator;
+    public static final UserCategories LANDLORD = UserCategories.Landlord;
+    public static final UserCategories CLIENT = UserCategories.Client;
 }
