@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Mapper;
 
+import com.travel_website.travel_website_2_backend.DTO.CreateReservationRequest;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ public class ReservationMapperImplementation implements ReservationMapper{
     public Reservation toReserve(CreateReservationRequest createReservationRequest)
     {
         if(createReservationRequest == null){ return null; }
-        return new Reservation(createReservationRequest.getDescription());
+        return new Reservation(createReservationRequest.getUser(), createReservationRequest.getRoom(), createReservationRequest.getPpn() , createReservationRequest.getStart(), createReservationRequest.getEnd());
     }
 
     @Override
