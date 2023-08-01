@@ -2,6 +2,7 @@ package com.travel_website.travel_website_2_backend.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
@@ -15,52 +16,52 @@ public class Room {
     private int id;
 
     @Column(name = "type_of_room")
-    @NotNull
+    @NotBlank
     private TypeOfRoom typeofroom;
 
     @Column(name = "num_of_beds")
-    @NotNull
+    @NotBlank
     @Min(value = 1, message = "At least one bed")
     private int NumOfBeds;
 
     @Column(name = "num_of_baths")
-    @NotNull
+    @NotBlank
     @Min(value = 1, message = "At least one bed")
     private int NumOfBaths;
 
     @Column(name = "num_of_bedrooms")
-    @NotNull
+    @NotBlank
     @Min(value = 1, message = "At least one bed")
     private int NumOfBedrooms;
 
     @Column(name = "livingroom")
-    @NotNull
+    @NotBlank
     private boolean living_room;
 
     @Column(name = "area")
-    @NotNull
+    @NotBlank
     private int area;
 
     @Column(name = "description")
-    @NotNull
+    @NotBlank
     //TODO set limit of 1000 characters
     private String description;
 
     //Rules
     @Column(name = "smoking")
-    @NotNull
+    @NotBlank
     private boolean smoking;
 
     @Column(name = "pets")
-    @NotNull
+    @NotBlank
     private boolean pets;
 
     @Column(name = "events")
-    @NotNull
+    @NotBlank
     private boolean events;
 
     @Column(name = "minimum_days")
-    @NotNull
+    @NotBlank
     private int minimum_days;
 
     @OneToOne(mappedBy = "room")
@@ -69,31 +70,31 @@ public class Room {
     //TODO add photos
 
     @Column(name = "internet")
-    @NotNull
+    @NotBlank
     private boolean internet;
 
     @Column(name = "cooling")
-    @NotNull
+    @NotBlank
     private boolean cooling;
 
     @Column(name = "heating")
-    @NotNull
+    @NotBlank
     private boolean heating;
 
     @Column(name = "kitchen")
-    @NotNull
+    @NotBlank
     private boolean kitchen;
 
     @Column(name = "tv")
-    @NotNull
+    @NotBlank
     private boolean tv;
 
     @Column(name = "parking")
-    @NotNull
+    @NotBlank
     private boolean parking;
 
     @Column(name = "elevator")
-    @NotNull
+    @NotBlank
     private boolean elevator;
 
     public Room() {

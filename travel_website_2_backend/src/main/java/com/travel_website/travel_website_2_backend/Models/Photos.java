@@ -1,6 +1,7 @@
 package com.travel_website.travel_website_2_backend.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
@@ -15,7 +16,7 @@ public class Photos {
     private int id;
 
     @Column(name = "path")
-    @NotNull
+    @NotBlank
     private String path;
 
     public Photos(String path) {

@@ -1,6 +1,7 @@
 package com.travel_website.travel_website_2_backend.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
@@ -22,15 +23,15 @@ public class Reservation {
     private Room booked_room;
 
     @Column(name = "price_per_night")
-    @NotNull
+    @NotBlank
     private int ppn;
 
     @Column(name = "start_date")
-    @NotNull
+    @NotBlank
     private LocalDate start;
 
     @Column(name = "end_date")
-    @NotNull
+    @NotBlank
     private LocalDate end;
 
     public Reservation(User client, Room booked_room, int ppn, LocalDate start, LocalDate end) {

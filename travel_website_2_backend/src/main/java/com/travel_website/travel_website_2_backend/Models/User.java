@@ -2,6 +2,7 @@ package com.travel_website.travel_website_2_backend.Models;
 
 //import com.travel_website.travel_website_2_backend.Exception.EntityException;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.io.Serializable;
@@ -16,23 +17,23 @@ public class User implements Serializable {
     private int Id;
 
     @Column(name = "name")
-    @NotNull
+    @NotBlank
     private String name;
 
     @Column(name = "surname")
-    @NotNull
+    @NotBlank
     private String surname;
 
     @Column(name = "email")
-    @NotNull
+    @NotBlank
     private String email;
 
     @Column(name = "telephone", length = 14)
-    @NotNull
+    @NotBlank
     private long telephone;
 
     @Column(name = "photo")
-    @NotNull
+    @NotBlank
     //TODO Add default picture with "default <path to default picture>" after line below
     private String photo;
 

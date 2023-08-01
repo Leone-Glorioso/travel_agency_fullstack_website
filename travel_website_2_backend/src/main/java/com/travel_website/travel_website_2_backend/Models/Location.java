@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
@@ -15,17 +16,16 @@ public class Location {
 //TODO add openstreetmap
     @Id
     @Column(name = "id")
-    @NotNull
     private int id;
 
     @Column(name = "address")
-    @NotNull
+    @NotBlank
     private String address;
     @Column(name = "neighbourhood")
-    @NotNull
+    @NotBlank
     private String neighbourhood;
     @Column(name = "transportation")
-    @NotNull
+    @NotBlank
     private String transportation;
 
     public Location(String address, String neighbourhood, String transportation) {
