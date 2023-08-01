@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -48,6 +49,10 @@ public class User implements Serializable {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private Set<Reservation> reservationSet;
+
 
     public static class UserBuilder{
 
@@ -235,6 +240,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Reservation> getReservationSet() {
+        return reservationSet;
+    }
+
+    public void setReservationSet(Set<Reservation> reservationSet) {
+        this.reservationSet = reservationSet;
     }
 
     @Override

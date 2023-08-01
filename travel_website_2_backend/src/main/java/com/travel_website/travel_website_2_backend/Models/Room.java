@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -64,7 +65,7 @@ public class Room {
     @NotBlank
     private int minimum_days;
 
-    @OneToOne(mappedBy = "room")
+    @ManyToOne
     private Location location;
 
     //TODO add photos
@@ -96,6 +97,9 @@ public class Room {
     @Column(name = "elevator")
     @NotBlank
     private boolean elevator;
+
+    @OneToMany(mappedBy = "booked_room")
+    private Set<Reservation> reservations;
 
     public Room() {
 
@@ -281,6 +285,14 @@ public class Room {
 
     public void setElevator(boolean elevator) {
         this.elevator = elevator;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override

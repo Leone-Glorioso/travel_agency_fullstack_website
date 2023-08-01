@@ -1,14 +1,12 @@
 package com.travel_website.travel_website_2_backend.Models;
 //import org.openstreetmap.gui.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.antlr.v4.runtime.misc.NotNull;
+//import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "location")
@@ -27,6 +25,9 @@ public class Location {
     @Column(name = "transportation")
     @NotBlank
     private String transportation;
+
+    @OneToMany(mappedBy = "location")
+    private Set<Room> rooms;
 
     public Location(String address, String neighbourhood, String transportation) {
         this.address = address;
@@ -68,6 +69,14 @@ public class Location {
 
     public void setTransportation(String transportation) {
         this.transportation = transportation;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override

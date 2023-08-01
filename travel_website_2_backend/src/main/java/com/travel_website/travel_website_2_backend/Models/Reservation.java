@@ -16,10 +16,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(mappedBy = "reservation")
+    @ManyToOne
     private User client;
 
-    @OneToOne(mappedBy = "reservation")
+    @ManyToOne
     private Room booked_room;
 
     @Column(name = "price_per_night")
