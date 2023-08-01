@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+travel_website_2_backend_1/src/main/resources/application.properties
