@@ -1,0 +1,299 @@
+package com.travel_website.travel_website_2_backend.Models;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import org.antlr.v4.runtime.misc.NotNull;
+
+import java.util.Objects;
+
+@Entity
+@Table(name = "room")
+public class Room {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "type_of_room")
+    @NotNull
+    private TypeOfRoom typeofroom;
+
+    @Column(name = "num_of_beds")
+    @NotNull
+    @Min(value = 1, message = "At least one bed")
+    private int NumOfBeds;
+
+    @Column(name = "num_of_baths")
+    @NotNull
+    @Min(value = 1, message = "At least one bed")
+    private int NumOfBaths;
+
+    @Column(name = "num_of_bedrooms")
+    @NotNull
+    @Min(value = 1, message = "At least one bed")
+    private int NumOfBedrooms;
+
+    @Column(name = "livingroom")
+    @NotNull
+    private boolean living_room;
+
+    @Column(name = "area")
+    @NotNull
+    private int area;
+
+    @Column(name = "description")
+    @NotNull
+    //TODO set limit of 1000 characters
+    private String description;
+
+    //Rules
+    @Column(name = "smoking")
+    @NotNull
+    private boolean smoking;
+
+    @Column(name = "pets")
+    @NotNull
+    private boolean pets;
+
+    @Column(name = "events")
+    @NotNull
+    private boolean events;
+
+    @Column(name = "minimum_days")
+    @NotNull
+    private int minimum_days;
+
+    @OneToOne(mappedBy = "room")
+    private Location location;
+
+    //TODO add photos
+
+    @Column(name = "internet")
+    @NotNull
+    private boolean internet;
+
+    @Column(name = "cooling")
+    @NotNull
+    private boolean cooling;
+
+    @Column(name = "heating")
+    @NotNull
+    private boolean heating;
+
+    @Column(name = "kitchen")
+    @NotNull
+    private boolean kitchen;
+
+    @Column(name = "tv")
+    @NotNull
+    private boolean tv;
+
+    @Column(name = "parking")
+    @NotNull
+    private boolean parking;
+
+    @Column(name = "elevator")
+    @NotNull
+    private boolean elevator;
+
+    public Room() {
+
+    }
+
+    public Room(TypeOfRoom typeofroom, int numOfBeds, int numOfBaths, int numOfBedrooms, boolean living_room, int area, String description, boolean smoking, boolean pets, boolean events, int minimum_days, Location location, boolean internet, boolean cooling, boolean heating, boolean kitchen, boolean tv, boolean parking, boolean elevator) {
+        this.typeofroom = typeofroom;
+        NumOfBeds = numOfBeds;
+        NumOfBaths = numOfBaths;
+        NumOfBedrooms = numOfBedrooms;
+        this.living_room = living_room;
+        this.area = area;
+        this.description = description;
+        this.smoking = smoking;
+        this.pets = pets;
+        this.events = events;
+        this.minimum_days = minimum_days;
+        this.location = location;
+        this.internet = internet;
+        this.cooling = cooling;
+        this.heating = heating;
+        this.kitchen = kitchen;
+        this.tv = tv;
+        this.parking = parking;
+        this.elevator = elevator;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public TypeOfRoom getTypeofroom() {
+        return typeofroom;
+    }
+
+    public void setTypeofroom(TypeOfRoom typeofroom) {
+        this.typeofroom = typeofroom;
+    }
+
+    public int getNumOfBeds() {
+        return NumOfBeds;
+    }
+
+    public void setNumOfBeds(int numOfBeds) {
+        NumOfBeds = numOfBeds;
+    }
+
+    public int getNumOfBaths() {
+        return NumOfBaths;
+    }
+
+    public void setNumOfBaths(int numOfBaths) {
+        NumOfBaths = numOfBaths;
+    }
+
+    public int getNumOfBedrooms() {
+        return NumOfBedrooms;
+    }
+
+    public void setNumOfBedrooms(int numOfBedrooms) {
+        NumOfBedrooms = numOfBedrooms;
+    }
+
+    public boolean isLiving_room() {
+        return living_room;
+    }
+
+    public void setLiving_room(boolean living_room) {
+        this.living_room = living_room;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(boolean smoking) {
+        this.smoking = smoking;
+    }
+
+    public boolean isPets() {
+        return pets;
+    }
+
+    public void setPets(boolean pets) {
+        this.pets = pets;
+    }
+
+    public boolean isEvents() {
+        return events;
+    }
+
+    public void setEvents(boolean events) {
+        this.events = events;
+    }
+
+    public int getMinimum_days() {
+        return minimum_days;
+    }
+
+    public void setMinimum_days(int minimum_days) {
+        this.minimum_days = minimum_days;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public boolean isInternet() {
+        return internet;
+    }
+
+    public void setInternet(boolean internet) {
+        this.internet = internet;
+    }
+
+    public boolean isCooling() {
+        return cooling;
+    }
+
+    public void setCooling(boolean cooling) {
+        this.cooling = cooling;
+    }
+
+    public boolean isHeating() {
+        return heating;
+    }
+
+    public void setHeating(boolean heating) {
+        this.heating = heating;
+    }
+
+    public boolean isKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(boolean kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    public boolean isTv() {
+        return tv;
+    }
+
+    public void setTv(boolean tv) {
+        this.tv = tv;
+    }
+
+    public boolean isParking() {
+        return parking;
+    }
+
+    public void setParking(boolean parking) {
+        this.parking = parking;
+    }
+
+    public boolean isElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return id == room.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
+}
