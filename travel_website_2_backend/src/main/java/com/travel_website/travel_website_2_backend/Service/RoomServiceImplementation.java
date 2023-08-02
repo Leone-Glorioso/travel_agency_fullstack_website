@@ -51,11 +51,11 @@ public class RoomServiceImplementation implements RoomService{
 
     @Override
     public List<Room> findRoomsWithCharacteristics(TypeOfRoom typeOfRoom,
-                                            int numofbeds,
-                                            int numofbaths,
-                                            int numofbedrooms,
+                                            int numOfBeds,
+                                            int numOfBaths,
+                                            int numOfBedrooms,
                                             int area,
-                                            boolean livingroom,
+                                            boolean livingRoom,
                                             boolean smoking,
                                             boolean pets,
                                             boolean events,
@@ -69,11 +69,11 @@ public class RoomServiceImplementation implements RoomService{
     {
         Collection<Room> collection = roomRepository.findAll();
         collection.retainAll(roomRepository.findRoomsByTypeofroom(typeOfRoom));
-        collection.retainAll(roomRepository.findRoomsByNumOfBeds(numofbeds));
-        collection.retainAll(roomRepository.findRoomsByNumOfBaths(numofbaths));
-        collection.retainAll(roomRepository.findRoomsByNumOfBedrooms(numofbedrooms));
+        collection.retainAll(roomRepository.findRoomsByNumOfBeds(numOfBeds));
+        collection.retainAll(roomRepository.findRoomsByNumOfBaths(numOfBaths));
+        collection.retainAll(roomRepository.findRoomsByNumOfBedrooms(numOfBedrooms));
         collection.retainAll(roomRepository.findRoomsByArea(area));
-        collection.retainAll(roomRepository.findRoomsByLivingRoom(livingroom));
+        collection.retainAll(roomRepository.findRoomsByLivingRoom(livingRoom));
         collection.retainAll(roomRepository.findRoomsBySmoking(smoking));
         collection.retainAll(roomRepository.findRoomsByPets(pets));
         collection.retainAll(roomRepository.findRoomsByEvents(events));
@@ -84,7 +84,6 @@ public class RoomServiceImplementation implements RoomService{
         collection.retainAll(roomRepository.findRoomsByTv(tv));
         collection.retainAll(roomRepository.findRoomsByParking(parking));
         collection.retainAll(roomRepository.findRoomsByElevator(elevator));
-        List<Room> returnList = new ArrayList<>(collection);
-        return returnList;
+        return new ArrayList<>(collection);
     }
 }
