@@ -53,86 +53,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client")
     private Set<Reservation> reservationSet;
 
+    @OneToMany(mappedBy = "landlord")
+    private Set<Room> rooms;
 
-    public static class UserBuilder{
-
-        private int id;
-        private String name;
-        private String surname;
-        private String email;
-        private long telephone;
-        private String photo;
-        private String country;
-        private UserCategories role;
-        private String username;
-        private String password;
-
-        public UserBuilder(int id, String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
-            this.id = id;
-            this.name = name;
-            this.surname = surname;
-            this.email = email;
-            this.telephone = telephone;
-            this.photo = photo;
-            this.country = country;
-            this.role = role;
-            this.username = username;
-            this.password = password;
-        }
-
-
-
-        public UserBuilder() {
-
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setSurname(String surname) {
-            this.surname = surname;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public void setTelephone(long telephone) {
-            this.telephone = telephone;
-        }
-
-        public void setPhoto(String photo) {
-            this.photo = photo;
-        }
-
-        public void setCountry(String country) {
-            this.country = country;
-        }
-
-        public void setRole(UserCategories role) {
-            this.role = role;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-//        public User build() throws EntityException {
-//            return new User(this);
-//        }
-
-    }
-
-    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
+    public User(int id, String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {
+        Id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -142,21 +67,13 @@ public class User implements Serializable {
         this.role = role;
         this.username = username;
         this.password = password;
+        this.reservationSet = null;
+        this.rooms = null;
+        if(role == UserCategories.Client)
+            this.reservationSet = reservationSet;
+        if (role == UserCategories.Landlord)
+            this.rooms = rooms;
     }
-
-//    public User(UserBuilder builder) throws EntityException {
-//        super();
-//        setId(builder.id);
-//        setName(builder.name);
-//        setSurname(builder.surname);
-//        setEmail(builder.email);
-//        setTelephone(builder.telephone);
-//        setPhoto(builder.photo);
-//        setCountry(builder.country);
-//        setRole(builder.role);
-//        setUsername(builder.username);
-//        setPassword(builder.password);
-//    }
 
     public User() {
 
@@ -248,6 +165,14 @@ public class User implements Serializable {
 
     public void setReservationSet(Set<Reservation> reservationSet) {
         this.reservationSet = reservationSet;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class RoomServiceImplementation implements RoomService{
     public List<Room> getRoomsByLandlord(User landlord)
     {
         //TODO fix
-        return roomRepository.findAll();
+        return roomRepository.findRoomsByLandlord(landlord);
     }
 
     @Override

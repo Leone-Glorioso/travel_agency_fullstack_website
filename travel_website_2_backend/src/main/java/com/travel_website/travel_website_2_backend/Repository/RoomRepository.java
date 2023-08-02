@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.Repository;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
+import com.travel_website.travel_website_2_backend.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     List<Room> findRoomsByElevator(boolean elevator);
 
     List<Room> findRoomsByLocation(Location location);
+
+    List<Room> findRoomsByLandlord(User landlord);
 
 
 }
