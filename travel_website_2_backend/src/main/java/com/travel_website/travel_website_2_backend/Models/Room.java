@@ -22,21 +22,21 @@ public class Room {
     @Column(name = "num_of_beds")
     @NotBlank
     @Min(value = 1, message = "At least one bed")
-    private int NumOfBeds;
+    private int numOfBeds;
 
     @Column(name = "num_of_baths")
     @NotBlank
     @Min(value = 1, message = "At least one bed")
-    private int NumOfBaths;
+    private int numOfBaths;
 
     @Column(name = "num_of_bedrooms")
     @NotBlank
     @Min(value = 1, message = "At least one bed")
-    private int NumOfBedrooms;
+    private int numOfBedrooms;
 
     @Column(name = "livingroom")
     @NotBlank
-    private boolean living_room;
+    private boolean livingRoom;
 
     @Column(name = "area")
     @NotBlank
@@ -62,7 +62,7 @@ public class Room {
 
     @Column(name = "minimum_days")
     @NotBlank
-    private int minimum_days;
+    private int minimumDays;
 
     @ManyToOne
     private Location location;
@@ -97,7 +97,7 @@ public class Room {
     @NotBlank
     private boolean elevator;
 
-    @OneToMany(mappedBy = "booked_room")
+    @OneToMany(mappedBy = "bookedRoom")
     private Set<Reservation> reservations;
 
     @ManyToOne
@@ -107,18 +107,18 @@ public class Room {
 
     }
 
-    public Room(TypeOfRoom typeofroom, int numOfBeds, int numOfBaths, int numOfBedrooms, boolean living_room, int area, String description, boolean smoking, boolean pets, boolean events, int minimum_days, Location location, boolean internet, boolean cooling, boolean heating, boolean kitchen, boolean tv, boolean parking, boolean elevator) {
+    public Room(TypeOfRoom typeofroom, int numOfBeds, int numOfBaths, int numOfBedrooms, boolean livingRoom, int area, String description, boolean smoking, boolean pets, boolean events, int minimumDays, Location location, boolean internet, boolean cooling, boolean heating, boolean kitchen, boolean tv, boolean parking, boolean elevator) {
         this.typeofroom = typeofroom;
-        NumOfBeds = numOfBeds;
-        NumOfBaths = numOfBaths;
-        NumOfBedrooms = numOfBedrooms;
-        this.living_room = living_room;
+        this.numOfBeds = numOfBeds;
+        this.numOfBaths = numOfBaths;
+        this.numOfBedrooms = numOfBedrooms;
+        this.livingRoom = livingRoom;
         this.area = area;
         this.description = description;
         this.smoking = smoking;
         this.pets = pets;
         this.events = events;
-        this.minimum_days = minimum_days;
+        this.minimumDays = minimumDays;
         this.location = location;
         this.internet = internet;
         this.cooling = cooling;
@@ -146,35 +146,35 @@ public class Room {
     }
 
     public int getNumOfBeds() {
-        return NumOfBeds;
+        return numOfBeds;
     }
 
     public void setNumOfBeds(int numOfBeds) {
-        NumOfBeds = numOfBeds;
+        this.numOfBeds = numOfBeds;
     }
 
     public int getNumOfBaths() {
-        return NumOfBaths;
+        return numOfBaths;
     }
 
     public void setNumOfBaths(int numOfBaths) {
-        NumOfBaths = numOfBaths;
+        this.numOfBaths = numOfBaths;
     }
 
     public int getNumOfBedrooms() {
-        return NumOfBedrooms;
+        return numOfBedrooms;
     }
 
     public void setNumOfBedrooms(int numOfBedrooms) {
-        NumOfBedrooms = numOfBedrooms;
+        this.numOfBedrooms = numOfBedrooms;
     }
 
-    public boolean isLiving_room() {
-        return living_room;
+    public boolean isLivingRoom() {
+        return livingRoom;
     }
 
-    public void setLiving_room(boolean living_room) {
-        this.living_room = living_room;
+    public void setLivingRoom(boolean living_room) {
+        this.livingRoom = living_room;
     }
 
     public int getArea() {
@@ -217,12 +217,12 @@ public class Room {
         this.events = events;
     }
 
-    public int getMinimum_days() {
-        return minimum_days;
+    public int getMinimumDays() {
+        return minimumDays;
     }
 
-    public void setMinimum_days(int minimum_days) {
-        this.minimum_days = minimum_days;
+    public void setMinimumDays(int minimum_days) {
+        this.minimumDays = minimum_days;
     }
 
     public Location getLocation() {

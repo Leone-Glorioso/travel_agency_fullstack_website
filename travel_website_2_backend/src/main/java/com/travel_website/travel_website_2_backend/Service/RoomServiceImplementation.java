@@ -4,16 +4,13 @@ import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
 import com.travel_website.travel_website_2_backend.Models.User;
-import com.travel_website.travel_website_2_backend.Repository.ReservationRepository;
 import com.travel_website.travel_website_2_backend.Repository.RoomRepository;
-import com.travel_website.travel_website_2_backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,7 +18,6 @@ import java.util.List;
 public class RoomServiceImplementation implements RoomService{
 
     private final RoomRepository roomRepository;
-    private final UserRepository userRepository;
     @Override
     public List<Room> getRooms()
     {
@@ -55,11 +51,11 @@ public class RoomServiceImplementation implements RoomService{
 
     @Override
     public List<Room> findRoomsWithCharacteristics(TypeOfRoom typeOfRoom,
-                                            int numofbeds,
-                                            int numofbaths,
-                                            int numofbedrooms,
+                                            int numOfBeds,
+                                            int numOfBaths,
+                                            int numOfBedrooms,
                                             int area,
-                                            boolean livingroom,
+                                            boolean livingRoom,
                                             boolean smoking,
                                             boolean pets,
                                             boolean events,
@@ -73,11 +69,11 @@ public class RoomServiceImplementation implements RoomService{
     {
         Collection<Room> collection = roomRepository.findAll();
         collection.retainAll(roomRepository.findRoomsByTypeofroom(typeOfRoom));
-        collection.retainAll(roomRepository.findRoomsByNumOfBeds(numofbeds));
-        collection.retainAll(roomRepository.findRoomsByNumOfBaths(numofbaths));
-        collection.retainAll(roomRepository.findRoomsByNumOfBedrooms(numofbedrooms));
+        collection.retainAll(roomRepository.findRoomsByNumOfBeds(numOfBeds));
+        collection.retainAll(roomRepository.findRoomsByNumOfBaths(numOfBaths));
+        collection.retainAll(roomRepository.findRoomsByNumOfBedrooms(numOfBedrooms));
         collection.retainAll(roomRepository.findRoomsByArea(area));
-        collection.retainAll(roomRepository.findRoomsByLiving_room(livingroom));
+        collection.retainAll(roomRepository.findRoomsByLivingRoom(livingRoom));
         collection.retainAll(roomRepository.findRoomsBySmoking(smoking));
         collection.retainAll(roomRepository.findRoomsByPets(pets));
         collection.retainAll(roomRepository.findRoomsByEvents(events));
@@ -88,7 +84,6 @@ public class RoomServiceImplementation implements RoomService{
         collection.retainAll(roomRepository.findRoomsByTv(tv));
         collection.retainAll(roomRepository.findRoomsByParking(parking));
         collection.retainAll(roomRepository.findRoomsByElevator(elevator));
-        List<Room> returnList = new ArrayList<>(collection);
-        return returnList;
+        return new ArrayList<>(collection);
     }
 }

@@ -4,6 +4,7 @@ import com.travel_website.travel_website_2_backend.DTO.CreateReservationRequest;
 import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
 import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
+import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
 import com.travel_website.travel_website_2_backend.Service.ReservationService;
@@ -16,6 +17,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +35,16 @@ public class ReservationController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping
-    public List<ReservationDTO> getReservations(@RequestParam(value = "int", required = false) int id, @RequestParam(value = "text", required = false) String text) {
-        List<Reservation> orders = (text == null) ? reservationService.getReservations() : reservationService.getReservationsContainingText(id, text);
-        return orders.stream()
+    public List<ReservationDTO> getReservations(@RequestParam(value = "int", required = false) int id, @RequestParam(required = false) User client, @RequestParam(required = false) Room room) {
+        Collection<Reservation> col = new ArrayList<>(reservationService.getReservations());
+        if(client != null) {
+             col.retainAll(reservationService.getReservationsOfClient(client));
+        }
+        if (room != null) {
+            col.retainAll(reservationService.getReservationsOfRoom(room));
+        }
+        List<Reservation> reservations = new ArrayList<>(col);
+        return reservations.stream()
                 .map(reservationMapper::toReserveDto)
                 .collect(Collectors.toList());
     }
