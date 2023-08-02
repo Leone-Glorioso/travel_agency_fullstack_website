@@ -56,8 +56,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "landlord")
     private Set<Room> rooms;
 
-    public User(int id, String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {
-        Id = id;
+    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -74,6 +73,20 @@ public class User implements Serializable {
         if (role == UserCategories.Landlord)
             this.rooms = rooms;
     }
+    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.telephone = telephone;
+        this.photo = photo;
+        this.country = country;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.reservationSet = null;
+        this.rooms = null;
+    }
+
 
     public User() {
 
