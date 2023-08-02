@@ -16,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 
+import javax.crypto.SecretKey;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
@@ -43,11 +44,12 @@ public class Component_TokenProvider {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        byte[] signingKey = jwtSecret.getBytes();
+        //byte[] signingKey = jwtSecret.getBytes();
+        SecretKey signingKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
 
         return Jwts.builder()
                 .setHeaderParam("typ", TOKEN_TYPE)
-                .signWith(SignatureAlgorithm.HS512, Keys.hmacShaKeyFor(signingKey))
+                .signWith(signingKey, SignatureAlgorithm.HS512)
                 .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(jwtExpirationMinutes).toInstant()))
                 .setIssuedAt(Date.from(ZonedDateTime.now().toInstant()))
                 .setId(UUID.randomUUID().toString())
@@ -65,8 +67,9 @@ public class Component_TokenProvider {
         try {
             byte[] signingKey = jwtSecret.getBytes();
 
-            Jws<Claims> jws = Jwts.parser()
+            Jws<Claims> jws = Jwts.parserBuilder()
                     .setSigningKey(signingKey)
+                    .build()
                     .parseClaimsJws(token);
 
             return Optional.of(jws);

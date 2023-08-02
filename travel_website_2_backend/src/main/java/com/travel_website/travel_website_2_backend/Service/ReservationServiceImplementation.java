@@ -4,6 +4,7 @@ import com.travel_website.travel_website_2_backend.Exception.Exception_Reservati
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +16,13 @@ public class ReservationServiceImplementation implements ReservationService{
 
     @Override
     public List<Reservation> getReservations() {
-        return reservationRepository.findAllByReservationByCreatedAtDesc();
+        return reservationRepository.findAll(Sort.by(Sort.Direction.DESC));
     }
 
-    @Override
+   /* @Override
     public List<Reservation> getReservationsContainingText(int id, String text) {
         return reservationRepository.findByIdContainingOrDescriptionContainingIgnoreCaseOrderByCreatedAt(id, text);
-    }
+    }*/
 
     @Override
     public Reservation validateAndGetReservation(int id) {

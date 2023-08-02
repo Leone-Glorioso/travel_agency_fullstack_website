@@ -7,7 +7,7 @@ import java.util.List;
 public interface ReservationService {
     List<Reservation> getReservations();
 
-    List<Reservation> getReservationsContainingText(int id, String text);
+    //List<Reservation> getReservationsContainingText(int id, String text);
 
     Reservation validateAndGetReservation(int id);
 

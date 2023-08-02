@@ -4,8 +4,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,15 +15,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
 import java.io.IOException;
 import java.util.Optional;
 
 @Slf4j
-@RequiredArgsConstructor
+/*@RequiredArgsConstructor*/
 @Component
 public class Component_Filter_TokenAuthentication extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final Component_TokenProvider tokenProvider;
+
+    @Autowired
+    public Component_Filter_TokenAuthentication(UserDetailsService userDetailsService,Component_TokenProvider tokenProvider){
+        this.userDetailsService=userDetailsService;
+        this.tokenProvider=tokenProvider;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
