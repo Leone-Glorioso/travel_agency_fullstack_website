@@ -77,7 +77,7 @@ public class RoomServiceImplementation implements RoomService{
         collection.retainAll(roomRepository.findRoomsByNumOfBaths(numofbaths));
         collection.retainAll(roomRepository.findRoomsByNumOfBedrooms(numofbedrooms));
         collection.retainAll(roomRepository.findRoomsByArea(area));
-        collection.retainAll(roomRepository.findRoomsByLiving_room(livingroom));
+        collection.retainAll(roomRepository.findRoomsByLivingRoom(livingroom));
         collection.retainAll(roomRepository.findRoomsBySmoking(smoking));
         collection.retainAll(roomRepository.findRoomsByPets(pets));
         collection.retainAll(roomRepository.findRoomsByEvents(events));

@@ -2,7 +2,6 @@ package com.travel_website.travel_website_2_backend.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class Reservation {
     private User client;
 
     @ManyToOne
-    private Room booked_room;
+    private Room bookedRoom;
 
     @Column(name = "price_per_night")
     @NotBlank
@@ -34,9 +33,9 @@ public class Reservation {
     @NotBlank
     private LocalDate end;
 
-    public Reservation(User client, Room booked_room, int ppn, LocalDate start, LocalDate end) {
+    public Reservation(User client, Room bookedRoom, int ppn, LocalDate start, LocalDate end) {
         this.client = client;
-        this.booked_room = booked_room;
+        this.bookedRoom = bookedRoom;
         this.ppn = ppn;
         this.start = start;
         this.end = end;
@@ -62,12 +61,12 @@ public class Reservation {
         this.client = client;
     }
 
-    public Room getBooked_room() {
-        return booked_room;
+    public Room getBookedRoom() {
+        return bookedRoom;
     }
 
-    public void setBooked_room(Room booked_room) {
-        this.booked_room = booked_room;
+    public void setBookedRoom(Room booked_room) {
+        this.bookedRoom = booked_room;
     }
 
     public int getPpn() {

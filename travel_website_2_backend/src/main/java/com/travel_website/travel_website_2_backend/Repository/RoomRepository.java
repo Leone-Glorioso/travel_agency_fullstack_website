@@ -22,7 +22,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     List<Room> findRoomsByArea(int area);
 
-    List<Room> findRoomsByLiving_room(boolean livingRoom);
+    List<Room> findRoomsByLivingRoom(boolean livingRoom);
     List<Room> findRoomsBySmoking(boolean smoking);
     List<Room> findRoomsByPets(boolean pets);
     List<Room> findRoomsByEvents(boolean events);
