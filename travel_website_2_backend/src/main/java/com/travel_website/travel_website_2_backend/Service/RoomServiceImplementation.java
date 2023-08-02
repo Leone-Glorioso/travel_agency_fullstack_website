@@ -4,16 +4,13 @@ import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
 import com.travel_website.travel_website_2_backend.Models.User;
-import com.travel_website.travel_website_2_backend.Repository.ReservationRepository;
 import com.travel_website.travel_website_2_backend.Repository.RoomRepository;
-import com.travel_website.travel_website_2_backend.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,7 +18,6 @@ import java.util.List;
 public class RoomServiceImplementation implements RoomService{
 
     private final RoomRepository roomRepository;
-    private final UserRepository userRepository;
     @Override
     public List<Room> getRooms()
     {
