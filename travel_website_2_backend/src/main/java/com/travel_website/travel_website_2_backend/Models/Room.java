@@ -3,7 +3,6 @@ package com.travel_website.travel_website_2_backend.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
 import java.util.Set;
@@ -100,6 +99,9 @@ public class Room {
 
     @OneToMany(mappedBy = "booked_room")
     private Set<Reservation> reservations;
+
+    @ManyToOne
+    private User landlord;
 
     public Room() {
 
