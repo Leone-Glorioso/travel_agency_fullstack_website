@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.travel_website</groupId>
     <artifactId>travel_website_2_backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>[0.0.1-SNAPSHOT,)</version>
     <name>travel_website_2_backend</name>
     <description>travel_website_2_backend</description>
     <properties>

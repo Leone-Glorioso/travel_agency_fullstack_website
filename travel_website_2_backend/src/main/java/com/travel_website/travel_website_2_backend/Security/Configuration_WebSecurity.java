@@ -1,6 +1,6 @@
 package com.travel_website.travel_website_2_backend.Security;
 
-/*
+
 import org.springframework.http.HttpMethod;
 import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import lombok.RequiredArgsConstructor;
@@ -63,7 +63,6 @@ public class Configuration_WebSecurity {
     public static final UserCategories LANDLORD = UserCategories.Landlord;
     public static final UserCategories CLIENT = UserCategories.Client;
 }
-*/
 
 
 
@@ -80,7 +79,8 @@ public class Configuration_WebSecurity {
 
 
 
-import org.springframework.http.HttpMethod;
+
+/*import org.springframework.http.HttpMethod;
 import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -142,4 +142,4 @@ public class Configuration_WebSecurity {
     public static final UserCategories ADMIN = UserCategories.Administrator;
     public static final UserCategories LANDLORD = UserCategories.Landlord;
     public static final UserCategories CLIENT = UserCategories.Client;
-}
+}*/
