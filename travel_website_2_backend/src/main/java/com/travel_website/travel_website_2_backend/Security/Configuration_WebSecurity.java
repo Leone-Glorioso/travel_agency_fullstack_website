@@ -1,10 +1,11 @@
 package com.travel_website.travel_website_2_backend.Security;
 
+/*
+import org.springframework.http.HttpMethod;
 import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -18,12 +19,87 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+//import org.springframework.security.web.util.matcher.MvcRequestMatcher;
 
-import static org.springframework.security.core.context.SecurityContextHolder.getContext;
-//import org.springframework.security.web.servlet.util.matcher;
+@RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+public class Configuration_WebSecurity {
+    private final Component_Filter_TokenAuthentication tokenAuthenticationFilter;
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // TODO fix authorities/accesses
+        return http
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .mvcMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .mvcMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .mvcMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN.toString())
+                        .mvcMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
+                        .antMatchers("/public/**", "/auth/**").permitAll()
+                        .antMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+                        .antMatchers("/public/**", HttpMethod.GET.toString()).permitAll()
+                        .antMatchers("/auth/**", HttpMethod.GET.toString()).permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    public static final UserCategories ADMIN = UserCategories.Administrator;
+    public static final UserCategories LANDLORD = UserCategories.Landlord;
+    public static final UserCategories CLIENT = UserCategories.Client;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.springframework.http.HttpMethod;
+import com.travel_website.travel_website_2_backend.Models.UserCategories;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 @RequiredArgsConstructor
 @Configuration
@@ -47,7 +123,8 @@ public class Configuration_WebSecurity {
                         .requestMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
-//                        .requestMatchers(new AntPathRequestMatcher("/api/**", "GET")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/public/**", HttpMethod.GET.toString())).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/**", HttpMethod.GET.toString())).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
