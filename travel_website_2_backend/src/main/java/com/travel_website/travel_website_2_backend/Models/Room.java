@@ -297,6 +297,14 @@ public class Room {
         this.reservations = reservations;
     }
 
+    public User getLandlord() {
+        return landlord;
+    }
+
+    public void setLandlord(User landlord) {
+        this.landlord = landlord;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
