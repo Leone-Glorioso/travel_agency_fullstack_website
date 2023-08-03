@@ -1,0 +1,31 @@
+package com.travel_website.travel_website_2_backend.DTO;
+
+import com.travel_website.travel_website_2_backend.Models.Location;
+import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
+import com.travel_website.travel_website_2_backend.Models.User;
+
+public record RoomDTO(TypeOfRoom typeOfRoom,
+                      int numofbeds,
+                      int numofbaths,
+                      int numofbedrooms,
+                      int area,
+                      boolean livingroom,
+                      boolean smoking,
+                      boolean pets,
+                      boolean events,
+                      boolean internet,
+                      boolean cooling,
+                      boolean heating,
+                      boolean kitchen,
+                      boolean tv,
+                      boolean parking,
+                      boolean elevator,
+                      String description,
+                      User landlord,
+                      Location location) {
+
+    public record LandlordDto(String username)
+    {
+
+    }
+}
