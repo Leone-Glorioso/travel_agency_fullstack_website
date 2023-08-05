@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//import org.springframework.security.web.util.matcher.RequestMatcher;
 //import org.springframework.security.web.util.matcher.MvcRequestMatcher;
 
 @RequiredArgsConstructor
@@ -37,14 +38,14 @@ public class Configuration_WebSecurity {
         // TODO fix authorities/accesses
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .mvcMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
-                        .mvcMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
-                        .mvcMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN.toString())
-                        .mvcMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
-                        .antMatchers("/public/**", "/auth/**").permitAll()
-                        .antMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
-                        .antMatchers("/public/**", HttpMethod.GET.toString()).permitAll()
-                        .antMatchers("/auth/**", HttpMethod.GET.toString()).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN.toString())
+                        .requestMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
+                        .requestMatchers("/public/**", "/auth/**").permitAll()
+                        .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/public/**", HttpMethod.GET.toString()).permitAll()
+                        .requestMatchers("/auth/**", HttpMethod.GET.toString()).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
