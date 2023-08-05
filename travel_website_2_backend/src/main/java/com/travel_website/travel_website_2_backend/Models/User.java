@@ -42,6 +42,7 @@ public class User implements Serializable {
     private String country;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private UserCategories role;
 
     @Column(name = "username")

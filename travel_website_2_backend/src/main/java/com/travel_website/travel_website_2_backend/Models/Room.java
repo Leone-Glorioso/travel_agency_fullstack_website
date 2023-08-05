@@ -17,6 +17,7 @@ public class Room {
 
     @Column(name = "type_of_room")
     @NotBlank
+    @Enumerated(EnumType.STRING)
     private TypeOfRoom typeofroom;
 
     @Column(name = "num_of_beds")
