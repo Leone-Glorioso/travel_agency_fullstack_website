@@ -62,7 +62,7 @@ public class ReservationController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @DeleteMapping("/{id}")
-    public ReservationDTO deleteReservations(@PathVariable int id) {
+    public ReservationDTO deleteReservation(@PathVariable int id) {
         Reservation reservation = reservationService.validateAndGetReservation(id);
         reservationService.deleteReservation(reservation);
         return reservationMapper.toReserveDto(reservation);

@@ -3,7 +3,9 @@ package com.travel_website.travel_website_2_backend.Mapper;
 import com.travel_website.travel_website_2_backend.DTO.NewRoomRequest;
 import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
 import com.travel_website.travel_website_2_backend.Models.Room;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RoomMapperImplementation implements RoomMapper{
     @Override
     public Room newRoom(NewRoomRequest roomRequest)

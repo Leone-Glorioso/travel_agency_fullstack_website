@@ -3,7 +3,9 @@ package com.travel_website.travel_website_2_backend.Mapper;
 import com.travel_website.travel_website_2_backend.DTO.LandlordDTO;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LandlordMapperImplementation implements LandlordMapper{
     @Override
     public LandlordDTO toLandlordDTO(User landlord)
