@@ -35,7 +35,7 @@ public class Configuration_WebSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // TODO fix authorities/accesses
+        // TODO personalize authorities (MVC AND ANT)
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .requestMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())

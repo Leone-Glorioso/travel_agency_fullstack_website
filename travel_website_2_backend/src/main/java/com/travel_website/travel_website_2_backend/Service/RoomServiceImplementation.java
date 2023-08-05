@@ -27,7 +27,6 @@ public class RoomServiceImplementation implements RoomService{
     @Override
     public List<Room> getRoomsByLandlord(User landlord)
     {
-        //TODO fix
         return roomRepository.findRoomsByLandlord(landlord);
     }
 
