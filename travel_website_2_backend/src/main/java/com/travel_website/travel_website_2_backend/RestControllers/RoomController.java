@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +56,36 @@ public class RoomController {
         Room room = roomService.validateAndGetRoom(id);
         roomService.deleteRoom(room);
         return roomMapper.toRoomDTO(room);
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{id}")
+    public RoomDTO getRoom(@PathVariable int id)
+    {
+        return roomMapper.toRoomDTO(roomService.validateAndGetRoom(id));
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{username}/rooms")
+    public List<RoomDTO> getRoomsByLandlord(@AuthenticationPrincipal Data_UserDetails currentUser)
+    {
+        User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        List<RoomDTO> list = new ArrayList<>();
+        for (Room room:
+             roomService.getRoomsByLandlord(landlord)) {
+            list.add(roomMapper.toRoomDTO(room));
+        }
+        return list;
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{username}/rooms/{id}")
+    public RoomDTO getOneOfMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser,
+                                   @PathVariable int id)
+    {
+        RoomDTO roomDTO = roomMapper.toRoomDTO(roomService.validateAndGetRoom(id));
+        if(roomService.validateAndGetRoom(id).getLandlord().equals(userService.validateAndGetUserByUsername(currentUser.getUsername())))
+            return roomDTO;
+        return null;
     }
 }
