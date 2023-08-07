@@ -34,4 +34,6 @@ public interface RoomService {
                                             boolean tv,
                                             boolean parking,
                                             boolean elevator);
+
+    Room validateAndGetRoom(int id);
 }

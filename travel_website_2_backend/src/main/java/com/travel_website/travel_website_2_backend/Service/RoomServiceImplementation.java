@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_RoomNotFound;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
@@ -84,5 +85,12 @@ public class RoomServiceImplementation implements RoomService{
         collection.retainAll(roomRepository.findRoomsByParking(parking));
         collection.retainAll(roomRepository.findRoomsByElevator(elevator));
         return new ArrayList<>(collection);
+    }
+
+    @Override
+    public Room validateAndGetRoom(int id)
+    {
+        return roomRepository.findById(id)
+                .orElseThrow(() -> new Exception_RoomNotFound("Room not found"));
     }
 }
