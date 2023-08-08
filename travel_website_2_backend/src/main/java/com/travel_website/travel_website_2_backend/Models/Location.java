@@ -3,9 +3,6 @@ package com.travel_website.travel_website_2_backend.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-//import org.antlr.v4.runtime.misc.NotNull;
-
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,12 +10,10 @@ import java.util.Set;
 public class Location {
 //TODO add openstreetmap
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address")
-    @NotBlank
-    private String address;
     @Column(name = "neighbourhood")
     @NotBlank
     private String neighbourhood;
@@ -29,21 +24,25 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private Set<Room> rooms;
 
-    public Location(String address, String neighbourhood, String transportation) {
-        this.address = address;
+    @OneToOne
+    private Address address;
+
+    public Location(String neighbourhood, String transportation, Set<Room> rooms, Address address) {
         this.neighbourhood = neighbourhood;
         this.transportation = transportation;
+        this.rooms = rooms;
+        this.address = address;
     }
 
     public Location() {
 
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -85,10 +84,5 @@ public class Location {
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
         return id == location.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
