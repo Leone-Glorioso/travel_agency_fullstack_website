@@ -24,7 +24,8 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private Set<Room> rooms;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id",referencedColumnName = "id")
     private Address address;
 
     public Location(String neighbourhood, String transportation, Set<Room> rooms, Address address) {

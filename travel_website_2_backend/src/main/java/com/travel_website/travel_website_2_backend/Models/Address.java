@@ -44,7 +44,7 @@ public class Address {
     @Column(name="longtitude")
     private double longtitude;
 
-    @OneToOne(mappedBy = "location")
+    @OneToOne(mappedBy = "address")
     private Location location;
 
     public Address(int houseNumber, String street, String city, int postCode, String country, double latitude, double longtitude, Location location) {
