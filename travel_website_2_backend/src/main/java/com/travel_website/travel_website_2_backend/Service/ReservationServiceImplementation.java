@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationDoesNotMatchClient;
 import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationNotFound;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
@@ -52,5 +53,12 @@ public class ReservationServiceImplementation implements ReservationService{
     @Override
     public void deleteReservation(Reservation reservation) {
         reservationRepository.delete(reservation);
+    }
+
+    @Override
+    public void validateClientReservationConnection(User client, Reservation reservation)
+    {
+        if(!reservation.getClient().equals(client))
+            throw new Exception_ReservationDoesNotMatchClient("Reservation with id " + reservation.getId() + " does not match client " + client.getUsername());
     }
 }

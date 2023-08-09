@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_RoomDoesNotMatchLandlord;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomNotFound;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
@@ -92,5 +93,12 @@ public class RoomServiceImplementation implements RoomService{
     {
         return roomRepository.findById(id)
                 .orElseThrow(() -> new Exception_RoomNotFound("Room not found"));
+    }
+
+    @Override
+    public void validateRoomLandlordConnection(User landlord, Room room)
+    {
+        if(!room.getLandlord().equals(landlord))
+            throw new Exception_RoomDoesNotMatchLandlord("Room with id " + room.getId() + " does not match landlord " + landlord.getUsername());
     }
 }

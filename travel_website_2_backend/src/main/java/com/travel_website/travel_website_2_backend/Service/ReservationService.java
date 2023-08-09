@@ -20,4 +20,6 @@ public interface ReservationService {
     Reservation saveReservation(Reservation reservation);
 
     void deleteReservation(Reservation reservation);
+
+    void validateClientReservationConnection(User client, Reservation reservation);
 }

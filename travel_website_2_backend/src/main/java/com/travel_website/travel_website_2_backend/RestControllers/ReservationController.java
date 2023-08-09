@@ -6,6 +6,7 @@ import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
+import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
 import com.travel_website.travel_website_2_backend.Service.ReservationService;
 import com.travel_website.travel_website_2_backend.Service.UserService;
@@ -62,6 +63,7 @@ public class ReservationController {
     public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
                                       @Valid @RequestBody CreateReservationRequest createOrderRequest) {
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateClient(user);
         Reservation reservation = reservationMapper.toReserve(createOrderRequest);
         reservation.setClient(user);
         return reservationMapper.toReserveDto(reservationService.saveReservation(reservation));

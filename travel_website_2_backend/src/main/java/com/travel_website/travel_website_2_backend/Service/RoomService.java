@@ -36,4 +36,6 @@ public interface RoomService {
                                             boolean elevator);
 
     Room validateAndGetRoom(int id);
+
+    void validateRoomLandlordConnection(User landlord, Room room);
 }

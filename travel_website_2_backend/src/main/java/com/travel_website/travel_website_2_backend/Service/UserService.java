@@ -19,4 +19,10 @@ public interface UserService {
     User saveUser(User user);
 
     void deleteUser(User user);
+
+    void validateAdmin(User user);
+
+    void validateLandlord(User user);
+
+    void validateClient(User user);
 }
