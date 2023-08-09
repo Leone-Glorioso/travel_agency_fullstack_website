@@ -34,7 +34,14 @@ public class ReservationController {
     private final ReservationMapper reservationMapper;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping
+    @GetMapping("/all")
+    public List<ReservationDTO> getAllReservations()
+    {
+        return reservationService.getReservations().stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{id}")
     public List<ReservationDTO> getReservations(@RequestParam(value = "int", required = false) int id, @RequestParam(required = false) User client, @RequestParam(required = false) Room room) {
         Collection<Reservation> col = new ArrayList<>(reservationService.getReservations());
         if(client != null) {
