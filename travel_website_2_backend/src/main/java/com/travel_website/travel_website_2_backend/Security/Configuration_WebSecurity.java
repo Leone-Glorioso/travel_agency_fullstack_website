@@ -38,9 +38,9 @@ public class Configuration_WebSecurity {
         // TODO personalize authorities (MVC AND ANT)
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers(HttpMethod.POST, "/api/orders").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers(HttpMethod.POST, "/api/reservations").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
                         .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
-                        .requestMatchers("/api/orders", "/api/orders/**").hasAuthority(ADMIN.toString())
+                        .requestMatchers("/api/reservations", "/api/reservations/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/api/users", "/api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()

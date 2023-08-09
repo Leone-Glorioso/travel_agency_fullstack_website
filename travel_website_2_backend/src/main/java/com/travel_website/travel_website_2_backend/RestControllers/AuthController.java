@@ -58,8 +58,18 @@ public class AuthController {
         user.setUsername(signUpRequest.getUsername());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         user.setName(signUpRequest.getName());
+        user.setSurname(signUpRequest.getSurname());
         user.setEmail(signUpRequest.getEmail());
-        user.setRole(Configuration_WebSecurity.CLIENT);
+        user.setTelephone(signUpRequest.getTelephone());
+        user.setCountry(signUpRequest.getCountry());
+        user.setPhoto(signUpRequest.getPhoto());
+        String role = signUpRequest.getRole();
+        if(role.equals("Admin"))
+            user.setRole(Configuration_WebSecurity.ADMIN);
+        else if(role.equals("Landlord"))
+            user.setRole(Configuration_WebSecurity.LANDLORD);
+        else
+            user.setRole(Configuration_WebSecurity.CLIENT);
         return user;
     }
 }

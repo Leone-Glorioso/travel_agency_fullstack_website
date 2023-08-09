@@ -19,6 +19,10 @@ public class SignUpRequest {
     @NotBlank
     private String name;
 
+    @Schema(example = "User3")
+    @NotBlank
+    private String surname;
+
     @Schema(example = "user3@email.com")
     @Email
     private String email;
@@ -32,4 +36,7 @@ public class SignUpRequest {
 
     @Schema(example = "default")
     private String photo;
+
+    @Schema(example = "Administrator")
+    private String role;
 }
