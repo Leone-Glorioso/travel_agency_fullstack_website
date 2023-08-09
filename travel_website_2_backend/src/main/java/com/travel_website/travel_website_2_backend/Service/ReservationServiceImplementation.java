@@ -2,6 +2,7 @@ package com.travel_website.travel_website_2_backend.Service;
 
 import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationDoesNotMatchClient;
 import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationNotFound;
+import com.travel_website.travel_website_2_backend.Exception.Exception_RoomDoesNotMatchLandlord;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
@@ -60,5 +61,12 @@ public class ReservationServiceImplementation implements ReservationService{
     {
         if(!reservation.getClient().equals(client))
             throw new Exception_ReservationDoesNotMatchClient("Reservation with id " + reservation.getId() + " does not match client " + client.getUsername());
+    }
+
+    @Override
+    public void validateRoomReservationConnection(Room room, Reservation reservation)
+    {
+        if(!reservation.getBookedRoom().equals(room))
+            throw new Exception_RoomDoesNotMatchLandlord("Reservation with id " + reservation.getId() + " does not match room " + room.getId());
     }
 }

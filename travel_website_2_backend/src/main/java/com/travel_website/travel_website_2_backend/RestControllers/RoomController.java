@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.RestControllers;
 import com.travel_website.travel_website_2_backend.DTO.NewRoomRequest;
 import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
+import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
@@ -66,26 +67,50 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}/rooms")
-    public List<RoomDTO> getRoomsByLandlord(@AuthenticationPrincipal Data_UserDetails currentUser)
+    @GetMapping("/me")
+    public List<RoomDTO> getMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser)
     {
-        User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
-        List<RoomDTO> list = new ArrayList<>();
-        for (Room room:
-             roomService.getRoomsByLandlord(landlord)) {
-            list.add(roomMapper.toRoomDTO(room));
-        }
-        return list;
+        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateLandlord(user);
+        return roomService.getRoomsByLandlord(user).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}/rooms/{id}")
-    public RoomDTO getOneOfMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser,
-                                   @PathVariable int id)
+    @GetMapping("/{username}")
+    public List<RoomDTO> getRoomsByLandlord(@PathVariable String username)
     {
-        RoomDTO roomDTO = roomMapper.toRoomDTO(roomService.validateAndGetRoom(id));
-        if(roomService.validateAndGetRoom(id).getLandlord().equals(userService.validateAndGetUserByUsername(currentUser.getUsername())))
-            return roomDTO;
-        return null;
+        User user = userService.validateAndGetUserByUsername(username);
+        userService.validateLandlord(user);
+        return roomService.getRoomsByLandlord(user).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/me/{id}")
+    public RoomDTO getMyRoom(@AuthenticationPrincipal Data_UserDetails currentUser, @PathVariable int id)
+    {
+        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateLandlord(user);
+        Room room = roomService.validateAndGetRoom(id);
+        roomService.validateRoomLandlordConnection(user, room);
+        return roomMapper.toRoomDTO(room);
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/{username}/{id}")
+    public RoomDTO getRoomByLandlord(@PathVariable String username, @PathVariable int id)
+    {
+        User user = userService.validateAndGetUserByUsername(username);
+        userService.validateLandlord(user);
+        Room room = roomService.validateAndGetRoom(id);
+        roomService.validateRoomLandlordConnection(user, room);
+        return roomMapper.toRoomDTO(room);
+    }
+
+    //TODO change location to something else (will not test today)
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/location/{id}")
+    public List<RoomDTO> getRoomsInLocation(@PathVariable Location location)
+    {
+        return roomService.getRoomsInLocation(location).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
 }

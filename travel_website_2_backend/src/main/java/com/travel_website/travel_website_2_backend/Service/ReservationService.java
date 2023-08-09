@@ -22,4 +22,6 @@ public interface ReservationService {
     void deleteReservation(Reservation reservation);
 
     void validateClientReservationConnection(User client, Reservation reservation);
+
+    void validateRoomReservationConnection(Room room, Reservation reservation);
 }
