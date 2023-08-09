@@ -60,7 +60,7 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     public RoomDTO getRoom(@PathVariable int id)
     {
         return roomMapper.toRoomDTO(roomService.validateAndGetRoom(id));
@@ -76,7 +76,7 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}")
+    @GetMapping("/landlord/{username}")
     public List<RoomDTO> getRoomsByLandlord(@PathVariable String username)
     {
         User user = userService.validateAndGetUserByUsername(username);
@@ -96,7 +96,7 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}/{id}")
+    @GetMapping("/landlord/{username}/room/{id}")
     public RoomDTO getRoomByLandlord(@PathVariable String username, @PathVariable int id)
     {
         User user = userService.validateAndGetUserByUsername(username);

@@ -64,7 +64,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{id}")
+    @GetMapping("/searchID/{id}")
     public ReservationDTO getReservation(@PathVariable int id)
     {
         return reservationMapper.toReserveDto(reservationService.validateAndGetReservation(id));
@@ -91,7 +91,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/me")
+    @GetMapping("/myReservations")
     public List<ReservationDTO> getMyReservations(@AuthenticationPrincipal Data_UserDetails currentUser)
     {
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
@@ -100,7 +100,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}")
+    @GetMapping("/client/{username}")
     public List<ReservationDTO> getReservationsOfClient(@PathVariable String username)
     {
         User user = userService.validateAndGetUserByUsername(username);
@@ -109,7 +109,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/me/{id}")
+    @GetMapping("/myReservations/{id}")
     public ReservationDTO getMyReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
                                            @PathVariable int id)
     {
@@ -121,7 +121,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/{username}/{id}")
+    @GetMapping("/client/{username}/reservation/{id}")
     public ReservationDTO getReservationOfClient(@PathVariable String username,
                                            @PathVariable int id)
     {
@@ -133,7 +133,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/me/{roomId}")
+    @GetMapping("/myRooms/{roomId}")
     public List<ReservationDTO> getReservationsOfMyRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
                                                         @PathVariable int roomId)
     {
@@ -157,7 +157,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/me/{roomId}/myReservations/{reservationId}")
+    @GetMapping("/myRooms/{roomId}/myReservations/{reservationId}")
     public ReservationDTO getReservationOfMyRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
                                                         @PathVariable int roomId,
                                                        @PathVariable int reservationId)
