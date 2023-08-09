@@ -22,7 +22,6 @@ import static com.travel_website.travel_website_2_backend.Configuration.Configur
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
-    //TODO CHECK ALL CONTROLLERS FOR CHANGES
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/me")
     public UserDTO getCurrentUser(@AuthenticationPrincipal Data_UserDetails currentUser) {
