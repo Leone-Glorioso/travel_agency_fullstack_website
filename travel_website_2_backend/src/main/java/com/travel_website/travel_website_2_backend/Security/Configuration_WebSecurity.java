@@ -35,8 +35,8 @@ public class Configuration_WebSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("api/users", "api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers("api/users", "api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("api/rooms/search/**", "api/rooms/location/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/rooms").hasAuthority(LANDLORD.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/me", "api/rooms/me/**").hasAuthority(LANDLORD.toString())

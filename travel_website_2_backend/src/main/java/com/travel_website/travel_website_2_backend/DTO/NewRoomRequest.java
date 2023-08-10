@@ -54,7 +54,7 @@ public class NewRoomRequest {
     @Schema(example = "2")
     @NotBlank
     private int minimumDays;
-
+    //TODO cannot contain class in request (Location)
     @Schema(example = "Birmingham,England,UK")
     private Location location;
 
@@ -85,8 +85,5 @@ public class NewRoomRequest {
     @Schema(example = "true")
     @NotBlank
     private boolean elevator;
-
-    @Schema(example = "Landlord1")
-    private User landlord;
 
 }
