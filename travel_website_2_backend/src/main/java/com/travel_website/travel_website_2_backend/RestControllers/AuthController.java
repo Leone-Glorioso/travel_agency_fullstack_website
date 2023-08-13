@@ -76,7 +76,7 @@ public class AuthController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/init")
-    public AuthenticationResponse createAdmin(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public AuthenticationResponse createAdmin() {
         User user = new User();
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin1234"));
