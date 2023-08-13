@@ -71,5 +71,6 @@ public class AuthController {
         else
             user.setRole(Configuration_WebSecurity.CLIENT);
         return user;
+
     }
 }
