@@ -1,6 +1,7 @@
 package com.travel_website.travel_website_2_backend.RestControllers;
 
 import com.travel_website.travel_website_2_backend.DTO.AuthenticationResponse;
+import com.travel_website.travel_website_2_backend.Exception.Exception_RoleDoesNotExist;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.DTO.LoginRequest;
 import com.travel_website.travel_website_2_backend.DTO.SignUpRequest;
@@ -64,12 +65,31 @@ public class AuthController {
         user.setCountry(signUpRequest.getCountry());
         user.setPhoto(signUpRequest.getPhoto());
         String role = signUpRequest.getRole();
-        if(role.equals("Admin"))
-            user.setRole(Configuration_WebSecurity.ADMIN);
-        else if(role.equals("Landlord"))
+        if(role.equals("Landlord"))
             user.setRole(Configuration_WebSecurity.LANDLORD);
-        else
+        else if(role.equals("Client"))
             user.setRole(Configuration_WebSecurity.CLIENT);
+        else
+            throw new Exception_RoleDoesNotExist("Role " + role + " does not exist");
         return user;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/init")
+    public AuthenticationResponse createAdmin() {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin1234"));
+        user.setName("admin");
+        user.setSurname("admin");
+        user.setEmail("admin@mail.com");
+        user.setTelephone(1234567890);
+        user.setCountry("Greece");
+        user.setPhoto("adminpath");
+        user.setRole(Configuration_WebSecurity.ADMIN);
+        userService.saveUser(user);
+
+        String token = authenticateAndGetToken("admin", "admin1234");
+        return new AuthenticationResponse(token);
     }
 }
