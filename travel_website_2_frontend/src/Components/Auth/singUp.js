@@ -1,0 +1,209 @@
+import React, {useState} from 'react';
+import {useAuth} from "./contex";
+import {ApiConnector} from "../Other/ApiConnector";
+import {handleLogError, parseJwt} from "../Other/Helpers";
+import { Button, Form, Grid, Segment, Message,Dropdown } from 'semantic-ui-react'
+import { NavLink, Navigate } from 'react-router-dom'
+//import * as PropTypes from "prop-types";
+
+
+async function SingUp() {
+    const Auth = useAuth()
+    const isLogged = Auth.userIsAuthenticated()
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
+    const [telephone, setTelephone] = useState('')
+    const [country, setCountry] = useState('')
+    const [photo, setPhoto] = useState('')
+    const [role, setRole] = useState('')
+    const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
+
+    const handleInputChange = (e, {name, value}) => {
+        if (name === 'username') {
+            setUsername(value)
+        } else if (name === 'password') {
+            setPassword(value)
+        } else if (name === 'name') {
+            setName(value)
+        } else if (name === 'surname') {
+            setSurname(value)
+        } else if (name === 'email') {
+            setEmail(value)
+        } else if (name === 'telephone') {
+            setTelephone(value)
+        } else if (name === 'country') {
+            setCountry(value)
+        } else if (name === 'photo') {
+            setPhoto(value)
+        } else if (name === 'role') {
+            setRole(value)
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (!(username && password && name && surname && email && telephone && country && photo && role)) {
+            setIsError(true)
+            setErrorMessage('Please,give all fields!')
+            return
+        }
+    }
+
+    const user=  {username, password, name, surname, email, telephone, country, photo, role}
+
+    try {
+        const resp = await ApiConnector.signUp(user)
+        const {accessToken}=resp.data
+        const data=parseJwt(accessToken)
+        const authUser={data,accessToken}
+
+        Auth.userLogin(authUser)
+
+        setUsername('')
+        setPassword('')
+        setName('')
+        setSurname('')
+        setEmail('')
+        setTelephone('')
+        setCountry('')
+        setPhoto('')
+        setRole('')
+    } catch (error){
+        handleLogError(error)
+        if(error.resp && error.resp.data){
+            const errorData=error.resp.data
+            let errorMessage='Invalid fields'
+            if (errorData.status===409){
+                errorMessage=errorData.message
+            }else if(errorData.status===400){
+                errorMessage=errorData.errors[0].defaultMessage
+            }
+            setIsError(true)
+            setErrorMessage(errorMessage)
+        }
+    }
+
+    const roleOptions = [
+        {key: 'Admin', text:'Admin', value:'Admin'},
+        {key: 'Landlord', text:'Landlord', value:'Landlord'},
+        {key: 'Client', text:'Client', value:'Client'},
+        {key: 'Landlord/Client', text:'Landlord/Client', value:'Landlord/Client'},
+    ]
+
+    if (isLogged){
+        return <Navigate to='/'/>
+    }
+
+    return (
+        <Grid textAlign='center'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+                <Form size='large' onSubmit={handleSubmit}>
+                    <Segment>
+                        <Form.Input
+                            fluid
+                            autoFocus
+                            name='username'
+                            icon='user'
+                            iconPosition='left'
+                            placeholder='Username'
+                            value={username}
+                            onChange={handleInputChange}
+                        />
+                        <Form.Input
+                            fluid
+                            name='password'
+                            icon='lock'
+                            iconPosition='left'
+                            placeholder='Password'
+                            type='password'
+                            value={password}
+                            onChange={handleInputChange}
+                        />
+                        <Form.Input
+                            fluid
+                            name='name'
+                            icon='id card'
+                            iconPosition='left'
+                            placeholder='Name'
+                            value={name}
+                            onChange={handleInputChange}
+                        />
+                        <Form.Input
+                            fluid
+                            name='surname'
+                            icon='id card outline'
+                            iconPosition='left'
+                            placeholder='surname'
+                            value={surname}
+                            onChange={handleInputChange}
+                        />
+                        <Form.Input
+                            fluid
+                            name='email'
+                            icon='at'
+                            iconPosition='left'
+                            placeholder='Email'
+                            value={email}
+                            onChange={handleInputChange}
+                        />
+                        <Form.Input
+                            fluid
+                            name='telephone'
+                            icon='phone'
+                            iconPosition='left'
+                            placeholder='telephone'
+                            value={telephone}
+                            onChange={handleInputChange}
+                            />
+
+                        <Form.Input
+                            fluid
+                            name='country'
+                            icon='world'
+                            iconPosition='left'
+                            placeholder='country'
+                            value={country}
+                            onChange={handleInputChange}
+                        />
+
+                        <Form.Input
+                            fluid
+                            name='photo'
+                            icon='photo'
+                            iconPosition='left'
+                            placeholder='photo'
+                            value={photo}
+                            onChange={handleInputChange}
+                        />
+
+                        <Dropdown
+                            floating
+                            selection
+                            fluid
+                            placeholder = 'Role'
+                            value = {role}
+                            options = {roleOptions}
+                            onChange={handleInputChange}>
+                        </Dropdown>
+
+                        <Button color='violet' fluid size='large'>Signup</Button>
+                    </Segment>
+                </Form>
+                <Message>{`Already have an account? `}
+                    <NavLink to="/login" color='violet' as={NavLink}>Login</NavLink>
+                </Message>
+                {isError && <Message negative>{errorMessage}</Message>}
+            </Grid.Column>
+        </Grid>
+    );
+}
+
+export default SingUp;
+
