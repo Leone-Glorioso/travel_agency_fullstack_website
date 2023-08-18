@@ -54,39 +54,42 @@ async function SingUp() {
             setErrorMessage('Please,give all fields!')
             return
         }
-    }
 
-    const user=  {username, password, name, surname, email, telephone, country, photo, role}
 
-    try {
-        const resp = await ApiConnector.signUp(user)
-        const {accessToken}=resp.data
-        const data=parseJwt(accessToken)
-        const authUser={data,accessToken}
+        const user = {username, password, name, surname, email, telephone, country, photo, role}
 
-        Auth.userLogin(authUser)
+        try {
+            const resp = await ApiConnector.signUp(user)
+            const {accessToken} = resp.data
+            const data = parseJwt(accessToken)
+            const authUser = {data, accessToken}
 
-        setUsername('')
-        setPassword('')
-        setName('')
-        setSurname('')
-        setEmail('')
-        setTelephone('')
-        setCountry('')
-        setPhoto('')
-        setRole('')
-    } catch (error){
-        handleLogError(error)
-        if(error.resp && error.resp.data){
-            const errorData=error.resp.data
-            let errorMessage='Invalid fields'
-            if (errorData.status===409){
-                errorMessage=errorData.message
-            }else if(errorData.status===400){
-                errorMessage=errorData.errors[0].defaultMessage
+            Auth.userLogin(authUser)
+
+            setUsername('')
+            setPassword('')
+            setName('')
+            setSurname('')
+            setEmail('')
+            setTelephone('')
+            setCountry('')
+            setPhoto('')
+            setRole('')
+            setIsError(false)
+            setErrorMessage('')
+        } catch (error) {
+            handleLogError(error)
+            if (error.response && error.response.data) {
+                const errorData = error.response.data
+                let errorMessage = 'Invalid fields'
+                if (errorData.status === 409) {
+                    errorMessage = errorData.message
+                } else if (errorData.status === 400) {
+                    errorMessage = errorData.errors[0].defaultMessage
+                }
+                setIsError(true)
+                setErrorMessage(errorMessage)
             }
-            setIsError(true)
-            setErrorMessage(errorMessage)
         }
     }
 
