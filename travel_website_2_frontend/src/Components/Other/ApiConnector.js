@@ -34,11 +34,11 @@ export const ApiConnector={
 }
 
 function authenticate(username,password){
-    return instance.post('auth/authenticate',{username,password},{headers:{'Content-type':'application/json'}})
+    return instance.post(`/auth/authenticate`,{username,password},{headers:{'Content-type':'application/json'}})
 }
 
 function signUp(user){
-    return instance.post('/auth/signUp', user, {
+    return instance.post(`/auth/signUp`, user, {
         headers: { 'Content-type': 'application/json' }
     })
 }

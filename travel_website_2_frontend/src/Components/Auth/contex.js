@@ -40,7 +40,7 @@ function AuthProvider({children}){
         setUser(null)
     }
 
-    const contexValue = {
+    const contextValue = {
         user,
         getUser,
         userIsAuthenticated,
@@ -49,7 +49,7 @@ function AuthProvider({children}){
     }
 
     return (
-        <AuthContext.Provider value={contexValue}>
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     )

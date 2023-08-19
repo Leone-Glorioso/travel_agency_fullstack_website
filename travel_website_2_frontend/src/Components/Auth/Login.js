@@ -42,8 +42,8 @@ function Login(){
         }
 
         try{
-            const resp=await ApiConnector.authenticate(username,password)
-            const {accessToken} =resp.data
+            const response=await ApiConnector.authenticate(username,password)
+            const {accessToken} =response.data
             const data=parseJwt(accessToken)
             const authUser={data,accessToken}
 
