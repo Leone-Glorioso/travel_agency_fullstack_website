@@ -6,6 +6,8 @@ import {handleLogError, parseJwt} from "../Other/Helpers";
 import { NavLink, Navigate } from 'react-router-dom'
 import { Button, Form, Grid, Segment, Message } from 'semantic-ui-react'
 
+import "./Login.css"
+
 /*function Grid(props) {
     return null;
 }
@@ -61,9 +63,9 @@ function Login(){
     }
 
     return (
-        <Grid textAlign='center'>
+        <Grid textAlign='center' className={'app'}>
             <Grid.Column style={{ maxWidth: 450 }}>
-                <Form size='large' onSubmit={handleSubmit}>
+                <Form size='large' onSubmit={handleSubmit} className={'login-form'}>
                     <Segment>
                         <Form.Input
                             fluid
@@ -74,6 +76,7 @@ function Login(){
                             placeholder='Username'
                             value={username}
                             onChange={handleInputChange}
+                            className={'input-container'}
                         />
                         <Form.Input
                             fluid
@@ -84,8 +87,9 @@ function Login(){
                             type='password'
                             value={password}
                             onChange={handleInputChange}
+                            className={'input-container'}
                         />
-                        <Button color='violet' fluid size='large'>Login</Button>
+                        <Button color='violet' fluid size='large' className={'button-container'}>Login</Button>
                     </Segment>
                 </Form>
                 <Message>{`Don't have already an account? `}
