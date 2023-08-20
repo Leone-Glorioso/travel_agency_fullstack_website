@@ -18,9 +18,6 @@ function AuthProvider({children}){
 
     const userIsAuthenticated = () => {
         let storedUser=localStorage.getItem('user')
-        console.log('Stored User:',storedUser)
-        const tokenData=storedUser.accessToken
-        console.log('Token Data:',tokenData)
         if (!storedUser){
             return false
         }

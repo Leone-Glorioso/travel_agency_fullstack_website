@@ -47,9 +47,6 @@ function Login(){
             const data=parseJwt(accessToken)
             const authUser={data,accessToken}
 
-            localStorage.setItem('user',JSON.stringify(authUser))
-            console.log('Stored User login:',authUser)
-
             Auth.userLogin(authUser)
 
             setUsername('')
