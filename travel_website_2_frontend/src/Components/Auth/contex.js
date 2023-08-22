@@ -24,10 +24,6 @@ function AuthProvider({ children }) {
         return user !== null;
     };
 
-    function GetUserName(){
-        const Auth=useAuth()
-        return Auth.user? Auth.user.username: null;
-    }
 
     const userLogin = (user, accessToken) => {
         localStorage.setItem("user", JSON.stringify({ user, accessToken }));
