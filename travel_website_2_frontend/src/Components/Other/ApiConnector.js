@@ -34,7 +34,9 @@ export const ApiConnector={
 }
 
 function authenticate(username,password){
-    return instance.post(`/auth/authenticate`,{username,password},{headers:{'Content-type':'application/json'}})
+    return instance.post('/auth/authenticate',{ username, password},{
+        headers:{ "Content-type": "application/json"}
+    })
 }
 
 function signUp(user){
@@ -48,7 +50,7 @@ function numberOfUsers() {
 }
 
 function numberOfReservations() {
-    return instance.get('/public/numberOfReservation')
+    return instance.get('/public/numberOfReservations')
 }
 
 function getUsers(user, username) {

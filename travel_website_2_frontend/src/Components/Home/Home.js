@@ -16,11 +16,11 @@ function Home(){
                 const respUsers=await ApiConnector.numberOfUsers()
                 const numberOfUsers=respUsers.data
 
-                const respReservations=await ApiConnector.numberOfReservations()
-                const numberOfReservations=respReservations.data
+                // const respReservations=await ApiConnector.numberOfReservations()
+                // const numberOfReservations=respReservations.data
 
                 setNumberOfUsers(numberOfUsers)
-                setNumberOfReservations(numberOfReservations)
+                // setNumberOfReservations(numberOfReservations)
             } catch (error){
                 handleLogError(error)
             } finally{
@@ -52,14 +52,14 @@ function Home(){
                             </Statistic>
                         </Segment>
                     </Grid.Column>
-                    <Grid.Column textAlign='center'>
-                        <Segment color='violet'>
-                            <Statistic>
-                                <Statistic.Value><Icon name='laptop' color='grey' />{numberOfReservations}</Statistic.Value>
-                                <Statistic.Label>Reservations</Statistic.Label>
-                            </Statistic>
-                        </Segment>
-                    </Grid.Column>
+                    {/*<Grid.Column textAlign='center'>*/}
+                    {/*    <Segment color='violet'>*/}
+                    {/*        <Statistic>*/}
+                    {/*            <Statistic.Value><Icon name='laptop' color='grey' />{numberOfReservations}</Statistic.Value>*/}
+                    {/*            <Statistic.Label>Reservations</Statistic.Label>*/}
+                    {/*        </Statistic>*/}
+                    {/*    </Segment>*/}
+                    {/*</Grid.Column>*/}
                 </Grid.Row>
             </Grid>
 
