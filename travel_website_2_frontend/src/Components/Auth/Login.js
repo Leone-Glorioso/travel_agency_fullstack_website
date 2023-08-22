@@ -48,7 +48,7 @@ function Login() {
     };
 
     if (isLogged) {
-        return <Navigate to={'/'} />;
+        return <Navigate to={'/profile'} />;
     }
 
     return (

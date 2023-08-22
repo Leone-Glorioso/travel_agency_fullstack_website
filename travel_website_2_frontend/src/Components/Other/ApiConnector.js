@@ -109,7 +109,9 @@ function getReservationsOfMyRoom(user,id){
 }
 
 function getReservationsOfLandlordRoom(user,username,id){
-    return instance.get('/api/reservations/rooms/{id}',{username,id},{headers: {'Content-type': 'application/json','Authorization': bearerAuth(user)}})
+    return instance.get('/api/reservations/rooms/{id}',{username,id},{
+        headers: {'Content-type': 'application/json','Authorization': bearerAuth(user)}
+    })
 }
 
 function getReservationOfMyRoom(user,roomID,reservationID){
