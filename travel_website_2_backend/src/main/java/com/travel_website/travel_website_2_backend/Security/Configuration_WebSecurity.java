@@ -50,8 +50,6 @@ public class Configuration_WebSecurity {
                                 "api/reservations/client/**", "api/reservations/rooms/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/public/**", HttpMethod.GET.toString()).permitAll()
-                        .requestMatchers("/auth/**", HttpMethod.GET.toString()).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
