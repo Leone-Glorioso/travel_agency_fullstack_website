@@ -1,8 +1,8 @@
-const prod={
-    url:{
-        API_BASE_URL:'http://myapp.herokuapp.com',
-    }
-}
+// const prod={
+//     url:{
+//         API_BASE_URL:'http://myapp.herokuapp.com',
+//     }
+// }
 
 const dev ={
     url:{
@@ -10,4 +10,4 @@ const dev ={
     }
 }
 
-export const config=process.env.NODE_ENV==='development'?dev:prod
+export const config=dev //process.env.NODE_ENV==='development'?dev:prod
