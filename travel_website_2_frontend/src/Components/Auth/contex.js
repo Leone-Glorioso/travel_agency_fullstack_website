@@ -18,7 +18,9 @@ function AuthProvider({children}){
 
     const userIsAuthenticated = () => {
         let storedUser=localStorage.getItem('user')
+        console.log(user)
         if (!storedUser){
+            console.log('cy@')
             return false
         }
         storedUser=JSON.parse(storedUser)
