@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {useAuth} from "./contex";
 import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError, parseJwt} from "../Other/Helpers";
-import { Button, Form, Grid, Segment, Message,Dropdown } from 'semantic-ui-react'
+import { Button , Form, Grid, Segment, Message,Dropdown } from 'semantic-ui-react'
 import { NavLink, Navigate } from 'react-router-dom'
 //import * as PropTypes from "prop-types";
 
 
-async function SingUp() {
+function SingUp() {
     const Auth = useAuth()
     const isLogged = Auth.userIsAuthenticated()
 
@@ -22,7 +22,6 @@ async function SingUp() {
     const [role, setRole] = useState('')
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
 
     const handleInputChange = (e, {name, value}) => {
         if (name === 'username') {
@@ -48,7 +47,6 @@ async function SingUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if (!(username && password && name && surname && email && telephone && country && photo && role)) {
             setIsError(true)
             setErrorMessage('Please,give all fields!')
@@ -57,7 +55,6 @@ async function SingUp() {
 
 
         const user = {username, password, name, surname, email, telephone, country, photo, role}
-
         try {
             const resp = await ApiConnector.signUp(user)
             const {accessToken} = resp.data
