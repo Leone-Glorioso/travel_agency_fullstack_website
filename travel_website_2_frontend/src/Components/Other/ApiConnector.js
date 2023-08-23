@@ -184,5 +184,5 @@ instance.interceptors.request.use(function (config) {
 
 
 function bearerAuth(user) {
-    return `Bearer ${user.accessToken}`
+    return `Bearer ${user.access}`
 }
