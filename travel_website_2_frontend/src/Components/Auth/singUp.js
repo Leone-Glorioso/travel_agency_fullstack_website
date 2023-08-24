@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {useAuth} from "./contex";
 import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError, parseJwt} from "../Other/Helpers";
-import { Button , Form, Grid, Segment, Message,Dropdown } from 'semantic-ui-react'
+import { Button , Form, Grid, Segment, Message, Dropdown} from 'semantic-ui-react'
+// import Dropdown from 'react-css-dropdown'
 import { NavLink, Navigate } from 'react-router-dom'
 //import * as PropTypes from "prop-types";
 
@@ -91,10 +92,10 @@ function SingUp() {
     }
 
     const roleOptions = [
-        {key: 'Admin', text:'Admin', value:'Admin'},
+        // {key: 'Admin', text:'Admin', value:'Admin'},
         {key: 'Landlord', text:'Landlord', value:'Landlord'},
         {key: 'Client', text:'Client', value:'Client'},
-        {key: 'Landlord/Client', text:'Landlord/Client', value:'Landlord/Client'},
+        // {key: 'Landlord/Client', text:'Landlord/Client', value:'Landlord/Client'},
     ]
 
     if (isLogged){
@@ -102,9 +103,9 @@ function SingUp() {
     }
 
     return (
-        <Grid textAlign='center'>
+        <Grid textAlign='center' className={"app"}>
             <Grid.Column style={{ maxWidth: 450 }}>
-                <Form size='large' onSubmit={handleSubmit}>
+                <Form size='large' onSubmit={handleSubmit} className={"login-form"}>
                     <Segment>
                         <Form.Input
                             fluid
@@ -115,6 +116,7 @@ function SingUp() {
                             placeholder='Username'
                             value={username}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
                         <Form.Input
                             fluid
@@ -125,6 +127,7 @@ function SingUp() {
                             type='password'
                             value={password}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
                         <Form.Input
                             fluid
@@ -134,6 +137,7 @@ function SingUp() {
                             placeholder='Name'
                             value={name}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
                         <Form.Input
                             fluid
@@ -143,6 +147,7 @@ function SingUp() {
                             placeholder='surname'
                             value={surname}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
                         <Form.Input
                             fluid
@@ -152,6 +157,7 @@ function SingUp() {
                             placeholder='Email'
                             value={email}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
                         <Form.Input
                             fluid
@@ -161,6 +167,7 @@ function SingUp() {
                             placeholder='telephone'
                             value={telephone}
                             onChange={handleInputChange}
+                            className={"input-container"}
                             />
 
                         <Form.Input
@@ -171,6 +178,7 @@ function SingUp() {
                             placeholder='country'
                             value={country}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
 
                         <Form.Input
@@ -181,19 +189,33 @@ function SingUp() {
                             placeholder='photo'
                             value={photo}
                             onChange={handleInputChange}
+                            className={"input-container"}
                         />
 
-                        <Dropdown
-                            floating
-                            selection
-                            fluid
-                            placeholder = 'Role'
-                            value = {role}
-                            options = {roleOptions}
-                            onChange={handleInputChange}>
-                        </Dropdown>
-
-                        <Button color='violet' fluid size='large'>Signup</Button>
+                        {/*<Dropdown*/}
+                        {/*    floating*/}
+                        {/*    selection*/}
+                        {/*    fluid*/}
+                        {/*    placeholder = 'Role'*/}
+                        {/*    value = {role}*/}
+                        {/*    options = {roleOptions}*/}
+                        {/*    onChange={handleInputChange}>*/}
+                        {/*</Dropdown>*/}
+                        {/*<Dropdown*/}
+                        {/*    placeholder='Select Role(s)'*/}
+                        {/*    fluid*/}
+                        {/*    selection*/}
+                        {/*    options={roleOptions}*/}
+                        {/*/>*/}
+                        {/*<Dropdown placeholder='Roles' fluid multiple search selection options={roleOptions} value={role} className={"input-container"}/>*/}
+                        {/*<Dropdown.Menu>*/}
+                        {/*    <Dropdown.Item text='ReactJS' icon='react' />*/}
+                        {/*    <Dropdown.Item text='AngularJS' icon='angular'/>*/}
+                        {/*    <Dropdown.Item text='HTML5' icon='html5' />*/}
+                        {/*    <Dropdown.Item text='JavaScript' icon='js' />*/}
+                        {/*    <Dropdown.Item text='NodeJS' icon='node'/>*/}
+                        {/*</Dropdown.Menu>*/}
+                        <Button color='violet' fluid size='large' className={"button-container"}>Signup</Button>
                     </Segment>
                 </Form>
                 <Message>{`Already have an account? `}
