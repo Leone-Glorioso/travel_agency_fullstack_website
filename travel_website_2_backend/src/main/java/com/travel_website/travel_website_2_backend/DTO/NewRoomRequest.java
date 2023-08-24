@@ -54,9 +54,17 @@ public class NewRoomRequest {
     @Schema(example = "2")
     @NotBlank
     private int minimumDays;
-    //TODO cannot contain class in request (Location)
-    @Schema(example = "Birmingham,England,UK")
-    private Location location;
+
+    @Schema(example = "-50.00")
+    @NotBlank
+    private double latitude;
+
+    @Schema(example = "+50.00")
+    @NotBlank
+    private double longitude;
+
+    @Schema(example = "Long beach 80, Birmingham, England")
+    private String address;
 
     @Schema(example = "true")
     @NotBlank
