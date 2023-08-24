@@ -2,6 +2,7 @@ package com.travel_website.travel_website_2_backend.Mapper;
 
 import com.travel_website.travel_website_2_backend.DTO.NewRoomRequest;
 import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
+import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class RoomMapperImplementation implements RoomMapper{
             return null;
         return new Room(roomRequest.getTypeofroom(), roomRequest.getNumOfBeds(), roomRequest.getNumOfBaths(), roomRequest.getNumOfBedrooms(), roomRequest.isLivingRoom(),
                 roomRequest.getArea(), roomRequest.getDescription(), roomRequest.isSmoking(), roomRequest.isPets(), roomRequest.isEvents(), roomRequest.getMinimumDays(),
-                roomRequest.getLocation(), roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
+                new Location(roomRequest.getLatitude(), roomRequest.getLongitude(),roomRequest.getAddress()), roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
                 roomRequest.isParking(), roomRequest.isElevator());
     }
 
