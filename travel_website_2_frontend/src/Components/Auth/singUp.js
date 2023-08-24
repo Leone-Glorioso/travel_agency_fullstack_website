@@ -97,7 +97,7 @@ function SingUp() {
     ]
 
     if (isLogged){
-        return <Navigate to='/'/>
+        return <Navigate to='/profile'/>
     }
 
     return (
