@@ -58,11 +58,9 @@ function SingUp() {
         const user = {username, password, name, surname, email, telephone, country, photo, role}
         try {
             const resp = await ApiConnector.signUp(user)
-            const {accessToken} = resp.data
-            const data = parseJwt(accessToken)
-            const authUser = {data, accessToken}
+            const { accessToken, ...userData } = resp.data; // Assuming user data is in response
 
-            Auth.userLogin(authUser)
+            Auth.userLogin(userData, accessToken);
 
             setUsername('')
             setPassword('')
@@ -192,6 +190,16 @@ function SingUp() {
                             className={"input-container"}
                         />
 
+                        <Form.Input
+                            fluid
+                            name='role'
+                            icon='world'
+                            iconPosition='left'
+                            placeholder='role'
+                            value={role}
+                            onChange={handleInputChange}
+                            className={"input-container"}
+                        />
                         {/*<Dropdown*/}
                         {/*    floating*/}
                         {/*    selection*/}
@@ -207,7 +215,7 @@ function SingUp() {
                         {/*    selection*/}
                         {/*    options={roleOptions}*/}
                         {/*/>*/}
-                        {/*<Dropdown placeholder='Roles' fluid multiple search selection options={roleOptions} value={role} className={"input-container"}/>*/}
+                        {/*<Dropdown placeholder='Roles' fluid selection options={roleOptions} value={role} className={"test"}/>*/}
                         {/*<Dropdown.Menu>*/}
                         {/*    <Dropdown.Item text='ReactJS' icon='react' />*/}
                         {/*    <Dropdown.Item text='AngularJS' icon='angular'/>*/}
