@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useAuth} from "../Auth/contex";
 import {ApiConnector} from "../Other/ApiConnector";
-import {parseJwt} from "../Other/Helpers";
+// import {parseJwt} from "../Other/Helpers";
 import {Grid, Icon, Segment, Statistic} from "semantic-ui-react";
+
+import "./Profile.css";
 
 function Profile() {
 
-    let [userMe, setUserMe] = useState(null)
+    // let [userMe, setUserMe] = useState(null)
     let [name, setName] = useState('')
     let [surname, setSurname] = useState('')
     let [username, setUsername] = useState('')
@@ -34,43 +36,71 @@ function Profile() {
         }
         fetchData().catch(console.error)
 
-    }, []);
+    }, [Auth.user.user]);
 
 
     return (
-        <Grid stackable columns={2}>
+        // <Grid stackable columns={2}>
+        //     <Grid.Row>
+        //         <Grid.Column textAlign='center'>
+        //             <Segment color='violet'>
+        //                 <Statistic>
+        //                     <Statistic.Label>Name</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{name}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Surname</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{surname}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Username</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{username}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Email</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{email}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Telephone</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{telephone}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Country</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{country}</Statistic.Value>
+        //                 </Statistic>
+        //                 <Statistic>
+        //                     <Statistic.Label>Role</Statistic.Label>
+        //                     <Statistic.Value><Icon name='user' color='grey' />{role}</Statistic.Value>
+        //                 </Statistic>
+        //             </Segment>
+        //         </Grid.Column>
+        //     </Grid.Row>
+        // </Grid>
+
+        <Grid className={"app-profile"} columns={"two"}>
             <Grid.Row>
-                <Grid.Column textAlign='center'>
-                    <Segment color='violet'>
-                        <Statistic>
-                            <Statistic.Label>Name</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{name}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Surname</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{surname}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Username</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{username}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Email</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{email}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Telephone</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{telephone}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Country</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{country}</Statistic.Value>
-                        </Statistic>
-                        <Statistic>
-                            <Statistic.Label>Role</Statistic.Label>
-                            <Statistic.Value><Icon name='user' color='grey' />{role}</Statistic.Value>
-                        </Statistic>
-                    </Segment>
+                <Grid.Column>
+                    <Segment><strong>Username</strong> {username}</Segment>
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment><strong>Name</strong> {name}</Segment>
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment><strong>Surname</strong> {surname}</Segment>
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment><strong>Email</strong> {email}</Segment>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column>
+                    <Segment><strong>Telephone</strong> {telephone}</Segment>
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment><strong>Country</strong> {country}</Segment>
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment><strong>Role</strong> {role}</Segment>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
