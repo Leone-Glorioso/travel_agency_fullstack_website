@@ -33,9 +33,16 @@ public class Reservation {
     @NotBlank
     private LocalDate end;
 
-    public Reservation(User client, Room bookedRoom, int ppn, LocalDate start, LocalDate end) {
-        this.client = client;
-        this.bookedRoom = bookedRoom;
+//    public Reservation(User client, Room bookedRoom, int ppn, LocalDate start, LocalDate end) {
+//        this.client = client;
+//        this.bookedRoom = bookedRoom;
+//        this.ppn = ppn;
+//        this.start = start;
+//        this.end = end;
+//    }
+
+
+    public Reservation(int ppn, LocalDate start, LocalDate end) {
         this.ppn = ppn;
         this.start = start;
         this.end = end;

@@ -25,9 +25,9 @@ public class CreateReservationRequest {
     //TODO Configure local date
     @Schema(example = "19/12/23")
     @NotBlank
-    private LocalDate start;
+    private String start;
 
     @Schema(example = "31/12/23")
     @NotBlank
-    private LocalDate end;
+    private String end;
 }

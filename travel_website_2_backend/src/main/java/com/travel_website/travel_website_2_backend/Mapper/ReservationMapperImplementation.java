@@ -5,6 +5,9 @@ import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class ReservationMapperImplementation implements ReservationMapper{
 
@@ -12,7 +15,8 @@ public class ReservationMapperImplementation implements ReservationMapper{
     public Reservation toReserve(CreateReservationRequest createReservationRequest)
     {
         if(createReservationRequest == null){ return null; }
-        return new Reservation(createReservationRequest.getUser(), createReservationRequest.getRoom(), createReservationRequest.getPpn() , createReservationRequest.getStart(), createReservationRequest.getEnd());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        return new Reservation(createReservationRequest.getPpn() , LocalDate.parse(createReservationRequest.getStart(), format), LocalDate.parse(createReservationRequest.getEnd(), format));
     }
 
     @Override
