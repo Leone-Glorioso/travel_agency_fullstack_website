@@ -77,7 +77,7 @@ function Profile() {
         //     </Grid.Row>
         // </Grid>
 
-        <Grid className={"app-profile"} columns={"two"}>
+        <Grid className={"app-profile"} >
             <Grid.Row>
                 <Grid.Column>
                     <Segment><strong>Username</strong> {username}</Segment>
@@ -91,8 +91,6 @@ function Profile() {
                 <Grid.Column>
                     <Segment><strong>Email</strong> {email}</Segment>
                 </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
                 <Grid.Column>
                     <Segment><strong>Telephone</strong> {telephone}</Segment>
                 </Grid.Column>
