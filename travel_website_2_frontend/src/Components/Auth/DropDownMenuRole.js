@@ -12,8 +12,8 @@ const DropdownMenu = ({ onSelect }) => {
     return (
         <div>
             <select value={selectedOption} onChange={handleOptionChange}>
-                <option value="Landlord">Landlord</option>
                 <option value="Client">Client</option>
+                <option value="Landlord">Landlord</option>
                 <option value="Landlord/Client">Landlord/Client</option>
             </select>
         </div>

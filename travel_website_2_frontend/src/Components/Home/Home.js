@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError} from "../Other/Helpers";
 import { Statistic, Icon, Grid, Container, Image, Segment, Dimmer, Loader } from 'semantic-ui-react'
-import WebSitelogo from 'file:///C:/Users/GIGABYTE/Documents/GitHub/travel_website_2/misc/logo_1.png';
+import WebSiteLogo from '../../logo_1.png'
+//import WebSiteLogo from 'file:///C:/Users/GIGABYTE/Documents/GitHub/travel_website_2/misc/logo_1.png';
 import {Link} from "react-router-dom"; // Adjust the path accordingly
 
 
@@ -78,7 +79,7 @@ function Home(){
                     {/*</Grid.Column>*/}
                 </Grid.Row>
             </Grid>
-            <Image src={WebSitelogo}  alt="Web site logo" />
+            <Image src={WebSiteLogo}  alt="Web site logo" />
             {/*<Image src={'https://github.com/Leone-Glorioso/travel_website_2/blob/master/misc/logo_1.png'} style={{marginTop: '10px'}} />*/}
             {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />*/}
             {/*<Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />*/}
