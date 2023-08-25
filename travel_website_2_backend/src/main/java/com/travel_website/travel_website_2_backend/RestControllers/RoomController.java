@@ -55,12 +55,11 @@ public class RoomController {
                               @PathVariable int id)
     {
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        Location location = locationService.validateAndGetLocation(id);
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
-        Location location = locationService.validateAndGetLocation(id);
         room.setLocation(location);
         roomService.saveRoom(room);
-        System.out.print(room.getId() + room.getLandlord().getUsername() + room.getLocation().getId());
         return roomMapper.toRoomDTO(room);
     }
 
