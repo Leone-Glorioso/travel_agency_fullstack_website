@@ -1,9 +1,7 @@
 package com.travel_website.travel_website_2_backend.RestControllers;
 
-import com.travel_website.travel_website_2_backend.DTO.CreateReservationRequest;
-import com.travel_website.travel_website_2_backend.DTO.NewRoomRequest;
-import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
-import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
+import com.travel_website.travel_website_2_backend.DTO.*;
+import com.travel_website.travel_website_2_backend.Mapper.LocationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
 import com.travel_website.travel_website_2_backend.Models.Location;
@@ -51,15 +49,18 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @PostMapping
+    @PostMapping("/location/{id}")
     public RoomDTO createRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
-                              @Valid @RequestBody NewRoomRequest newRoomRequest)
+                           @Valid @RequestBody NewRoomRequest newRoomRequest,
+                              @PathVariable int id)
     {
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
-        locationService.saveLocation(room.getLocation());
+        Location location = locationService.validateAndGetLocation(id);
+        room.setLocation(location);
         roomService.saveRoom(room);
+        System.out.print(room.getId() + room.getLandlord().getUsername() + room.getLocation().getId());
         return roomMapper.toRoomDTO(room);
     }
 

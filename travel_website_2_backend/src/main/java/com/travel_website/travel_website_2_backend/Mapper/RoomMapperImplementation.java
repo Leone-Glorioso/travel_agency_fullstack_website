@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoomMapperImplementation implements RoomMapper{
 
-//    LocationService locationService;
 
     @Override
     public Room newRoom(NewRoomRequest roomRequest)
@@ -30,11 +29,10 @@ public class RoomMapperImplementation implements RoomMapper{
             tpr = TypeOfRoom.house;
         else
             throw new Exception_NonExcistentRoomType("Room type " + roomRequest.getTypeofroom() + " does not exist");
-        Location location = new Location(roomRequest.getLatitude(), roomRequest.getLongitude(),roomRequest.getAddress());
-//        locationService.saveLocation(location);
+//        Location location = new Location(roomRequest.getLatitude(), roomRequest.getLongitude(),roomRequest.getAddress());
         return new Room(tpr, roomRequest.getNumOfBeds(), roomRequest.getNumOfBaths(), roomRequest.getNumOfBedrooms(), roomRequest.isLivingRoom(),
                 roomRequest.getArea(), roomRequest.getDescription(), roomRequest.isSmoking(), roomRequest.isPets(), roomRequest.isEvents(), roomRequest.getMinimumDays(),
-                location, roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
+                roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
                 roomRequest.isParking(), roomRequest.isElevator());
     }
 

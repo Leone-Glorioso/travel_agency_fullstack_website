@@ -55,16 +55,16 @@ public class NewRoomRequest {
     @NotBlank
     private int minimumDays;
 
-    @Schema(example = "-50.00")
-    @NotBlank
-    private double latitude;
-
-    @Schema(example = "+50.00")
-    @NotBlank
-    private double longitude;
-
-    @Schema(example = "Long beach 80, Birmingham, England")
-    private String address;
+//    @Schema(example = "-50.00")
+//    @NotBlank
+//    private double latitude;
+//
+//    @Schema(example = "+50.00")
+//    @NotBlank
+//    private double longitude;
+//
+//    @Schema(example = "Long beach 80, Birmingham, England")
+//    private String address;
 
     @Schema(example = "true")
     @NotBlank
