@@ -28,4 +28,9 @@ public record RoomDTO(TypeOfRoom typeOfRoom,
     {
 
     }
+
+    public record LocationDto(int id)
+    {
+
+    }
 }
