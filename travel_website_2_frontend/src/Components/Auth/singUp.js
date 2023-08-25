@@ -5,6 +5,7 @@ import {handleLogError, parseJwt} from "../Other/Helpers";
 import { Button , Form, Grid, Segment, Message, Dropdown} from 'semantic-ui-react'
 // import Dropdown from 'react-css-dropdown'
 import { NavLink, Navigate } from 'react-router-dom'
+import DropdownMenu from "./DropDownMenuRole";
 //import * as PropTypes from "prop-types";
 
 
@@ -45,6 +46,10 @@ function SingUp() {
             setRole(value)
         }
     }
+
+    const handleRoleChange = (selectedRole) => {
+        setRole(selectedRole);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -88,13 +93,6 @@ function SingUp() {
             }
         }
     }
-
-    const roleOptions = [
-        // {key: 'Admin', text:'Admin', value:'Admin'},
-        {key: 'Landlord', text:'Landlord', value:'Landlord'},
-        {key: 'Client', text:'Client', value:'Client'},
-        // {key: 'Landlord/Client', text:'Landlord/Client', value:'Landlord/Client'},
-    ]
 
     if (isLogged){
         return <Navigate to='/profile'/>
@@ -190,16 +188,34 @@ function SingUp() {
                             className={"input-container"}
                         />
 
-                        <Form.Input
-                            fluid
-                            name='role'
-                            icon='world'
-                            iconPosition='left'
-                            placeholder='role'
-                            value={role}
-                            onChange={handleInputChange}
-                            className={"input-container"}
-                        />
+                        <Form.Field>
+                            <label>Select Role</label>
+                            <DropdownMenu onSelect={handleRoleChange} />
+                        </Form.Field>
+
+                        {/*<Dropdown*/}
+                        {/*    placeholder={'Select Role'}*/}
+                        {/*    fluid*/}
+                        {/*    selection*/}
+                        {/*    options={[*/}
+                        {/*    {key:'admin',text:'Admin',value:'admin'},*/}
+                        {/*    {key:'user',text:'User',value:'user'},*/}
+                        {/*    {key:'admin',text:'Admin',value:'admin'}*/}
+                        {/*]}*/}
+                        {/*    value={role}*/}
+                        {/*    onChange={handleRoleChange}*/}
+                        {/*/>*/}
+
+                        {/*<Form.Input*/}
+                        {/*    fluid*/}
+                        {/*    name='role'*/}
+                        {/*    icon='world'*/}
+                        {/*    iconPosition='left'*/}
+                        {/*    placeholder='role'*/}
+                        {/*    value={role}*/}
+                        {/*    onChange={handleInputChange}*/}
+                        {/*    className={"input-container"}*/}
+                        {/*/>*/}
                         {/*<Dropdown*/}
                         {/*    floating*/}
                         {/*    selection*/}
