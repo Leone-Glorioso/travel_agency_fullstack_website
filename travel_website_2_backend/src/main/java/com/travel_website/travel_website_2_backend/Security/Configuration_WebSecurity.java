@@ -43,7 +43,8 @@ public class Configuration_WebSecurity {
                         .requestMatchers(HttpMethod.DELETE, "api/rooms").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/all", "api/rooms/landlord/**").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/reservations/myRooms/**").hasAuthority(LANDLORD.toString())
-                        .requestMatchers(HttpMethod.POST, "api/reservations").hasAuthority(CLIENT.toString())
+//                        .requestMatchers(HttpMethod.POST, "api/reservations").hasAuthority(CLIENT.toString())
+                        .requestMatchers(HttpMethod.POST, "api/rooms/room/**").hasAuthority(CLIENT.toString())
                         .requestMatchers(HttpMethod.GET, "api/reservations/myReservations", "api/reservations/myReservations/**").hasAuthority(CLIENT.toString())
                         .requestMatchers(HttpMethod.DELETE, "api/reservations/**").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/reservations/all", "api/reservations/search", "api/reservations/searchID/**",

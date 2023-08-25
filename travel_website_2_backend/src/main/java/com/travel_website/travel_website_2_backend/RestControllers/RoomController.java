@@ -1,17 +1,25 @@
 package com.travel_website.travel_website_2_backend.RestControllers;
 
+import com.travel_website.travel_website_2_backend.DTO.CreateReservationRequest;
 import com.travel_website.travel_website_2_backend.DTO.NewRoomRequest;
+import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
 import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
+import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
 import com.travel_website.travel_website_2_backend.Models.Location;
+import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
+import com.travel_website.travel_website_2_backend.Service.LocationService;
+import com.travel_website.travel_website_2_backend.Service.ReservationService;
 import com.travel_website.travel_website_2_backend.Service.RoomService;
 import com.travel_website.travel_website_2_backend.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +37,9 @@ public class RoomController {
     private final UserService userService;
     private final RoomService roomService;
     private final RoomMapper roomMapper;
+    private final ReservationService reservationService;
+    private final ReservationMapper reservationMapper;
+    private final LocationService locationService;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
@@ -47,6 +58,8 @@ public class RoomController {
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
+        locationService.saveLocation(room.getLocation());
+        roomService.saveRoom(room);
         return roomMapper.toRoomDTO(room);
     }
 
@@ -113,4 +126,22 @@ public class RoomController {
     {
         return roomService.getRoomsInLocation(location).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/room/{id}")
+    public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
+                                            @Valid @RequestBody CreateReservationRequest reservationRequest,
+                                            @PathVariable @NotBlank int id)
+    {
+        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateClient(user);
+        Room room = roomService.validateAndGetRoom(id);
+        Reservation reservation = reservationMapper.toReserve(reservationRequest);
+        reservation.setBookedRoom(room);
+        reservation.setClient(user);
+        reservationService.saveReservation(reservation);
+        return reservationMapper.toReserveDto(reservation);
+    }
+
 }

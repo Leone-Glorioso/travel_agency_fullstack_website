@@ -41,7 +41,8 @@ public class Location{
 //    public void setId(LocationID id) {
 //        this.id = id;
 //    }
-
+    @OneToMany
+    private Set<Room> rooms;
 
     public int getId() {
         return id;
@@ -98,6 +99,15 @@ public class Location{
 //        Location location = (Location) o;
 //        return Objects.equals(id, location.id);
 //    }
+
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     @Override
     public boolean equals(Object o) {

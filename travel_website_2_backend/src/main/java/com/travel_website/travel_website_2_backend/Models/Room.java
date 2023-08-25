@@ -130,6 +130,28 @@ public class Room {
         this.elevator = elevator;
     }
 
+    public Room(TypeOfRoom typeofroom, int numOfBeds, int numOfBaths, int numOfBedrooms, boolean livingRoom, int area, String description, boolean smoking, boolean pets, boolean events, int minimumDays, boolean internet, boolean cooling, boolean heating, boolean kitchen, boolean tv, boolean parking, boolean elevator) {
+        this.typeofroom = typeofroom;
+        this.numOfBeds = numOfBeds;
+        this.numOfBaths = numOfBaths;
+        this.numOfBedrooms = numOfBedrooms;
+        this.livingRoom = livingRoom;
+        this.area = area;
+        this.description = description;
+        this.smoking = smoking;
+        this.pets = pets;
+        this.events = events;
+        this.minimumDays = minimumDays;
+        this.internet = internet;
+        this.cooling = cooling;
+        this.heating = heating;
+        this.kitchen = kitchen;
+        this.tv = tv;
+        this.parking = parking;
+        this.elevator = elevator;
+        this.location = null;
+    }
+
     public int getId() {
         return id;
     }

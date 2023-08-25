@@ -15,7 +15,7 @@ public class ReservationMapperImplementation implements ReservationMapper{
     public Reservation toReserve(CreateReservationRequest createReservationRequest)
     {
         if(createReservationRequest == null){ return null; }
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         return new Reservation(createReservationRequest.getPpn() , LocalDate.parse(createReservationRequest.getStart(), format), LocalDate.parse(createReservationRequest.getEnd(), format));
     }
 
