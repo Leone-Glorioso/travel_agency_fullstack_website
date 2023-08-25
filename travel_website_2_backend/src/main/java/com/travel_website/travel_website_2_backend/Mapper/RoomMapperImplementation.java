@@ -6,13 +6,19 @@ import com.travel_website.travel_website_2_backend.Exception.Exception_NonExcist
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
+import com.travel_website.travel_website_2_backend.Repository.LocationRepository;
+import com.travel_website.travel_website_2_backend.Service.LocationService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoomMapperImplementation implements RoomMapper{
+
+//    LocationService locationService;
+
     @Override
     public Room newRoom(NewRoomRequest roomRequest)
     {
+
         if(roomRequest == null)
             return null;
         TypeOfRoom tpr;
@@ -24,10 +30,11 @@ public class RoomMapperImplementation implements RoomMapper{
             tpr = TypeOfRoom.house;
         else
             throw new Exception_NonExcistentRoomType("Room type " + roomRequest.getTypeofroom() + " does not exist");
-
+        Location location = new Location(roomRequest.getLatitude(), roomRequest.getLongitude(),roomRequest.getAddress());
+//        locationService.saveLocation(location);
         return new Room(tpr, roomRequest.getNumOfBeds(), roomRequest.getNumOfBaths(), roomRequest.getNumOfBedrooms(), roomRequest.isLivingRoom(),
                 roomRequest.getArea(), roomRequest.getDescription(), roomRequest.isSmoking(), roomRequest.isPets(), roomRequest.isEvents(), roomRequest.getMinimumDays(),
-                new Location(roomRequest.getLatitude(), roomRequest.getLongitude(),roomRequest.getAddress()), roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
+                location, roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
                 roomRequest.isParking(), roomRequest.isElevator());
     }
 

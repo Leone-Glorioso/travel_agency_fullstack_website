@@ -70,17 +70,17 @@ public class ReservationController {
         return reservationMapper.toReserveDto(reservationService.validateAndGetReservation(id));
     }
 
-    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
-                                      @Valid @RequestBody CreateReservationRequest createOrderRequest) {
-        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
-        userService.validateClient(user);
-        Reservation reservation = reservationMapper.toReserve(createOrderRequest);
-        reservation.setClient(user);
-        return reservationMapper.toReserveDto(reservationService.saveReservation(reservation));
-    }
+//    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping
+//    public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
+//                                      @Valid @RequestBody CreateReservationRequest createOrderRequest) {
+//        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+//        userService.validateClient(user);
+//        Reservation reservation = reservationMapper.toReserve(createOrderRequest);
+//        reservation.setClient(user);
+//        return reservationMapper.toReserveDto(reservationService.saveReservation(reservation));
+//    }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @DeleteMapping("/{id}")

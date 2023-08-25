@@ -10,14 +10,14 @@ import java.time.LocalDate;
 
 @Data
 public class CreateReservationRequest {
-    //TODO cannot contain class in request (User)
-    @Schema(example = "user1")
-    @NotBlank
-    private User user;
-    //TODO cannot contain class in request (Room)
-    @Schema(example = "room18")
-    @NotBlank
-    private Room room;
+//    //TODO cannot contain class in request (User)
+//    @Schema(example = "user1")
+//    @NotBlank
+//    private User user;
+//    //TODO cannot contain class in request (Room)
+//    @Schema(example = "room18")
+//    @NotBlank
+//    private Room room;
 
     @Schema(example = "50")
     @NotBlank
