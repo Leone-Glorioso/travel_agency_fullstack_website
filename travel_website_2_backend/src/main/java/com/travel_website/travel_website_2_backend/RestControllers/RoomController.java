@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,18 +50,19 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @PostMapping("/location/{id}")
-    public RoomDTO createRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/location/{id}")
+    public CreatedResponse createRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
                            @Valid @RequestBody NewRoomRequest newRoomRequest,
-                              @PathVariable int id)
+                              @Valid @PathVariable int id)
     {
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
         Location location = locationService.validateAndGetLocation(id);
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
         room.setLocation(location);
-        roomService.saveRoom(room);
-        return roomMapper.toRoomDTO(room);
+        Room room1 = roomService.saveRoom(room);
+        return new CreatedResponse("room", room1.getId());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
@@ -121,16 +123,18 @@ public class RoomController {
 
     //TODO change location to something else (will not test today)
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/location/{id}")
-    public List<RoomDTO> getRoomsInLocation(@PathVariable Location location)
+    @GetMapping("/location/{latitude}/{longitude}")
+    public List<RoomDTO> getRoomsInLocation(@PathVariable double latitude,
+                                            @PathVariable double longitude)
     {
+        Location location = locationService.validateAndGetLocationFromPosition(latitude, longitude);
         return roomService.getRoomsInLocation(location).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/room/{id}")
-    public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
+    public CreatedResponse createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
                                             @Valid @RequestBody CreateReservationRequest reservationRequest,
                                             @PathVariable @NotBlank int id)
     {
@@ -140,8 +144,8 @@ public class RoomController {
         Reservation reservation = reservationMapper.toReserve(reservationRequest);
         reservation.setBookedRoom(room);
         reservation.setClient(user);
-        reservationService.saveReservation(reservation);
-        return reservationMapper.toReserveDto(reservation);
+        Reservation reservation1 = reservationService.saveReservation(reservation);
+        return new CreatedResponse("reservation", reservation1.getId());
     }
 
 }

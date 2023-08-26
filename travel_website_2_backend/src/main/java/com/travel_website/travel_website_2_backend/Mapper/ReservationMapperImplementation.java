@@ -24,6 +24,6 @@ public class ReservationMapperImplementation implements ReservationMapper{
     {
         if(reservation == null){ return null; }
         ReservationDTO.UserDto userDto = new ReservationDTO.UserDto(reservation.getClient().getUsername());
-        return new ReservationDTO(reservation.getId(), reservation.getClient(), reservation.getBookedRoom() , reservation.getPpn() ,reservation.getStart(), reservation.getEnd());
+        return new ReservationDTO(reservation.getId(), reservation.getPpn() ,reservation.getStart(), reservation.getEnd());
     }
 }

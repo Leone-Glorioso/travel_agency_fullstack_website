@@ -1,9 +1,12 @@
 package com.travel_website.travel_website_2_backend.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -45,7 +48,6 @@ public class Room {
 
     @Column(name = "description")
     @NotBlank
-    //TODO set limit of 1000 characters
     private String description;
 
     //Rules
@@ -65,6 +67,7 @@ public class Room {
     @NotBlank
     private int minimumDays;
 
+    @JsonIgnore
     @ManyToOne
     private Location location;
 
@@ -98,6 +101,7 @@ public class Room {
     @NotBlank
     private boolean elevator;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bookedRoom")
     private Set<Reservation> reservations;
 
@@ -150,7 +154,10 @@ public class Room {
         this.parking = parking;
         this.elevator = elevator;
         this.location = null;
+        this.landlord = null;
+        this.reservations = new HashSet<>();
     }
+
 
     public int getId() {
         return id;
@@ -328,18 +335,33 @@ public class Room {
         this.landlord = landlord;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Room room = (Room) o;
+//        return id == room.id;
+//    }
+//
+//
+//
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id;
+        return id == room.id && numOfBeds == room.numOfBeds && numOfBaths == room.numOfBaths && numOfBedrooms == room.numOfBedrooms && livingRoom == room.livingRoom && area == room.area && smoking == room.smoking && pets == room.pets && events == room.events && minimumDays == room.minimumDays && internet == room.internet && cooling == room.cooling && heating == room.heating && kitchen == room.kitchen && tv == room.tv && parking == room.parking && elevator == room.elevator && typeofroom == room.typeofroom && Objects.equals(description, room.description) && Objects.equals(location, room.location) && Objects.equals(reservations, room.reservations) && Objects.equals(landlord, room.landlord);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, typeofroom, numOfBeds, numOfBaths, numOfBedrooms, livingRoom, area, description, smoking, pets, events, minimumDays, location, internet, cooling, heating, kitchen, tv, parking, elevator, reservations, landlord);
     }
-
-
 }

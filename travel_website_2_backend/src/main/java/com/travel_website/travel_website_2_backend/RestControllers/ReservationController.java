@@ -172,7 +172,7 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/rooms/{roomId}/myReservations/{reservationId}")
+    @GetMapping("/rooms/{roomId}/reservations/{reservationId}")
     public ReservationDTO getReservationOfLandlordRoom(@PathVariable String username,
                                                  @PathVariable int roomId,
                                                  @PathVariable int reservationId)

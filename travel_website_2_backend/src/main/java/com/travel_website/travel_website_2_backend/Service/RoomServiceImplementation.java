@@ -23,7 +23,7 @@ public class RoomServiceImplementation implements RoomService{
     @Override
     public List<Room> getRooms()
     {
-        return roomRepository.findAll(Sort.by(Sort.Direction.DESC));
+        return roomRepository.findAll();//Sort.by(Sort.Direction.DESC));
     }
 
     @Override
