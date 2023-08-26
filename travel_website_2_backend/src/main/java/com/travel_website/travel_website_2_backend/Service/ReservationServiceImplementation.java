@@ -20,7 +20,7 @@ public class ReservationServiceImplementation implements ReservationService{
 
     @Override
     public List<Reservation> getReservations() {
-        return reservationRepository.findAll(Sort.by(Sort.Direction.DESC));
+        return reservationRepository.findAll();
     }
 
    /* @Override
