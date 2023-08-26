@@ -335,18 +335,33 @@ public class Room {
         this.landlord = landlord;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Room room = (Room) o;
+//        return id == room.id;
+//    }
+//
+//
+//
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id;
+        return id == room.id && numOfBeds == room.numOfBeds && numOfBaths == room.numOfBaths && numOfBedrooms == room.numOfBedrooms && livingRoom == room.livingRoom && area == room.area && smoking == room.smoking && pets == room.pets && events == room.events && minimumDays == room.minimumDays && internet == room.internet && cooling == room.cooling && heating == room.heating && kitchen == room.kitchen && tv == room.tv && parking == room.parking && elevator == room.elevator && typeofroom == room.typeofroom && Objects.equals(description, room.description) && Objects.equals(location, room.location) && Objects.equals(reservations, room.reservations) && Objects.equals(landlord, room.landlord);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, typeofroom, numOfBeds, numOfBaths, numOfBedrooms, livingRoom, area, description, smoking, pets, events, minimumDays, location, internet, cooling, heating, kitchen, tv, parking, elevator, reservations, landlord);
     }
-
-
 }

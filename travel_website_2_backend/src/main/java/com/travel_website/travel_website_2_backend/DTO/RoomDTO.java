@@ -20,9 +20,7 @@ public record RoomDTO(TypeOfRoom typeOfRoom,
                       boolean tv,
                       boolean parking,
                       boolean elevator,
-                      String description,
-                      User landlord,
-                      Location location) {
+                      String description) {
 
     public record LandlordDto(String username)
     {
