@@ -2,5 +2,11 @@
     background: url("../../HousePhoto.png") ;
     height:30vh;
     position:relative;
-    width:100%;
+}
+
+.ButtonSearchNearBy{
+    width: 190px;
+    background-color: deepskyblue;
+    color:black;
+    text-transform: inherit;
 }
