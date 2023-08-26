@@ -101,4 +101,11 @@ public class RoomServiceImplementation implements RoomService{
         if(!room.getLandlord().equals(landlord))
             throw new Exception_RoomDoesNotMatchLandlord("Room with id " + room.getId() + " does not match landlord " + landlord.getUsername());
     }
+
+    @Override
+    public List<Room> getRoomsForAmountOfPeople(int people)
+    {
+        return roomRepository.findRoomsByNumOfBeds(people);
+    }
+
 }

@@ -38,4 +38,6 @@ public interface RoomService {
     Room validateAndGetRoom(int id);
 
     void validateRoomLandlordConnection(User landlord, Room room);
+
+    List<Room> getRoomsForAmountOfPeople(int people);
 }
