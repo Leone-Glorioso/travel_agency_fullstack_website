@@ -1,0 +1,12 @@
+.SearchBanner{
+    background: url("../../HousePhoto.png") ;
+    height:30vh;
+    position:relative;
+}
+
+.ButtonSearchNearBy{
+    width: 190px;
+    background-color: deepskyblue;
+    color:black;
+    text-transform: inherit;
+}

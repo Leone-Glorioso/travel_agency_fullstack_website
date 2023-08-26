@@ -6,6 +6,7 @@ import WebSiteLogo from '../../logo_1.png'
 //import WebSiteLogo from 'file:///C:/Users/GIGABYTE/Documents/GitHub/travel_website_2/misc/logo_1.png';
 import {Link} from "react-router-dom"; // Adjust the path accordingly
 import Header from './Header'
+import SearchBanner from './SearchBanner'
 
 function Home(){
     const [numberOfUsers,setNumberOfUsers]=useState(0)
@@ -69,6 +70,8 @@ function Home(){
                             </ul>
                         </nav>
                     </div>
+                    <SearchBanner/>
+
 
                     {/*<Grid.Column textAlign='center'>*/}
                     {/*    <Segment color='violet'>*/}
