@@ -1,0 +1,6 @@
+.SearchBanner{
+    background: url("../../HousePhoto.png") ;
+    height:30vh;
+    position:relative;
+    width:100%;
+}
