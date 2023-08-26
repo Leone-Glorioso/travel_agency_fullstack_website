@@ -35,6 +35,14 @@ public class LocationServiceImplementation implements LocationService{
     }
 
     @Override
+    public Location validateAndGetLocationFromPosition(double latitude, double longitude)
+    {
+        return locationRepository.findByLatitudeAndLongitude(latitude, longitude)
+                .orElseThrow(() -> new Exception_LocationNotFound("Location not found"));
+    }
+
+
+    @Override
     public void deleteLocation(Location location)
     {
         locationRepository.delete(location);

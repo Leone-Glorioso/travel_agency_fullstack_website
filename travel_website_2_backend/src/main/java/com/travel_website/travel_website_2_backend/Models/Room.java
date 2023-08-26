@@ -1,9 +1,12 @@
 package com.travel_website.travel_website_2_backend.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -45,7 +48,6 @@ public class Room {
 
     @Column(name = "description")
     @NotBlank
-    //TODO set limit of 1000 characters
     private String description;
 
     //Rules
@@ -65,6 +67,7 @@ public class Room {
     @NotBlank
     private int minimumDays;
 
+    @JsonIgnore
     @ManyToOne
     private Location location;
 
@@ -98,6 +101,7 @@ public class Room {
     @NotBlank
     private boolean elevator;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bookedRoom")
     private Set<Reservation> reservations;
 
@@ -150,7 +154,10 @@ public class Room {
         this.parking = parking;
         this.elevator = elevator;
         this.location = null;
+        this.landlord = null;
+        this.reservations = new HashSet<>();
     }
+
 
     public int getId() {
         return id;

@@ -12,5 +12,7 @@ public interface LocationService {
 
     Location validateAndGetLocation(int id);
 
+    Location validateAndGetLocationFromPosition(double latitude, double longitude);
+
     void deleteLocation(Location location);
 }
