@@ -29,7 +29,7 @@ public class CalendarServiceImplementation implements CalendarService{
     }
 
     @Override
-    public Set<Integer> roomsAvailableBetweenDates(LocalDate start, LocalDate end)
+    public Set<Integer> roomsNotAvailableBetweenDates(LocalDate start, LocalDate end)
     {
         List<Calendar> entries = calendarRepository.findByDateBetween(start, end);
         Set<Integer> rooms = new HashSet<>();

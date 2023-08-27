@@ -158,10 +158,12 @@ public class RoomController {
                                        @PathVariable int numOfPeople)
     {
         Location location = locationService.validateAndGetLocation(location_id);
-        Set<Integer> roomNums = calendarService.roomsAvailableBetweenDates(dateHelper.stringToDate2(start_date), dateHelper.stringToDate2(end_date));
-        System.out.print(roomNums);
+        Set<Integer> roomNums = calendarService.roomsNotAvailableBetweenDates(dateHelper.stringToDate2(start_date), dateHelper.stringToDate2(end_date));
+        Set<Integer> allRoomNums = roomService.getRooms().stream().map(Room::getId).collect(Collectors.toSet());
+        Set<Integer> remainingRoomNums = allRoomNums.stream().filter(e-> !roomNums.contains(e)).collect(Collectors.toSet());
+//        System.out.print(roomNums);
         List<Room> rooms = new ArrayList<>();
-        for(int room : roomNums)
+        for(int room : remainingRoomNums)
             rooms.add(roomService.validateAndGetRoom(room));
         Collection<Room> collection= roomService.getRoomsInLocation(location);
         collection.retainAll(roomService.getRoomsForAmountOfPeople(numOfPeople));

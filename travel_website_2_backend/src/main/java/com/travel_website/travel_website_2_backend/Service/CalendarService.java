@@ -12,7 +12,7 @@ public interface CalendarService {
 
 //    boolean isFreeOnDate(int room, LocalDate start, LocalDate end);
 
-    Set<Integer> roomsAvailableBetweenDates(LocalDate start, LocalDate end);
+    Set<Integer> roomsNotAvailableBetweenDates(LocalDate start, LocalDate end);
 
     List<Calendar> allEntries();
 
