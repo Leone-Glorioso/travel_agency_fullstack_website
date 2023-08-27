@@ -57,6 +57,4 @@ public class Calendar {
     }
 
     //TODO use calendar in controllers
-
-    //TODO fix database/ add calendar
 }
