@@ -56,10 +56,6 @@ public class Calendar {
         return Objects.hash(room, date);
     }
 
-    //TODO Calendar DtO(s)
-
-    //TODO Calendar Mapper
-
     //TODO use calendar in controllers
 
     //TODO fix database/ add calendar
