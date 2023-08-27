@@ -4,15 +4,13 @@ import com.travel_website.travel_website_2_backend.DTO.*;
 import com.travel_website.travel_website_2_backend.Mapper.LocationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
+import com.travel_website.travel_website_2_backend.Misc.DateHelper;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
-import com.travel_website.travel_website_2_backend.Service.LocationService;
-import com.travel_website.travel_website_2_backend.Service.ReservationService;
-import com.travel_website.travel_website_2_backend.Service.RoomService;
-import com.travel_website.travel_website_2_backend.Service.UserService;
+import com.travel_website.travel_website_2_backend.Service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.NotBlank;
@@ -24,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.travel_website.travel_website_2_backend.Configuration.Configuration_Swagger.BEARER_KEY_SECURITY_SCHEME;
@@ -39,6 +39,8 @@ public class RoomController {
     private final ReservationService reservationService;
     private final ReservationMapper reservationMapper;
     private final LocationService locationService;
+    private final CalendarService calendarService;
+    private final DateHelper dateHelper;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
@@ -146,6 +148,25 @@ public class RoomController {
         reservation.setClient(user);
         Reservation reservation1 = reservationService.saveReservation(reservation);
         return new CreatedResponse("reservation", reservation1.getId());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("search/{location_id}/{start_date}/{end_date}/{numOfPeople}")
+    public List<RoomDTO> initialSearch(@PathVariable int location_id,
+                                       @PathVariable String start_date,
+                                       @PathVariable String end_date,
+                                       @PathVariable int numOfPeople)
+    {
+        Location location = locationService.validateAndGetLocation(location_id);
+        Set<Integer> roomNums = calendarService.roomsAvailableBetweenDates(dateHelper.stringToDate2(start_date), dateHelper.stringToDate2(end_date));
+        System.out.print(roomNums);
+        List<Room> rooms = new ArrayList<>();
+        for(int room : roomNums)
+            rooms.add(roomService.validateAndGetRoom(room));
+        Collection<Room> collection= roomService.getRoomsInLocation(location);
+        collection.retainAll(roomService.getRoomsForAmountOfPeople(numOfPeople));
+        collection.retainAll(rooms);
+        return collection.stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
 
 }

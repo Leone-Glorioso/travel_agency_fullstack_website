@@ -19,7 +19,7 @@ import java.util.Set;
 public class CalendarServiceImplementation implements CalendarService{
 
     private final CalendarRepository calendarRepository;
-    private DateHelper dateHelper;
+    private final DateHelper dateHelper;
 
     @Override
     public Calendar validateAndGetEntry(int room, LocalDate date)
@@ -28,16 +28,9 @@ public class CalendarServiceImplementation implements CalendarService{
                 .orElseThrow(() -> new Exception_CalendarEntryDoesNotExist("Room with id " + room + " does not have a booking on date " + date.toString()));
     }
 
-//    @Override
-//    public boolean isFreeOnDate(int room, LocalDate start, LocalDate end)
-//    {
-//
-//    }
-
     @Override
     public Set<Integer> roomsAvailableBetweenDates(LocalDate start, LocalDate end)
     {
-//        Collection<LocalDate> dates = dateHelper.getTimeSpanInDatesFromDates(start, end);
         List<Calendar> entries = calendarRepository.findByDateBetween(start, end);
         Set<Integer> rooms = new HashSet<>();
         for (Calendar entry: entries) {

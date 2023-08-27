@@ -56,5 +56,5 @@ public class Calendar {
         return Objects.hash(room, date);
     }
 
-    //TODO use calendar in controllers
+    //TODO fix calendar service functions
 }
