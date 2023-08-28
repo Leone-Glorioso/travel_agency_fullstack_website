@@ -1,28 +1,22 @@
-.SearchBanner{
+.Banner{
     background: url("../../HousePhoto.png") ;
     height:30vh;
     position:relative;
 }
 
-/*.SearchBannerInfo{*/
-/*    background-color: black;*/
-/*    color:white;*/
-/*    padding-top:25vh;*/
-/*    padding-left:50px;*/
-/*    padding-right:50px;*/
-/*    padding-bottom:40px;*/
-/*    width:300px;*/
-/*}*/
-
-
-.SearchButton{
+.SearchBannerInfo{
     background-color: black;
-    font-weight:900;
-    text-transform: inherit;
-    color:red;
+    color:white;
+    display: inline-block;
+    /*padding-top:25vh;*/
+    /*padding-left:50px;*/
+    /*padding-right:50px;*/
+    /*padding-bottom:40px;*/
+    /*width:300px;*/
 }
 
-.SearchBanner >button{
+.Banner >button{
+    margin:-100px;
     width: 100px;
     background-color: deepskyblue;
     color:white;
@@ -31,9 +25,20 @@
     font-weight:400;
 }
 
-.SearchBanner>button:hover{
+.Banner>button:hover{
     background-color: black;
     color:deepskyblue;
+}
+
+.Search>button{
+    font-weight:400;
+    text-transform: inherit;
+    color:green;
+}
+
+.Search>button:hover{
+    background-color: black;
+    color:green;
 }
 
 

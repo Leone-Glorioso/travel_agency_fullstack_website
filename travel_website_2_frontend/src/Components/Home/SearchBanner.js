@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import './SearchBanner.css'
 import { IconButton } from '@mui/material';
+import Search from "./Search";
 
 function SearchBanner () {
     const [showSearch,setShowSearch]=useState(false);
     return (
-        <div className={'SearchBanner'}>
+        <div className={'Banner'}>
             <div className={'Search'}>
-                {showSearch && <h1>SHOW DATE</h1>}
+                {showSearch && <Search></Search>}
                 <IconButton onClick={()=>setShowSearch(!showSearch)} className={'SearchButton'} variant={'outlined'}>
                     Search Dates
                 </IconButton>
