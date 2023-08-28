@@ -24,4 +24,6 @@ public interface CalendarService {
 
     void validateFreeRoomOnPeriod(int room, LocalDate start, LocalDate end);
 
+    List<Calendar> bookDates(int room, LocalDate start, LocalDate end);
+
 }

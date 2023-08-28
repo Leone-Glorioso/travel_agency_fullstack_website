@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -75,5 +72,15 @@ public class CalendarServiceImplementation implements CalendarService{
         }
         if(rooms.contains(room))
             throw new Exception_RoomIsBookedOnPeriod("Room with id " + room + " is not free from " + start.toString() + " to " + end.toString());
+    }
+
+    @Override
+    public List<Calendar> bookDates(int room, LocalDate start, LocalDate end)
+    {
+        List<Calendar> calendars = new ArrayList<>();
+        List<LocalDate> dates = dateHelper.getTimeSpanInDatesFromDates(start, end).stream().toList();
+        for (LocalDate date: dates)
+            calendars.add(calendarRepository.save(new Calendar(room, date)));
+        return calendars;
     }
 }
