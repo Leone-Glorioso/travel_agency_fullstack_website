@@ -35,21 +35,20 @@ public class Configuration_WebSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers("api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers("api/users", "api/users/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("api/rooms/search/**", "api/rooms/location/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/rooms").hasAuthority(LANDLORD.toString())
-                        .requestMatchers(HttpMethod.GET, "api/rooms/me", "api/rooms/me/**").hasAuthority(LANDLORD.toString())
+                        .requestMatchers(HttpMethod.POST, "api/rooms").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
+                        .requestMatchers(HttpMethod.GET, "api/rooms/me", "api/rooms/me/**").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.DELETE, "api/rooms").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/all", "api/rooms/landlord/**").hasAuthority(ADMIN.toString())
-                        .requestMatchers(HttpMethod.GET, "api/reservations/myRooms/**").hasAuthority(LANDLORD.toString())
-//                        .requestMatchers(HttpMethod.POST, "api/reservations").hasAuthority(CLIENT.toString())
-                        .requestMatchers(HttpMethod.POST, "api/rooms/room/**").hasAuthority(CLIENT.toString())
-                        .requestMatchers(HttpMethod.GET, "api/reservations/myReservations", "api/reservations/myReservations/**").hasAuthority(CLIENT.toString())
+                        .requestMatchers(HttpMethod.GET, "api/reservations/myRooms/**").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
+                        .requestMatchers(HttpMethod.POST, "api/rooms/room/**").hasAnyAuthority(CLIENT.toString(), LANDLORDCLIENT.toString())
+                        .requestMatchers(HttpMethod.GET, "api/reservations/myReservations", "api/reservations/myReservations/**").hasAnyAuthority(CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.DELETE, "api/reservations/**").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/reservations/all", "api/reservations/search", "api/reservations/searchID/**",
                                 "api/reservations/client/**", "api/reservations/rooms/**").hasAuthority(ADMIN.toString())
-                        .requestMatchers("api/locations", "api/locations/**").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString())
+                        .requestMatchers("api/locations", "api/locations/**").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
@@ -69,4 +68,5 @@ public class Configuration_WebSecurity {
     public static final UserCategories ADMIN = UserCategories.Administrator;
     public static final UserCategories LANDLORD = UserCategories.Landlord;
     public static final UserCategories CLIENT = UserCategories.Client;
+    public static final UserCategories LANDLORDCLIENT = UserCategories.LandlordClient;
 }

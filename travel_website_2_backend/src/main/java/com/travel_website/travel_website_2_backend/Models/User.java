@@ -71,8 +71,13 @@ public class User implements Serializable {
         this.rooms = null;
         if(role == UserCategories.Client)
             this.reservationSet = reservationSet;
-        if (role == UserCategories.Landlord)
+        else if(role == UserCategories.Landlord)
             this.rooms = rooms;
+        else if(role == UserCategories.LandlordClient)
+        {
+            this.rooms = rooms;
+            this.reservationSet = reservationSet;
+        }
     }
     public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
         this.name = name;

@@ -69,6 +69,8 @@ public class AuthController {
             user.setRole(Configuration_WebSecurity.LANDLORD);
         else if(role.equals("Client"))
             user.setRole(Configuration_WebSecurity.CLIENT);
+        else if(role.equals("Landlord/Client"))
+            user.setRole(Configuration_WebSecurity.LANDLORDCLIENT);
         else
             throw new Exception_RoleDoesNotExist("Role " + role + " does not exist");
         return user;

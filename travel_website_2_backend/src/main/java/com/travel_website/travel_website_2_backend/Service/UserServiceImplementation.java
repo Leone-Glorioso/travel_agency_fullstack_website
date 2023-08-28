@@ -64,14 +64,14 @@ public class UserServiceImplementation implements UserService{
     @Override
     public void validateLandlord(User user)
     {
-        if (!user.getRole().equals(UserCategories.Landlord))
+        if (!user.getRole().equals(UserCategories.Landlord) && !user.getRole().equals(UserCategories.LandlordClient))
             throw new Exception_UserNotLandlord("User is Not A Landlord");
     }
 
     @Override
     public void validateClient(User user)
     {
-        if (!user.getRole().equals(UserCategories.Client))
+        if (!user.getRole().equals(UserCategories.Client) && !user.getRole().equals(UserCategories.LandlordClient))
             throw new Exception_UserNotClient("User is Not A Client");
     }
 }
