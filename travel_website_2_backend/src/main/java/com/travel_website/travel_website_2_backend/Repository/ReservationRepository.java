@@ -13,9 +13,6 @@ import java.util.Optional;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
     Optional<Reservation> findById(int id);
-    //List<Reservation> findAllByReservationByCreatedAtDesc();
-
-//    List<Reservation> findByIdContainingOrDescriptionContainingIgnoreCaseOrderByCreatedAt(int id, String description);
 
     List<Reservation> findReservationsByClient(User client);
 
