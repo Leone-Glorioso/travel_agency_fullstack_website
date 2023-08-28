@@ -14,7 +14,7 @@ public class Request {
 
     @Id
     @Column(name = "landlord_id")
-    private int landlord;
+    private String landlord;
 
     @Column
     @NotBlank
@@ -24,33 +24,31 @@ public class Request {
     @NotBlank
     private boolean pending;
 
-    public Request(int landlord, boolean verified, boolean pending) {
+    public Request(String landlord, boolean verified, boolean pending) {
         this.landlord = landlord;
         this.verified = verified;
         this.pending = pending;
     }
 
-    public Request(int landlord, boolean verified) {
+    public Request(String landlord, boolean pending) {
         this.landlord = landlord;
-        this.verified = verified;
-        this.pending = false;
+        this.pending = pending;
+        this.verified = false;
     }
 
-    public Request(int landlord) {
+    public Request(String landlord) {
         this.landlord = landlord;
-        this.pending = true;
-        this.verified = false;
     }
 
     public Request() {
 
     }
 
-    public int getLandlord() {
+    public String getLandlord() {
         return landlord;
     }
 
-    public void setLandlord(int landlord) {
+    public void setLandlord(String landlord) {
         this.landlord = landlord;
     }
 
