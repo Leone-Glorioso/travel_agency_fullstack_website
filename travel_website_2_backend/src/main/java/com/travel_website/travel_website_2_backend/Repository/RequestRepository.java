@@ -19,4 +19,6 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findByVerifiedAndPending(boolean verified, boolean pending);
 
     boolean existsByLandlord(int landlord);
+
+    boolean existsByLandlordAndVerifiedAndPending(int landlord, boolean verified, boolean pending);
 }
