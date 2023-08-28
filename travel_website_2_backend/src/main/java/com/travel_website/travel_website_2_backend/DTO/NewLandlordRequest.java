@@ -9,7 +9,7 @@ public class NewLandlordRequest {
 
     @Schema(example = "1")
     @NotBlank
-    private int landlord;
+    private String landlord;
 
     @Schema(example = "true")
     @NotBlank

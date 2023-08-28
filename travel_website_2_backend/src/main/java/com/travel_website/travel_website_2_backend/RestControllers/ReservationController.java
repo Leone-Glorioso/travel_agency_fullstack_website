@@ -9,6 +9,7 @@ import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
+import com.travel_website.travel_website_2_backend.Service.RequestService;
 import com.travel_website.travel_website_2_backend.Service.ReservationService;
 import com.travel_website.travel_website_2_backend.Service.RoomService;
 import com.travel_website.travel_website_2_backend.Service.UserService;
@@ -37,6 +38,7 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final RoomService roomService;
     private final ReservationMapper reservationMapper;
+    private final RequestService requestService;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
@@ -69,18 +71,6 @@ public class ReservationController {
     {
         return reservationMapper.toReserveDto(reservationService.validateAndGetReservation(id));
     }
-
-//    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping
-//    public ReservationDTO createReservation(@AuthenticationPrincipal Data_UserDetails currentUser,
-//                                      @Valid @RequestBody CreateReservationRequest createOrderRequest) {
-//        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
-//        userService.validateClient(user);
-//        Reservation reservation = reservationMapper.toReserve(createOrderRequest);
-//        reservation.setClient(user);
-//        return reservationMapper.toReserveDto(reservationService.saveReservation(reservation));
-//    }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @DeleteMapping("/{id}")
@@ -137,6 +127,7 @@ public class ReservationController {
     public List<ReservationDTO> getReservationsOfMyRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
                                                         @PathVariable int roomId)
     {
+        requestService.validateLandlord(currentUser.getUsername());
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
         userService.validateLandlord(user);
         Room room = roomService.validateAndGetRoom(roomId);
@@ -162,6 +153,7 @@ public class ReservationController {
                                                         @PathVariable int roomId,
                                                        @PathVariable int reservationId)
     {
+        requestService.validateLandlord(currentUser.getUsername());
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
         userService.validateLandlord(user);
         Room room = roomService.validateAndGetRoom(roomId);

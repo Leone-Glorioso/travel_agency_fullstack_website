@@ -2,12 +2,15 @@ package com.travel_website.travel_website_2_backend.RestControllers;
 
 import com.travel_website.travel_website_2_backend.DTO.AuthenticationResponse;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoleDoesNotExist;
+import com.travel_website.travel_website_2_backend.Models.Request;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.DTO.LoginRequest;
 import com.travel_website.travel_website_2_backend.DTO.SignUpRequest;
 import com.travel_website.travel_website_2_backend.Exception.Exception_DuplicatedUserInfo;
+import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import com.travel_website.travel_website_2_backend.Security.Component_TokenProvider;
 import com.travel_website.travel_website_2_backend.Security.Configuration_WebSecurity;
+import com.travel_website.travel_website_2_backend.Service.RequestService;
 import com.travel_website.travel_website_2_backend.Service.UserService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final Component_TokenProvider tokenProvider;
+    private final RequestService requestService;
 
     @PostMapping("/authenticate")
     public AuthenticationResponse login(@Valid @RequestBody LoginRequest loginRequest) {
@@ -44,7 +48,8 @@ public class AuthController {
         }
 
         userService.saveUser(mapSignUpRequestToUser(signUpRequest));
-
+        if(signUpRequest.getRole().equals("Landlord") || signUpRequest.getRole().equals("Landlord/Client"))
+            requestService.saveRequest(new Request(signUpRequest.getUsername(), false, true));
         String token = authenticateAndGetToken(signUpRequest.getUsername(), signUpRequest.getPassword());
         return new AuthenticationResponse(token);
     }

@@ -53,9 +53,16 @@ public class RequestServiceImplementation implements RequestService{
 
 
     @Override
-    public void validateLandlord(int landlord)
+    public void validateLandlord(String landlord)
     {
         if(!requestRepository.existsByLandlordAndVerifiedAndPending(landlord, true, false))
             throw new Exception_LandlordNotVerifiedByAdmin("Landlord with id " + landlord + " is not verified");
+    }
+
+    @Override
+    public void validatePending(String landlord)
+    {
+        if(!requestRepository.existsByLandlordAndPending(landlord,  true))
+            throw new Exception_LandlordNotVerifiedByAdmin("Landlord with id " + landlord + " does not have a pending application");
     }
 }

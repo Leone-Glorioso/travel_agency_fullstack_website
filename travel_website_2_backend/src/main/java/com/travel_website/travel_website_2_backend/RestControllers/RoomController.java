@@ -41,6 +41,7 @@ public class RoomController {
     private final LocationService locationService;
     private final CalendarService calendarService;
     private final DateHelper dateHelper;
+    private final RequestService requestService;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
@@ -58,6 +59,7 @@ public class RoomController {
                            @Valid @RequestBody NewRoomRequest newRoomRequest,
                               @Valid @PathVariable int id)
     {
+        requestService.validateLandlord(currentUser.getUsername());
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
         Location location = locationService.validateAndGetLocation(id);
         Room room = roomMapper.newRoom(newRoomRequest);
@@ -87,6 +89,7 @@ public class RoomController {
     @GetMapping("/me")
     public List<RoomDTO> getMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser)
     {
+        requestService.validateLandlord(currentUser.getUsername());
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
         userService.validateLandlord(user);
         return roomService.getRoomsByLandlord(user).stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
@@ -105,6 +108,7 @@ public class RoomController {
     @GetMapping("/me/{id}")
     public RoomDTO getMyRoom(@AuthenticationPrincipal Data_UserDetails currentUser, @PathVariable int id)
     {
+        requestService.validateLandlord(currentUser.getUsername());
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
         userService.validateLandlord(user);
         Room room = roomService.validateAndGetRoom(id);

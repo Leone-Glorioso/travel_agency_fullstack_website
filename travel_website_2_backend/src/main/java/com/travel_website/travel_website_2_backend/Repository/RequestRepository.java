@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Integer> {
-    List<Request> findByLandlord(int landlord);
+    List<Request> findByLandlord(String landlord);
 
     List<Request> findByVerified(boolean verified);
 
@@ -18,7 +18,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     List<Request> findByVerifiedAndPending(boolean verified, boolean pending);
 
-    boolean existsByLandlord(int landlord);
+    boolean existsByLandlord(String landlord);
 
-    boolean existsByLandlordAndVerifiedAndPending(int landlord, boolean verified, boolean pending);
+    boolean existsByLandlordAndVerifiedAndPending(String landlord, boolean verified, boolean pending);
+
+    boolean existsByLandlordAndPending(String landlord, boolean pending);
 }

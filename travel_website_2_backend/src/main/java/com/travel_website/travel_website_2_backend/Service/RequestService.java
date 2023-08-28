@@ -17,5 +17,7 @@ public interface RequestService {
 
     void deleteRequest(Request request);
 
-    void validateLandlord(int landlord);
+    void validateLandlord(String landlord);
+
+    void validatePending(String landlord);
 }
