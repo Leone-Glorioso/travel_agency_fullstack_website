@@ -4,9 +4,47 @@
     position:relative;
 }
 
-.ButtonSearchNearBy{
-    width: 190px;
-    background-color: deepskyblue;
-    color:black;
+/*.SearchBannerInfo{*/
+/*    background-color: black;*/
+/*    color:white;*/
+/*    padding-top:25vh;*/
+/*    padding-left:50px;*/
+/*    padding-right:50px;*/
+/*    padding-bottom:40px;*/
+/*    width:300px;*/
+/*}*/
+
+
+.SearchButton{
+    background-color: black;
+    font-weight:900;
     text-transform: inherit;
+    color:red;
+}
+
+.SearchBanner >button{
+    width: 100px;
+    background-color: deepskyblue;
+    color:white;
+    text-transform: inherit;
+    margin-top:10px;
+    font-weight:400;
+}
+
+.SearchBanner>button:hover{
+    background-color: black;
+    color:deepskyblue;
+}
+
+
+.Search{
+    display:flex;
+    flex-direction: column;
+}
+
+.SearchButton{
+    background-color:white ;
+    font-weight: 900;
+    text-transform: inherit;
+    color:green;
 }
