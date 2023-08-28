@@ -16,4 +16,6 @@ public interface RequestService {
     Request saveRequest(Request request);
 
     void deleteRequest(Request request);
+
+    void validateLandlord(int landlord);
 }

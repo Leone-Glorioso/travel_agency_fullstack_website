@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_LandlordNotVerifiedByAdmin;
 import com.travel_website.travel_website_2_backend.Models.Request;
 import com.travel_website.travel_website_2_backend.Repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,13 @@ public class RequestServiceImplementation implements RequestService{
     {
         requestRepository.delete(request);
         return;
+    }
+
+
+    @Override
+    public void validateLandlord(int landlord)
+    {
+        if(requestRepository.existsByLandlord(landlord))
+            throw new Exception_LandlordNotVerifiedByAdmin("Landlord with id " + landlord + " is not verified");
     }
 }
