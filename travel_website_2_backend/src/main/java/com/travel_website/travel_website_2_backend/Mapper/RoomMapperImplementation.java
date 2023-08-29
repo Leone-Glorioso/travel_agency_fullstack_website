@@ -29,7 +29,7 @@ public class RoomMapperImplementation implements RoomMapper{
             tpr = TypeOfRoom.house;
         else
             throw new Exception_NonExcistentRoomType("Room type " + roomRequest.getTypeofroom() + " does not exist");
-        return new Room(tpr, roomRequest.getNumOfBeds(), roomRequest.getNumOfBaths(), roomRequest.getNumOfBedrooms(), roomRequest.isLivingRoom(),
+        return new Room(roomRequest.getName(), tpr, roomRequest.getNumOfBeds(), roomRequest.getNumOfBaths(), roomRequest.getNumOfBedrooms(), roomRequest.isLivingRoom(),
                 roomRequest.getArea(), roomRequest.getDescription(), roomRequest.isSmoking(), roomRequest.isPets(), roomRequest.isEvents(), roomRequest.getMinimumDays(),
                 roomRequest.isInternet(), roomRequest.isCooling(), roomRequest.isHeating(), roomRequest.isKitchen(), roomRequest.isTv(),
                 roomRequest.isParking(), roomRequest.isElevator());
@@ -40,7 +40,7 @@ public class RoomMapperImplementation implements RoomMapper{
     {
         if(room == null)
             return null;
-        return new RoomDTO(room.getTypeofroom(), room.getNumOfBeds(), room.getNumOfBaths(), room.getNumOfBedrooms(), room.getArea(), room.isLivingRoom(), room.isSmoking(),
+        return new RoomDTO(room.getName(), room.getTypeofroom(), room.getNumOfBeds(), room.getNumOfBaths(), room.getNumOfBedrooms(), room.getArea(), room.isLivingRoom(), room.isSmoking(),
                 room.isPets(), room.isEvents(), room.isInternet(), room.isCooling(), room.isHeating(), room.isKitchen(), room.isTv(), room.isParking(), room.isElevator(),
                 room.getDescription());
     }

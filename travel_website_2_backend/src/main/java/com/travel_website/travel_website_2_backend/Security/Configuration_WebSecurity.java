@@ -37,7 +37,7 @@ public class Configuration_WebSecurity {
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                         .requestMatchers("api/users/me").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers("api/users", "api/users/**").hasAuthority(ADMIN.toString())
-                        .requestMatchers("api/rooms/search/**", "api/rooms/location/**").permitAll()
+                        .requestMatchers("api/rooms/search","api/rooms/search/**", "api/rooms/location/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/rooms").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/me", "api/rooms/me/**").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.DELETE, "api/rooms").hasAuthority(ADMIN.toString())

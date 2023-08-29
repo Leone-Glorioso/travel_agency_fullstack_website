@@ -23,11 +23,6 @@ public class ReservationServiceImplementation implements ReservationService{
         return reservationRepository.findAll();
     }
 
-   /* @Override
-    public List<Reservation> getReservationsContainingText(int id, String text) {
-        return reservationRepository.findByIdContainingOrDescriptionContainingIgnoreCaseOrderByCreatedAt(id, text);
-    }*/
-
     @Override
     public List<Reservation> getReservationsOfRoom(Room room)
     {

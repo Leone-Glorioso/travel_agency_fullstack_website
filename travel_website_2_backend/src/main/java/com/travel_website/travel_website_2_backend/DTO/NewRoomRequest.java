@@ -12,6 +12,10 @@ public class NewRoomRequest {
 
     @Schema(example = "private_room")
     @NotBlank
+    private String name;
+
+    @Schema(example = "private_room")
+    @NotBlank
     private String typeofroom;
 
     @Schema(example = "1")

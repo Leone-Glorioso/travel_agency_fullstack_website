@@ -5,6 +5,7 @@ import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
 import com.travel_website.travel_website_2_backend.Models.User;
 
+import javax.validation.constraints.Max;
 import java.util.List;
 
 public interface RoomService {
@@ -13,6 +14,8 @@ public interface RoomService {
     List<Room> getRoomsByLandlord(User landlord);
 
     List<Room> getRoomsInLocation(Location location);
+
+    List<Room> getRoomsInLocations(List<Location> locations);
 
     Room saveRoom(Room room);
 
@@ -38,6 +41,10 @@ public interface RoomService {
     Room validateAndGetRoom(int id);
 
     void validateRoomLandlordConnection(User landlord, Room room);
+
+    void validateRoomNameIsUnique(String name);
+
+    Room validateAndGetRoomWithName(String name);
 
     List<Room> getRoomsForAmountOfPeople(int people);
 
