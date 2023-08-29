@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_NonExcistentRoomType;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomDoesNotMatchLandlord;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomNotFound;
 import com.travel_website.travel_website_2_backend.Models.Location;
@@ -106,6 +107,44 @@ public class RoomServiceImplementation implements RoomService{
     public List<Room> getRoomsForAmountOfPeople(int people)
     {
         return roomRepository.findRoomsByNumOfBeds(people);
+    }
+
+
+    @Override
+    public List<Room> getRoomsByNumOfBeds(int numofbeds)
+    {
+        return roomRepository.findRoomsByNumOfBeds(numofbeds);
+    }
+
+    @Override
+    public List<Room> getRoomsByNumOfBedrooms(int numofbedrooms)
+    {
+        return roomRepository.findRoomsByNumOfBedrooms(numofbedrooms);
+    }
+
+    @Override
+    public List<Room> getRoomsByNumOfBaths(int numofbaths)
+    {
+        return roomRepository.findRoomsByNumOfBaths(numofbaths);
+    }
+
+    @Override
+    public List<Room> getRoomsByType(String type)
+    {
+        if(type.equals("private_rooms"))
+            return roomRepository.findRoomsByTypeofroom(TypeOfRoom.private_room);
+        else if(type.equals("house"))
+            return roomRepository.findRoomsByTypeofroom(TypeOfRoom.house);
+        else if(type.equals("hostel"))
+            return roomRepository.findRoomsByTypeofroom(TypeOfRoom.hostel);
+        else
+            throw new Exception_NonExcistentRoomType("Room type does not exist");
+    }
+
+    @Override
+    public List<Room> getRoomsByAreaRange(int start_area, int end_area)
+    {
+        return roomRepository.findByAreaBetween(start_area, end_area);
     }
 
 }

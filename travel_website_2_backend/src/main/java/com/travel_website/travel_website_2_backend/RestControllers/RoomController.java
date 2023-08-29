@@ -157,7 +157,7 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("search/{location_id}/{start_date}/{end_date}/{numOfPeople}")
+    @GetMapping("/search/{location_id}/{start_date}/{end_date}/{numOfPeople}")
     public List<RoomDTO> initialSearch(@PathVariable int location_id,
                                        @PathVariable String start_date,
                                        @PathVariable String end_date,
@@ -175,5 +175,13 @@ public class RoomController {
         collection.retainAll(rooms);
         return collection.stream().map(roomMapper::toRoomDTO).collect(Collectors.toList());
     }
+
+
+//    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+//    @GetMapping("/search")
+//    public List<RoomDTO> search(@RequestBody SearchRequest request)
+//    {
+//
+//    }
 
 }

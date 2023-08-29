@@ -40,4 +40,14 @@ public interface RoomService {
     void validateRoomLandlordConnection(User landlord, Room room);
 
     List<Room> getRoomsForAmountOfPeople(int people);
+
+    List<Room> getRoomsByNumOfBeds(int numofbeds);
+
+    List<Room> getRoomsByNumOfBedrooms(int numofbedrooms);
+
+    List<Room> getRoomsByNumOfBaths(int numofbaths);
+
+    List<Room> getRoomsByType(String type);
+
+    List<Room> getRoomsByAreaRange(int start_area, int end_area);
 }

@@ -74,4 +74,11 @@ public class UserServiceImplementation implements UserService{
         if (!user.getRole().equals(UserCategories.Client) && !user.getRole().equals(UserCategories.LandlordClient))
             throw new Exception_UserNotClient("User is Not A Client");
     }
+
+
+    @Override
+    public List<User> getUsersByRole(UserCategories role)
+    {
+        return userRepository.findByRole(role);
+    }
 }
