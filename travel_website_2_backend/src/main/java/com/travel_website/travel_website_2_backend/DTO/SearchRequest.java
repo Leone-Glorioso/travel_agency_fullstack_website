@@ -26,23 +26,32 @@ public class SearchRequest {
     @NotBlank
     private String typeofroom;
 
-    @Schema(example = "1")
-    private int numOfBeds;
+    @Schema(example = "1", defaultValue = "1")
+    private int start_numOfBeds;
 
-    @Schema(example = "1")
-    private int numOfBaths;
+    @Schema(example = "1", defaultValue = "10")
+    private int end_numOfBeds;
 
-    @Schema(example = "1")
-    private int numOfBedrooms;
+    @Schema(example = "1", defaultValue = "1")
+    private int start_numOfBaths;
+
+    @Schema(example = "1", defaultValue = "10")
+    private int end_numOfBaths;
+
+    @Schema(example = "1", defaultValue = "1")
+    private int start_numOfBedrooms;
+
+    @Schema(example = "1", defaultValue = "10")
+    private int end_numOfBedrooms;
 
     @Schema(example = "true")
     private boolean livingRoom;
 
-    @Schema(example = "100")
-    private int area;
+    @Schema(example = "100", defaultValue = "1")
+    private int start_area;
 
-    @Schema(example = "A very nice house")
-    private String description;
+    @Schema(example = "100", defaultValue = "1000")
+    private int end_area;
 
     @Schema(example = "true")
     private boolean smoking;
@@ -52,9 +61,6 @@ public class SearchRequest {
 
     @Schema(example = "true")
     private boolean events;
-
-    @Schema(example = "2")
-    private int minimumDays;
 
     @Schema(example = "true")
     private boolean internet;
@@ -83,4 +89,6 @@ public class SearchRequest {
     @Schema(example = "1", defaultValue = "1")
     private int last_element;
 
+    @Schema(example = "beds", defaultValue = "1")
+    private String flags;
 }

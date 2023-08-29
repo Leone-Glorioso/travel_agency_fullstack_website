@@ -111,27 +111,27 @@ public class RoomServiceImplementation implements RoomService{
 
 
     @Override
-    public List<Room> getRoomsByNumOfBeds(int numofbeds)
+    public List<Room> getRoomsByNumOfBeds(int start_numofbeds, int end_numofbeds)
     {
-        return roomRepository.findRoomsByNumOfBeds(numofbeds);
+        return roomRepository.findByNumOfBedsBetween(start_numofbeds, end_numofbeds);
     }
 
     @Override
-    public List<Room> getRoomsByNumOfBedrooms(int numofbedrooms)
+    public List<Room> getRoomsByNumOfBedrooms(int start_numofbedrooms, int end_numofbedrooms)
     {
-        return roomRepository.findRoomsByNumOfBedrooms(numofbedrooms);
+        return roomRepository.findByNumOfBedroomsBetween(start_numofbedrooms, end_numofbedrooms);
     }
 
     @Override
-    public List<Room> getRoomsByNumOfBaths(int numofbaths)
+    public List<Room> getRoomsByNumOfBaths(int start_numofbaths, int end_numofbaths)
     {
-        return roomRepository.findRoomsByNumOfBaths(numofbaths);
+        return roomRepository.findByNumOfBathsBetween(start_numofbaths, end_numofbaths);
     }
 
     @Override
     public List<Room> getRoomsByType(String type)
     {
-        if(type.equals("private_rooms"))
+        if(type.equals("private_room"))
             return roomRepository.findRoomsByTypeofroom(TypeOfRoom.private_room);
         else if(type.equals("house"))
             return roomRepository.findRoomsByTypeofroom(TypeOfRoom.house);
@@ -145,6 +145,73 @@ public class RoomServiceImplementation implements RoomService{
     public List<Room> getRoomsByAreaRange(int start_area, int end_area)
     {
         return roomRepository.findByAreaBetween(start_area, end_area);
+    }
+
+
+    @Override
+    public List<Room> getIfLivingRoom(boolean option)
+    {
+        return roomRepository.findRoomsByLivingRoom(option);
+    }
+
+    @Override
+    public List<Room> getIfSmoking(boolean option)
+    {
+        return roomRepository.findRoomsBySmoking(option);
+    }
+
+    @Override
+    public List<Room> getIfPets(boolean option)
+    {
+        return roomRepository.findRoomsByPets(option);
+    }
+
+    @Override
+    public List<Room> getIfEvents(boolean option)
+    {
+        return roomRepository.findRoomsByEvents(option);
+    }
+
+    @Override
+    public List<Room> getIfInternet(boolean option)
+    {
+        return roomRepository.findRoomsByInternet(option);
+    }
+
+    @Override
+    public List<Room> getIfCooling(boolean option)
+    {
+        return roomRepository.findRoomsByCooling(option);
+    }
+
+    @Override
+    public List<Room> getIfHeating(boolean option)
+    {
+        return roomRepository.findRoomsByHeating(option);
+    }
+
+    @Override
+    public List<Room> getIfKitchen(boolean option)
+    {
+        return roomRepository.findRoomsByKitchen(option);
+    }
+
+    @Override
+    public List<Room> getIfTV(boolean option)
+    {
+        return roomRepository.findRoomsByTv(option);
+    }
+
+    @Override
+    public List<Room> getIfParking(boolean option)
+    {
+        return roomRepository.findRoomsByParking(option);
+    }
+
+    @Override
+    public List<Room> getIfElevator(boolean option)
+    {
+        return roomRepository.findRoomsByElevator(option);
     }
 
 }
