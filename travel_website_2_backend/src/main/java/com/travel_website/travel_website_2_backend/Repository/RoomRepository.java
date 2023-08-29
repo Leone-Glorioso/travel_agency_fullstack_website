@@ -41,5 +41,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     List<Room> findRoomsByLandlord(User landlord);
 
+    List<Room> findByAreaBetween(int start, int end);
 
 }
