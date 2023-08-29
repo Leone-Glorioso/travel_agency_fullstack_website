@@ -66,12 +66,6 @@ function Home(){
                                     Welcome to our Website
                                 </h1>
                             </header>
-                            <nav>
-                                <ul>
-                                    <li>  <Link to={"/signup"}>Sign Up</Link></li>
-                                    <li> <Link to={"/login"}> Login </Link></li>
-                                </ul>
-                            </nav>
                         </div>
                         <SearchBanner/>
                         <br/>
