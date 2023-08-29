@@ -7,6 +7,8 @@ import WebSiteLogo from '../../logo_1.png'
 import {Link} from "react-router-dom"; // Adjust the path accordingly
 import Header from './Header'
 import SearchBanner from './SearchBanner'
+import Card from "./Card"
+import RoomTypes from "./RoomTypes";
 
 function Home(){
     const [numberOfUsers,setNumberOfUsers]=useState(0)
@@ -57,20 +59,45 @@ function Home(){
                             </Statistic>
                         </Segment>
                     </Grid.Column>
-                    <div className={"GreekTours"}>
-                        <header>
-                            <h1>
-                                Welcome to our Website
-                            </h1>
-                        </header>
-                        <nav>
-                            <ul>
-                                <li>  <Link to={"/signup"}>Sign Up</Link></li>
-                                <li> <Link to={"/login"}> Login </Link></li>
-                            </ul>
-                        </nav>
+                    <div className={"home"}>
+                        <div className={"GreekTours"}>
+                            <header>
+                                <h1>
+                                    Welcome to our Website
+                                </h1>
+                            </header>
+                            <nav>
+                                <ul>
+                                    <li>  <Link to={"/signup"}>Sign Up</Link></li>
+                                    <li> <Link to={"/login"}> Login </Link></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <SearchBanner/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+
+                        <RoomTypes/>
+                        <div className={'homes'}>
+                            <Card
+                            src={"https://plus.unsplash.com/premium_photo-1670076505419-99468d952c61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmVkcm9vbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                            }title={"Private Room"} description={"Private room with private bathroom"} price={"30$"}/>
+                            <Card src={"https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zdGVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"}
+                            title={"Hostel Room"} description={"Beautiful hostel ideal for teenagers"} price={"20$"} />
+                            <Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"}
+                                  title={"Entire House"}
+                            description={"Luxury modern House for unforgettable vacations"} price={"1k$"} />
+                        </div>
                     </div>
-                    <SearchBanner/>
+
+
 
 
                     {/*<Grid.Column textAlign='center'>*/}

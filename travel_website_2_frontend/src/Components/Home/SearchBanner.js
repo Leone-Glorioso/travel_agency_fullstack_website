@@ -10,7 +10,7 @@ function SearchBanner () {
             <div className={'Search'}>
                 {showSearch && <Search></Search>}
                 <IconButton onClick={()=>setShowSearch(!showSearch)} className={'SearchButton'} variant={'outlined'}>
-                    Search Dates
+                    {showSearch ? "Hide" : "Search Dates"}
                 </IconButton>
             </div>
             <div className={'SearchBannerInfo'}>
