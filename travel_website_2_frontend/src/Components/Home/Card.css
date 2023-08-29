@@ -40,3 +40,15 @@
     width: 100%;
 }
 
+.cardInfo{
+    margin-top:-9px;
+    border-radius: 10px;
+    padding:20px;
+    padding-top: 20px;
+}
+
+.cardInfo>h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
