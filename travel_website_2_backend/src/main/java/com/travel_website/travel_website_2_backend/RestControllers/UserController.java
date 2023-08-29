@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.RestControllers;
 import com.travel_website.travel_website_2_backend.DTO.UserDTO;
 import com.travel_website.travel_website_2_backend.Mapper.UserMapper;
 import com.travel_website.travel_website_2_backend.Models.User;
+import com.travel_website.travel_website_2_backend.Models.UserCategories;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
 import com.travel_website.travel_website_2_backend.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,35 @@ public class UserController {
     @GetMapping
     public List<UserDTO> getUsers() {
         return userService.getUsers().stream()
+                .map(userMapper::toUserDto)
+                .collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/landlords")
+    public List<UserDTO> getLandlords() {
+        List<User> combined = userService.getUsersByRole(UserCategories.LandlordClient);
+        combined.addAll(userService.getUsersByRole(UserCategories.Landlord));
+        return combined.stream()
+                .map(userMapper::toUserDto)
+                .collect(Collectors.toList());
+    }
+
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/clients")
+    public List<UserDTO> getClients() {
+        List<User> combined = userService.getUsersByRole(UserCategories.LandlordClient);
+        combined.addAll(userService.getUsersByRole(UserCategories.Client));
+        return combined.stream()
+                .map(userMapper::toUserDto)
+                .collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/landlordsclients")
+    public List<UserDTO> getCombinedUsers() {
+        return userService.getUsersByRole(UserCategories.LandlordClient).stream()
                 .map(userMapper::toUserDto)
                 .collect(Collectors.toList());
     }
