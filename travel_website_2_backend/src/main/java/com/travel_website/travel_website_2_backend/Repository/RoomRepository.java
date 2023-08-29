@@ -49,4 +49,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     List<Room> findByNumOfBedroomsBetween(int start, int end);
 
+    List<Room> findByName(String name);
+
+    boolean existsByName(String name);
+
 }

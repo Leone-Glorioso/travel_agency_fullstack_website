@@ -2,6 +2,7 @@ package com.travel_website.travel_website_2_backend.Service;
 
 import com.travel_website.travel_website_2_backend.Exception.Exception_NonExcistentRoomType;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomDoesNotMatchLandlord;
+import com.travel_website.travel_website_2_backend.Exception.Exception_RoomNameIsUsed;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomNotFound;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Room;
@@ -221,6 +222,21 @@ public class RoomServiceImplementation implements RoomService{
     public List<Room> getIfElevator(boolean option)
     {
         return roomRepository.findRoomsByElevator(option);
+    }
+
+
+    @Override
+    public void validateRoomNameIsUnique(String name)
+    {
+        if(roomRepository.existsByName(name))
+            throw new Exception_RoomNameIsUsed("Name " + name + " is already in use");
+    }
+
+    @Override
+    public Room validateAndGetRoomWithName(String name)
+    {
+        return roomRepository.findByName(name).stream().findFirst()
+                .orElseThrow(() -> new Exception_RoomNotFound("Room with name " + name + " does not exist"));
     }
 
 }

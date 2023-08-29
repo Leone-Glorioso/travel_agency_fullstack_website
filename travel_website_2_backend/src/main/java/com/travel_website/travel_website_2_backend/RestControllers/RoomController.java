@@ -62,6 +62,7 @@ public class RoomController {
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
         room.setLocation(location);
+        roomService.validateRoomNameIsUnique(newRoomRequest.getName());
         Room room1 = roomService.saveRoom(room);
         return new CreatedResponse("room", room1.getId());
     }
