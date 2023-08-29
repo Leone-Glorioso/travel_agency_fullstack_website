@@ -32,9 +32,12 @@
     padding:5px;
 }
 
+
+
 .header_right{
     display:flex;
     align-items: center;
     justify-content: space-between;
     margin-right: 80px;
 }
+

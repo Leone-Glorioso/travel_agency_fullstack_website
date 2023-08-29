@@ -5,6 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Avatar } from '@mui/material';
+import ExpandClick from "./ExpandClick";
+
 
 function Header(){
     return (
@@ -23,7 +25,7 @@ function Header(){
             <div className={'header_right'}>
                 <p>Become a LandLord</p>
                 <LanguageIcon/>
-                <ExpandMoreIcon/>
+                <ExpandClick/>
                 <Avatar/>
             </div>
         </div>
