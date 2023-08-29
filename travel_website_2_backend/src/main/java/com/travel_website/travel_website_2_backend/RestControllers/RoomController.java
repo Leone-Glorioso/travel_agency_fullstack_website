@@ -181,6 +181,7 @@ public class RoomController {
 //    @GetMapping("/search")
 //    public List<RoomDTO> search(@RequestBody SearchRequest request)
 //    {
+//        Collection<Room> rooms = roomService.getRooms();
 //
 //    }
 

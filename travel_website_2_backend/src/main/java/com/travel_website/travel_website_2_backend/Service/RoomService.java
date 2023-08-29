@@ -41,13 +41,35 @@ public interface RoomService {
 
     List<Room> getRoomsForAmountOfPeople(int people);
 
-    List<Room> getRoomsByNumOfBeds(int numofbeds);
+    List<Room> getRoomsByNumOfBeds(int start_numofbeds, int end_numofbeds);
 
-    List<Room> getRoomsByNumOfBedrooms(int numofbedrooms);
+    List<Room> getRoomsByNumOfBedrooms(int start_numofbedrooms, int end_numofbedrooms);
 
-    List<Room> getRoomsByNumOfBaths(int numofbaths);
+    List<Room> getRoomsByNumOfBaths(int start_numofbaths, int end_numofbaths);
 
     List<Room> getRoomsByType(String type);
 
     List<Room> getRoomsByAreaRange(int start_area, int end_area);
+
+    List<Room> getIfLivingRoom(boolean option);
+
+    List<Room> getIfSmoking(boolean option);
+
+    List<Room> getIfPets(boolean option);
+
+    List<Room> getIfEvents(boolean option);
+
+    List<Room> getIfInternet(boolean option);
+
+    List<Room> getIfCooling(boolean option);
+
+    List<Room> getIfHeating(boolean option);
+
+    List<Room> getIfKitchen(boolean option);
+
+    List<Room> getIfTV(boolean option);
+
+    List<Room> getIfParking(boolean option);
+
+    List<Room> getIfElevator(boolean option);
 }
