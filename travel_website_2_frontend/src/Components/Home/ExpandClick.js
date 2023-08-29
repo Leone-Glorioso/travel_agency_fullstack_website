@@ -45,8 +45,8 @@ const ExpandClick = () =>{
                         <div className="loginColumn">
                             <Link to={"/login"}> Login </Link>
                         </div>
-                        <div className="link-column">
-                            <Link to="/link3">Link 3</Link>
+                        <div className="roomsColumn">
+                            <Link to="/rooms">Rooms</Link>
                         </div>
                     </div>
                 </div>

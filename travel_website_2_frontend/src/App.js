@@ -5,6 +5,7 @@ import Home from "./Components/Home/Home";
 import Login from "./Components/Auth/Login";
 import SingUp from "./Components/Auth/singUp";
 import Profile from "./Components/Home/Profile";
+import RoomCard from "./Components/Room/RoomCard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<SingUp />} />
                     <Route path='/profile' element={<Profile />} />
+                    <Route path='/rooms' element={<RoomCard/>} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}

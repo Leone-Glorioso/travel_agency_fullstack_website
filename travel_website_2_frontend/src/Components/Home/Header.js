@@ -2,7 +2,6 @@ import React from 'react'
 import './Header.css'
 import WebSiteLogo from '../../logo_1.png'
 import SearchIcon from '@mui/icons-material/Search';
-import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Avatar } from '@mui/material';
 import ExpandClick from "./ExpandClick";
@@ -24,7 +23,6 @@ function Header(){
 
             <div className={'header_right'}>
                 <p>Become a LandLord</p>
-                <LanguageIcon/>
                 <ExpandClick/>
                 <Avatar/>
             </div>
