@@ -14,6 +14,8 @@ public interface RoomService {
 
     List<Room> getRoomsInLocation(Location location);
 
+    List<Room> getRoomsInLocations(List<Location> locations);
+
     Room saveRoom(Room room);
 
     void deleteRoom(Room room);

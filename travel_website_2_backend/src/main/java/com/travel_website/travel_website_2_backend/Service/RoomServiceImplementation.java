@@ -40,6 +40,15 @@ public class RoomServiceImplementation implements RoomService{
     }
 
     @Override
+    public List<Room> getRoomsInLocations(List<Location> locations)
+    {
+        List<Room> rooms = new ArrayList<>();
+        for(Location location : locations)
+            rooms.addAll(roomRepository.findRoomsByLocation(location));
+        return rooms;
+    }
+
+    @Override
     public Room saveRoom(Room room)
     {
         return roomRepository.save(room);

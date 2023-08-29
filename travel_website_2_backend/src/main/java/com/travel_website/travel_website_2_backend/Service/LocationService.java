@@ -15,4 +15,6 @@ public interface LocationService {
     Location validateAndGetLocationFromPosition(double latitude, double longitude);
 
     void deleteLocation(Location location);
+
+    List<Location> locationsInArea(double latitude, double longitude, double range);
 }

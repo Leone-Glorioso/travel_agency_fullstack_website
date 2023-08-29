@@ -179,6 +179,7 @@ public class RoomController {
     public List<RoomDTO> search(@RequestBody  SearchRequest request)
     {
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
+        System.out.println(flags);
         Collection<Room> rooms = roomService.getRooms();
         if(flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
@@ -188,12 +189,13 @@ public class RoomController {
             rooms.retainAll(roomService.getRoomsByNumOfBaths(request.getStart_numOfBaths(), request.getEnd_numOfBaths()));
         if(flags.contains("dates"))
             rooms.retainAll(roomService.getRoomsInLocation(locationService.validateAndGetLocationFromPosition(request.getLatitude(), request.getLongitude())));
-//        if(flags.contains("location"))
-//            //TODO figure it out
+        if(flags.contains("location"))
+            rooms.retainAll(roomService.getRoomsInLocations(locationService.locationsInArea(request.getLatitude(), request.getLongitude(), request.getRange())));
         if(flags.contains("area"))
             rooms.retainAll(roomService.getRoomsByAreaRange(request.getStart_area(), request.getEnd_area()));
         if(flags.contains("livingRoom"))
             rooms.retainAll(roomService.getIfLivingRoom(request.isLivingRoom()));
+//        System.out.println(roomService.getIfLivingRoom(request.isLivingRoom()));
         if(flags.contains("smoking"))
             rooms.retainAll(roomService.getIfSmoking(request.isSmoking()));
         if(flags.contains("pets"))

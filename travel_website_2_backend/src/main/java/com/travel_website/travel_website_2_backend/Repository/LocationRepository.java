@@ -17,4 +17,6 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
     Optional<Location> findById(int id);
 
     Optional<Location> findByLatitudeAndLongitude(double latitude, double longitude);
+
+    List<Location> findByLatitudeBetweenAndLongitudeBetween(double start_latitude, double end_latitude, double start_longitude, double end_longitude);
 }

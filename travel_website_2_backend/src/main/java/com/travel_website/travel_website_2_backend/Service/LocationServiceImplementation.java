@@ -47,4 +47,13 @@ public class LocationServiceImplementation implements LocationService{
     {
         locationRepository.delete(location);
     }
+
+
+    @Override
+    public List<Location> locationsInArea(double latitude, double longitude, double range)
+    {
+        double rangeToPosition = range/222; //(range/111)/2
+        return locationRepository.findByLatitudeBetweenAndLongitudeBetween(latitude - rangeToPosition, latitude + rangeToPosition,
+                                                                            longitude - rangeToPosition, longitude + rangeToPosition);
+    }
 }
