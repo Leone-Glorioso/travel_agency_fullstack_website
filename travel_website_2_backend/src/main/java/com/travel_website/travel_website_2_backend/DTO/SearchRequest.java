@@ -62,9 +62,6 @@ public class SearchRequest {
     @Schema(example = "true")
     private boolean events;
 
-    @Schema(example = "2")
-    private int minimumDays;
-
     @Schema(example = "true")
     private boolean internet;
 
@@ -92,4 +89,6 @@ public class SearchRequest {
     @Schema(example = "1", defaultValue = "1")
     private int last_element;
 
+    @Schema(example = "beds", defaultValue = "1")
+    private String flags;
 }
