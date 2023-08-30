@@ -19,7 +19,7 @@ public class Room {
     private int id;
 
 
-    @Column(name = "Paris Villa")
+    @Column(name = "name")
     @NotBlank
     private String name;
 

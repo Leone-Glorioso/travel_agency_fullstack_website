@@ -196,7 +196,6 @@ public class RoomController {
             rooms.retainAll(roomService.getRoomsByAreaRange(request.getStart_area(), request.getEnd_area()));
         if(flags.contains("livingRoom"))
             rooms.retainAll(roomService.getIfLivingRoom(request.isLivingRoom()));
-//        System.out.println(roomService.getIfLivingRoom(request.isLivingRoom()));
         if(flags.contains("smoking"))
             rooms.retainAll(roomService.getIfSmoking(request.isSmoking()));
         if(flags.contains("pets"))

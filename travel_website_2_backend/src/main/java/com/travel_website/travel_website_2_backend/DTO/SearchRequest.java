@@ -91,4 +91,5 @@ public class SearchRequest {
 
     @Schema(example = "beds", defaultValue = "1")
     private String flags;
+    // String: parking, tv
 }
