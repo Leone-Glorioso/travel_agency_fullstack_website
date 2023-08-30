@@ -91,33 +91,35 @@ function Search(){
                 type={"number"}
                 onChange={(e)=>setNumOfGuests(e.target.value)}
             />
+            <div className={'SearchButtons'}>
+                <button onClick={() => console.log("Latitude:", -50.0)}>Latitude</button>
+                <button onClick={() => console.log("Latitude:", -50.0)}>Latitude</button>
+                <button onClick={() => console.log("Longitude:", -50.0)}>Longitude</button>
+                <button onClick={() => console.log("Range:", 10)}>Range</button>
+                <button onClick={() => console.log("Start Date:", startDate.toISOString())}>Start Date</button>
+                <button onClick={() => console.log("End Date:", endDate.toISOString())}>End Date</button>
+                <button onClick={() => console.log("Type of Room:", "private_room")}>Type of Room</button>
+                <button onClick={() => console.log("Start Number of Beds:", 1)}>Start Number of Beds</button>
+                <button onClick={() => console.log("End Number of Beds:", 10)}>End Number of Beds</button>
+                <button onClick={() => console.log("Start Number of Bathrooms:", 1)}>Start Number of Bathrooms</button>
+                <button onClick={() => console.log("End Number of Bathrooms:", 10)}>End Number of Bathrooms</button>
+                <button onClick={() => console.log("Start Number of Bedrooms:", 1)}>Start Number of Bedrooms</button>
+                <button onClick={() => console.log("End Number of Bedrooms:", 10)}>End Number of Bedrooms</button>
+                <button onClick={() => console.log("Living Room:", true)}>Living Room</button>
+                <button onClick={() => console.log("Start Area:", 100)}>Start Area</button>
+                <button onClick={() => console.log("End Area:", 1000)}>End Area</button>
+                <button onClick={() => console.log("Smoking:", true)}>Smoking</button>
+                <button onClick={() => console.log("Pets:", true)}>Pets</button>
+                <button onClick={() => console.log("Events:", true)}>Events</button>
+                <button onClick={() => console.log("Internet:", true)}>Internet</button>
+                <button onClick={() => console.log("Cooling:", true)}>Cooling</button>
+                <button onClick={() => console.log("Heating:", true)}>Heating</button>
+                <button onClick={() => console.log("Kitchen:", true)}>Kitchen</button>
+                <button onClick={() => console.log("TV:", true)}>TV</button>
+                <button onClick={() => console.log("Parking:", true)}>Parking</button>
+                <button onClick={() => console.log("Elevator:", true)}>Elevator</button>
 
-            {/*<button onClick={() => console.log("Latitude:", -50.0)}>Latitude</button>*/}
-            {/*<button onClick={() => console.log("Latitude:", -50.0)}>Latitude</button>*/}
-            {/*<button onClick={() => console.log("Longitude:", -50.0)}>Longitude</button>*/}
-            {/*<button onClick={() => console.log("Range:", 10)}>Range</button>*/}
-            {/*<button onClick={() => console.log("Start Date:", startDate.toISOString())}>Start Date</button>*/}
-            {/*<button onClick={() => console.log("End Date:", endDate.toISOString())}>End Date</button>*/}
-            {/*<button onClick={() => console.log("Type of Room:", "private_room")}>Type of Room</button>*/}
-            {/*<button onClick={() => console.log("Start Number of Beds:", 1)}>Start Number of Beds</button>*/}
-            {/*<button onClick={() => console.log("End Number of Beds:", 10)}>End Number of Beds</button>*/}
-            {/*<button onClick={() => console.log("Start Number of Bathrooms:", 1)}>Start Number of Bathrooms</button>*/}
-            {/*<button onClick={() => console.log("End Number of Bathrooms:", 10)}>End Number of Bathrooms</button>*/}
-            {/*<button onClick={() => console.log("Start Number of Bedrooms:", 1)}>Start Number of Bedrooms</button>*/}
-            {/*<button onClick={() => console.log("End Number of Bedrooms:", 10)}>End Number of Bedrooms</button>*/}
-            {/*<button onClick={() => console.log("Living Room:", true)}>Living Room</button>*/}
-            {/*<button onClick={() => console.log("Start Area:", 100)}>Start Area</button>*/}
-            {/*<button onClick={() => console.log("End Area:", 1000)}>End Area</button>*/}
-            {/*<button onClick={() => console.log("Smoking:", true)}>Smoking</button>*/}
-            {/*<button onClick={() => console.log("Pets:", true)}>Pets</button>*/}
-            {/*<button onClick={() => console.log("Events:", true)}>Events</button>*/}
-            {/*<button onClick={() => console.log("Internet:", true)}>Internet</button>*/}
-            {/*<button onClick={() => console.log("Cooling:", true)}>Cooling</button>*/}
-            {/*<button onClick={() => console.log("Heating:", true)}>Heating</button>*/}
-            {/*<button onClick={() => console.log("Kitchen:", true)}>Kitchen</button>*/}
-            {/*<button onClick={() => console.log("TV:", true)}>TV</button>*/}
-            {/*<button onClick={() => console.log("Parking:", true)}>Parking</button>*/}
-            {/*<button onClick={() => console.log("Elevator:", true)}>Elevator</button>*/}
+            </div>
             <IconButton onClick={handleSearch}>Search Room</IconButton>
 
         </div>
