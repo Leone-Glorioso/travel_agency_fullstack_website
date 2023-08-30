@@ -35,7 +35,15 @@ export const ApiConnector={
     getClients,
     getLandlordClients,
     initialSearch,
-    search
+    search,
+    createLocation,
+    deleteLocation,
+    allRequests,
+    allAcceptedRequests,
+    allRejectedRequests,
+    allPendingRequests,
+    acceptRequest,
+    rejectRequest
 }
 
 function authenticate(username,password){
@@ -298,6 +306,89 @@ function search(request)
         data: {request},
         headers: {
             'Content-type': 'application/json'
+        }
+    })
+}
+
+function createLocation(user, location)
+{
+    return instance.post('/api/rooms/search', location, {
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function deleteLocation(user, id)
+{
+    return instance.delete(`/api/rooms/search/${id}`,{
+        data: {id},
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allRequests(user)
+{
+    return instance.get('/api/requests/all',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allAcceptedRequests(user)
+{
+    return instance.get('/api/requests/all/accepted',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allRejectedRequests(user)
+{
+    return instance.get('/api/requests/all/rejected',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allPendingRequests(user)
+{
+    return instance.get('/api/requests/all/pending',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function acceptRequest(user, username)
+{
+    return instance.get(`/api/requests/accept/${username}`,{
+        data: {username},
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function rejectRequest(user, username)
+{
+    return instance.get(`/api/requests/reject/${username}`,{
+        data: {username},
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
         }
     })
 }
