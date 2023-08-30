@@ -114,9 +114,9 @@ function createReservation(user,reservation, id){
         }})
 }
 
-function deleteReservation(user,reservation){
+function deleteReservation(user,id){
     return instance.delete(`/api/reservations/${id}`,{
-        data: {reservation},
+        data: {id},
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
