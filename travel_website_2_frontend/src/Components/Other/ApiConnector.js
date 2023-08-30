@@ -199,7 +199,7 @@ function getReservationOfLandlordRoom (user,username,roomID,reservationID){
 }
 
 function getRooms (){
-    return instance.get('/api/rooms/all')
+    return instance.get(`/api/rooms/all`)
 }
 
 function createRoom(user,room){

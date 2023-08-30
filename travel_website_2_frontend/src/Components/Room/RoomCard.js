@@ -26,9 +26,9 @@ function RoomCard({room}){
         const fetchData=async () =>
         {
             const response =await ApiConnector.getRooms()
-            const data=response.data.first()
-            console.log(data)
-
+            const data=response.data.at(0)
+            console.log(response.data)
+            console.log(response.data.at(0))
             setNumOfBeds(data.numofbeds)
             setNumOfBaths(data.numofbaths)
             setNumOfBedrooms(data.numofbedrooms)
