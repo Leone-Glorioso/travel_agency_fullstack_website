@@ -64,6 +64,45 @@ function AdminPage(){
         }
     }
 
+    const handleGetLandlords = async () => {
+        try {
+            const response = await ApiConnector.getLandlords(user)
+            // console.log(response.data)
+            // const data = response.data
+            // const users = data instanceof Array ? data : [data]
+            setUsers(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setUsers([])
+        }
+    }
+
+    const handleGetClients = async () => {
+        try {
+            const response = await ApiConnector.getClients(user)
+            // console.log(response.data)
+            // const data = response.data
+            // const users = data instanceof Array ? data : [data]
+            setUsers(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setUsers([])
+        }
+    }
+
+    const handleGetLandlordClients = async () => {
+        try {
+            const response = await ApiConnector.getLandlordClients(user)
+            // console.log(response.data)
+            // const data = response.data
+            // const users = data instanceof Array ? data : [data]
+            setUsers(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setUsers([])
+        }
+    }
+
     if (!isAdmin) {
         return <Navigate to='/' />
     }
@@ -77,6 +116,10 @@ function AdminPage(){
                 handleDeleteUser={handleDeleteUser}
                 handleSearchUser={handleSearchUser}
                 handleInputChange={handleInputChange}
+                handleGetLandlords={handleGetLandlords}
+                handleGetClients={handleGetClients}
+                handleGetLandlordClients={handleGetLandlordClients}
+                handleGetUsers={handleGetUsers}
             />
         </Container>
     )

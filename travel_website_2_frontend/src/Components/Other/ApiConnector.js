@@ -305,7 +305,7 @@ function getClients(user)
 
 function getLandlordClients(user)
 {
-    return instance.get('/api/users/landlordclients', {
+    return instance.get('/api/users/landlordsclients', {
         headers: { 'Authorization': bearerAuth(user) }
     })
 }

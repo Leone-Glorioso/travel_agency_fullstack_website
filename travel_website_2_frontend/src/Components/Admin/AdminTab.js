@@ -7,7 +7,7 @@ import UsersTable from "./UsersTable";
 
 function AdminTab(props) {
     const { handleInputChange } = props
-    const { isUsersLoading, users, userUsernameSearch, handleDeleteUser, handleSearchUser } = props
+    const { isUsersLoading, users, userUsernameSearch, handleDeleteUser, handleSearchUser , handleGetLandlords, handleGetClients, handleGetLandlordClients, handleGetUsers} = props
     const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoom } = props
     const { isRequestsLoading,requests, requestSearch, handleDeleteRequest, handleSearchRequest } = props
     const { isReservationsLoading, reservations, reservationIdSearch, handleDeleteReservation, handleSearchReservation } = props
@@ -23,6 +23,10 @@ function AdminTab(props) {
                         handleInputChange={handleInputChange}
                         handleDeleteUser={handleDeleteUser}
                         handleSearchUser={handleSearchUser}
+                        handleGetLandlords={handleGetLandlords}
+                        handleGetClients={handleGetClients}
+                        handleGetLandlordClients={handleGetLandlordClients}
+                        handleGetUsers={handleGetUsers}
                     />
                 </Tab.Pane>
             )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function UsersTable({ users, userUsernameSearch, handleInputChange, handleDeleteUser, handleSearchUser }) {
+function UsersTable({ users, userUsernameSearch, handleInputChange, handleDeleteUser, handleSearchUser , handleGetLandlords, handleGetClients, handleGetLandlordClients, handleGetUsers}) {
     let userList
     if (users.length === 0) {
         userList = (
@@ -14,13 +14,6 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
             return (
                 <Table.Row key={user.id}>
                     <Table.Cell collapsing>
-                        <Button
-                            circular
-                            color='red'
-                            size='small'
-                            icon='trash'
-                            onClick={() => handleDeleteUser(user.username)}
-                        />
                     </Table.Cell>
                     <Table.Cell>{user.id}</Table.Cell>
                     <Table.Cell>{user.username}</Table.Cell>
@@ -30,6 +23,13 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                     <Table.Cell>{user.telephone}</Table.Cell>
                     <Table.Cell>{user.country}</Table.Cell>
                     <Table.Cell>{user.role}</Table.Cell>
+                    <Button
+                        circular
+                        color='red'
+                        size='small'
+                        icon='trash'
+                        onClick={() => handleDeleteUser(user.username)}
+                    />
                 </Table.Row>
             )
         })
@@ -46,6 +46,10 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                     onChange={handleInputChange}
                 />
             </Form>
+            <Button onClick={handleGetUsers} />
+            <Button onClick={handleGetLandlords} />
+            <Button onClick={handleGetClients} />
+            <Button onClick={handleGetLandlordClients} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
