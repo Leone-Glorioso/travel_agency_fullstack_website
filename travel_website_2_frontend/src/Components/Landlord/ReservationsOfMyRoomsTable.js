@@ -1,11 +1,11 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function ReservationsTableToLandlord({ reservations, reservationIdSearch, handleInputChange, handleDeleteReservation, handleSearchReservation }) {
+function ReservationsTableToLandlord({ reservations, reservationIdSearch, handleInputChange, handleSearchReservation, handleGetReservations }) {
     let reservationList
     if (reservations.length === 0) {
         reservationList = (
-            <Table.Row key='no-reservation'>
+            <Table.Row key='no-user'>
                 <Table.Cell collapsing textAlign='center' colSpan='6'>No reservations</Table.Cell>
             </Table.Row>
         )
@@ -13,15 +13,6 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, handle
         reservationList = reservations.map(reservation => {
             return (
                 <Table.Row key={reservation.id}>
-                    <Table.Cell collapsing>
-                        <Button
-                            circular
-                            color='red'
-                            size='small'
-                            icon='trash'
-                            onClick={() => handleDeleteReservation(reservation.id)}
-                        />
-                    </Table.Cell>
                     <Table.Cell>{reservation.id}</Table.Cell>
                     <Table.Cell>{reservation.ppn}</Table.Cell>
                     <Table.Cell>{reservation.start}</Table.Cell>
@@ -36,12 +27,13 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, handle
             <Form onSubmit={handleSearchReservation}>
                 <Input
                     action={{ icon: 'search' }}
-                    name='Search'
+                    name='reservationSearch'
                     placeholder='Search'
                     value={reservationIdSearch}
                     onChange={handleInputChange}
                 />
             </Form>
+            <Button onClick={handleGetReservations} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

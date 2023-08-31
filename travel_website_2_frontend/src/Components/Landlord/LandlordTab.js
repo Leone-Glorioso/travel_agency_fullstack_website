@@ -6,7 +6,7 @@ import RoomsTableLandlord from "./RoomsTable";
 function LandlordTab(props) {
     const { handleInputChange } = props
     const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoom } = props
-    const { isReservationsLoading, reservations, reservationIdSearch, handleDeleteReservation, handleSearchReservation } = props
+    const { isReservationsLoading, reservations, reservationIdSearch, handleSearchReservation , handleGetReservations} = props
 
     const panes = [
         {
@@ -30,9 +30,9 @@ function LandlordTab(props) {
                     <ReservationsTableToLandlord
                         reservations={reservations}
                         reservationIdSearch={reservationIdSearch}
-                        handleDeleteReservation={handleDeleteReservation}
                         handleInputChange={handleInputChange}
                         handleSearchReservation={handleSearchReservation}
+                        handleGetReservations={handleGetReservations}
                     />
                 </Tab.Pane>
             )
