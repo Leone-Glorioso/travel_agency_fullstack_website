@@ -11,7 +11,7 @@ export const ApiConnector={
     getUser,
     deleteUser,
     getReservations,
-    getReservationsByBookerAndRoom,
+    getReservationsOfRoom,
     getReservation,
     createReservation,
     deleteReservation,
@@ -99,12 +99,10 @@ function getReservations(user) {
     )
 }
 
-function getReservationsByBookerAndRoom(user,username,id){
-    return instance.get('/api/reservations/search',{
-        data: {username, id},
+function getReservationsOfRoom(user,name){
+    return instance.get(`/api/reservations/room/${name}`,{
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            'Authorization': bearerAuth(user)
         }
     })
 }
@@ -325,7 +323,7 @@ function initialSearch( location_id, start, end, people)
 function search(request)
 {
     return instance.get('/api/rooms/search',{
-        data: {request},
+        data: request,
         headers: {
             'Content-type': 'application/json'
         }
