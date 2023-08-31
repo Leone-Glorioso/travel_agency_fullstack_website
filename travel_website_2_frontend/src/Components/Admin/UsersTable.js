@@ -13,8 +13,6 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
         userList = users.map(user => {
             return (
                 <Table.Row key={user.id}>
-                    <Table.Cell collapsing>
-                    </Table.Cell>
                     <Table.Cell>{user.id}</Table.Cell>
                     <Table.Cell>{user.username}</Table.Cell>
                     <Table.Cell>{user.name}</Table.Cell>
@@ -23,13 +21,15 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                     <Table.Cell>{user.telephone}</Table.Cell>
                     <Table.Cell>{user.country}</Table.Cell>
                     <Table.Cell>{user.role}</Table.Cell>
-                    <Button
-                        circular
-                        color='red'
-                        size='small'
-                        icon='trash'
-                        onClick={() => handleDeleteUser(user.username)}
-                    />
+                    <Table.Cell collapsing>
+                        <Button
+                            circular
+                            color='red'
+                            size='small'
+                            icon='trash'
+                            onClick={() => handleDeleteUser(user.username)}
+                        />
+                    </Table.Cell>
                 </Table.Row>
             )
         })

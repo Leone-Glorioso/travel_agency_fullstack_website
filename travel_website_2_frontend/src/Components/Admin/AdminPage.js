@@ -12,13 +12,17 @@ function AdminPage(){
     // console.log(Auth.user)
 
     const [users, setUsers] = useState([])
+    const [requests, setRequests] = useState([])
     const [userUsernameSearch, setUserUsernameSearch] = useState('')
+    // const [userRequestsSearch, setUserRequestsSearch] = useState('')
     const [isAdmin, setIsAdmin] = useState(true)
     const [isUsersLoading, setIsUsersLoading] = useState(false)
+    const [isRequestsLoading, setIsRequestsLoading] = useState(false)
 
     useEffect(() => {
         setIsAdmin(true)
         handleGetUsers()
+        handleGetRequests()
     }, [])
 
 
@@ -103,6 +107,66 @@ function AdminPage(){
         }
     }
 
+    const handleGetRequests = async () => {
+        setIsRequestsLoading(true)
+        try {
+            const response = await ApiConnector.allRequests(user)
+            // console.log(response.data)
+            setRequests(response.data)
+        } catch (error) {
+            handleLogError(error)
+        } finally {
+            setIsRequestsLoading(false)
+        }
+    }
+
+    const handleGetAccepted = async () => {
+        try {
+            const response = await ApiConnector.allAcceptedRequests(user)
+            setRequests(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRequests([])
+        }
+    }
+
+    const handleGetRejected = async () => {
+        try {
+            const response = await ApiConnector.allRejectedRequests(user)
+            setRequests(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRequests([])
+        }
+    }
+
+    const handleGetPending = async () => {
+        try {
+            const response = await ApiConnector.allPendingRequests(user)
+            setRequests(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRequests([])
+        }
+    }
+
+    const handleAccept = async (username) => {
+        try {
+            const response = await ApiConnector.acceptRequest(user, username)
+        } catch (error) {
+            handleLogError(error)
+        }
+    }
+
+    const handleReject = async (username) => {
+        try {
+            const response = await ApiConnector.rejectRequest(user, username)
+        } catch (error) {
+            handleLogError(error)
+        }
+    }
+
+
     if (!isAdmin) {
         return <Navigate to='/' />
     }
@@ -120,6 +184,13 @@ function AdminPage(){
                 handleGetClients={handleGetClients}
                 handleGetLandlordClients={handleGetLandlordClients}
                 handleGetUsers={handleGetUsers}
+                requests={requests}
+                handleGetRequests={handleGetRequests}
+                handleGetAccepted={handleGetAccepted}
+                handleGetRejected={handleGetRejected}
+                handleGetPending={handleGetPending}
+                handleAccept={handleAccept}
+                handleReject={handleReject}
             />
         </Container>
     )
