@@ -9,7 +9,7 @@ function AdminTab(props) {
     const { handleInputChange } = props
     const { isUsersLoading, users, userUsernameSearch, handleDeleteUser, handleSearchUser , handleGetLandlords, handleGetClients, handleGetLandlordClients, handleGetUsers} = props
     const { isRequestsLoading,requests, handleGetRequests, handleGetAccepted, handleGetRejected, handleGetPending, handleAccept, handleReject} = props
-    const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoom } = props
+    const { isRoomsLoading, rooms, roomIdSearch, roomLandlordSearch, handleDeleteRoom, handleSearchRoomId, handleSearchRoomLandlord, handleGetRooms } = props
     const { isReservationsLoading, reservations, reservationIdSearch, handleDeleteReservation, handleSearchReservation } = props
 
     const panes = [
@@ -38,9 +38,12 @@ function AdminTab(props) {
                     <RoomsTable
                         rooms={rooms}
                         roomIdSearch={roomIdSearch}
+                        roomLandlordSearch={roomLandlordSearch}
                         handleDeleteRoom={handleDeleteRoom}
                         handleInputChange={handleInputChange}
-                        handleSearchRoom={handleSearchRoom}
+                        handleSearchRoomId={handleSearchRoomId}
+                        handleSearchRoomLandlord={handleSearchRoomLandlord}
+                        handleGetRooms={handleGetRooms}
                         />
                 </Tab.Pane>
             )

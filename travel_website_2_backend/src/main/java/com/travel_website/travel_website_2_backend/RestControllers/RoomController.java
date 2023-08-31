@@ -68,7 +68,7 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @DeleteMapping
+    @DeleteMapping("/delete/{id}")
     public RoomDTO deleteRoom(@PathVariable int id)
     {
         Room room = roomService.validateAndGetRoom(id);
@@ -77,10 +77,17 @@ public class RoomController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/search/{id}")
+    @GetMapping("/search/id/{id}")
     public RoomDTO getRoom(@PathVariable int id)
     {
         return roomMapper.toRoomDTO(roomService.validateAndGetRoom(id));
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/search/name/{name}")
+    public RoomDTO getRoomByName(@PathVariable String name)
+    {
+        return roomMapper.toRoomDTO(roomService.validateAndGetRoomWithName(name));
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})

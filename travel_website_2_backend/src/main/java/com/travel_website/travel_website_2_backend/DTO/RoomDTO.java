@@ -4,7 +4,8 @@ import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
 import com.travel_website.travel_website_2_backend.Models.User;
 
-public record RoomDTO(String name,
+public record RoomDTO(int id,
+                      String name,
                       TypeOfRoom typeOfRoom,
                       int numofbeds,
                       int numofbaths,

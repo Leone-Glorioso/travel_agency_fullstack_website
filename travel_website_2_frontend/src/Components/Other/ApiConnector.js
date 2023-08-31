@@ -27,6 +27,7 @@ export const ApiConnector={
     createRoom,
     deleteRoom,
     getRoom,
+    getRoomByName,
     getMyRooms,
     getRoomsByLandlord,
     getMyRoom,
@@ -224,25 +225,20 @@ function createRoom(user,room){
     return instance.post('/api/rooms',room,{headers: {'Content-type': 'application/json','Authorization': bearerAuth(user)}})
 }
 
-function deleteRoom(user,room){
-    return instance.delete('/api/rooms',{
-        data: {room},
+function deleteRoom(user,roomId){
+    return instance.delete(`/api/rooms/delete/${roomId}`,{
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            'Authorization': bearerAuth(user)
         }
     })
 }
 
 function getRoom(id){
-    return instance.get(`/api/rooms/search/${id}`
-        // ,{
-        // data: {id},
-        // headers: {
-        //     'Content-type': 'application/json'
-        // }
-    // }
-    )
+    return instance.get(`/api/rooms/search/id/${id}`)
+}
+
+function getRoomByName(name){
+    return instance.get(`/api/rooms/search/name/${name}`)
 }
 
 function getMyRooms(user){
@@ -253,8 +249,7 @@ function getRoomsByLandlord(user,username){
     return instance.get(`/api/rooms/landlord/${username}`,{
         // data: {username},
         headers: {
-            // 'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            'Authorization': bearerAuth(user)
         }
     })
 }

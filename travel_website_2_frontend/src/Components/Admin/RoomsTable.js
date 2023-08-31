@@ -1,27 +1,19 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function RoomsTable({ rooms, roomIdSearch, handleInputChange, handleDeleteRoom, handleSearchRoom }) {
+function RoomsTable({ rooms, roomIdSearch, roomLandlordSearch, handleInputChange, handleDeleteRoom, handleSearchRoomId, handleSearchRoomLandlord, handleGetRooms }) {
     let roomList
     if (rooms.length === 0) {
         roomList = (
-            <Table.Row key='no-user'>
+            <Table.Row key='no-room'>
                 <Table.Cell collapsing textAlign='center' colSpan='6'>No room</Table.Cell>
             </Table.Row>
         )
     } else {
         roomList = rooms.map(room => {
             return (
-                <Table.Row key={room.name}>
-                    <Table.Cell collapsing>
-                        <Button
-                            circular
-                            color='red'
-                            size='small'
-                            icon='trash'
-                            onClick={() => handleDeleteRoom(room.id)}
-                        />
-                    </Table.Cell>
+                <Table.Row key={room.id}>
+                    <Table.Cell>{room.id}</Table.Cell>
                     <Table.Cell>{room.name}</Table.Cell>
                     <Table.Cell>{room.typeOfRoom}</Table.Cell>
                     <Table.Cell>{room.numofbeds}</Table.Cell>
@@ -40,6 +32,15 @@ function RoomsTable({ rooms, roomIdSearch, handleInputChange, handleDeleteRoom, 
                     <Table.Cell>{room.parking}</Table.Cell>
                     <Table.Cell>{room.elevator}</Table.Cell>
                     <Table.Cell>{room.description}</Table.Cell>
+                    <Table.Cell collapsing>
+                        <Button
+                            circular
+                            color='red'
+                            size='small'
+                            icon='trash'
+                            onClick={() => handleDeleteRoom(room.id)}
+                        />
+                    </Table.Cell>
                 </Table.Row>
             )
         })
@@ -47,19 +48,30 @@ function RoomsTable({ rooms, roomIdSearch, handleInputChange, handleDeleteRoom, 
 
     return (
         <>
-            <Form onSubmit={handleSearchRoom}>
+            <Form onSubmit={handleSearchRoomId}>
                 <Input
                     action={{ icon: 'search' }}
-                    name='Search'
+                    name='SearchRoomId'
                     placeholder='Search'
                     value={roomIdSearch}
                     onChange={handleInputChange}
                 />
             </Form>
+            <Form onSubmit={handleSearchRoomLandlord}>
+                <Input
+                    action={{ icon: 'search' }}
+                    name='SearchRoomLandlord'
+                    placeholder='Search'
+                    value={roomLandlordSearch}
+                    onChange={handleInputChange}
+                />
+            </Form>
+            <Button onClick={handleGetRooms} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell width={1} />
+                        <Table.HeaderCell width={3}>Id</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Name</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Type Of Room</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Number of Beds</Table.HeaderCell>
