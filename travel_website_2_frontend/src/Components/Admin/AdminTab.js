@@ -1,9 +1,9 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
-import UserTable from './UserTable'
 import RequestsTable from "./RequestsTable";
 import ReservationsTable from "./ReservationsTable";
 import RoomsTable from "./RoomsTable";
+import UsersTable from "./UsersTable";
 
 function AdminTab(props) {
     const { handleInputChange } = props
@@ -17,7 +17,7 @@ function AdminTab(props) {
             menuItem: { key: 'users', icon: 'users', content: 'Users' },
             render: () => (
                 <Tab.Pane loading={isUsersLoading}>
-                    <UserTable
+                    <UsersTable
                         users={users}
                         userUsernameSearch={userUsernameSearch}
                         handleInputChange={handleInputChange}

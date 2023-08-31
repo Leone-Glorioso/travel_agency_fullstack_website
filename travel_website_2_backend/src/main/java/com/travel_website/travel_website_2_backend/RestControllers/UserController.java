@@ -68,13 +68,13 @@ public class UserController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/{username}")
-    public UserDTO getUser(@PathVariable String username) {
+    public UserDTO getUser(@PathVariable("username") String username) {
         return userMapper.toUserDto(userService.validateAndGetUserByUsername(username));
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @DeleteMapping("/{username}")
-    public UserDTO deleteUser(@PathVariable String username) {
+    public UserDTO deleteUser(@PathVariable("username") String username) {
         User user = userService.validateAndGetUserByUsername(username);
         userService.deleteUser(user);
         return userMapper.toUserDto(user);

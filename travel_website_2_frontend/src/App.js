@@ -6,6 +6,8 @@ import Login from "./Components/Auth/Login";
 import SingUp from "./Components/Auth/singUp";
 import Profile from "./Components/Home/Profile";
 import RoomList from "./Components/Room/RoomList";
+import AdminPage from "./Components/Admin/AdminPage";
+import ProtectedRoute from "./Components/Other/ProtectedRoute";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
                     <Route path='/signup' element={<SingUp />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/rooms' element={<RoomList/>} />
+                    <Route path='/admin' element={<ProtectedRoute> <AdminPage/> </ProtectedRoute>} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}
