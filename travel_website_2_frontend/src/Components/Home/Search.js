@@ -6,6 +6,7 @@ import {DateRangePicker} from "react-date-range"
 import {IconButton} from "@mui/material";
 import PeopleIcon from '@mui/icons-material/People';
 import {ApiConnector} from "../Other/ApiConnector";
+import {Form} from "semantic-ui-react";
 
 
 
@@ -21,7 +22,7 @@ function Search(){
     const [startNumOfBeds, setStartNumOfBeds] = useState(1);
     const [endNumOfBeds, setEndNumOfBeds] = useState(10);
     const [startNumOfBaths, setStartNumOfBaths] = useState(1);
-    const [endNumOfBaths, setEndNumOfBaths] = useState(10);
+    const [endNumOfBaths, setEndNumOfBaths] = useState(5);
     const [startNumOfBedrooms, setStartNumOfBedrooms] = useState(1);
     const [endNumOfBedrooms, setEndNumOfBedrooms] = useState(10);
     const [livingRoom, setLivingRoom] = useState(true);
@@ -70,27 +71,57 @@ function Search(){
     };
 
     const handleSetStartNumOfBeds = (value) => {
-        setStartNumOfBeds(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
+            setStartNumOfBeds(parsedValue);
+        }
     };
 
     const handleSetEndNumOfBeds = (value) => {
-        setEndNumOfBeds(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
+            setEndNumOfBeds(parsedValue);
+        }
     };
 
     const handleSetStartNumOfBaths = (value) => {
-        setStartNumOfBaths(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 5) {
+            setStartNumOfBaths(parsedValue);
+        }
     };
 
     const handleSetEndNumOfBaths = (value) => {
-        setEndNumOfBaths(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 5) {
+            setEndNumOfBaths(parsedValue);
+        }
     };
 
     const handleSetStartNumOfBedrooms = (value) => {
-        setStartNumOfBedrooms(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
+            setStartNumOfBedrooms(parsedValue);
+        }
     };
 
     const handleSetEndNumOfBedrooms = (value) => {
-        setEndNumOfBedrooms(value);
+        const parsedValue = parseInt(value, 10);
+
+        // Check if the parsed value is within the allowed range
+        if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
+            setEndNumOfBedrooms(parsedValue);
+        }
     };
 
     const handleSetLivingRoom = (value) => {
@@ -205,6 +236,7 @@ function Search(){
                 Number of guests
                 <PeopleIcon/>
             </h1>
+            <label>Number of guests:</label>
             <input
                 min={0}
                 value={numOfGuests}
@@ -217,39 +249,167 @@ function Search(){
                     <label>Latitude:</label>
                     <input
                         type="number"
+                        step={'0.01'}
                         value={latitude}
                         onChange={(e) => handleSetLatitude(e.target.value)}
                     />
+                    <label>Longtitude:</label>
                     <input
                         type="number"
+                        step={'0.01'}
                         value={longitude}
                         onChange={(e) => handleSetLongtitude(e.target.value)}
                     />
+                    <label>Range:</label>
+                    <input
+                        type="number"
+                        value={range}
+                        onChange={(e) => handleSetRange(e.target.value)}
+                    />
+
+                    <label htmlFor="typeOfRoom">Choose type of room:</label>
+                    <select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)}>
+                        <option value="private_room">Private Room</option>
+                        <option value="hostel">Hostel</option>
+                        <option value="hotel">Hotel</option>
+                    </select>
+
+                    <label>Start Number Of beds:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={startNumOfBeds}
+                        onChange={(e) => handleSetStartNumOfBeds(e.target.value)}
+                    />
+
+                    <label>End Number Of beds:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={endNumOfBeds}
+                        onChange={(e) => handleSetEndNumOfBeds(e.target.value)}
+                    />
+
+                    <label>Start Number Of Bathrooms:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={5}
+                        value={startNumOfBaths}
+                        onChange={(e) => handleSetStartNumOfBaths(e.target.value)}
+                    />
+
+                    <label>End Number Of Bathrooms:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={5}
+                        value={endNumOfBaths}
+                        onChange={(e) => handleSetEndNumOfBaths(e.target.value)}
+                    />
+
+                    <label>Start Number Of Bedrooms:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={startNumOfBedrooms}
+                        onChange={(e) => handleSetStartNumOfBedrooms(e.target.value)}
+                    />
+
+                    <label>End Number Of Bedrooms:</label>
+                    <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={endNumOfBedrooms}
+                        onChange={(e) => handleSetEndNumOfBedrooms(e.target.value)}
+                    />
+
+                    <label htmlFor="livingroom">LivingRoom:</label>
+                    <select name="livingroom" id="livingroom" onChange={(e) => handleSetLivingRoom(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label>Start area:</label>
+                    <input
+                        type="number"
+                        value={startArea}
+                        onChange={(e) => handleSetStartArea(e.target.value)}
+                    />
+
+                    <label>End area:</label>
+                    <input
+                        type="number"
+                        value={endArea}
+                        onChange={(e) => handleSetEndArea(e.target.value)}
+                    />
+
+                    <label htmlFor="smoking">Smoking:</label>
+                    <select name="smoking" id="smoking" onChange={(e) => handleSetSmoking(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="pets">Pets:</label>
+                    <select name="pets" id="pets" onChange={(e) => handleSetPets(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="events">Events:</label>
+                    <select name="events" id="events" onChange={(e) => handleSetEvents(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="internet">Internet:</label>
+                    <select name="internet" id="internet" onChange={(e) => handleSetInternet(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="cooling">Cooling:</label>
+                    <select name="cooling" id="cooling" onChange={(e) => handleSetCooling(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="heating">Heating:</label>
+                    <select name="heating" id="heating" onChange={(e) => handleSetHeating(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="kitchen">Kitchen:</label>
+                    <select name="kitchen" id="kitchen" onChange={(e) => handleSetKitchen(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="tv">Tv:</label>
+                    <select name="tv" id="tv" onChange={(e) => handleSetTV(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="parking">Parking:</label>
+                    <select name="parking" id="parking" onChange={(e) => handleSetParking(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
+                    <label htmlFor="elevator">Elevator:</label>
+                    <select name="elevator" id="elevator" onChange={(e) => handleSetElevator(e.target.value)}>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+
                 </div>
 
-                <button onClick={() => console.log("Range:", 10)}>Range</button>
-                <button onClick={() => console.log("Start Date:", startDate.toISOString())}>Start Date</button>
-                <button onClick={() => console.log("End Date:", endDate.toISOString())}>End Date</button>
-                <button onClick={() => console.log("Type of Room:", "private_room")}>Type of Room</button>
-                <button onClick={() => console.log("Start Number of Beds:", 1)}>Start Number of Beds</button>
-                <button onClick={() => console.log("End Number of Beds:", 10)}>End Number of Beds</button>
-                <button onClick={() => console.log("Start Number of Bathrooms:", 1)}>Start Number of Bathrooms</button>
-                <button onClick={() => console.log("End Number of Bathrooms:", 10)}>End Number of Bathrooms</button>
-                <button onClick={() => console.log("Start Number of Bedrooms:", 1)}>Start Number of Bedrooms</button>
-                <button onClick={() => console.log("End Number of Bedrooms:", 10)}>End Number of Bedrooms</button>
-                <button onClick={() => console.log("Living Room:", true)}>Living Room</button>
-                <button onClick={() => console.log("Start Area:", 100)}>Start Area</button>
-                <button onClick={() => console.log("End Area:", 1000)}>End Area</button>
-                <button onClick={() => console.log("Smoking:", true)}>Smoking</button>
-                <button onClick={() => console.log("Pets:", true)}>Pets</button>
-                <button onClick={() => console.log("Events:", true)}>Events</button>
-                <button onClick={() => console.log("Internet:", true)}>Internet</button>
-                <button onClick={() => console.log("Cooling:", true)}>Cooling</button>
-                <button onClick={() => console.log("Heating:", true)}>Heating</button>
-                <button onClick={() => console.log("Kitchen:", true)}>Kitchen</button>
-                <button onClick={() => console.log("TV:", true)}>TV</button>
-                <button onClick={() => console.log("Parking:", true)}>Parking</button>
-                <button onClick={() => console.log("Elevator:", true)}>Elevator</button>
             </div>
             <IconButton onClick={handleSearch}>Search Room</IconButton>
 
