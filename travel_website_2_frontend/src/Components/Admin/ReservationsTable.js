@@ -13,6 +13,10 @@ function ReservationsTable({ reservations, reservationIdSearch, handleInputChang
         reservationList = reservations.map(reservation => {
             return (
                 <Table.Row key={reservation.id}>
+                    <Table.Cell>{reservation.id}</Table.Cell>
+                    <Table.Cell>{reservation.ppn}</Table.Cell>
+                    <Table.Cell>{reservation.start}</Table.Cell>
+                    <Table.Cell>{reservation.end}</Table.Cell>
                     <Table.Cell collapsing>
                         <Button
                             circular
@@ -22,10 +26,6 @@ function ReservationsTable({ reservations, reservationIdSearch, handleInputChang
                             onClick={() => handleDeleteReservation(reservation.id)}
                         />
                     </Table.Cell>
-                    <Table.Cell>{reservation.id}</Table.Cell>
-                    <Table.Cell>{reservation.ppn}</Table.Cell>
-                    <Table.Cell>{reservation.start}</Table.Cell>
-                    <Table.Cell>{reservation.end}</Table.Cell>
                 </Table.Row>
             )
         })

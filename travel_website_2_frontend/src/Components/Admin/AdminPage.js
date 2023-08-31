@@ -13,22 +13,32 @@ function AdminPage(){
 
     const [users, setUsers] = useState([])
     const [requests, setRequests] = useState([])
+    const [rooms, setRooms] = useState([])
     const [userUsernameSearch, setUserUsernameSearch] = useState('')
-    // const [userRequestsSearch, setUserRequestsSearch] = useState('')
+    const [roomIdSearch, setRoomIdSearch] = useState('')
+    const [roomLandlordSearch, setRoomLandlordSearch] = useState('')
     const [isAdmin, setIsAdmin] = useState(true)
     const [isUsersLoading, setIsUsersLoading] = useState(false)
     const [isRequestsLoading, setIsRequestsLoading] = useState(false)
+    const [isRoomsLoading, setIsRoomsLoading] = useState(false)
 
     useEffect(() => {
         setIsAdmin(true)
         handleGetUsers()
         handleGetRequests()
+        handleGetRooms()
     }, [])
 
 
     const handleInputChange = (e, { name, value }) => {
         if (name === 'userUsernameSearch') {
             setUserUsernameSearch(value)
+        }
+        else if (name === 'SearchRoomId') {
+            setRoomIdSearch(value)
+        }
+        else if (name === 'SearchRoomLandlord') {
+            setRoomLandlordSearch(value)
         }
     }
 
@@ -166,6 +176,53 @@ function AdminPage(){
         }
     }
 
+    const handleGetRooms = async () => {
+        setIsRoomsLoading(true)
+        try {
+            const response = await ApiConnector.getRooms(user)
+            setRooms(response.data)
+        } catch (error) {
+            handleLogError(error)
+        } finally {
+            setIsRoomsLoading(false)
+        }
+    }
+
+    const handleDeleteRoom = async (id) => {
+        try {
+            await ApiConnector.deleteRoom(user, id)
+            handleGetRooms()
+        } catch (error) {
+            handleLogError(error)
+        }
+    }
+
+    const handleSearchRoomId = async () => {
+        const id = roomIdSearch
+        try {
+            const response = await ApiConnector.getRoom(id)
+            setRooms(response.data)
+            console.log(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRooms([])
+        }
+    }
+
+    const handleSearchRoomLandlord = async () => {
+        const landlord = roomLandlordSearch
+        try {
+            const response = await ApiConnector.getRoomsByLandlord(landlord)
+            // const data = response.data
+            // const rooms = data instanceof Array ? data : [data]
+            setRooms(response.data)
+            console.log(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRooms([])
+        }
+    }
+
 
     if (!isAdmin) {
         return <Navigate to='/' />
@@ -191,6 +248,13 @@ function AdminPage(){
                 handleGetPending={handleGetPending}
                 handleAccept={handleAccept}
                 handleReject={handleReject}
+                rooms={rooms}
+                roomIdSearch={roomIdSearch}
+                roomLandlordSearch={roomLandlordSearch}
+                handleDeleteRoom={handleDeleteRoom}
+                handleSearchRoomId={handleSearchRoomId}
+                handleSearchRoomLandlord={handleSearchRoomLandlord}
+                handleGetRooms={handleGetRooms}
             />
         </Container>
     )

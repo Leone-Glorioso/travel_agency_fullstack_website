@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function MyReservationsTableClient({ reservations, reservationIdSearch, handleInputChange, handleDeleteReservation, handleSearchReservation }) {
+function MyReservationsTableClient({ reservations, reservationIdSearch, handleInputChange, handleSearchReservation, handleGetReservations }) {
     let reservationList
     if (reservations.length === 0) {
         reservationList = (
@@ -13,15 +13,6 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
         reservationList = reservations.map(reservation => {
             return (
                 <Table.Row key={reservation.id}>
-                    <Table.Cell collapsing>
-                        <Button
-                            circular
-                            color='red'
-                            size='small'
-                            icon='trash'
-                            onClick={() => handleDeleteReservation(reservation.id)}
-                        />
-                    </Table.Cell>
                     <Table.Cell>{reservation.id}</Table.Cell>
                     <Table.Cell>{reservation.ppn}</Table.Cell>
                     <Table.Cell>{reservation.start}</Table.Cell>
@@ -42,6 +33,7 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
                     onChange={handleInputChange}
                 />
             </Form>
+            <Button onClick={handleGetReservations} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

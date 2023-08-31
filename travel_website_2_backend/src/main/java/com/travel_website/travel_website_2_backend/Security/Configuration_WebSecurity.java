@@ -40,7 +40,7 @@ public class Configuration_WebSecurity {
                         .requestMatchers("api/rooms/search","api/rooms/search/**", "api/rooms/location/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/rooms").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/me", "api/rooms/me/**").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
-                        .requestMatchers(HttpMethod.DELETE, "api/rooms").hasAuthority(ADMIN.toString())
+                        .requestMatchers(HttpMethod.DELETE, "api/rooms/delete/**").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.GET, "api/rooms/all", "api/rooms/landlord/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "api/reservations/myRooms/**").hasAnyAuthority(LANDLORD.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.POST, "api/reservations/room/**").hasAnyAuthority(ADMIN.toString())

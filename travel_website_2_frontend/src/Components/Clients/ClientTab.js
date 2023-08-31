@@ -4,7 +4,7 @@ import MyReservationsTableClient from "./MyReservationsTable";
 
 function ClientTab(props) {
     const { handleInputChange } = props
-    const { isReservationsLoading, reservations, reservationIdSearch, handleDeleteReservation, handleSearchReservation } = props
+    const { isReservationsLoading, reservations, reservationIdSearch, handleSearchReservation , handleGetReservations} = props
 
     const panes = [
         {
@@ -14,9 +14,10 @@ function ClientTab(props) {
                     <MyReservationsTableClient
                         reservations={reservations}
                         reservationIdSearch={reservationIdSearch}
-                        handleDeleteReservation={handleDeleteReservation}
+                        // handleDeleteReservation={handleDeleteReservation}
                         handleInputChange={handleInputChange}
                         handleSearchReservation={handleSearchReservation}
+                        handleGetReservations={handleGetReservations}
                     />
                 </Tab.Pane>
             )
