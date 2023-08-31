@@ -42,8 +42,8 @@ function Search(){
 
 
     const selectionRange={
-        startDate:startDate,
-        endDate:endDate,
+        startDate:new Date(),
+        endDate:new Date(),
         key:"selection"
     }
 
@@ -231,7 +231,25 @@ function Search(){
 
     return (
         <div className={'search'}>
-            <DateRangePicker ranges={[selectionRange]} onChange={handleSelect}></DateRangePicker>
+
+            <input
+                type="date"
+                value={startDate.toISOString().split('T')[0]}
+                onChange={(e) => setStartDate(new Date(e.target.value))}
+            />
+            <input
+                type="date"
+                value={endDate.toISOString().split('T')[0]}
+                onChange={(e) => setEndDate(new Date(e.target.value))}
+            />
+
+            {/* DateRangePicker component */}
+            <DateRangePicker
+                ranges={[selectionRange]}
+                onChange={handleSelect}
+                dateDisplayFormat={'dd/MM/yyyy'}
+            ></DateRangePicker>
+            {/*<DateRangePicker ranges={[selectionRange]} onChange={handleSelect} dateDisplayFormat={"dd/MM/yyyy"}></DateRangePicker>*/}
             <h1>
                 Number of guests
                 <PeopleIcon/>
