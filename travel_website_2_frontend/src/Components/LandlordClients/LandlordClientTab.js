@@ -47,7 +47,7 @@ function LandlordTab(props) {
                         reservations={reservations_from}
                         reservationIdSearch={reservationIdSearch_from}
                         handleDeleteReservation={handleDeleteReservation_from}
-                        handleInputChange={handleInputChange_from}
+                        handleInputChange={handleInputChange}
                         handleSearchReservation={handleSearchReservation_from}
                     />
                 </Tab.Pane>
