@@ -27,7 +27,7 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
             <Form onSubmit={handleSearchReservation}>
                 <Input
                     action={{ icon: 'search' }}
-                    name='Search'
+                    name='reservationSearch'
                     placeholder='Search'
                     value={reservationIdSearch}
                     onChange={handleInputChange}

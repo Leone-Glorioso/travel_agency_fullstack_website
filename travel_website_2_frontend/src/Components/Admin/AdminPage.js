@@ -198,11 +198,13 @@ function AdminPage(){
     }
 
     const handleSearchRoomId = async () => {
-        const id = roomIdSearch
+        const id = parseInt(roomIdSearch)
         try {
             const response = await ApiConnector.getRoom(id)
-            setRooms(response.data)
-            console.log(response.data)
+            const data = response.data
+            const rooms = data instanceof Array ? data : [data]
+            setRooms(rooms)
+            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRooms([])
@@ -212,11 +214,11 @@ function AdminPage(){
     const handleSearchRoomLandlord = async () => {
         const landlord = roomLandlordSearch
         try {
-            const response = await ApiConnector.getRoomsByLandlord(landlord)
-            // const data = response.data
-            // const rooms = data instanceof Array ? data : [data]
-            setRooms(response.data)
-            console.log(response.data)
+            const response = await ApiConnector.getRoomsByLandlord(user, landlord)
+            const data = response.data
+            const rooms = data instanceof Array ? data : [data]
+            setRooms(rooms)
+            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRooms([])

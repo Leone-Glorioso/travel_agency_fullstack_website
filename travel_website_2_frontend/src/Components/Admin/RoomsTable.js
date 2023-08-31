@@ -51,7 +51,7 @@ function RoomsTable({ rooms, roomIdSearch, roomLandlordSearch, handleInputChange
             <Form onSubmit={handleSearchRoomId}>
                 <Input
                     action={{ icon: 'search' }}
-                    name='SearchRoomName'
+                    name='SearchRoomId'
                     placeholder='Search'
                     value={roomIdSearch}
                     onChange={handleInputChange}

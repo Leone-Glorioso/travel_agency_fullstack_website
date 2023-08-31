@@ -51,9 +51,9 @@ function ClientPage(){
     // }
 
     const handleSearchReservation = async () => {
-        const id = reservationSearch
+        const id = parseInt(reservationSearch)
         try {
-            const response = await ApiConnector.getReservation(user, id)
+            const response = await ApiConnector.getMyReservation(user, id)
             console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
