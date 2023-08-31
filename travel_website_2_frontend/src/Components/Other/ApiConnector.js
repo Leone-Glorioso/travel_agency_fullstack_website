@@ -8,9 +8,10 @@ export const ApiConnector={
     numberOfUsers,
     numberOfReservations,
     getUsers,
+    getUser,
     deleteUser,
     getReservations,
-    getReservationsByBookerAndRoom,
+    getReservationsOfRoom,
     getReservation,
     createReservation,
     deleteReservation,
@@ -66,16 +67,30 @@ function numberOfReservations() {
     return instance.get('/public/numberOfReservations')
 }
 
-function getUsers(user, username) {
-    const url = username ? `/api/users/${username}` : '/api/users'
-    return instance.get(url, {
+function getUsers(user) {
+    // const url = username ? `/api/users/${username}` : '/api/users'
+    return instance.get('/api/users', {
         headers: { 'Authorization': bearerAuth(user) }
+    })
+}
+
+function getUser(user, username) {
+    return instance.get(`/api/users/${username}`, {
+        // data: {username},
+        headers: {
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
     })
 }
 
 function deleteUser(user, username) {
     return instance.delete(`/api/users/${username}`, {
-        headers: { 'Authorization': bearerAuth(user) }
+        // data: {username},
+        headers: {
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
     })
 }
 
@@ -84,21 +99,19 @@ function getReservations(user) {
     )
 }
 
-function getReservationsByBookerAndRoom(user,username,id){
-    return instance.get('/api/reservations/search',{
-        data: {username, id},
+function getReservationsOfRoom(user,name){
+    return instance.get(`/api/reservations/room/${name}`,{
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            'Authorization': bearerAuth(user)
         }
     })
 }
 
 function getReservation(user,id){
     return instance.get(`/api/reservations/searchID/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -107,32 +120,37 @@ function getReservation(user,id){
 
 function createReservation(user,reservation, id){
     return instance.post(`/api/reservations/room/${id}`,reservation,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
         }})
 }
 
 function deleteReservation(user,id){
     return instance.delete(`/api/reservations/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
 }
 
 function getMyReservations(user){
-    return instance.get('/api/reservations/myReservations',{headers: {'Content-type': 'application/json','Authorization': bearerAuth(user)}})
+    return instance.get('/api/reservations/myReservations',{
+        headers: {
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
 }
 
 function getReservationsOfClient(user,username){
     return instance.get(`/api/reservations/client/${username}`,{
-        data: {username},
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -140,9 +158,9 @@ function getReservationsOfClient(user,username){
 
 function getMyReservation(user,id){
     return instance.get(`/api/reservations/myReservations/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -150,9 +168,9 @@ function getMyReservation(user,id){
 
 function getReservationOfClient(user,username,id){
     return instance.get(`/api/reservations/client/${username}/reservation/${id}`,{
-        data: {username, id},
+        // data: {username, id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -160,17 +178,17 @@ function getReservationOfClient(user,username,id){
 
 function getReservationsOfMyRoom(user,id){
     return instance.get(`/api/reservations/myRooms/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
         }
     })
 }
 
 function getReservationsOfLandlordRoom(user,username,id){
     return instance.get(`/api/reservations/rooms/${id}`,{
-        data: {username, id},
+        data: {username},
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
@@ -180,17 +198,17 @@ function getReservationsOfLandlordRoom(user,username,id){
 
 function getReservationOfMyRoom(user,roomID,reservationID){
     return instance.get(`/api/reservations/myRooms/${roomID}/myReservations/${reservationID}`,{
-        data: {roomID,reservationID},
+        // data: {roomID,reservationID},
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
         }
     })
 }
 
 function getReservationOfLandlordRoom (user,username,roomID,reservationID){
     return instance.get(`/api/reservations/rooms/${roomID}/myReservations/${reservationID}`,{
-        data: {username, roomID,reservationID},
+        data: {username},
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
@@ -217,23 +235,25 @@ function deleteRoom(user,room){
 }
 
 function getRoom(id){
-    return instance.get(`/api/rooms/search/${id}`,{
-        data: {id},
-        headers: {
-            'Content-type': 'application/json'
-        }
-    })
+    return instance.get(`/api/rooms/search/${id}`
+        // ,{
+        // data: {id},
+        // headers: {
+        //     'Content-type': 'application/json'
+        // }
+    // }
+    )
 }
 
 function getMyRooms(user){
-    return instance.get('/api/rooms/me',{headers: {'Content-type': 'application/json','Authorization': bearerAuth(user)}})
+    return instance.get('/api/rooms/me',{headers: {'Authorization': bearerAuth(user)}})
 }
 
 function getRoomsByLandlord(user,username){
     return instance.get(`/api/rooms/landlord/${username}`,{
-        data: {username},
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -241,9 +261,9 @@ function getRoomsByLandlord(user,username){
 
 function getMyRoom(user,id){
     return instance.get(`/api/rooms/me/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -251,9 +271,9 @@ function getMyRoom(user,id){
 
 function getRoomByLandlord(user,username,id){
     return instance.get(`/api/rooms/landlord/${username}/room/${id}`,{
-        data: {username, id},
+        // data: {username, id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -283,7 +303,7 @@ function getClients(user)
 
 function getLandlordClients(user)
 {
-    return instance.get('/api/users/landlordclients', {
+    return instance.get('/api/users/landlordsclients', {
         headers: { 'Authorization': bearerAuth(user) }
     })
 }
@@ -293,7 +313,7 @@ function getLandlordClients(user)
 function initialSearch( location_id, start, end, people)
 {
     return instance.get(`/api/rooms/${location_id}/${start}/${end}/${people}`,{
-        data: {location_id, start, end, people},
+        // data: {location_id, start, end, people},
         headers: {
             'Content-type': 'application/json'
         }
@@ -303,7 +323,7 @@ function initialSearch( location_id, start, end, people)
 function search(request)
 {
     return instance.get('/api/rooms/search',{
-        data: {request},
+        data: request,
         headers: {
             'Content-type': 'application/json'
         }
@@ -323,9 +343,9 @@ function createLocation(user, location)
 function deleteLocation(user, id)
 {
     return instance.delete(`/api/rooms/search/${id}`,{
-        data: {id},
+        // data: {id},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
         }
     })
@@ -374,9 +394,9 @@ function allPendingRequests(user)
 function acceptRequest(user, username)
 {
     return instance.get(`/api/requests/accept/${username}`,{
-        data: {username},
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
         }
     })
@@ -385,9 +405,9 @@ function acceptRequest(user, username)
 function rejectRequest(user, username)
 {
     return instance.get(`/api/requests/reject/${username}`,{
-        data: {username},
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
         }
     })

@@ -47,19 +47,29 @@ public class ReservationController {
         return reservationService.getReservations().stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
     }
 
+//    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+//    @GetMapping("/search")
+//    public List<ReservationDTO> getReservationsByBookerAndRoom(@RequestParam(required = false) String username, @RequestParam(required = false) int roomId) {
+//        User client = userService.validateAndGetUserByUsername(username);
+//        Room room = roomService.validateAndGetRoom(roomId);
+//        Collection<Reservation> col = new ArrayList<>(reservationService.getReservations());
+//        if(client != null) {
+//             col.retainAll(reservationService.getReservationsOfClient(client));
+//        }
+//        if (room != null) {
+//            col.retainAll(reservationService.getReservationsOfRoom(room));
+//        }
+//        List<Reservation> reservations = new ArrayList<>(col);
+//        return reservations.stream()
+//                .map(reservationMapper::toReserveDto)
+//                .collect(Collectors.toList());
+//    }
+
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/search")
-    public List<ReservationDTO> getReservationsByBookerAndRoom(@RequestParam(required = false) String username, @RequestParam(required = false) int roomId) {
-        User client = userService.validateAndGetUserByUsername(username);
-        Room room = roomService.validateAndGetRoom(roomId);
-        Collection<Reservation> col = new ArrayList<>(reservationService.getReservations());
-        if(client != null) {
-             col.retainAll(reservationService.getReservationsOfClient(client));
-        }
-        if (room != null) {
-            col.retainAll(reservationService.getReservationsOfRoom(room));
-        }
-        List<Reservation> reservations = new ArrayList<>(col);
+    @GetMapping("/room_search/{room_name}")
+    public List<ReservationDTO> getReservationsOfRoom(@PathVariable String room_name) {
+        Room room = roomService.validateAndGetRoomWithName(room_name);
+        List<Reservation> reservations = reservationService.getReservationsOfRoom(room);
         return reservations.stream()
                 .map(reservationMapper::toReserveDto)
                 .collect(Collectors.toList());

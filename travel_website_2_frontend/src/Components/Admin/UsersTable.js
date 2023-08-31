@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function UsersTable({ users, userUsernameSearch, handleInputChange, handleDeleteUser, handleSearchUser }) {
+function UsersTable({ users, userUsernameSearch, handleInputChange, handleDeleteUser, handleSearchUser , handleGetLandlords, handleGetClients, handleGetLandlordClients, handleGetUsers}) {
     let userList
     if (users.length === 0) {
         userList = (
@@ -13,6 +13,14 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
         userList = users.map(user => {
             return (
                 <Table.Row key={user.id}>
+                    <Table.Cell>{user.id}</Table.Cell>
+                    <Table.Cell>{user.username}</Table.Cell>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.surname}</Table.Cell>
+                    <Table.Cell>{user.email}</Table.Cell>
+                    <Table.Cell>{user.telephone}</Table.Cell>
+                    <Table.Cell>{user.country}</Table.Cell>
+                    <Table.Cell>{user.role}</Table.Cell>
                     <Table.Cell collapsing>
                         <Button
                             circular
@@ -22,14 +30,6 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                             onClick={() => handleDeleteUser(user.username)}
                         />
                     </Table.Cell>
-                    <Table.Cell>{user.id}</Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
-                    <Table.Cell>{user.name}</Table.Cell>
-                    <Table.Cell>{user.surname}</Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                    <Table.Cell>{user.telephone}</Table.Cell>
-                    <Table.Cell>{user.country}</Table.Cell>
-                    <Table.Cell>{user.role}</Table.Cell>
                 </Table.Row>
             )
         })
@@ -46,6 +46,10 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                     onChange={handleInputChange}
                 />
             </Form>
+            <Button onClick={handleGetUsers} />
+            <Button onClick={handleGetLandlords} />
+            <Button onClick={handleGetClients} />
+            <Button onClick={handleGetLandlordClients} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
