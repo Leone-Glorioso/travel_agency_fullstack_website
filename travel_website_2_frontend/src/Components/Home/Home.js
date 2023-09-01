@@ -9,6 +9,7 @@ import Header from './Header'
 import SearchBanner from './SearchBanner'
 import Card from "./Card"
 import RoomTypes from "./RoomTypes";
+import "./Home.css"
 
 function Home(){
     const [numberOfUsers,setNumberOfUsers]=useState(0)
@@ -68,49 +69,13 @@ function Home(){
                             </header>
                         </div>
                         <SearchBanner/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-
+                        <div className={"emptySpace"}>
+                            <br/>
+                        </div>
 
                         <RoomTypes/>
+
+                        <label className={"ourServices"}> Our Services </label>
                         <div className={'homes'}>
                             <Card
                             src={"https://plus.unsplash.com/premium_photo-1670076505419-99468d952c61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmVkcm9vbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"

@@ -231,7 +231,7 @@ function Search(){
 
     return (
         <div className={'search'}>
-
+            <label> Give Dates: </label>
             <input
                 type="date"
                 value={startDate.toISOString().split('T')[0]}
@@ -244,11 +244,11 @@ function Search(){
             />
 
             {/* DateRangePicker component */}
-            <DateRangePicker
-                ranges={[selectionRange]}
-                onChange={handleSelect}
-                dateDisplayFormat={'dd/MM/yyyy'}
-            ></DateRangePicker>
+            {/*<DateRangePicker*/}
+            {/*    ranges={[selectionRange]}*/}
+            {/*    onChange={handleSelect}*/}
+            {/*    dateDisplayFormat={'dd/MM/yyyy'}*/}
+            {/*></DateRangePicker>*/}
             {/*<DateRangePicker ranges={[selectionRange]} onChange={handleSelect} dateDisplayFormat={"dd/MM/yyyy"}></DateRangePicker>*/}
             <h1>
                 Number of guests

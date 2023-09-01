@@ -1,6 +1,8 @@
 .search{
+    max-width: 500px;
+    background-color: white;
     position:absolute;
-    top:20px;
+    top:35px;
     left:69%;
     width: 100vw;
 
@@ -14,7 +16,7 @@
 .search>button{
     position: absolute;
     left:0;
-    top:600px;
+    top:1750px;
     text-transform: inherit;
     background-color: white;
     color: #33AAFF;
@@ -27,6 +29,43 @@
     color: white;
 }
 
+.SearchInputs{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    margin:10px
+}
+
+label{
+    font-weight: bold;
+}
+
+input [type="number"],
+select{
+    width: 100%;
+    padding:8px;
+    border:1px solid #ccc ;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+select {
+    appearance: none;
+    background-color: white;
+    /*background-image: url("path/to/your-arrow-icon.png"); !* Customize the arrow icon *!*/
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 30px; /* Adjust padding to leave space for the arrow */
+}
+
+/* Add hover and focus styles if desired */
+input[type="number"]:hover,
+input[type="number"]:focus,
+select:hover,
+select:focus {
+    border-color: #007bff; /* Highlight color on hover and focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional box-shadow effect */
+}
 
 
 /*.search >h1{*/
