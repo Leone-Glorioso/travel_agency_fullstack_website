@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.RestControllers;
 import com.travel_website.travel_website_2_backend.DTO.CreateReservationRequest;
 import com.travel_website.travel_website_2_backend.DTO.ReservationDTO;
 import com.travel_website.travel_website_2_backend.DTO.RoomDTO;
+import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationNotFound;
 import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
@@ -146,15 +147,15 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/rooms/{roomId}")
-    public List<ReservationDTO> getReservationsOfLandlordRoom(@PathVariable String username,
-                                                        @PathVariable int roomId)
+    @GetMapping("/rooms/{username}")
+    public List<ReservationDTO> getReservationsOfLandlordRooms(@PathVariable String username)
     {
         User user = userService.validateAndGetUserByUsername(username);
         userService.validateLandlord(user);
-        Room room = roomService.validateAndGetRoom(roomId);
-        roomService.validateRoomLandlordConnection(user, room);
-        return reservationService.getReservationsOfRoom(room).stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
+        List<Room> rooms = roomService.getRoomsByLandlord(user);
+        for(Room room: rooms)
+            roomService.validateRoomLandlordConnection(user, room);
+        return reservationService.getReservationsOfRooms(rooms).stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
@@ -174,18 +175,21 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/rooms/{roomId}/reservations/{reservationId}")
+    @GetMapping("/rooms/{username}/reservations/{reservationId}")
     public ReservationDTO getReservationOfLandlordRoom(@PathVariable String username,
-                                                 @PathVariable int roomId,
                                                  @PathVariable int reservationId)
     {
         User user = userService.validateAndGetUserByUsername(username);
         userService.validateLandlord(user);
-        Room room = roomService.validateAndGetRoom(roomId);
-        roomService.validateRoomLandlordConnection(user, room);
+        List<Room> rooms = roomService.getRoomsByLandlord(user);
+        for(Room room: rooms)
+            roomService.validateRoomLandlordConnection(user, room);
+        List<Reservation> reservations = reservationService.getReservationsOfRooms(rooms);
         Reservation reservation = reservationService.validateAndGetReservation(reservationId);
-        reservationService.validateRoomReservationConnection(room, reservation);
-        return reservationMapper.toReserveDto(reservation);
+        if(reservations.contains(reservation))
+            return reservationMapper.toReserveDto(reservation);
+        else
+            throw new Exception_ReservationNotFound("Reservation with id" + reservationId + "is not found");
     }
 
 }

@@ -187,11 +187,11 @@ function getReservationsOfMyRoom(user,id){
     })
 }
 
-function getReservationsOfLandlordRoom(user,username,id){
-    return instance.get(`/api/reservations/rooms/${id}`,{
-        data: {username},
+function getReservationsOfLandlordRoom(user,username){
+    return instance.get(`/api/reservations/rooms/${username}`,{
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
+            // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
         }
     })
@@ -207,12 +207,12 @@ function getReservationOfMyRoom(user,roomID,reservationID){
     })
 }
 
-function getReservationOfLandlordRoom (user,username,roomID,reservationID){
-    return instance.get(`/api/reservations/rooms/${roomID}/myReservations/${reservationID}`,{
-        data: {username},
+function getReservationOfLandlordRoom (user,username,reservationID){
+    return instance.get(`/api/reservations/rooms/${username}/myReservations/${reservationID}`,{
+        // data: {username},
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user),
+            // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
         }
     })
 }

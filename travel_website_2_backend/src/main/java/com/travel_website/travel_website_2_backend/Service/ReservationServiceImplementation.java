@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -64,4 +67,21 @@ public class ReservationServiceImplementation implements ReservationService{
         if(!reservation.getBookedRoom().equals(room))
             throw new Exception_RoomDoesNotMatchLandlord("Reservation with id " + reservation.getId() + " does not match room " + room.getId());
     }
+
+    @Override
+    public List<Reservation> getReservationsOfRooms(List<Room> rooms)
+    {
+        Collection<Reservation> reservations = new ArrayList<>();
+        for(Room room: rooms)
+            reservations.addAll(reservationRepository.findReservationsByBookedRoom(room));
+        return reservations.stream().collect(Collectors.toList());
+    }
+
+
+    @Override
+    public boolean isReservationOfRoom(Reservation reservation, Room room)
+    {
+        return reservationRepository.existsByBookedRoomAndAndId(room, reservation.getId());
+    }
+
 }

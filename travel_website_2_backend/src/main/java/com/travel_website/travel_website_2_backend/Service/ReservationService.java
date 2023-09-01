@@ -13,6 +13,8 @@ public interface ReservationService {
 
     List<Reservation> getReservationsOfRoom(Room room);
 
+    List<Reservation> getReservationsOfRooms(List<Room> rooms);
+
     List<Reservation> getReservationsOfClient(User client);
 
     Reservation validateAndGetReservation(int id);
@@ -24,4 +26,6 @@ public interface ReservationService {
     void validateClientReservationConnection(User client, Reservation reservation);
 
     void validateRoomReservationConnection(Room room, Reservation reservation);
+
+    boolean isReservationOfRoom(Reservation reservation, Room room);
 }
