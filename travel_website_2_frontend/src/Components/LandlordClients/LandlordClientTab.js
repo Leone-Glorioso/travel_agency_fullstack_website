@@ -6,9 +6,11 @@ import RoomsTableLandlordClient from "./RoomsTable";
 
 function LandlordTab(props) {
     const { handleInputChange } = props
-    const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoom } = props
-    const { isReservationsLoading_to, reservations_to, reservationIdSearch_to, handleDeleteReservation_to, handleSearchReservation_to } = props
-    const { isReservationsLoading_from, reservations_from, reservationIdSearch_from, handleDeleteReservation_from, handleSearchReservation_from } = props
+    const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoomId, handleGetRooms } = props
+    const { isReservationsLoading_to, reservations, reservationIdSearch, reservationRoomSearch, reservationClientSearch,
+        handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient ,
+        handleGetReservations } = props
+    const { isReservationsLoading_from, reservations_from, reservationIdSearch_from, handleSearchReservation_from, handleGetReservations_from } = props
 
     const panes = [
         {
@@ -20,7 +22,8 @@ function LandlordTab(props) {
                         roomIdSearch={roomIdSearch}
                         handleDeleteRoom={handleDeleteRoom}
                         handleInputChange={handleInputChange}
-                        handleSearchRoom={handleSearchRoom}
+                        handleSearchRoomId={handleSearchRoomId}
+                        handleGetRooms={handleGetRooms}
                     />
                 </Tab.Pane>
             )
@@ -30,25 +33,30 @@ function LandlordTab(props) {
             render: () => (
                 <Tab.Pane loading={isReservationsLoading_to}>
                     <ReservationsTableToLandlordClient
-                        reservations={reservations_to}
-                        reservationIdSearch={reservationIdSearch_to}
-                        handleDeleteReservation={handleDeleteReservation_to}
+                        reservations={reservations}
+                        reservationIdSearch={reservationIdSearch}
                         handleInputChange={handleInputChange}
-                        handleSearchReservation={handleSearchReservation_to}
+                        handleGetReservations={handleGetReservations}
+                        handleDeleteReservation={handleDeleteReservation}
+                        handleSearchReservationId={handleSearchReservationId}
+                        handleSearchReservationClient={handleSearchReservationClient}
+                        handleSearchReservationRoom={handleSearchReservationRoom}
+                        reservationClientSearch={reservationClientSearch}
+                        reservationRoomSearch={reservationRoomSearch}
                     />
                 </Tab.Pane>
             )
         },
         {
-            menuItem: { key: 'reservations', icon: 'bookmark', content: 'Reservations' },
+            menuItem: { key: 'reservationsFrom', icon: 'bookmark', content: 'ReservationsFrom' },
             render: () => (
                 <Tab.Pane loading={isReservationsLoading_from}>
-                    <ReservationsTableToLandlordClient
+                    <ReservationsTableFromLandlordClient
                         reservations={reservations_from}
                         reservationIdSearch={reservationIdSearch_from}
-                        handleDeleteReservation={handleDeleteReservation_from}
                         handleInputChange={handleInputChange}
                         handleSearchReservation={handleSearchReservation_from}
+                        handleGetReservations={handleGetReservations_from}
                     />
                 </Tab.Pane>
             )

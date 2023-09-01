@@ -10,6 +10,7 @@ import AdminPage from "./Components/Admin/AdminPage";
 import ProtectedRoute from "./Components/Other/ProtectedRoute";
 import ClientPage from "./Components/Clients/ClientPage";
 import LandlordPage from "./Components/Landlord/LandlordPage";
+import LandlordClientPage from "./Components/LandlordClients/LandlordClientPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path='/admin' element={<ProtectedRoute> <AdminPage/> </ProtectedRoute>} />
                     <Route path='/client' element={<ProtectedRoute> <ClientPage/> </ProtectedRoute>} />
                     <Route path='/landlord' element={<ProtectedRoute> <LandlordPage/> </ProtectedRoute>} />
+                    <Route path='/landlordclient' element={<ProtectedRoute> <LandlordClientPage/> </ProtectedRoute>} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}

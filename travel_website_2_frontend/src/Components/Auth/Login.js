@@ -48,7 +48,7 @@ function Login() {
     };
 
     if (isLogged) {
-        return <Navigate to={'/landlord'} />;
+        return <Navigate to={'/landlordclient'} />;
     }
 
     return (
