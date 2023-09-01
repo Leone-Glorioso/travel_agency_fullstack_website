@@ -84,4 +84,10 @@ public class ReservationServiceImplementation implements ReservationService{
         return reservationRepository.existsByBookedRoomAndAndId(room, reservation.getId());
     }
 
+    @Override
+    public boolean isReservationByClient(Reservation reservation, User client)
+    {
+        return reservationRepository.existsByIdAndClient(reservation.getId(), client);
+    }
+
 }

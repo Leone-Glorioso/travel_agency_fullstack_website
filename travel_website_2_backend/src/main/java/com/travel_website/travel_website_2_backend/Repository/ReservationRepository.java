@@ -20,4 +20,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     boolean existsByBookedRoomAndAndId(Room room, int id);
 
+    boolean existsByIdAndClient(int id, User client);
+
 }

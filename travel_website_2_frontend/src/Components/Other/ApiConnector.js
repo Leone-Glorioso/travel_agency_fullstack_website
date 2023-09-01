@@ -23,6 +23,9 @@ export const ApiConnector={
     getReservationsOfMyRoom,
     getReservationsOfLandlordRoom,
     getReservationOfMyRoom,
+    getReservationsOfMyRooms,
+    getReservationsOfMyRoomsByClient,
+    getReservationOfMyRooms,
     getReservationOfLandlordRoom,
     getRooms,
     createRoom,
@@ -117,6 +120,14 @@ function getReservationsOfRoomId(user,id){
     })
 }
 
+function getReservationOfMyRooms(user,id){
+    return instance.get(`/api/reservations/myRooms/reservation/${id}`,{
+        headers: {
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
 function getReservation(user,id){
     return instance.get(`/api/reservations/searchID/${id}`,{
         // data: {id},
@@ -202,6 +213,22 @@ function getReservationsOfLandlordRoom(user,username){
         headers: {
             // 'Content-type': 'application/json',
             'Authorization': bearerAuth(user),
+        }
+    })
+}
+
+function getReservationsOfMyRooms(user){
+    return instance.get(`/api/reservations/myRooms`,{
+        headers: {
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function getReservationsOfMyRoomsByClient(user, username){
+    return instance.get(`/api/reservations/myRooms/client/${username}`,{
+        headers: {
+            'Authorization': bearerAuth(user)
         }
     })
 }

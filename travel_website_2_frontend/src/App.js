@@ -9,6 +9,7 @@ import RoomList from "./Components/Room/RoomList";
 import AdminPage from "./Components/Admin/AdminPage";
 import ProtectedRoute from "./Components/Other/ProtectedRoute";
 import ClientPage from "./Components/Clients/ClientPage";
+import LandlordPage from "./Components/Landlord/LandlordPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path='/rooms' element={<RoomList/>} />
                     <Route path='/admin' element={<ProtectedRoute> <AdminPage/> </ProtectedRoute>} />
                     <Route path='/client' element={<ProtectedRoute> <ClientPage/> </ProtectedRoute>} />
+                    <Route path='/landlord' element={<ProtectedRoute> <LandlordPage/> </ProtectedRoute>} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}

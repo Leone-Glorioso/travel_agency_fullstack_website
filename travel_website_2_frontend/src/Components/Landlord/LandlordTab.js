@@ -5,8 +5,10 @@ import RoomsTableLandlord from "./RoomsTable";
 
 function LandlordTab(props) {
     const { handleInputChange } = props
-    const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoom } = props
-    const { isReservationsLoading, reservations, reservationIdSearch, handleSearchReservation , handleGetReservations} = props
+    const { isRoomsLoading, rooms, roomIdSearch, handleDeleteRoom, handleSearchRoomId, handleGetRooms } = props
+    const { isReservationsLoading, reservations, reservationIdSearch, reservationRoomSearch, reservationClientSearch,
+        handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient ,
+        handleGetReservations} = props
 
     const panes = [
         {
@@ -18,7 +20,8 @@ function LandlordTab(props) {
                         roomIdSearch={roomIdSearch}
                         handleDeleteRoom={handleDeleteRoom}
                         handleInputChange={handleInputChange}
-                        handleSearchRoom={handleSearchRoom}
+                        handleSearchRoomId={handleSearchRoomId}
+                        handleGetRooms={handleGetRooms}
                     />
                 </Tab.Pane>
             )
@@ -31,8 +34,13 @@ function LandlordTab(props) {
                         reservations={reservations}
                         reservationIdSearch={reservationIdSearch}
                         handleInputChange={handleInputChange}
-                        handleSearchReservation={handleSearchReservation}
                         handleGetReservations={handleGetReservations}
+                        handleDeleteReservation={handleDeleteReservation}
+                        handleSearchReservationId={handleSearchReservationId}
+                        handleSearchReservationClient={handleSearchReservationClient}
+                        handleSearchReservationRoom={handleSearchReservationRoom}
+                        reservationClientSearch={reservationClientSearch}
+                        reservationRoomSearch={reservationRoomSearch}
                     />
                 </Tab.Pane>
             )

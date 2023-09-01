@@ -155,6 +155,48 @@ public class ReservationController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/myRooms/client/{username}")
+    public List<ReservationDTO> getReservationsOfMyRoomsByClient(@AuthenticationPrincipal Data_UserDetails currentUser,
+                                                        @PathVariable String username)
+    {
+        requestService.validateLandlord(currentUser.getUsername());
+        User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateLandlord(landlord);
+        User client = userService.validateAndGetUserByUsername(username);
+        userService.validateClient(client);
+        List<Reservation> reservations = reservationService.getReservationsOfRooms(roomService.getRoomsByLandlord(landlord));
+        if(reservations.size() == 0)
+            return reservations.stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
+        for(Reservation reservation : reservations)
+            if(!reservationService.isReservationByClient(reservation, client))
+                reservations.remove(reservation);
+        return reservations.stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/myRooms/reservation/{id}")
+    public ReservationDTO getReservationOfMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser,
+                                                                 @PathVariable int id)
+    {
+        requestService.validateLandlord(currentUser.getUsername());
+        User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateLandlord(landlord);
+        Reservation reservation = reservationService.validateAndGetReservation(id);
+        roomService.validateRoomLandlordConnection(landlord, reservation.getBookedRoom());
+        return reservationMapper.toReserveDto(reservation);
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/myRooms")
+    public List<ReservationDTO> getReservationsOfMyRooms(@AuthenticationPrincipal Data_UserDetails currentUser)
+    {
+        requestService.validateLandlord(currentUser.getUsername());
+        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        userService.validateLandlord(user);
+        return reservationService.getReservationsOfRooms(roomService.getRoomsByLandlord(user)).stream().map(reservationMapper::toReserveDto).collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/rooms/{username}")
     public List<ReservationDTO> getReservationsOfLandlordRooms(@PathVariable String username)
     {

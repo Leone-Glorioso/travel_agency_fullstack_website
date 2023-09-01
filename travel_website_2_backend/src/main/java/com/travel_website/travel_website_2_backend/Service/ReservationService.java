@@ -28,4 +28,6 @@ public interface ReservationService {
     void validateRoomReservationConnection(Room room, Reservation reservation);
 
     boolean isReservationOfRoom(Reservation reservation, Room room);
+
+    boolean isReservationByClient(Reservation reservation, User client);
 }

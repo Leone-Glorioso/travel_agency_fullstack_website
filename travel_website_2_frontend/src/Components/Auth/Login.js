@@ -48,7 +48,7 @@ function Login() {
     };
 
     if (isLogged) {
-        return <Navigate to={'/admin'} />;
+        return <Navigate to={'/landlord'} />;
     }
 
     return (
