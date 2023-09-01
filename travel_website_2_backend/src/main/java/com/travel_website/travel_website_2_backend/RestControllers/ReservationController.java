@@ -67,11 +67,19 @@ public class ReservationController {
 //    }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/room_search/{room_name}")
-    public List<ReservationDTO> getReservationsOfRoom(@PathVariable String room_name) {
+    @GetMapping("/room_search_name/{room_name}")
+    public List<ReservationDTO> getReservationsOfRoomName(@PathVariable String room_name) {
         Room room = roomService.validateAndGetRoomWithName(room_name);
-        List<Reservation> reservations = reservationService.getReservationsOfRoom(room);
-        return reservations.stream()
+        return reservationService.getReservationsOfRoom(room).stream()
+                .map(reservationMapper::toReserveDto)
+                .collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/room_search_id/{room_id}")
+    public List<ReservationDTO> getReservationsOfRoomId(@PathVariable int room_id) {
+        Room room = roomService.validateAndGetRoom(room_id);
+        return reservationService.getReservationsOfRoom(room).stream()
                 .map(reservationMapper::toReserveDto)
                 .collect(Collectors.toList());
     }

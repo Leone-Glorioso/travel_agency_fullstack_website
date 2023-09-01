@@ -11,7 +11,8 @@ export const ApiConnector={
     getUser,
     deleteUser,
     getReservations,
-    getReservationsOfRoom,
+    getReservationsOfRoomName,
+    getReservationsOfRoomId,
     getReservation,
     createReservation,
     deleteReservation,
@@ -100,8 +101,16 @@ function getReservations(user) {
     )
 }
 
-function getReservationsOfRoom(user,name){
-    return instance.get(`/api/reservations/room/${name}`,{
+function getReservationsOfRoomName(user,name){
+    return instance.get(`/api/reservations/room_search_name/${name}`,{
+        headers: {
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function getReservationsOfRoomId(user,id){
+    return instance.get(`/api/reservations/room_search_id/${id}`,{
         headers: {
             'Authorization': bearerAuth(user)
         }
@@ -378,7 +387,7 @@ function allRejectedRequests(user)
 
 function allPendingRequests(user)
 {
-    return instance.get('/api/requests/all/pending',{
+    return instance.get('/api/requests/all/pending', {},{
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
@@ -388,7 +397,7 @@ function allPendingRequests(user)
 
 function acceptRequest(user, username)
 {
-    return instance.get(`/api/requests/accept/${username}`,{
+    return instance.patch(`/api/requests/accept/${username}`, {}, {
         // data: {username},
         headers: {
             // 'Content-type': 'application/json',
@@ -399,7 +408,7 @@ function acceptRequest(user, username)
 
 function rejectRequest(user, username)
 {
-    return instance.get(`/api/requests/reject/${username}`,{
+    return instance.patch(`/api/requests/reject/${username}`,{
         // data: {username},
         headers: {
             // 'Content-type': 'application/json',

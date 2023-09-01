@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
+import {useAuth} from "../Auth/contex";
 
 function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleGetRejected, handleGetPending, handleAccept, handleReject}) {
+
     let requestList
     if (requests.length === 0) {
         requestList = (
@@ -23,7 +25,7 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
                             color='green'
                             size='small'
                             icon='trash'
-                            onClick={handleAccept(request.landlord)}
+                            onClick={() => handleAccept(request.landlord)}
                         />
                         }
                     </Table.Cell>
@@ -34,7 +36,7 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
                             color='red'
                             size='small'
                             icon='trash'
-                            onClick={handleReject(request.landlord)}
+                            onClick={() => handleReject(request.landlord)}
                         />
                         }
                     </Table.Cell>

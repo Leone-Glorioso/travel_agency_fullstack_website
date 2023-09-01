@@ -10,7 +10,9 @@ function AdminTab(props) {
     const { isUsersLoading, users, userUsernameSearch, handleDeleteUser, handleSearchUser , handleGetLandlords, handleGetClients, handleGetLandlordClients, handleGetUsers} = props
     const { isRequestsLoading,requests, handleGetRequests, handleGetAccepted, handleGetRejected, handleGetPending, handleAccept, handleReject} = props
     const { isRoomsLoading, rooms, roomIdSearch, roomLandlordSearch, handleDeleteRoom, handleSearchRoomId, handleSearchRoomLandlord, handleGetRooms } = props
-    const { isReservationsLoading, reservations, reservationIdSearch, handleDeleteReservation, handleSearchReservation } = props
+    const { isReservationsLoading, reservations, reservationIdSearch, reservationRoomSearch, reservationClientSearch, reservationLandlordSearch,
+        handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient , handleSearchReservationLandlord,
+        handleGetReservations} = props
 
     const panes = [
         {
@@ -55,9 +57,16 @@ function AdminTab(props) {
                     <ReservationsTable
                         reservations={reservations}
                         reservationIdSearch={reservationIdSearch}
+                        reservationClientSearch={reservationClientSearch}
+                        reservationLandlordSearch={reservationLandlordSearch}
+                        reservationRoomSearch={reservationRoomSearch}
                         handleDeleteReservation={handleDeleteReservation}
                         handleInputChange={handleInputChange}
-                        handleSearchReservation={handleSearchReservation}
+                        handleSearchReservationId={handleSearchReservationId}
+                        handleSearchReservationClient={handleSearchReservationClient}
+                        handleSearchReservationLandlord={handleSearchReservationLandlord}
+                        handleSearchReservationRoom={handleSearchReservationRoom}
+                        handleGetReservations={handleGetReservations}
                         />
                 </Tab.Pane>
             )

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Button, Input, Table } from 'semantic-ui-react'
 
-function ReservationsTable({ reservations, reservationIdSearch, handleInputChange, handleDeleteReservation, handleSearchReservation }) {
+function ReservationsTable({ reservations, reservationIdSearch, reservationRoomSearch, reservationClientSearch, reservationLandlordSearch, handleInputChange,
+                               handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient , handleSearchReservationLandlord,
+                                handleGetReservations}) {
     let reservationList
     if (reservations.length === 0) {
         reservationList = (
@@ -33,15 +35,43 @@ function ReservationsTable({ reservations, reservationIdSearch, handleInputChang
 
     return (
         <>
-            <Form onSubmit={handleSearchReservation}>
+            <Form onSubmit={handleSearchReservationId}>
                 <Input
                     action={{ icon: 'search' }}
-                    name='Search'
+                    name='SearchReservationId'
                     placeholder='Search'
                     value={reservationIdSearch}
                     onChange={handleInputChange}
                 />
             </Form>
+            <Form onSubmit={handleSearchReservationRoom}>
+                <Input
+                    action={{ icon: 'search' }}
+                    name='SearchReservationRoom'
+                    placeholder='Search'
+                    value={reservationRoomSearch}
+                    onChange={handleInputChange}
+                />
+            </Form>
+            <Form onSubmit={handleSearchReservationClient}>
+                <Input
+                    action={{ icon: 'search' }}
+                    name='SearchReservationClient'
+                    placeholder='Search'
+                    value={reservationClientSearch}
+                    onChange={handleInputChange}
+                />
+            </Form>
+            <Form onSubmit={handleSearchReservationLandlord}>
+                <Input
+                    action={{ icon: 'search' }}
+                    name='SearchReservationLandlord'
+                    placeholder='Search'
+                    value={reservationLandlordSearch}
+                    onChange={handleInputChange}
+                />
+            </Form>
+            <Button onClick={handleGetReservations} />
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
