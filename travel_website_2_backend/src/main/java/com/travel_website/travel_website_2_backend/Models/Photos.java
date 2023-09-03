@@ -15,17 +15,10 @@ public class Photos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "path")
+
+    @Column(name = "name")
     @NotBlank
-    private String path;
-
-    public Photos(String path) {
-        this.path = path;
-    }
-
-    public Photos() {
-
-    }
+    private String name;
 
     public int getId() {
         return id;
@@ -35,26 +28,11 @@ public class Photos {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getName() {
+        return name;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Photos photos = (Photos) o;
-        return id == photos.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-
 }
