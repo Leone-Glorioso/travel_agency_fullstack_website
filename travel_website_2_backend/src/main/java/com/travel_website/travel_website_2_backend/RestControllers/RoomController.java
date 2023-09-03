@@ -51,18 +51,18 @@ public class RoomController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/location/{id}")
+    @PostMapping
     public CreatedResponse createRoom(@AuthenticationPrincipal Data_UserDetails currentUser,
-                           @Valid @RequestBody NewRoomRequest newRoomRequest,
-                              @Valid @PathVariable int id)
+                           @Valid @RequestBody NewRoomRequest newRoomRequest)
     {
         requestService.validateLandlord(currentUser.getUsername());
         User landlord = userService.validateAndGetUserByUsername(currentUser.getUsername());
-        Location location = locationService.validateAndGetLocation(id);
+//        Location location = locationService.validateAndGetLocation(id);
         Room room = roomMapper.newRoom(newRoomRequest);
         room.setLandlord(landlord);
-        room.setLocation(location);
+//        room.setLocation(location);
         roomService.validateRoomNameIsUnique(newRoomRequest.getName());
+        locationService.saveLocation(room.getLocation());
         Room room1 = roomService.saveRoom(room);
         return new CreatedResponse("room", room1.getId());
     }

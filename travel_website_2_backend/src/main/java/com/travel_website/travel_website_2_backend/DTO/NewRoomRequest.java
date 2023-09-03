@@ -98,4 +98,15 @@ public class NewRoomRequest {
     @NotBlank
     private boolean elevator;
 
+    @Schema(example = "-50.00")
+    @NotBlank
+    private double latitude;
+
+    @Schema(example = "-50.00")
+    @NotBlank
+    private double longitude;
+
+    @Schema(example = "adams 8, long beach, california")
+    private String address;
+
 }

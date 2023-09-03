@@ -72,7 +72,7 @@ public class Room {
     @NotBlank
     private int minimumDays;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     private Location location;
 
