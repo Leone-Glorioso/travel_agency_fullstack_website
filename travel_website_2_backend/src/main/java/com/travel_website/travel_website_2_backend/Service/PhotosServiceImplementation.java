@@ -15,7 +15,7 @@ public class PhotosServiceImplementation implements PhotosService{
     @Override
     public Photos savePhoto(Photos photo)
     {
-        photosRepository.save(photo);
+        return photosRepository.save(photo);
     }
 
     @Override
