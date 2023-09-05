@@ -68,7 +68,7 @@ public class AuthController {
         user.setEmail(signUpRequest.getEmail());
         user.setTelephone(signUpRequest.getTelephone());
         user.setCountry(signUpRequest.getCountry());
-        user.setPhoto(signUpRequest.getPhoto());
+//        user.setPhoto(signUpRequest.getPhoto());
         String role = signUpRequest.getRole();
         if(role.equals("Landlord"))
             user.setRole(Configuration_WebSecurity.LANDLORD);
@@ -92,7 +92,7 @@ public class AuthController {
         user.setEmail("admin@mail.com");
         user.setTelephone(1234567890);
         user.setCountry("Greece");
-        user.setPhoto("adminpath");
+//        user.setPhoto("adminpath");
         user.setRole(Configuration_WebSecurity.ADMIN);
         userService.saveUser(user);
 

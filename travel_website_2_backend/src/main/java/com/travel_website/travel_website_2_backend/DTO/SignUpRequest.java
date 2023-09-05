@@ -34,8 +34,8 @@ public class SignUpRequest {
     @Schema(example = "Greece")
     private String country;
 
-    @Schema(example = "default")
-    private String photo;
+//    @Schema(example = "default")
+//    private String photo;
 
     @Schema(example = "Administrator")
     private String role;

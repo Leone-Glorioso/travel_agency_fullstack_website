@@ -20,6 +20,9 @@ public class Photos {
     @NotBlank
     private String name;
 
+    @OneToOne
+    private User userPhoto;
+
     public int getId() {
         return id;
     }
@@ -35,4 +38,11 @@ public class Photos {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Photos(String name, User userPhoto) {
+        this.name = name;
+        this.userPhoto = userPhoto;
+    }
+
+
 }

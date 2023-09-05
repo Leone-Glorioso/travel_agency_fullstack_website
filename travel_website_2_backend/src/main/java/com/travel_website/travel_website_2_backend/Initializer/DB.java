@@ -25,16 +25,16 @@ public class DB implements CommandLineRunner {
         if (!userService.getUsers().isEmpty()) {
             return;
         }
-        USERS.forEach(user -> {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userService.saveUser(user);
-        });
+//        USERS.forEach(user -> {
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            userService.saveUser(user);
+//        });
         log.info("Database initialized");
     }
 
-    private static final List<User> USERS = Arrays.asList(
-            new User("admin", "admin", "admin@email.com", 3069999999L, "default", "Greece", UserCategories.Administrator, "Admin", "AdminAdmin"),
-            new User("landlord", "landlord", "landlord@email.com", 3069999998L, "default", "Greece", UserCategories.Landlord, "Landlord", "LandlordLandlord"),
-            new User("client", "client", "client@email.com", 3069999997L, "default", "Greece", UserCategories.Client, "Client", "ClientClient")
-    );
+//    private static final List<User> USERS = Arrays.asList(
+//            new User("admin", "admin", "admin@email.com", 3069999999L, "default", "Greece", UserCategories.Administrator, "Admin", "AdminAdmin"),
+//            new User("landlord", "landlord", "landlord@email.com", 3069999998L, "default", "Greece", UserCategories.Landlord, "Landlord", "LandlordLandlord"),
+//            new User("client", "client", "client@email.com", 3069999997L, "default", "Greece", UserCategories.Client, "Client", "ClientClient")
+//    );
 }

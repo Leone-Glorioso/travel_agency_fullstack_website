@@ -33,10 +33,10 @@ public class User implements Serializable {
     @NotBlank
     private long telephone;
 
-    @Column(name = "photo")
-    @NotBlank
+//    @Column(name = "photo")
+//    @NotBlank
     //TODO Add default picture with "default <path to default picture>" after line below
-    private String photo;
+//    private String photo;
 
     @Column(name = "country")
     private String country;
@@ -57,42 +57,70 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "landlord")
     private Set<Room> rooms;
 
-    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {
+    @OneToOne(mappedBy = "")
+    private Photos userPhoto;
+
+//    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.telephone = telephone;
+//        this.photo = photo;
+//        this.country = country;
+//        this.role = role;
+//        this.username = username;
+//        this.password = password;
+//        this.reservationSet = null;
+//        this.rooms = null;
+//        if(role == UserCategories.Client)
+//            this.reservationSet = reservationSet;
+//        else if(role == UserCategories.Landlord)
+//            this.rooms = rooms;
+//        else if(role == UserCategories.LandlordClient)
+//        {
+//            this.rooms = rooms;
+//            this.reservationSet = reservationSet;
+//        }
+//    }
+//    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
+//        this.name = name;
+//        this.surname = surname;
+//        this.email = email;
+//        this.telephone = telephone;
+//        this.photo = photo;
+//        this.country = country;
+//        this.role = role;
+//        this.username = username;
+//        this.password = password;
+//        this.reservationSet = null;
+//        this.rooms = null;
+//    }
+
+
+    public User(String name, String surname, String email, long telephone, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms, Photos userPhoto) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.telephone = telephone;
-        this.photo = photo;
         this.country = country;
         this.role = role;
         this.username = username;
         this.password = password;
-        this.reservationSet = null;
-        this.rooms = null;
-        if(role == UserCategories.Client)
-            this.reservationSet = reservationSet;
-        else if(role == UserCategories.Landlord)
-            this.rooms = rooms;
-        else if(role == UserCategories.LandlordClient)
-        {
-            this.rooms = rooms;
-            this.reservationSet = reservationSet;
-        }
-    }
-    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.telephone = telephone;
-        this.photo = photo;
-        this.country = country;
-        this.role = role;
-        this.username = username;
-        this.password = password;
-        this.reservationSet = null;
-        this.rooms = null;
+        this.reservationSet = reservationSet;
+        this.rooms = rooms;
+        this.userPhoto = userPhoto;
     }
 
+    public User(String name, String surname, String email, long telephone, String country, UserCategories role, String username, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.telephone = telephone;
+        this.country = country;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+    }
 
     public User() {
 
@@ -138,13 +166,13 @@ public class User implements Serializable {
         this.telephone = telephone;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+//    public String getPhoto() {
+//        return photo;
+//    }
+//
+//    public void setPhoto(String photo) {
+//        this.photo = photo;
+//    }
 
     public String getCountry() {
         return country;
@@ -192,6 +220,14 @@ public class User implements Serializable {
 
     public void setRooms(Set<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public Photos getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(Photos userPhoto) {
+        this.userPhoto = userPhoto;
     }
 
     @Override
