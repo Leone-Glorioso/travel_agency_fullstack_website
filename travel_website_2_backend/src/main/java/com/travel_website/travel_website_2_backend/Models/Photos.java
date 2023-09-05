@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 
@@ -20,8 +21,9 @@ public class Photos {
     @NotBlank
     private String name;
 
+
     @OneToOne
-    private User userPhoto;
+    private User user;
 
     public int getId() {
         return id;
@@ -39,10 +41,23 @@ public class Photos {
         this.name = name;
     }
 
-    public Photos(String name, User userPhoto) {
-        this.name = name;
-        this.userPhoto = userPhoto;
+    public User getUser() {
+        return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public Photos(String name, User userPhoto) {
+        this.name = name;
+        this.user = userPhoto;
+    }
+
+    public Photos(String name) {
+        this.name = name;
+    }
+
+    public Photos() {
+    }
 }

@@ -57,7 +57,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "landlord")
     private Set<Room> rooms;
 
-    @OneToOne(mappedBy = "")
+    @OneToOne(mappedBy = "user")
     private Photos userPhoto;
 
 //    public User(String name, String surname, String email, long telephone, String photo, String country, UserCategories role, String username, String password, Set<Reservation> reservationSet, Set<Room> rooms) {

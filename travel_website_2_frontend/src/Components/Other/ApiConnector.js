@@ -5,6 +5,7 @@ import {parseJwt} from "./Helpers";
 export const ApiConnector={
     authenticate,
     signUp,
+    signUp2,
     numberOfUsers,
     numberOfReservations,
     getUsers,
@@ -59,8 +60,14 @@ function authenticate(username,password){
     })
 }
 
-function signUp(user){
-    return instance.post(`/auth/signup`, user, {
+function signUp(user, file, name){
+    return instance.post(`/auth/signup`, {user, file, name}, {
+        headers: { 'Content-type': 'application/json' }
+    })
+}
+
+function signUp2(user){
+    return instance.post(`/auth/signup2`, user, {
         headers: { 'Content-type': 'application/json' }
     })
 }
