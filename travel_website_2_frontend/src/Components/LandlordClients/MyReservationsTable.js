@@ -26,14 +26,14 @@ function ReservationsTableFromLandlordClient({ reservations, reservationIdSearch
         <>
             <Form onSubmit={handleSearchReservation}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='reservationSearch'
                     placeholder='Search'
                     value={reservationIdSearch}
                     onChange={handleInputChange}
                 />
             </Form>
-            <Button onClick={handleGetReservations} />
+            <Button onClick={handleGetReservations} >Get All</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

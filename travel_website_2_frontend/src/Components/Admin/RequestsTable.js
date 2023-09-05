@@ -16,8 +16,8 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
             return (
                 <Table.Row key={request.landlord}>
                     <Table.Cell>{request.landlord}</Table.Cell>
-                    <Table.Cell>{request.verified}</Table.Cell>
-                    <Table.Cell>{request.pending}</Table.Cell>
+                    <Table.Cell>{request.verified.toString()}</Table.Cell>
+                    <Table.Cell>{request.pending.toString()}</Table.Cell>
                     <Table.Cell collapsing>
                         {request.pending === true &&
                         <Button
@@ -26,7 +26,7 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
                             size='small'
                             icon='trash'
                             onClick={() => handleAccept(request.landlord)}
-                        />
+                        > Accept </Button>
                         }
                     </Table.Cell>
                     <Table.Cell collapsing>
@@ -37,7 +37,7 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
                             size='small'
                             icon='trash'
                             onClick={() => handleReject(request.landlord)}
-                        />
+                            > Reject </Button>
                         }
                     </Table.Cell>
                 </Table.Row>
@@ -47,14 +47,14 @@ function RequestsTable({ requests, handleGetRequests, handleGetAccepted, handleG
 
     return (
         <>
-            <Button onClick={handleGetRequests} />
-            <Button onClick={handleGetAccepted} />
-            <Button onClick={handleGetRejected} />
-            <Button onClick={handleGetPending} />
+            <Button onClick={handleGetRequests}>Get All</Button>
+            <Button onClick={handleGetAccepted}>Get Accepted Requests</Button>
+            <Button onClick={handleGetRejected}>Get Rejected Requests</Button>
+            <Button onClick={handleGetPending}>Get Pending Requests</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell width={1} />
+                        {/*<Table.HeaderCell width={1} />*/}
                         <Table.HeaderCell width={3}>Landlord</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Verified</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Pending</Table.HeaderCell>

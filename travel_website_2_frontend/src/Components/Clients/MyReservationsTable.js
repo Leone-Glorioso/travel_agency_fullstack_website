@@ -33,7 +33,7 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
                     onChange={handleInputChange}
                 />
             </Form>
-            <Button onClick={handleGetReservations} />
+            <Button onClick={handleGetReservations}>Get All</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

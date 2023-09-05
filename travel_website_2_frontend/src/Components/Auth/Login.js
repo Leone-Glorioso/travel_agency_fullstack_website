@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useAuth} from "./contex";
 import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError, parseJwt} from "../Other/Helpers";
@@ -14,6 +14,7 @@ function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
     const [isError, setIsError] = useState(false);
 
     const handleInputChange = (e, { name, value }) => {
@@ -47,8 +48,33 @@ function Login() {
         }
     };
 
+
+
+    // useEffect(() => {
+    //     const checkRole = async () =>
+    //     {
+    //         if(isLogged) {
+    //             const response = await ApiConnector.getUserMe(Auth.user.user)
+    //             const data = response.data
+    //             console.log(response.data)
+    //             setRole(data.role)
+    //         }
+    //     }
+    //     checkRole().catch(console.error)
+    // }, []);
+
     if (isLogged) {
-        return <Navigate to={'/landlordclient'} />;
+        // console.log(role)
+        // if(role === "Administrator")
+        //     return <Navigate to={'/admin'} />;
+        // else if(role === "Client")
+        //     return <Navigate to={'/client'} />;
+        // else if(role === "Landlord")
+        //     return <Navigate to={'/landlord'} />;
+        // else if(role === "LandlordClient")
+        //     return <Navigate to={'/landlordclient'} />;
+        // else
+        return <Navigate to={'/admin'} />;
     }
 
     return (

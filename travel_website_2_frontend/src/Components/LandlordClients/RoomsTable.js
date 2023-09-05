@@ -20,17 +20,17 @@ function RoomsTableLandlordClient({ rooms, roomIdSearch, handleInputChange, hand
                     <Table.Cell>{room.numofbedrooms}</Table.Cell>
                     <Table.Cell>{room.numofbaths}</Table.Cell>
                     <Table.Cell>{room.area}</Table.Cell>
-                    <Table.Cell>{room.livingroom}</Table.Cell>
-                    <Table.Cell>{room.smoking}</Table.Cell>
-                    <Table.Cell>{room.pets}</Table.Cell>
-                    <Table.Cell>{room.events}</Table.Cell>
-                    <Table.Cell>{room.internet}</Table.Cell>
-                    <Table.Cell>{room.cooling}</Table.Cell>
-                    <Table.Cell>{room.heating}</Table.Cell>
-                    <Table.Cell>{room.kitchen}</Table.Cell>
-                    <Table.Cell>{room.tv}</Table.Cell>
-                    <Table.Cell>{room.parking}</Table.Cell>
-                    <Table.Cell>{room.elevator}</Table.Cell>
+                    <Table.Cell>{room.livingroom.toString()}</Table.Cell>
+                    <Table.Cell>{room.smoking.toString()}</Table.Cell>
+                    <Table.Cell>{room.pets.toString()}</Table.Cell>
+                    <Table.Cell>{room.events.toString()}</Table.Cell>
+                    <Table.Cell>{room.internet.toString()}</Table.Cell>
+                    <Table.Cell>{room.cooling.toString()}</Table.Cell>
+                    <Table.Cell>{room.heating.toString()}</Table.Cell>
+                    <Table.Cell>{room.kitchen.toString()}</Table.Cell>
+                    <Table.Cell>{room.tv.toString()}</Table.Cell>
+                    <Table.Cell>{room.parking.toString()}</Table.Cell>
+                    <Table.Cell>{room.elevator.toString()}</Table.Cell>
                     <Table.Cell>{room.description}</Table.Cell>
                     <Table.Cell collapsing>
                         <Button
@@ -39,7 +39,7 @@ function RoomsTableLandlordClient({ rooms, roomIdSearch, handleInputChange, hand
                             size='small'
                             icon='trash'
                             onClick={() => handleDeleteRoom(room.id)}
-                        />
+                        > Delete </Button>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -50,14 +50,14 @@ function RoomsTableLandlordClient({ rooms, roomIdSearch, handleInputChange, hand
         <>
             <Form onSubmit={handleSearchRoomId}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchRoomId'
                     placeholder='Search'
                     value={roomIdSearch}
                     onChange={handleInputChange}
                 />
             </Form>
-            <Button onClick={handleGetRooms} />
+            <Button onClick={handleGetRooms}  >Get All</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

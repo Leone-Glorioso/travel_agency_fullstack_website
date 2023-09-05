@@ -26,7 +26,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
                             size='small'
                             icon='trash'
                             onClick={() => handleDeleteReservation(reservation.id)}
-                        />
+                        > Delete </Button>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -37,7 +37,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
         <>
             <Form onSubmit={handleSearchReservationId}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationId'
                     placeholder='Search'
                     value={reservationIdSearch}
@@ -46,7 +46,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
             </Form>
             <Form onSubmit={handleSearchReservationRoom}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationRoom'
                     placeholder='Search'
                     value={reservationRoomSearch}
@@ -55,7 +55,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
             </Form>
             <Form onSubmit={handleSearchReservationClient}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationClient'
                     placeholder='Search'
                     value={reservationClientSearch}
@@ -64,14 +64,14 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
             </Form>
             <Form onSubmit={handleSearchReservationLandlord}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationLandlord'
                     placeholder='Search'
                     value={reservationLandlordSearch}
                     onChange={handleInputChange}
                 />
             </Form>
-            <Button onClick={handleGetReservations} />
+            <Button onClick={handleGetReservations}>Get All</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

@@ -26,7 +26,7 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, reserv
                             size='small'
                             icon='trash'
                             onClick={() => handleDeleteReservation(reservation.id)}
-                        />
+                        > Delete </Button>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -37,7 +37,7 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, reserv
         <>
             <Form onSubmit={handleSearchReservationId}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationId'
                     placeholder='Search'
                     value={reservationIdSearch}
@@ -46,7 +46,7 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, reserv
             </Form>
             <Form onSubmit={handleSearchReservationRoom}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationRoom'
                     placeholder='Search'
                     value={reservationRoomSearch}
@@ -55,14 +55,14 @@ function ReservationsTableToLandlord({ reservations, reservationIdSearch, reserv
             </Form>
             <Form onSubmit={handleSearchReservationClient}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationClient'
                     placeholder='Search'
                     value={reservationClientSearch}
                     onChange={handleInputChange}
                 />
             </Form>
-            <Button onClick={handleGetReservations} />
+            <Button onClick={handleGetReservations}>Get All</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>

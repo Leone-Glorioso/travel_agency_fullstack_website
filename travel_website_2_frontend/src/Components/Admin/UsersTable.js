@@ -28,7 +28,7 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                             size='small'
                             icon='trash'
                             onClick={() => handleDeleteUser(user.username)}
-                        />
+                        > Delete </Button>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -38,30 +38,32 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
     return (
         <>
             <Form onSubmit={handleSearchUser}>
-                <Input
-                    action={{ icon: 'search' }}
+                <Form.Input
+                    action={<Form.Button type={"submit"}> Submit </Form.Button>}
                     name='userUsernameSearch'
                     placeholder='Search by Username'
                     value={userUsernameSearch}
                     onChange={handleInputChange}
                 />
+                {/*<Form.Button type={"submit"}> Submit </Form.Button>*/}
             </Form>
-            <Button onClick={handleGetUsers} />
-            <Button onClick={handleGetLandlords} />
-            <Button onClick={handleGetClients} />
-            <Button onClick={handleGetLandlordClients} />
+            <Button onClick={handleGetUsers}>Get All</Button>
+            <Button onClick={handleGetLandlords}>Get Landlords</Button>
+            <Button onClick={handleGetClients}>Get Clients</Button>
+            <Button onClick={handleGetLandlordClients}>Get Hybrid Users</Button>
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell width={1} />
-                        <Table.HeaderCell width={3}>Id</Table.HeaderCell>
-                        <Table.HeaderCell width={3}>Username</Table.HeaderCell>
+                        {/*<Table.HeaderCell width={2} />*/}
+                        <Table.HeaderCell>Id</Table.HeaderCell>
+                        <Table.HeaderCell>Username</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Name</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Surname</Table.HeaderCell>
                         <Table.HeaderCell width={5}>Email</Table.HeaderCell>
                         <Table.HeaderCell width={5}>Telephone</Table.HeaderCell>
                         <Table.HeaderCell width={5}>Country</Table.HeaderCell>
                         <Table.HeaderCell width={2}>Role</Table.HeaderCell>
+                        <Table.HeaderCell width={5}>Delete</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
