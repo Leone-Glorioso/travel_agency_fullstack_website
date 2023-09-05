@@ -6,6 +6,7 @@ import { Button , Form, Grid, Segment, Message, Dropdown} from 'semantic-ui-reac
 // import Dropdown from 'react-css-dropdown'
 import { NavLink, Navigate } from 'react-router-dom'
 import DropdownMenu from "./DropDownMenuRole";
+import UploadImage from "../UploadImage/UploadImage";
 //import * as PropTypes from "prop-types";
 
 
@@ -177,16 +178,18 @@ function SingUp() {
                             className={"input-container"}
                         />
 
-                        <Form.Input
-                            fluid
-                            name='photo'
-                            icon='photo'
-                            iconPosition='left'
-                            placeholder='photo'
-                            value={photo}
-                            onChange={handleInputChange}
-                            className={"input-container"}
-                        />
+                        {/*<Form.Input*/}
+                        {/*    fluid*/}
+                        {/*    name='photo'*/}
+                        {/*    icon='photo'*/}
+                        {/*    iconPosition='left'*/}
+                        {/*    placeholder='photo'*/}
+                        {/*    value={photo}*/}
+                        {/*    onChange={handleInputChange}*/}
+                        {/*    className={"input-container"}*/}
+                        {/*/>*/}
+
+                        <UploadImage name={"person"}/>
 
                         <Form.Field>
                             <label>Select Role</label>

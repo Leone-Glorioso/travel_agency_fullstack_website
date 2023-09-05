@@ -49,7 +49,8 @@ export const ApiConnector={
     allRejectedRequests,
     allPendingRequests,
     acceptRequest,
-    rejectRequest
+    rejectRequest,
+    uploadImage
 }
 
 function authenticate(username,password){
@@ -435,10 +436,19 @@ function acceptRequest(user, username)
 
 function rejectRequest(user, username)
 {
-    return instance.patch(`/api/requests/reject/${username}`,{
+    return instance.patch(`/api/requests/reject/${username}`,{}, {
         // data: {username},
         headers: {
             // 'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function uploadImage(user, file, name)
+{
+    return instance.post('/api/upload/image', {file, name}, {
+        headers: {
             'Authorization': bearerAuth(user)
         }
     })

@@ -50,6 +50,7 @@ public class Configuration_WebSecurity {
                         .requestMatchers(HttpMethod.GET, "api/reservations/all", "api/reservations/search", "api/reservations/searchID/**",
                                 "api/reservations/client/**", "api/reservations/rooms/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("api/locations", "api/locations/**").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
+                        .requestMatchers("/api/upload/image").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers("api/requests/**").hasAuthority(ADMIN.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
