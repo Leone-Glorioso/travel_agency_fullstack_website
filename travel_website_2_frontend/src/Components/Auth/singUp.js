@@ -21,7 +21,8 @@ function SingUp() {
     const [email, setEmail] = useState('')
     const [telephone, setTelephone] = useState('')
     const [country, setCountry] = useState('')
-    const [photo, setPhoto] = useState('')
+    const [photo, setPhoto] = useState(null)
+    const [photoName, setPhotoName] = useState('')
     const [role, setRole] = useState('')
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -41,10 +42,19 @@ function SingUp() {
             setTelephone(value)
         } else if (name === 'country') {
             setCountry(value)
-        } else if (name === 'photo') {
-            setPhoto(value)
-        } else if (name === 'role') {
+        }
+        // else if (name === 'photo') {
+        //     setPhoto(value)
+        // }
+        else if (name === 'role') {
             setRole(value)
+        }
+    }
+
+    const handleImageChange = (event) => {
+        if (event.target.files.length > 0) {
+            setPhoto(event.target.files[0]);
+            setPhotoName(event.target.files[0].name);
         }
     }
 
@@ -61,9 +71,9 @@ function SingUp() {
         }
 
 
-        const user = {username, password, name, surname, email, telephone, country, photo, role}
+        const user = {username, password, name, surname, email, telephone, country, role}
         try {
-            const resp = await ApiConnector.signUp(user)
+            const resp = await ApiConnector.signUp(user, photo, photoName)
             const { accessToken, ...userData } = resp.data; // Assuming user data is in response
 
             Auth.userLogin(userData, accessToken);
@@ -75,7 +85,7 @@ function SingUp() {
             setEmail('')
             setTelephone('')
             setCountry('')
-            setPhoto('')
+            setPhoto(null)
             setRole('')
             setIsError(false)
             setErrorMessage('')
@@ -178,18 +188,18 @@ function SingUp() {
                             className={"input-container"}
                         />
 
-                        {/*<Form.Input*/}
-                        {/*    fluid*/}
-                        {/*    name='photo'*/}
-                        {/*    icon='photo'*/}
-                        {/*    iconPosition='left'*/}
-                        {/*    placeholder='photo'*/}
-                        {/*    value={photo}*/}
-                        {/*    onChange={handleInputChange}*/}
-                        {/*    className={"input-container"}*/}
-                        {/*/>*/}
+                        <Form.Input
+                            fluid
+                            name='photo'
+                            icon='photo'
+                            iconPosition='left'
+                            placeholder='photo'
+                            onChange={handleImageChange}
+                            type={"file"}
+                            className={"input-container"}
+                        />
 
-                        <UploadImage name={"person"}/>
+                        {/*<UploadImage name={"person"}/>*/}
 
                         <Form.Field>
                             <label>Select Role</label>

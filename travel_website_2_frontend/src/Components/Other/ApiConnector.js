@@ -62,7 +62,7 @@ function authenticate(username,password){
 
 function signUp(user, file, name){
     return instance.post(`/auth/signup`, {user, file, name}, {
-        headers: { 'Content-type': 'application/json' }
+        headers: { 'Content-type': 'multipart/form-data' }
     })
 }
 
