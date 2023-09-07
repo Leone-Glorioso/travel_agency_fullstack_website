@@ -53,9 +53,7 @@ public class AuthController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup")
-    public AuthenticationResponse signUp(@Valid @RequestBody SignUpRequest signUpRequest,
-                                         @RequestParam("imageFile") MultipartFile file,
-                                         @RequestParam("imageName") String name) {
+    public AuthenticationResponse signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (userService.hasUserWithUsername(signUpRequest.getUsername())) {
             throw new Exception_DuplicatedUserInfo(String.format("Username %s already been used", signUpRequest.getUsername()));
         }
@@ -64,7 +62,7 @@ public class AuthController {
         }
 
         User user = mapSignUpRequestToUser(signUpRequest);
-        User newUser = saveImageOfUser(user, file, name);
+        User newUser = saveImageOfUser(user, signUpRequest.getPhoto(), signUpRequest.getPhotoName());
         userService.saveUser(newUser);
         if(signUpRequest.getRole().equals("Landlord") || signUpRequest.getRole().equals("Landlord/Client"))
             requestService.saveRequest(new Request(signUpRequest.getUsername(), false, true));
@@ -81,7 +79,7 @@ public class AuthController {
         if (userService.hasUserWithEmail(signUpRequest.getEmail())) {
             throw new Exception_DuplicatedUserInfo(String.format("Email %s already been used", signUpRequest.getEmail()));
         }
-
+//        System.out.println(signUpRequest.getUsername() + " " + signUpRequest.getPassword());
         userService.saveUser(mapSignUpRequestToUser(signUpRequest));
         if(signUpRequest.getRole().equals("Landlord") || signUpRequest.getRole().equals("Landlord/Client"))
             requestService.saveRequest(new Request(signUpRequest.getUsername(), false, true));

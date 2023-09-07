@@ -60,9 +60,9 @@ function authenticate(username,password){
     })
 }
 
-function signUp(user, file, name){
-    return instance.post(`/auth/signup`, {user, file, name}, {
-        headers: { 'Content-type': 'multipart/form-data' }
+function signUp(user){
+    return instance.post(`/auth/signup`, {user}, {
+        headers: { 'Content-type': 'application/json' }
     })
 }
 

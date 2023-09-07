@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAuth} from "./contex";
 import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError, parseJwt} from "../Other/Helpers";
@@ -21,8 +21,9 @@ function SingUp() {
     const [email, setEmail] = useState('')
     const [telephone, setTelephone] = useState('')
     const [country, setCountry] = useState('')
-    const [photo, setPhoto] = useState(null)
+    const [photo, setPhoto] = useState()
     const [photoName, setPhotoName] = useState('')
+    const [photoPreview, setPhotoPreview] = useState()
     const [role, setRole] = useState('')
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -51,11 +52,34 @@ function SingUp() {
         }
     }
 
-    const handleImageChange = (event) => {
-        if (event.target.files.length > 0) {
-            setPhoto(event.target.files[0]);
-            setPhotoName(event.target.files[0].name);
+    // const handleImageChange = (event) => {
+    //     if (event.target.files.length > 0) {
+    //         setPhoto(event.target.files[0]);
+    //         setPhotoName(event.target.files[0].name);
+    //     }
+    // }
+    useEffect(() => {
+        if (!photo) {
+            setPhotoPreview(undefined)
+            return
         }
+
+        const objectUrl = URL.createObjectURL(photo)
+        setPhotoPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [photo])
+
+    const handleImageChange = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setPhoto(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setPhoto(e.target.files[0])
+        setPhotoName(e.target.files[0].name)
     }
 
     const handleRoleChange = (selectedRole) => {
@@ -71,9 +95,9 @@ function SingUp() {
         }
 
 
-        const user = {username, password, name, surname, email, telephone, country, role}
+        const user = {username, password, name, surname, email, telephone, country, role, photo, photoName}
         try {
-            const resp = await ApiConnector.signUp(user, photo, photoName)
+            const resp = await ApiConnector.signUp(user)
             const { accessToken, ...userData } = resp.data; // Assuming user data is in response
 
             Auth.userLogin(userData, accessToken);
@@ -193,10 +217,10 @@ function SingUp() {
                             name='photo'
                             icon='photo'
                             iconPosition='left'
-                            placeholder='photo'
+                            // placeholder='photo'
                             onChange={handleImageChange}
                             type={"file"}
-                            className={"input-container"}
+                            // className={"input-container"}
                         />
 
                         {/*<UploadImage name={"person"}/>*/}
