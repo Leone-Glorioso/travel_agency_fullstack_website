@@ -184,7 +184,7 @@ public class RoomController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/search")
-    public List<RoomDTO> search(@RequestBody  SearchRequest request)
+    public List<RoomDTO> search(@RequestParam("request")  SearchRequest request)
     {
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
         System.out.println(flags);

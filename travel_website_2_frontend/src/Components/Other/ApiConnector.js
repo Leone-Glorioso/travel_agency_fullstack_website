@@ -371,10 +371,13 @@ function search(request)
 {
 
     return instance.get('/api/rooms/search',{
-        data: request, //{}
-        // headers: {
-        //     'Content-type': 'application/json'
-        // }
+        // data: request, //{}
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        },
+        params: {
+            "request": request
+        }
     })
 
 }
