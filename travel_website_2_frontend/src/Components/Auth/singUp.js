@@ -21,9 +21,9 @@ function SingUp() {
     const [email, setEmail] = useState('')
     const [telephone, setTelephone] = useState('')
     const [country, setCountry] = useState('')
-    const [photo, setPhoto] = useState()
-    const [photoName, setPhotoName] = useState('')
-    const [photoPreview, setPhotoPreview] = useState()
+    // const [photo, setPhoto] = useState()
+    // const [photoName, setPhotoName] = useState('')
+    // const [photoPreview, setPhotoPreview] = useState()
     const [role, setRole] = useState('')
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -58,29 +58,29 @@ function SingUp() {
     //         setPhotoName(event.target.files[0].name);
     //     }
     // }
-    useEffect(() => {
-        if (!photo) {
-            setPhotoPreview(undefined)
-            return
-        }
+    // useEffect(() => {
+    //     if (!photo) {
+    //         setPhotoPreview(undefined)
+    //         return
+    //     }
+    //
+    //     const objectUrl = URL.createObjectURL(photo)
+    //     setPhotoPreview(objectUrl)
+    //
+    //     // free memory when ever this component is unmounted
+    //     return () => URL.revokeObjectURL(objectUrl)
+    // }, [photo])
 
-        const objectUrl = URL.createObjectURL(photo)
-        setPhotoPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [photo])
-
-    const handleImageChange = e => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setPhoto(undefined)
-            return
-        }
-
-        // I've kept this example simple by using the first image instead of multiple
-        setPhoto(e.target.files[0])
-        setPhotoName(e.target.files[0].name)
-    }
+    // const handleImageChange = e => {
+    //     if (!e.target.files || e.target.files.length === 0) {
+    //         setPhoto(undefined)
+    //         return
+    //     }
+    //
+    //     // I've kept this example simple by using the first image instead of multiple
+    //     setPhoto(e.target.files[0])
+    //     setPhotoName(e.target.files[0].name)
+    // }
 
     const handleRoleChange = (selectedRole) => {
         setRole(selectedRole);
@@ -88,14 +88,14 @@ function SingUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!(username && password && name && surname && email && telephone && country && photo && role)) {
+        if (!(username && password && name && surname && email && telephone && country && role)) {
             setIsError(true)
             setErrorMessage('Please,give all fields!')
             return
         }
 
 
-        const user = {username, password, name, surname, email, telephone, country, role, photo, photoName}
+        const user = {username, password, name, surname, email, telephone, country, role}
         try {
             const resp = await ApiConnector.signUp(user)
             const { accessToken, ...userData } = resp.data; // Assuming user data is in response
@@ -109,7 +109,7 @@ function SingUp() {
             setEmail('')
             setTelephone('')
             setCountry('')
-            setPhoto(null)
+            // setPhoto(null)
             setRole('')
             setIsError(false)
             setErrorMessage('')
@@ -212,16 +212,16 @@ function SingUp() {
                             className={"input-container"}
                         />
 
-                        <Form.Input
-                            fluid
-                            name='photo'
-                            icon='photo'
-                            iconPosition='left'
-                            // placeholder='photo'
-                            onChange={handleImageChange}
-                            type={"file"}
-                            // className={"input-container"}
-                        />
+                        {/*<Form.Input*/}
+                        {/*    fluid*/}
+                        {/*    name='photo'*/}
+                        {/*    icon='photo'*/}
+                        {/*    iconPosition='left'*/}
+                        {/*    // placeholder='photo'*/}
+                        {/*    onChange={handleImageChange}*/}
+                        {/*    type={"file"}*/}
+                        {/*    // className={"input-container"}*/}
+                        {/*/>*/}
 
                         {/*<UploadImage name={"person"}/>*/}
 
