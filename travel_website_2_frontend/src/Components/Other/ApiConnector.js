@@ -58,6 +58,14 @@ function authenticate(username,password){
     return instance.post('/auth/authenticate',{ username, password},{
         headers:{ "Content-type": "application/json"}
     })
+        // .then(response => {
+        //     console.log('Reponse status code:',response.status)
+        //     return response
+        // })
+        // .catch(error=>{
+        //     console.error('Error',error)
+        //     throw error
+        // })
 }
 
 function signUp(user){
@@ -361,12 +369,14 @@ function initialSearch( location_id, start, end, people)
 
 function search(request)
 {
+
     return instance.get('/api/rooms/search',{
-        data: request,
-        headers: {
-            'Content-type': 'application/json'
-        }
+        data: request, //{}
+        // headers: {
+        //     'Content-type': 'application/json'
+        // }
     })
+
 }
 
 function createLocation(user, location)

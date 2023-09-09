@@ -7,6 +7,7 @@ import {IconButton} from "@mui/material";
 import PeopleIcon from '@mui/icons-material/People';
 import {ApiConnector} from "../Other/ApiConnector";
 import {Form} from "semantic-ui-react";
+import RoomList from "../Room/RoomList";
 
 
 
@@ -18,16 +19,16 @@ function Search(){
     const [latitude, setLatitude] = useState(-50.0);
     const [longitude, setLongitude] = useState(-50.0);
     const [range, setRange] = useState(10);
-    const [typeOfRoom, setTypeOfRoom] = useState("private_room");
-    const [startNumOfBeds, setStartNumOfBeds] = useState(1);
-    const [endNumOfBeds, setEndNumOfBeds] = useState(10);
-    const [startNumOfBaths, setStartNumOfBaths] = useState(1);
-    const [endNumOfBaths, setEndNumOfBaths] = useState(5);
-    const [startNumOfBedrooms, setStartNumOfBedrooms] = useState(1);
-    const [endNumOfBedrooms, setEndNumOfBedrooms] = useState(10);
+    const [typeofroom, setTypeofroom] = useState("private_room");
+    const [start_numOfBeds, setStart_numOfBeds] = useState(1);
+    const [end_numOfBeds, setEnd_numOfBeds] = useState(10);
+    const [start_numOfBaths, setStart_numOfBaths] = useState(1);
+    const [end_numOfBaths, setEnd_numOfBaths] = useState(5);
+    const [start_numOfBedrooms, setStart_numOfBedrooms] = useState(1);
+    const [end_numOfBedrooms, setEnd_numOfBedrooms] = useState(10);
     const [livingRoom, setLivingRoom] = useState(true);
-    const [startArea, setStartArea] = useState(100);
-    const [endArea, setEndArea] = useState(1000);
+    const [start_area, setStart_area] = useState(100);
+    const [end_area, setEnd_area] = useState(1000);
     const [smoking, setSmoking] = useState(true);
     const [pets, setPets] = useState(true);
     const [events, setEvents] = useState(true);
@@ -67,7 +68,7 @@ function Search(){
     };
 
     const handleSetTypeOfRoom = (value) => {
-        setTypeOfRoom(value);
+        setTypeofroom(value);
     };
 
     const handleSetStartNumOfBeds = (value) => {
@@ -75,7 +76,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
-            setStartNumOfBeds(parsedValue);
+            setStart_numOfBeds(parsedValue);
         }
     };
 
@@ -84,7 +85,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
-            setEndNumOfBeds(parsedValue);
+            setEnd_numOfBeds(parsedValue);
         }
     };
 
@@ -93,7 +94,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 5) {
-            setStartNumOfBaths(parsedValue);
+            setStart_numOfBaths(parsedValue);
         }
     };
 
@@ -102,7 +103,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 5) {
-            setEndNumOfBaths(parsedValue);
+            setEnd_numOfBaths(parsedValue);
         }
     };
 
@@ -111,7 +112,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
-            setStartNumOfBedrooms(parsedValue);
+            setStart_numOfBedrooms(parsedValue);
         }
     };
 
@@ -120,7 +121,7 @@ function Search(){
 
         // Check if the parsed value is within the allowed range
         if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
-            setEndNumOfBedrooms(parsedValue);
+            setEnd_numOfBedrooms(parsedValue);
         }
     };
 
@@ -129,11 +130,11 @@ function Search(){
     };
 
     const handleSetStartArea = (value) => {
-        setStartArea(value);
+        setStart_area(value);
     };
 
     const handleSetEndArea = (value) => {
-        setEndArea(value);
+        setEnd_area(value);
     };
 
     const handleSetSmoking = (value) => {
@@ -178,41 +179,76 @@ function Search(){
 
 
     const handleSearch = async () => {
-        const searchRequest = {
-            latitude: latitude,
-            longitude: longitude,
-            range:range,
-            start: startDate.toISOString(),
-            end: endDate.toISOString(),
-            typeofroom: typeOfRoom,
-            start_numOfBeds: startNumOfBeds,
-            end_numOfBeds:endNumOfBeds,
-            start_numOfBaths: startNumOfBaths,
-            end_numOfBaths: endNumOfBaths,
-            start_numOfBedrooms: startNumOfBedrooms,
-            end_numOfBedrooms:endNumOfBedrooms,
-            livingRoom:livingRoom,
-            start_area: startArea,
-            end_area: endArea,
-            smoking: smoking,
-            pets: pets,
-            events: events,
-            internet: internet,
-            cooling: cooling,
-            heating: heating,
-            kitchen: kitchen,
-            tv: tv,
-            parking: parking,
-            elevator: elevator,
-            first_element: 1,
-            last_element: 1,
-            flags: "beds,bedrooms,baths,dates,location,area,livingRoom,smoking,pets,events,internet,cooling,heating,kitchen,tv,parking,elevator"
-        };
+        // const searchRequest = {
+        //     latitude: latitude,
+        //     longitude: longitude,
+        //     range:range,
+        //     start: startDate.toISOString(),
+        //     end: endDate.toISOString(),
+        //     typeofroom: typeOfRoom,
+        //     start_numOfBeds: startNumOfBeds,
+        //     end_numOfBeds:endNumOfBeds,
+        //     start_numOfBaths: startNumOfBaths,
+        //     end_numOfBaths: endNumOfBaths,
+        //     start_numOfBedrooms: startNumOfBedrooms,
+        //     end_numOfBedrooms:endNumOfBedrooms,
+        //     livingRoom:livingRoom,
+        //     start_area: startArea,
+        //     end_area: endArea,
+        //     smoking: smoking,
+        //     pets: pets,
+        //     events: events,
+        //     internet: internet,
+        //     cooling: cooling,
+        //     heating: heating,
+        //     kitchen: kitchen,
+        //     tv: tv,
+        //     parking: parking,
+        //     elevator: elevator,
+        //     first_element: 1,
+        //     last_element: 20,
+        //     flags: "beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator"
+        // };
+            const first_element=1
+            const last_element=20
+            const flags="beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator"
+
+            const searchRequest={
+                    latitude,
+                    longitude,
+                    range,
+                    start:startDate.toLocaleDateString('en-GB'),
+                    end:endDate.toLocaleDateString('en-GB'),
+                    typeofroom,
+                    start_numOfBeds,
+                    end_numOfBeds,
+                    start_numOfBaths,
+                    end_numOfBaths,
+                    start_numOfBedrooms,
+                    end_numOfBedrooms,
+                    livingRoom,
+                    start_area,
+                    end_area,
+                    smoking,
+                    pets,
+                    events,
+                    internet,
+                    cooling,
+                    heating,
+                    kitchen,
+                    tv,
+                    parking,
+                    elevator,
+                    first_element,
+                    last_element,
+                    flags
+            }
 
         try {
             console.log(1)
             console.log(searchRequest)
             const response = await ApiConnector.search(searchRequest);
+
 
             // Handle the response here
             if (response && response.data) {
@@ -224,9 +260,11 @@ function Search(){
                 // Handle empty or invalid search results
             }
         } catch (error) {
-            console.error("Error searching for rooms:", error);
+            console.error("Error searching for rooms: edw", error);
+            console.log(error.response)
             // Handle the error appropriately, e.g., show an error message
         }
+
     };
 
     return (
@@ -297,7 +335,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={10}
-                        value={startNumOfBeds}
+                        value={start_numOfBeds}
                         onChange={(e) => handleSetStartNumOfBeds(e.target.value)}
                     />
 
@@ -306,7 +344,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={10}
-                        value={endNumOfBeds}
+                        value={end_numOfBeds}
                         onChange={(e) => handleSetEndNumOfBeds(e.target.value)}
                     />
 
@@ -315,7 +353,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={5}
-                        value={startNumOfBaths}
+                        value={start_numOfBaths}
                         onChange={(e) => handleSetStartNumOfBaths(e.target.value)}
                     />
 
@@ -324,7 +362,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={5}
-                        value={endNumOfBaths}
+                        value={end_numOfBaths}
                         onChange={(e) => handleSetEndNumOfBaths(e.target.value)}
                     />
 
@@ -333,7 +371,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={10}
-                        value={startNumOfBedrooms}
+                        value={start_numOfBedrooms}
                         onChange={(e) => handleSetStartNumOfBedrooms(e.target.value)}
                     />
 
@@ -342,7 +380,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={10}
-                        value={endNumOfBedrooms}
+                        value={end_numOfBedrooms}
                         onChange={(e) => handleSetEndNumOfBedrooms(e.target.value)}
                     />
 
@@ -355,14 +393,14 @@ function Search(){
                     <label>Start area:</label>
                     <input
                         type="number"
-                        value={startArea}
+                        value={start_area}
                         onChange={(e) => handleSetStartArea(e.target.value)}
                     />
 
                     <label>End area:</label>
                     <input
                         type="number"
-                        value={endArea}
+                        value={end_area}
                         onChange={(e) => handleSetEndArea(e.target.value)}
                     />
 
