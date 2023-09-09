@@ -41,9 +41,9 @@ public class SignUpRequest {
     @Schema(example = "Administrator")
     private String role;
 
-    @Schema(example = "file")
-    private MultipartFile photo;
-
-    @Schema(example = "fileName")
-    private String photoName;
+//    @Schema(example = "file")
+//    private MultipartFile photo;
+//
+//    @Schema(example = "fileName")
+//    private String photoName;
 }

@@ -62,8 +62,8 @@ public class AuthController {
         }
 
         User user = mapSignUpRequestToUser(signUpRequest);
-        User newUser = saveImageOfUser(user, signUpRequest.getPhoto(), signUpRequest.getPhotoName());
-        userService.saveUser(newUser);
+//        User newUser = saveImageOfUser(user, signUpRequest.getPhoto(), signUpRequest.getPhotoName());
+        userService.saveUser(user);
         if(signUpRequest.getRole().equals("Landlord") || signUpRequest.getRole().equals("Landlord/Client"))
             requestService.saveRequest(new Request(signUpRequest.getUsername(), false, true));
         String token = authenticateAndGetToken(signUpRequest.getUsername(), signUpRequest.getPassword());
@@ -134,27 +134,27 @@ public class AuthController {
     }
 
 
-    private User saveImageOfUser(User user, MultipartFile file, String name)
-    {
-        makeDirectoryIfNotExist(imageDirectory);
-        Path fileNamePath = Paths.get(imageDirectory,
-                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
-        try {
-            Files.write(fileNamePath, file.getBytes());
-            Photos photo = new Photos(name, user);
-            photosService.savePhoto(photo);
-            user.setUserPhoto(photo);
-            return user;
-        } catch (IOException ex) {
-            throw new Exception_PhotoNotProperlyGiven("Photo throws error");
-        }
-    }
-
-
-    private void makeDirectoryIfNotExist(String imageDirectory) {
-        File directory = new File(imageDirectory);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-    }
+//    private User saveImageOfUser(User user, MultipartFile file, String name)
+//    {
+//        makeDirectoryIfNotExist(imageDirectory);
+//        Path fileNamePath = Paths.get(imageDirectory,
+//                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+//        try {
+//            Files.write(fileNamePath, file.getBytes());
+//            Photos photo = new Photos(name, user);
+//            photosService.savePhoto(photo);
+//            user.setUserPhoto(photo);
+//            return user;
+//        } catch (IOException ex) {
+//            throw new Exception_PhotoNotProperlyGiven("Photo throws error");
+//        }
+//    }
+//
+//
+//    private void makeDirectoryIfNotExist(String imageDirectory) {
+//        File directory = new File(imageDirectory);
+//        if (!directory.exists()) {
+//            directory.mkdir();
+//        }
+//    }
 }

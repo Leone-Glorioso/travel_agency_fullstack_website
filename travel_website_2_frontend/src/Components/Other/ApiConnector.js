@@ -61,7 +61,7 @@ function authenticate(username,password){
 }
 
 function signUp(user){
-    return instance.post(`/auth/signup`, {user}, {
+    return instance.post(`/auth/signup`, user, {
         headers: { 'Content-type': 'application/json' }
     })
 }
