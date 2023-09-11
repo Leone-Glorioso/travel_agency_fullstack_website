@@ -245,10 +245,9 @@ function Search(){
             }
 
         try {
-            console.log(1)
             console.log(searchRequest)
             const response = await ApiConnector.search( searchRequest);
-
+            console.log("response: ",  response)
 
             // Handle the response here
             if (response && response.data) {
@@ -264,7 +263,6 @@ function Search(){
             console.log(error.response)
             // Handle the error appropriately, e.g., show an error message
         }
-
     };
 
     return (

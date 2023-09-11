@@ -184,50 +184,70 @@ public class RoomController {
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/search")
-    public List<RoomDTO> search(@RequestParam("request")  SearchRequest request)
-    {
+    public List<RoomDTO> search(@RequestBody  SearchRequest request) {
+        System.out.println("Received request: " + request);
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
         System.out.println(flags);
         Collection<Room> rooms = roomService.getRooms();
-        if(flags.contains("beds"))
+        if (flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
-        if(flags.contains("bedrooms"))
+        if (flags.contains("bedrooms"))
             rooms.retainAll(roomService.getRoomsByNumOfBedrooms(request.getStart_numOfBedrooms(), request.getEnd_numOfBedrooms()));
-        if(flags.contains("baths"))
+        if (flags.contains("baths"))
             rooms.retainAll(roomService.getRoomsByNumOfBaths(request.getStart_numOfBaths(), request.getEnd_numOfBaths()));
-        if(flags.contains("dates"))
-            rooms.retainAll(roomService.getRoomsInLocation(locationService.validateAndGetLocationFromPosition(request.getLatitude(), request.getLongitude())));
-        if(flags.contains("location"))
-            rooms.retainAll(roomService.getRoomsInLocations(locationService.locationsInArea(request.getLatitude(), request.getLongitude(), request.getRange())));
-        if(flags.contains("area"))
+//        if(flags.contains("dates"))
+//            rooms.retainAll(roomService.getRoomsInLocation(locationService.validateAndGetLocationFromPosition(request.getLatitude(), request.getLongitude())));
+//        if(flags.contains("location"))
+//            rooms.retainAll(roomService.getRoomsInLocations(locationService.locationsInArea(request.getLatitude(), request.getLongitude(), request.getRange())));
+        if (flags.contains("area"))
             rooms.retainAll(roomService.getRoomsByAreaRange(request.getStart_area(), request.getEnd_area()));
-        if(flags.contains("livingRoom"))
+        if (flags.contains("livingRoom"))
             rooms.retainAll(roomService.getIfLivingRoom(request.isLivingRoom()));
-        if(flags.contains("smoking"))
+        if (flags.contains("smoking"))
             rooms.retainAll(roomService.getIfSmoking(request.isSmoking()));
-        if(flags.contains("pets"))
+        if (flags.contains("pets"))
             rooms.retainAll(roomService.getIfPets(request.isPets()));
-        if(flags.contains("events"))
+        if (flags.contains("events"))
             rooms.retainAll(roomService.getIfEvents(request.isEvents()));
-        if(flags.contains("internet"))
+        if (flags.contains("internet"))
             rooms.retainAll(roomService.getIfInternet(request.isInternet()));
-        if(flags.contains("cooling"))
+        if (flags.contains("cooling"))
             rooms.retainAll(roomService.getIfCooling(request.isCooling()));
-        if(flags.contains("heating"))
+        if (flags.contains("heating"))
             rooms.retainAll(roomService.getIfHeating(request.isHeating()));
-        if(flags.contains("kitchen"))
+        if (flags.contains("kitchen"))
             rooms.retainAll(roomService.getIfKitchen(request.isKitchen()));
-        if(flags.contains("tv"))
+        if (flags.contains("tv"))
             rooms.retainAll(roomService.getIfTV(request.isTv()));
-        if(flags.contains("parking"))
+        if (flags.contains("parking"))
             rooms.retainAll(roomService.getIfParking(request.isParking()));
-        if(flags.contains("elevator"))
+        if (flags.contains("elevator"))
             rooms.retainAll(roomService.getIfElevator(request.isElevator()));
+//        List<RoomDTO> roomDTOList = new ArrayList<>();
+//
+//        try {
+//            List<Room> roomSublist = rooms.stream()
+//                    .skip(request.getFirst_element())
+//                    .limit(request.getLast_element() - request.getFirst_element() + 1)
+//                    .collect(Collectors.toList());
+//
+//            roomDTOList = roomSublist.stream()
+//                    .map(roomMapper::toRoomDTO)
+//                    .collect(Collectors.toList());
+//        } catch (IndexOutOfBoundsException e) {
+//            // Handle the exception or return an error response
+//            // You can log the error or return an empty list or an error message
+//            e.printStackTrace(); // For debugging purposes
+//            // Optionally, return an error response or throw a custom exception
+//            roomDTOList = Collections.emptyList(); // Return an empty list as a default response
+//        }
+
+
         List<Room> roomSublist = rooms.stream().collect(Collectors.toList()).subList(request.getFirst_element(), request.getLast_element());
         return roomSublist.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
 
     }
-
+//        return roomDTOList;
 }
