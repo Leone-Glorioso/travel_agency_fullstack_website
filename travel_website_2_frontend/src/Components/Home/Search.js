@@ -247,7 +247,7 @@ function Search(){
         try {
             console.log(1)
             console.log(searchRequest)
-            const response = await ApiConnector.search(searchRequest);
+            const response = await ApiConnector.search( searchRequest);
 
 
             // Handle the response here
