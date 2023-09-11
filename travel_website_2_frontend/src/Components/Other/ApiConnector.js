@@ -51,7 +51,8 @@ export const ApiConnector={
     allPendingRequests,
     acceptRequest,
     rejectRequest,
-    uploadImage
+    uploadImage,
+    uploadUserImage
 }
 
 function authenticate(username,password){
@@ -371,13 +372,14 @@ function search(request)
 {
 
     return instance.get('/api/rooms/search',{
-        // data: request, //{}
-        headers: {
-            "Access-Control-Allow-Origin": "*"
-        },
-        params: {
-            "request": request
-        }
+        params:request,
+        //data: request, //{}
+        // headers: {
+        //     "Access-Control-Allow-Origin": "*"
+        // },
+        // params: {
+        //     "request": request
+        // }
     })
 
 }
@@ -465,11 +467,26 @@ function rejectRequest(user, username)
     })
 }
 
-function uploadImage(user, file, name)
+function uploadImage(user, file)
 {
-    return instance.post('/api/upload/image', {file, name}, {
+    return instance.post('/api/image', {}, {
+        params: file,
         headers: {
             'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function uploadUserImage(user, username, request)
+{
+    return instance.post(`/api/users/image/${username}`, {}, {
+        params:
+            {
+                request
+            },
+        headers:{
+            'Authorization': bearerAuth(user),
+            'Content-type': 'multipart/form-data'
         }
     })
 }

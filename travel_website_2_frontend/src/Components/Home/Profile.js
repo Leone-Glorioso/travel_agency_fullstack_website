@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useAuth} from "../Auth/contex";
 import {ApiConnector} from "../Other/ApiConnector";
 // import {parseJwt} from "../Other/Helpers";
-import {Grid, Icon, Segment, Statistic} from "semantic-ui-react";
+import {Button, Form, Grid, Icon, Image, Input, Segment, Statistic} from "semantic-ui-react";
 
 import "./Profile.css";
 
@@ -16,6 +16,7 @@ function Profile() {
     let [telephone, setTelephone] = useState(0)
     let [country, setCountry] = useState('')
     let [role, setRole] = useState('')
+    let [photo, setPhoto] = useState([])
     const Auth = useAuth()
 
     useEffect(() => {
@@ -37,6 +38,26 @@ function Profile() {
         fetchData().catch(console.error)
 
     }, [Auth.user.user]);
+
+    const imageChange = event =>
+    {
+        setPhoto([event.target.files[0], event.target.files[0].name])
+    }
+
+    const submitNewImage = async () =>
+    {
+        try {
+            const formData = new FormData();
+            formData.append('file', photo[0])
+            formData.append('name', photo[1])
+            const response = await ApiConnector.uploadUserImage(Auth.user.user, username, formData)
+
+        }
+        catch (error)
+        {
+            console.log(error)
+        }
+    }
 
 
     return (
@@ -79,6 +100,9 @@ function Profile() {
 
         <Grid className={"app-profile"} >
             <Grid.Row>
+                {/*<Grid.Column>*/}
+                {/*    <img src={URL.createObjectURL(photo[0])}/>*/}
+                {/*</Grid.Column>*/}
                 <Grid.Column>
                     <Segment><strong>Username</strong> {username}</Segment>
                 </Grid.Column>
@@ -100,6 +124,15 @@ function Profile() {
                 <Grid.Column>
                     <Segment><strong>Role</strong> {role}</Segment>
                 </Grid.Column>
+                <Grid.Column>
+                    <Form >
+                        <Form.Input type={"file"} onChange={imageChange} />
+                        <Form.Button type={"submit"} onClick={submitNewImage}>Upload Image</Form.Button>
+                    </Form>
+                </Grid.Column>
+                {/*<Grid.Column>*/}
+                {/*    */}
+                {/*</Grid.Column>*/}
             </Grid.Row>
         </Grid>
     );
