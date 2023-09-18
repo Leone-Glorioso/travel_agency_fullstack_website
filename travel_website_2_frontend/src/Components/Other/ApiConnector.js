@@ -475,10 +475,11 @@ function rejectRequest(user, username)
 
 function uploadImage(user, file)
 {
-    return instance.post('/api/image', {}, {
-        params: file,
+    return instance.post('/api/image', {file}, {
+        // params: {file},
         headers: {
-            'Authorization': bearerAuth(user)
+            'Authorization': bearerAuth(user),
+            'Content-type': 'application/json'
         }
     })
 }
@@ -492,7 +493,7 @@ function uploadUserImage(user, username, request)
             },
         headers:{
             'Authorization': bearerAuth(user),
-            'Content-type': 'multipart/form-data'
+            // 'Content-type': 'image/png'
         }
     })
 }

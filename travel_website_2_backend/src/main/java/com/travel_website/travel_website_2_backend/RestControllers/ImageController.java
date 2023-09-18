@@ -1,37 +1,35 @@
 package com.travel_website.travel_website_2_backend.RestControllers;
 
+import com.travel_website.travel_website_2_backend.DTO.NewImage;
 import com.travel_website.travel_website_2_backend.Service.StorageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.io.FilenameUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/image")
 public class ImageController {
 
-    @Autowired
-    private StorageService service;
+//    @Autowired
+    private final StorageService storageService;
 
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("image")MultipartFile file) throws IOException {
-        String uploadImage = service.uploadImage(file);
+    public ResponseEntity<?> uploadImage(@RequestBody NewImage image) throws IOException {
+        String uploadImage = storageService.uploadImage(image.getImage());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);
     }
 
     @GetMapping("/{fileName}")
     public ResponseEntity<?> downloadImage(@PathVariable String fileName){
-        byte[] imageData=service.downloadImage(fileName);
+        byte[] imageData= storageService.downloadImage(fileName);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);

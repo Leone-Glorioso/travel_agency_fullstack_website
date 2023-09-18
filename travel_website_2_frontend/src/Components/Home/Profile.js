@@ -50,7 +50,7 @@ function Profile() {
             const formData = new FormData();
             formData.append('file', photo[0])
             formData.append('name', photo[1])
-            const response = await ApiConnector.uploadUserImage(Auth.user.user, username, formData)
+            const response = await ApiConnector.uploadImage(Auth.user.user, { image: photo[0] })
 
         }
         catch (error)
