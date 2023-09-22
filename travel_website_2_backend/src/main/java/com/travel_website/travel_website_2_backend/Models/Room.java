@@ -72,7 +72,7 @@ public class Room {
     @NotBlank
     private int minimumDays;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     private Location location;
 
@@ -110,6 +110,7 @@ public class Room {
     @OneToMany(mappedBy = "bookedRoom")
     private Set<Reservation> reservations;
 
+    @JsonIgnore
     @ManyToOne
     private User landlord;
 

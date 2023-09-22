@@ -214,39 +214,41 @@ function Search(){
             const flags="beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator"
 
             const searchRequest={
-                    latitude,
-                    longitude,
-                    range,
-                    start:startDate.toLocaleDateString('en-GB'),
-                    end:endDate.toLocaleDateString('en-GB'),
-                    typeofroom,
-                    start_numOfBeds,
-                    end_numOfBeds,
-                    start_numOfBaths,
-                    end_numOfBaths,
-                    start_numOfBedrooms,
-                    end_numOfBedrooms,
-                    livingRoom,
-                    start_area,
-                    end_area,
-                    smoking,
-                    pets,
-                    events,
-                    internet,
-                    cooling,
-                    heating,
-                    kitchen,
-                    tv,
-                    parking,
-                    elevator,
-                    first_element,
-                    last_element,
-                    flags
+                "latitude": latitude,
+                "longitude": longitude,
+                "range": range,
+                "start": startDate.toLocaleDateString('en-GB'),
+                "end": endDate.toLocaleDateString('en-GB'),
+                "typeofroom": typeofroom,
+                "start_numOfBeds": start_numOfBeds,
+                "end_numOfBeds": end_numOfBeds,
+                "start_numOfBaths": start_numOfBaths,
+                "end_numOfBaths": end_numOfBaths,
+                "start_numOfBedrooms": start_numOfBedrooms,
+                "end_numOfBedrooms": end_numOfBedrooms,
+                "livingRoom": livingRoom,
+                "start_area": start_area,
+                "end_area": end_area,
+                "smoking": smoking,
+                "pets": pets,
+                "events": events,
+                "internet": internet,
+                "cooling": cooling,
+                "heating": heating,
+                "kitchen": kitchen,
+                "tv": tv,
+                "parking": parking,
+                "elevator": elevator,
+                "first_element": first_element,
+                "last_element": last_element,
+                "flags": flags
             }
 
         try {
             console.log(searchRequest)
-            const response = await ApiConnector.search( searchRequest);
+            // const start = startDate.toLocaleDateString('en-GB')
+            // const end = endDate.toLocaleDateString('en-GB')
+            const response = await ApiConnector.search(JSON.stringify(searchRequest));
             console.log("response: ",  response)
 
             // Handle the response here

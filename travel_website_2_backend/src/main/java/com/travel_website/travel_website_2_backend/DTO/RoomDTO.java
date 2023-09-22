@@ -24,13 +24,13 @@ public record RoomDTO(int id,
                       boolean elevator,
                       String description) {
 
-    public record LandlordDto(String username)
-    {
-
-    }
-
-    public record LocationDto(int id)
-    {
-
-    }
+//    public record LandlordDto(String username)
+//    {
+//
+//    }
+//
+//    public record LocationDto(int id)
+//    {
+//
+//    }
 }

@@ -183,22 +183,19 @@ public class RoomController {
 
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/search")
-    public List<RoomDTO> search(@RequestBody  SearchRequest request) {
+    @PostMapping("/search")
+    public List<RoomDTO> search(@RequestBody SearchRequest request) {
         System.out.println("Received request: " + request);
+        System.out.println(request.getFlags());
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
         System.out.println(flags);
-        Collection<Room> rooms = roomService.getRooms();
+        List<Room> rooms = roomService.getRooms();
         if (flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
         if (flags.contains("bedrooms"))
             rooms.retainAll(roomService.getRoomsByNumOfBedrooms(request.getStart_numOfBedrooms(), request.getEnd_numOfBedrooms()));
         if (flags.contains("baths"))
             rooms.retainAll(roomService.getRoomsByNumOfBaths(request.getStart_numOfBaths(), request.getEnd_numOfBaths()));
-//        if(flags.contains("dates"))
-//            rooms.retainAll(roomService.getRoomsInLocation(locationService.validateAndGetLocationFromPosition(request.getLatitude(), request.getLongitude())));
-//        if(flags.contains("location"))
-//            rooms.retainAll(roomService.getRoomsInLocations(locationService.locationsInArea(request.getLatitude(), request.getLongitude(), request.getRange())));
         if (flags.contains("area"))
             rooms.retainAll(roomService.getRoomsByAreaRange(request.getStart_area(), request.getEnd_area()));
         if (flags.contains("livingRoom"))
@@ -241,9 +238,17 @@ public class RoomController {
 //            // Optionally, return an error response or throw a custom exception
 //            roomDTOList = Collections.emptyList(); // Return an empty list as a default response
 //        }
-
-
-        List<Room> roomSublist = rooms.stream().collect(Collectors.toList()).subList(request.getFirst_element(), request.getLast_element());
+        if(rooms.size() == 0)
+        {
+            return rooms.stream()
+                    .map(roomMapper::toRoomDTO)
+                    .collect(Collectors.toList());
+        }
+        int start = (request.getFirst_element() > rooms.size()) ? 1 : request.getFirst_element();
+        int end = request.getLast_element();
+        if(end > rooms.size())
+            end = rooms.size();
+        List<Room> roomSublist = rooms.subList(start, end);
         return roomSublist.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());

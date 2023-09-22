@@ -43,7 +43,6 @@ export const ApiConnector={
     getLandlordClients,
     initialSearch,
     search,
-    createLocation,
     deleteLocation,
     allRequests,
     allAcceptedRequests,
@@ -371,12 +370,13 @@ function initialSearch( location_id, start, end, people)
 function search(request)
 {
 
-    return instance.get('/api/rooms/search',{
-        params:request,
-        //data: request, //{}
-        // headers: {
-        //     "Access-Control-Allow-Origin": "*"
-        // },
+    return instance.post('/api/rooms/search', request ,{
+        // params:request,
+        // data: {}, //{}
+        headers: {
+            // "Access-Control-Allow-Origin": "*"
+            'Content-type': 'application/json'
+        }
         // params: {
         //     "request": request
         // }
@@ -390,15 +390,15 @@ function search(request)
         })
 }
 
-function createLocation(user, location)
-{
-    return instance.post('/api/rooms/search', location, {
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': bearerAuth(user)
-        }
-    })
-}
+// function createLocation(user, location)
+// {
+//     return instance.post('/api/rooms/search', location, {
+//         headers: {
+//             'Content-type': 'application/json',
+//             'Authorization': bearerAuth(user)
+//         }
+//     })
+// }
 
 function deleteLocation(user, id)
 {
