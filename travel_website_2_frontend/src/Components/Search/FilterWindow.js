@@ -5,6 +5,12 @@ import L from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import {Slider, Typography} from "@mui/material";
 import TripleToggleSwitch from "./TripleToggleSwitch";
+import SearchField from "./SearchField";
+import {MapContainer, TileLayer} from "react-leaflet";
+
+const useStyles = makeStyles(() => ({
+    map: { height: "300px" }
+}));
 
 const FilterWindow = (props) => {
     const [startDate,setStartDate]=useState(new Date())
@@ -33,6 +39,10 @@ const FilterWindow = (props) => {
     const [tv, setTV] = useState(true);
     const [parking, setParking] = useState(true);
     const [elevator, setElevator] = useState(true);
+
+    const classes = useStyles();
+    const prov = new OpenStreetMapProvider();
+
 
     const labels = {
         left: {
@@ -151,6 +161,18 @@ const FilterWindow = (props) => {
         setTypeofroom(value.join(", "));
     };
 
+    const eventHandler = (e) =>
+    {
+        const marker = e.target.markers[0]
+        setLatitude(marker.y)
+        setLongitude(marker.x)
+    }
+
+    const handleSetRange = (value) =>
+    {
+        setRange(value)
+    }
+
 
     const handleSubmit = async () =>
     {
@@ -200,6 +222,39 @@ const FilterWindow = (props) => {
 
     return (
         <Container >
+            <MapContainer
+                id="map"
+                className={classes.map}
+                center={[51.505, -0.091]}
+                zoom={13}
+                scrollWheelZoom={false}
+            >
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <SearchField
+                    provider={prov}
+                    showMarker={true}
+                    showPopup={false}
+                    popupFormat={({ query, result }) => result.label}
+                    maxMarkers={3}
+                    retainZoomLevel={false}
+                    animateZoom={true}
+                    autoClose={false}
+                    searchLabel={"Enter address, please"}
+                    keepResult={true}
+                    eventHandler={eventHandler}
+                />
+            </MapContainer>
+            <Typography id="range-sliderBed" gutterBottom>
+                Select Range:
+            </Typography>
+            <Slider
+                value={range}
+                onChange={handleSetRange}
+                valueLabelDisplay="auto"
+            />
             <label> Give Dates: </label>
             <input
                 type="date"
