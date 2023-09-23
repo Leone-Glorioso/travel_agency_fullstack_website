@@ -8,7 +8,7 @@ function Card({src,title,description,price}){
             <div className={"cardInfo"}>
                 <h1>{title}</h1>
                 <h3>{description}</h3>
-                <h5>{price}</h5>
+                <h5>{price}/night</h5>
             </div>
         </div>
     )

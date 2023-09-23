@@ -1,0 +1,33 @@
+.search-page {
+    padding: 20px;
+}
+
+.search-page h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-result {
+    flex-basis: calc(33.33% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-result img {
+    max-width: 100%;
+    height: auto;
+}
+
+.search-result p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}

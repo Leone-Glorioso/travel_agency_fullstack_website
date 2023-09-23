@@ -10,6 +10,7 @@ import {Form} from "semantic-ui-react";
 import RoomList from "../Room/RoomList";
 import {NavLink} from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import SearchPage from "./SearchPage";
 
 
 
@@ -275,12 +276,13 @@ function Search(){
                 console.log("Empty or invalid search results.");
                 // Handle empty or invalid search results
             }
+            navigate('/search-result', {state : { data : response.data}})
         } catch (error) {
             console.error("Error searching for rooms: edw", error);
             console.log(error.response)
             // Handle the error appropriately, e.g., show an error message
         }
-        navigate('/search-result')
+
     };
 
     return (

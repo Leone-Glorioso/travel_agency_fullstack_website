@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import {useLocation} from "react-router-dom";
+import Card from "./Card"
+function SearchPage () {
 
-function SearchPage() {
     // Define state variables for search results and filters
+    const {state}=useLocation()
+    const {data}=state
+    console.log(data)
+
+
     const [searchResults, setSearchResults] = useState([]);
     const [filters, setFilters] = useState({
         // Define your initial filter options here
@@ -11,32 +18,15 @@ function SearchPage() {
         // Add more filters as needed
     });
 
-    // Simulate fetching search results from an API
-    useEffect(() => {
-        // Replace this with an actual API call to fetch search results
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/search', {
-                    method: 'POST', // or GET, depending on your API
-                    body: JSON.stringify(filters),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+    const cards={}
+    for(let value in data){
+        cards.append(<Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={value.description} price={value.ppn} />)
+    }
+    // data.forEach((value) => {
+    //     cards.append(<Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={value.description} price={value.ppn} />)
+    // })
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
 
-                const data = await response.json();
-                setSearchResults(data.results);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, [filters]);
 
     // Define a function to update filters
     const handleFilterChange = (event) => {
@@ -81,7 +71,14 @@ function SearchPage() {
                     ))}
                 </ul>
             </div>
+            {
+                JSON.parse(data).map(function(object,i) {
+                    return <Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={object.description} price={
+                        <object data="" type=""></object>.ppn}/>
+                })
+            }
         </div>
+
     );
 }
 

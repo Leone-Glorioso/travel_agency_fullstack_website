@@ -27,6 +27,7 @@ function App() {
                     <Route path='/client' element={<ProtectedRoute> <ClientPage/> </ProtectedRoute>} />
                     <Route path='/landlord' element={<ProtectedRoute> <LandlordPage/> </ProtectedRoute>} />
                     <Route path='/landlordclient' element={<ProtectedRoute> <LandlordClientPage/> </ProtectedRoute>} />
+                    {/*<Route path="/search-results" />*/}
                     <Route path='/search-result' element={<SearchPage/>}/>
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>

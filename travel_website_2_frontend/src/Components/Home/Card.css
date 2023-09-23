@@ -1,54 +1,95 @@
-.card{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card >column{
-    float:left;
-    width: 25%;
-    padding:0 10px;
+.card img {
+    max-width: 100%;
+    height: auto;
 }
 
-.card>row{
-    margin:0 -5px;
+.cardInfo {
+    padding: 10px;
 }
 
-.card>row:after{
-    content:" ";
-    display:table;
-    clear:both;
+.cardInfo h1 {
+    font-size: 1.5rem;
+    margin: 0;
 }
 
-@media screen and (max-width: 600px){
-    .card>column{
-        width: 100%;
-        display: block;
-        maring-bottom:20px;
-    }
+.cardInfo h3 {
+    font-size: 1rem;
+    margin: 5px 0;
 }
 
-.card:hover{
-    transform: scale(1.07);
+.cardInfo h5 {
+    font-size: 1.25rem;
+    margin: 5px 0;
+    color: #007bff; /* Change this to your desired price color */
 }
 
-.card > img{
-    object-fit: contain;
-    max-width: 400px;
-    max-height: 500px;
-    width: 100%;
+.card:hover {
+    transform: scale(1.05); /* Increase size when hovered */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
-.cardInfo{
-    margin-top:-9px;
-    border-radius: 10px;
-    padding:20px;
-    padding-top: 20px;
-}
 
-.cardInfo>h3 {
-    font-size: 18px;
-    font-weight: 600;
-}
+/*.card{*/
+/*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+/*    padding: 16px;*/
+/*    text-align: center;*/
+/*    background-color: #f1f1f1;*/
+/*}*/
+
+/*.card >column{*/
+/*    float:left;*/
+/*    width: 25%;*/
+/*    padding:0 10px;*/
+/*}*/
+
+/*.card>row{*/
+/*    margin:0 -5px;*/
+/*}*/
+
+/*.card>row:after{*/
+/*    content:" ";*/
+/*    display:table;*/
+/*    clear:both;*/
+/*}*/
+
+/*@media screen and (max-width: 600px){*/
+/*    .card>column{*/
+/*        width: 100%;*/
+/*        display: block;*/
+/*        maring-bottom:20px;*/
+/*    }*/
+/*}*/
+
+/*.card:hover{*/
+/*    transform: scale(1.07);*/
+/*}*/
+
+/*.card > img{*/
+/*    object-fit: contain;*/
+/*    max-width: 400px;*/
+/*    max-height: 500px;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.cardInfo{*/
+/*    margin-top:-9px;*/
+/*    border-radius: 10px;*/
+/*    padding:20px;*/
+/*    padding-top: 20px;*/
+/*}*/
+
+/*.cardInfo>h3 {*/
+/*    font-size: 18px;*/
+/*    font-weight: 600;*/
+/*}*/
 

@@ -84,7 +84,7 @@ function Home(){
                             title={"Hostel Room"} description={"Beautiful hostel ideal for teenagers"} price={"20$"} />
                             <Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"}
                                   title={"Entire House"}
-                            description={"Luxury modern House for unforgettable vacations"} price={"1k$"} />
+                            description={"Luxury modern House for unforgettable vacations"} price={"500$"} />
                         </div>
                     </div>
 
