@@ -79,4 +79,8 @@ public interface RoomService {
     List<Room> getIfParking(boolean option);
 
     List<Room> getIfElevator(boolean option);
+
+    List<Room> getRoomsInLocalArea(double latitude, double longitude, int area);
+
+    List<Room> getRoomsByTypes(String types);
 }

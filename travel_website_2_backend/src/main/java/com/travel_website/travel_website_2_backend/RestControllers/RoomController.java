@@ -189,6 +189,7 @@ public class RoomController {
         System.out.println(request.getFlags());
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
         System.out.println(flags);
+        System.out.println(request.getTypeofroom());
         List<Room> rooms = roomService.getRooms();
         if (flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
@@ -220,24 +221,10 @@ public class RoomController {
             rooms.retainAll(roomService.getIfParking(request.isParking()));
         if (flags.contains("elevator"))
             rooms.retainAll(roomService.getIfElevator(request.isElevator()));
-//        List<RoomDTO> roomDTOList = new ArrayList<>();
-//
-//        try {
-//            List<Room> roomSublist = rooms.stream()
-//                    .skip(request.getFirst_element())
-//                    .limit(request.getLast_element() - request.getFirst_element() + 1)
-//                    .collect(Collectors.toList());
-//
-//            roomDTOList = roomSublist.stream()
-//                    .map(roomMapper::toRoomDTO)
-//                    .collect(Collectors.toList());
-//        } catch (IndexOutOfBoundsException e) {
-//            // Handle the exception or return an error response
-//            // You can log the error or return an empty list or an error message
-//            e.printStackTrace(); // For debugging purposes
-//            // Optionally, return an error response or throw a custom exception
-//            roomDTOList = Collections.emptyList(); // Return an empty list as a default response
-//        }
+        if(flags.contains("location"))
+            rooms.retainAll(roomService.getRoomsInLocalArea(request.getLatitude(), request.getLongitude(), request.getRange()));
+        if(flags.contains("typeofroom"))
+            rooms.retainAll(roomService.getRoomsByTypes(request.getTypeofroom()));
         if(rooms.size() == 0)
         {
             return rooms.stream()
@@ -249,10 +236,10 @@ public class RoomController {
         if(end > rooms.size())
             end = rooms.size();
         List<Room> roomSublist = rooms.subList(start, end);
+        System.out.println(roomSublist.stream().map(Room::getId));
         return roomSublist.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
 
     }
-//        return roomDTOList;
 }

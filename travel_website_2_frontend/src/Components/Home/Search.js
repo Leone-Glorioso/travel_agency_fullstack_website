@@ -67,9 +67,9 @@ function Search(){
         setRange(value);
     };
 
-    const handleSetTypeOfRoom = (value) => {
-        setTypeofroom(value);
-    };
+    // const handleSetTypeOfRoom = (value) => {
+    //     setTypeofroom(value);
+    // };
 
     const handleSetStartNumOfBeds = (value) => {
         const parsedValue = parseInt(value, 10);
@@ -177,6 +177,17 @@ function Search(){
         setElevator(value);
     };
 
+    const handleSetTypeOfRoom = (e) =>
+    {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        setTypeofroom(value.join(", "));
+    };
 
     const handleSearch = async () => {
         // const searchRequest = {
@@ -211,7 +222,7 @@ function Search(){
         // };
             const first_element=1
             const last_element=20
-            const flags="beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator"
+            const flags="beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator, typeofroom"
 
             const searchRequest={
                 "latitude": latitude,
@@ -324,10 +335,11 @@ function Search(){
                     />
 
                     <label htmlFor="typeOfRoom">Choose type of room:</label>
-                    <select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)}>
+                    {/*<select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)} multiple>*/}
+                    <select name="typeOfRoom" id="typeOfRoom" onChange={handleSetTypeOfRoom} multiple size="1">
                         <option value="private_room">Private Room</option>
                         <option value="hostel">Hostel</option>
-                        <option value="hotel">Hotel</option>
+                        <option value="house">House</option>
                     </select>
 
                     <label>Start Number Of beds:</label>

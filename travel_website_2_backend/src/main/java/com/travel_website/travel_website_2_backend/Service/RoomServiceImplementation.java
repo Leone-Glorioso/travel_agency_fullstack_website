@@ -10,18 +10,19 @@ import com.travel_website.travel_website_2_backend.Models.TypeOfRoom;
 import com.travel_website.travel_website_2_backend.Models.User;
 import com.travel_website.travel_website_2_backend.Repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class RoomServiceImplementation implements RoomService{
 
     private final RoomRepository roomRepository;
+    private final LocationService locationService;
     @Override
     public List<Room> getRooms()
     {
@@ -237,6 +238,31 @@ public class RoomServiceImplementation implements RoomService{
     {
         return roomRepository.findByName(name).stream().findFirst()
                 .orElseThrow(() -> new Exception_RoomNotFound("Room with name " + name + " does not exist"));
+    }
+
+    @Override
+    public List<Room> getRoomsInLocalArea(double latitude, double longitude, int area)
+    {
+        System.out.println(getRoomsInLocations(locationService.locationsInArea(latitude, longitude, area)).stream().map(Room::getId).collect(Collectors.toList()));
+        return getRoomsInLocations(locationService.locationsInArea(latitude, longitude, area));
+    }
+
+    @Override
+    public List<Room> getRoomsByTypes(String types)
+    {
+        String[] typesDiv = types.split(", ");
+        List<String> type = Arrays.asList(typesDiv);
+        Set<Room> rooms = new HashSet<>();
+        if(type.contains("private_room"))
+            rooms.addAll(roomRepository.findRoomsByTypeofroom(TypeOfRoom.private_room));
+        if(type.contains("house"))
+            rooms.addAll(roomRepository.findRoomsByTypeofroom(TypeOfRoom.house));
+        if(type.contains("hostel"))
+            rooms.addAll(roomRepository.findRoomsByTypeofroom(TypeOfRoom.hostel));
+        if(type.size() != 0 && !type.contains("private_room") && !type.contains("house") && !type.contains("hostel"))
+            throw new Exception_NonExcistentRoomType("Room type does not exist");
+//        System.out.println(rooms.stream().map(Room::getId).collect(Collectors.toList()));
+        return rooms.stream().collect(Collectors.toList());
     }
 
 }
