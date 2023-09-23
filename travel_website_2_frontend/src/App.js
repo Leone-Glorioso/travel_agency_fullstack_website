@@ -11,6 +11,7 @@ import ProtectedRoute from "./Components/Other/ProtectedRoute";
 import ClientPage from "./Components/Clients/ClientPage";
 import LandlordPage from "./Components/Landlord/LandlordPage";
 import LandlordClientPage from "./Components/LandlordClients/LandlordClientPage";
+import SearchPage from './Components/Home/SearchPage'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path='/client' element={<ProtectedRoute> <ClientPage/> </ProtectedRoute>} />
                     <Route path='/landlord' element={<ProtectedRoute> <LandlordPage/> </ProtectedRoute>} />
                     <Route path='/landlordclient' element={<ProtectedRoute> <LandlordClientPage/> </ProtectedRoute>} />
+                    <Route path='/search-result' element={<SearchPage/>}/>
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}
