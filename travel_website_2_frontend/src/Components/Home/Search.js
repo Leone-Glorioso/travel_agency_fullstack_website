@@ -8,6 +8,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import {ApiConnector} from "../Other/ApiConnector";
 import {Form} from "semantic-ui-react";
 import RoomList from "../Room/RoomList";
+import {NavLink} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -39,6 +42,7 @@ function Search(){
     const [tv, setTV] = useState(true);
     const [parking, setParking] = useState(true);
     const [elevator, setElevator] = useState(true);
+    const navigate=useNavigate()
 
 
 
@@ -276,6 +280,7 @@ function Search(){
             console.log(error.response)
             // Handle the error appropriately, e.g., show an error message
         }
+        navigate('/search-result')
     };
 
     return (
