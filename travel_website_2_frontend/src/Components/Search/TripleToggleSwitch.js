@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./toogle.css";
+import "./toggle.css";
 
 const valueType = PropTypes.oneOfType([
     PropTypes.string,

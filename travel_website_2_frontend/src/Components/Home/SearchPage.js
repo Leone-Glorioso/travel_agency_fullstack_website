@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation} from "react-router-dom";
 import Card from "./Card"
+import FilterWindow from "../Search/FilterWindow";
 function SearchPage () {
 
     // Define state variables for search results and filters
@@ -71,12 +72,13 @@ function SearchPage () {
                     ))}
                 </ul>
             </div>
-            {
-                JSON.parse(data).map(function(object,i) {
-                    return <Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={object.description} price={
-                        <object data="" type=""></object>.ppn}/>
-                })
-            }
+            <FilterWindow />
+            {/*{*/}
+            {/*    JSON.parse(data).map(function(object,i) {*/}
+            {/*        return <Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={object.description} price={*/}
+            {/*            <object data="" type=""></object>.ppn}/>*/}
+            {/*    })*/}
+            {/*}*/}
         </div>
 
     );

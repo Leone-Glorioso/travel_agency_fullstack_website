@@ -8,9 +8,9 @@ import TripleToggleSwitch from "./TripleToggleSwitch";
 import SearchField from "./SearchField";
 import {MapContainer, TileLayer} from "react-leaflet";
 
-const useStyles = makeStyles(() => ({
-    map: { height: "300px" }
-}));
+// const useStyles = makeStyles(() => ({
+//     map: { height: "300px" }
+// }));
 
 const FilterWindow = (props) => {
     const [startDate,setStartDate]=useState(new Date())
@@ -40,7 +40,7 @@ const FilterWindow = (props) => {
     const [parking, setParking] = useState(true);
     const [elevator, setElevator] = useState(true);
 
-    const classes = useStyles();
+    // const classes = useStyles();
     const prov = new OpenStreetMapProvider();
 
 
@@ -221,32 +221,32 @@ const FilterWindow = (props) => {
     }
 
     return (
-        <Container >
-            <MapContainer
-                id="map"
-                className={classes.map}
-                center={[51.505, -0.091]}
-                zoom={13}
-                scrollWheelZoom={false}
-            >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <SearchField
-                    provider={prov}
-                    showMarker={true}
-                    showPopup={false}
-                    popupFormat={({ query, result }) => result.label}
-                    maxMarkers={3}
-                    retainZoomLevel={false}
-                    animateZoom={true}
-                    autoClose={false}
-                    searchLabel={"Enter address, please"}
-                    keepResult={true}
-                    eventHandler={eventHandler}
-                />
-            </MapContainer>
+        <div>
+            {/*<MapContainer*/}
+            {/*    id="map"*/}
+            {/*    // className={classes.map}*/}
+            {/*    center={[51.505, -0.091]}*/}
+            {/*    zoom={13}*/}
+            {/*    scrollWheelZoom={false}*/}
+            {/*>*/}
+            {/*    <TileLayer*/}
+            {/*        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'*/}
+            {/*        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
+            {/*    />*/}
+            {/*    <SearchField*/}
+            {/*        provider={prov}*/}
+            {/*        showMarker={true}*/}
+            {/*        showPopup={false}*/}
+            {/*        popupFormat={({ query, result }) => result.label}*/}
+            {/*        maxMarkers={3}*/}
+            {/*        retainZoomLevel={false}*/}
+            {/*        animateZoom={true}*/}
+            {/*        autoClose={false}*/}
+            {/*        searchLabel={"Enter address, please"}*/}
+            {/*        keepResult={true}*/}
+            {/*        eventHandler={eventHandler}*/}
+            {/*    />*/}
+            {/*</MapContainer>*/}
             <Typography id="range-sliderBed" gutterBottom>
                 Select Range:
             </Typography>
@@ -291,6 +291,8 @@ const FilterWindow = (props) => {
                 value={[start_numOfBeds, end_numOfBeds]}
                 onChange={rangeBedSelector}
                 valueLabelDisplay="auto"
+                max={10}
+                min={1}
             />
             <Typography id="range-sliderBedroom" gutterBottom>
                 Select Bedroom Range:
@@ -299,6 +301,8 @@ const FilterWindow = (props) => {
                 value={[start_numOfBedrooms, end_numOfBedrooms]}
                 onChange={rangeBedroomSelector}
                 valueLabelDisplay="auto"
+                max={10}
+                min={1}
             />
             <Typography id="range-sliderBath" gutterBottom>
                 Select Bath Range:
@@ -307,12 +311,16 @@ const FilterWindow = (props) => {
                 value={[start_numOfBaths, end_numOfBaths]}
                 onChange={rangeBathSelector}
                 valueLabelDisplay="auto"
+                max={10}
+                min={1}
             />
             <Typography id="range-sliderArea" gutterBottom>
                 Select Area Range:
             </Typography>
             <Slider
                 value={[start_area, end_area]}
+                max={2000}
+                min={1}
                 onChange={rangeAreaSelector}
                 valueLabelDisplay="auto"
             />
@@ -363,7 +371,7 @@ const FilterWindow = (props) => {
 
 
             <Button type={"submit"} onClick={handleSubmit} />
-        </Container>
+        </div>
     );
 };
 
