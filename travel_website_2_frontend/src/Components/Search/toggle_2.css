@@ -1,0 +1,81 @@
+.toggle-btn-group {
+    display: inline-block;
+    position: relative;
+}
+
+.toggle-btn-group .toggle-btn {
+    float: left;
+    padding: 10px;
+    margin: 0;
+    height: 40px;
+    min-width: 65px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background: #7e7e7e; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdlN2U3ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3MzczNzMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #7e7e7e 0%, #737373 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7e7e7e), color-stop(100%,#737373)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #7e7e7e 0%,#737373 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #7e7e7e 0%,#737373 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #7e7e7e 0%,#737373 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #7e7e7e 0%,#737373 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e7e7e', endColorstr='#737373',GradientType=0 ); /* IE6-8 */
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, .8);
+    border: none;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, .2);
+    -moz-box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 1px 1px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 1px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.2), 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn-group .toggle-btn:first-child {
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.toggle-btn-group .toggle-btn:last-child {
+    -moz-border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+
+.toggle-btn-group .toggle-btn:only-of-type {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+.toggle-btn-group > button:hover {
+    color: #13c5c7;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, .5);
+    -moz-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+
+.toggle-btn-group > button:active {
+    background: #09626c;
+}
+
+.toggle-btn-group > .selected:hover {
+    background: #505050;
+}
+
+.toggle-btn.selected {
+    border-color: #141414;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    -moz-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+    background: #404040;
+    color: #d1d3d4;
+}

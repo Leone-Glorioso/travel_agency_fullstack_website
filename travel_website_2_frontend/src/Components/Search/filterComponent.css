@@ -46,3 +46,8 @@ p {
 .button-secondary:hover {
     background-color: #333; /* Black on hover */
 }
+
+.new {
+    background: white;
+    font-palette: dark;
+}

@@ -3,11 +3,13 @@ import {Button, Container} from "semantic-ui-react";
 import {ApiConnector} from "../Other/ApiConnector";
 import L from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import {Slider, Typography} from "@mui/material";
+import {Slider, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
 import TripleToggleSwitch from "./TripleToggleSwitch";
 import SearchField from "./SearchField";
 import {MapContainer, TileLayer} from "react-leaflet";
 import './filterComponent.css';
+import './toggle.css';
+import './toggle_2.css'
 
 // const useStyles = makeStyles(() => ({
 //     map: { height: "300px" }
@@ -40,6 +42,9 @@ const FilterWindow = (props) => {
     const [tv, setTV] = useState(true);
     const [parking, setParking] = useState(true);
     const [elevator, setElevator] = useState(true);
+    const [flags, setFlags] = useState([]);
+
+
 
     // const classes = useStyles();
     const prov = new OpenStreetMapProvider();
@@ -59,6 +64,37 @@ const FilterWindow = (props) => {
             value: null
         }
     };
+
+    const marks = [
+        {
+            value: 10,
+            label: '10km',
+        },
+        {
+            value: 50,
+            label: '50km',
+        },
+        {
+            value: 100,
+            label: '100km',
+        },
+        {
+            value: 200,
+            label: '200km',
+        },
+        {
+            value: 500,
+            label: '500km',
+        },
+        {
+            value: 1000,
+            label: '1000km',
+        },
+    ];
+
+    const handleSetRanges = (event, newValue) =>{
+        setRange(newValue)
+    }
 
     const rangeBedSelector = (event, newValue) =>
     {
@@ -84,70 +120,169 @@ const FilterWindow = (props) => {
         setEnd_area(newValue[1])
     }
 
-    const handleChangeLivingRoom = (value) =>
+    const handleChangeLivingRoom = (event) =>
     {
-        if(value != null)
-            setLivingRoom(value)
+        if(event.target.value !== 'none')
+        {
+            setLivingRoom(event.target.value === 'true')
+            if(flags.includes('livingRoom') == false)
+                flags.push('livingRoom')
+        }
+        else
+        {
+            if(flags.includes('livingRoom') == true)
+                flags.splice(flags.indexOf('livingRoom'), 1)
+        }
     }
 
-    const handleChangeCooling = (value) =>
+    const handleChangeCooling = (event) =>
     {
-        if(value != null)
-            setCooling(value)
+        if(event.target.value !== 'none')
+        {
+            setCooling(event.target.value === 'true')
+            if(flags.includes('cooling') == false)
+                flags.push('cooling')
+        }
+        else
+        {
+            if(flags.includes('cooling') == true)
+                flags.splice(flags.indexOf('cooling'), 1)
+        }
     }
 
-    const handleChangeHeating = (value) =>
+    const handleChangeHeating = (event) =>
     {
-        if(value != null)
-            setHeating(value)
+        if(event.target.value !== 'none')
+        {
+            setHeating(event.target.value === 'true')
+            if(flags.includes('heating') == false)
+                flags.push('heating')
+        }
+        else
+        {
+            if(flags.includes('heating') == true)
+                flags.splice(flags.indexOf('heating'), 1)
+        }
     }
 
-    const handleChangeTV = (value) =>
+    const handleChangeTV = (event) =>
     {
-        if(value != null)
-            setTV(value)
+        if(event.target.value !== 'none')
+        {
+            setTV(event.target.value === 'true')
+            if(flags.includes('tv') == false)
+                flags.push('tv')
+        }
+        else
+        {
+            if(flags.includes('tv') == true)
+                flags.splice(flags.indexOf('tv'), 1)
+        }
     }
 
-    const handleChangeParking = (value) =>
+    const handleChangeParking = (event) =>
     {
-        if(value != null)
-            setParking(value)
+        if(event.target.value !== 'none')
+        {
+            setParking(event.target.value === 'true')
+            if(flags.includes('parking') == false)
+                flags.push('parking')
+        }
+        else
+        {
+            if(flags.includes('parking') == true)
+                flags.splice(flags.indexOf('parking'), 1)
+        }
     }
 
-    const handleChangeSmoking = (value) =>
+    const handleChangeSmoking = (event) =>
     {
-        if(value != null)
-            setSmoking(value)
+        if(event.target.value !== 'none')
+        {
+            setSmoking(event.target.value === 'true')
+            if(flags.includes('smoking') == false)
+                flags.push('smoking')
+        }
+        else
+        {
+            if(flags.includes('smoking') == true)
+                flags.splice(flags.indexOf('smoking'), 1)
+        }
     }
 
-    const handleChangePets = (value) =>
+    const handleChangePets = (event) =>
     {
-        if(value != null)
-            setPets(value)
+        if(event.target.value !== 'none')
+        {
+            setPets(event.target.value === 'true')
+            if(flags.includes('pets') == false)
+                flags.push('pets')
+        }
+        else
+        {
+            if(flags.includes('pets') == true)
+                flags.splice(flags.indexOf('pets'), 1)
+        }
     }
 
-    const handleChangeElevator = (value) =>
+    const handleChangeElevator = (event) =>
     {
-        if(value != null)
-            setElevator(value)
+        if(event.target.value !== 'none')
+        {
+            setElevator(event.target.value === 'true')
+            if(flags.includes('elevator') == false)
+                flags.push('elevator')
+        }
+        else
+        {
+            if(flags.includes('elevator') == true)
+                flags.splice(flags.indexOf('elevator'), 1)
+        }
     }
 
-    const handleChangeKitchen = (value) =>
+    const handleChangeKitchen = (event) =>
     {
-        if(value != null)
-            setKitchen(value)
+        if(event.target.value !== 'none')
+        {
+            setKitchen(event.target.value === 'true')
+            if(flags.includes('kitchen') == false)
+                flags.push('kitchen')
+        }
+        else
+        {
+            if(flags.includes('kitchen') == true)
+                flags.splice(flags.indexOf('kitchen'), 1)
+        }
     }
 
-    const handleChangeInternet = (value) =>
+    const handleChangeInternet = (event) =>
     {
-        if(value != null)
-            setInternet(value)
+        if(event.target.value !== 'none')
+        {
+            setInternet(event.target.value === 'true')
+            if(flags.includes('internet') == false)
+                flags.push('internet')
+        }
+        else
+        {
+            if(flags.includes('internet') == true)
+                flags.splice(flags.indexOf('internet'), 1)
+        }
     }
 
-    const handleChangeEvents = (value) =>
+    const handleChangeEvents = (event) =>
     {
-        if(value != null)
-            setEvents(value)
+        if(event.target.value !== 'none')
+        {
+            setEvents(event.target.value === 'true')
+            if(flags.includes('events') == false)
+                flags.push('events')
+        }
+        else
+        {
+            if(flags.includes('events') == true)
+                flags.splice(flags.indexOf('events'), 1)
+        }
     }
 
     const handleSetTypeOfRoom = (e) =>
@@ -179,7 +314,7 @@ const FilterWindow = (props) => {
     {
         const first_element=1
         const last_element=20
-        const flags="beds, bedrooms, baths, dates, location, area, livingRoom, smoking, pets, events, internet, cooling, heating, kitchen, tv, parking, elevator, typeofroom"
+        const flags_2= flags.join(', ')
 
         const searchRequest={
             "latitude": latitude,
@@ -209,11 +344,12 @@ const FilterWindow = (props) => {
             "elevator": elevator,
             "first_element": first_element,
             "last_element": last_element,
-            "flags": flags
+            "flags": flags_2
         }
 
         try {
             const response = ApiConnector.search(searchRequest);
+            console.log(searchRequest)
         }
         catch (error)
         {
@@ -253,8 +389,12 @@ const FilterWindow = (props) => {
             </Typography>
             <Slider
                 value={range}
-                onChange={handleSetRange}
+                onChange={handleSetRanges}
                 valueLabelDisplay="auto"
+                max={1000}
+                min={10}
+                marks={marks}
+                step={null}
             />
             <label> Give Dates: </label>
             <input
@@ -270,14 +410,14 @@ const FilterWindow = (props) => {
             <h4>
                 Number of guests
             </h4>
-            <label>Number of guests:</label>
-            <input
-                min={0}
-                value={numOfGuests}
-                defaultValue={2}
-                type={"number"}
-                onChange={(e)=>setNumOfGuests(e.target.value)}
-            />
+            {/*<label>Number of guests:</label>*/}
+            {/*<input*/}
+            {/*    min={0}*/}
+            {/*    value={numOfGuests}*/}
+            {/*    defaultValue={2}*/}
+            {/*    type={"number"}*/}
+            {/*    onChange={(e)=>setNumOfGuests(e.target.value)}*/}
+            {/*/>*/}
             <label htmlFor="typeOfRoom">Choose type of room:</label>
             {/*<select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)} multiple>*/}
             <select name="typeOfRoom" id="typeOfRoom" onChange={handleSetTypeOfRoom} multiple size="1">
@@ -329,49 +469,235 @@ const FilterWindow = (props) => {
                 Living Room:
             </Typography>
             {/*<label>Living Room:</label>*/}
-            <TripleToggleSwitch labels={labels} onChange={handleChangeLivingRoom} />
-            <Typography id="2" gutterBottom={true}>
-                Elevator:
-            </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeElevator} />
-            <Typography id="3" gutterBottom={true}>
-                Smoking:
-            </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeSmoking} />
-            <Typography id="4" gutterBottom={true}>
-                Pets:
-            </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangePets} />
-            <Typography id="5" gutterBottom={true}>
-                Heating:
-            </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeHeating} />
+            {/*<TripleToggleSwitch labels={labels} onChange={handleChangeLivingRoom} />*/}
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeLivingRoom}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="6" gutterBottom={true}>
                 Cooling:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeCooling} />
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeCooling}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
+            <Typography id="2" gutterBottom={true}>
+                Elevator:
+            </Typography>
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeElevator}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
+            <Typography id="3" gutterBottom={true}>
+                Smoking:
+            </Typography>
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeSmoking}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
+            <Typography id="4" gutterBottom={true}>
+                Pets:
+            </Typography>
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangePets}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
+            <Typography id="5" gutterBottom={true}>
+                Heating:
+            </Typography>
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeHeating}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="7" gutterBottom={true}>
                 TV:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeTV} />
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeTV}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="8" gutterBottom={true}>
                 Events:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeEvents} />
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeEvents}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="9" gutterBottom={true}>
                 Parking:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeParking} />
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeParking}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="10" gutterBottom={true}>
                 Internet:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeInternet} />
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeInternet}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Typography id="11" gutterBottom={true}>
                 Kitchen:
             </Typography>
-            <TripleToggleSwitch labels={labels} onChange={handleChangeKitchen} />
-
-
+            <ToggleButtonGroup
+                // value={livingRoom}
+                exclusive
+                onChange={handleChangeKitchen}
+                aria-label="text alignment"
+                className={"toggle-btn-group"}
+                color={"primary"}
+            >
+                <ToggleButton value={false} aria-label="left aligned" className={"toggle-btn"}>
+                    No
+                </ToggleButton>
+                <ToggleButton value={"none"} aria-label="centered" className={"toggle-btn"}>
+                    O
+                </ToggleButton>
+                <ToggleButton value={true} aria-label="right aligned" className={"toggle-btn"}>
+                    Yes
+                </ToggleButton>
+            </ToggleButtonGroup>
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
         </div>
     );
