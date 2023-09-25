@@ -7,6 +7,7 @@ import {Slider, Typography} from "@mui/material";
 import TripleToggleSwitch from "./TripleToggleSwitch";
 import SearchField from "./SearchField";
 import {MapContainer, TileLayer} from "react-leaflet";
+import './filterComponent.css';
 
 // const useStyles = makeStyles(() => ({
 //     map: { height: "300px" }
@@ -54,7 +55,7 @@ const FilterWindow = (props) => {
             value: true
         },
         center: {
-            title: "O",
+            title: "",
             value: null
         }
     };
@@ -221,32 +222,32 @@ const FilterWindow = (props) => {
     }
 
     return (
-        <div>
-            {/*<MapContainer*/}
-            {/*    id="map"*/}
-            {/*    // className={classes.map}*/}
-            {/*    center={[51.505, -0.091]}*/}
-            {/*    zoom={13}*/}
-            {/*    scrollWheelZoom={false}*/}
-            {/*>*/}
-            {/*    <TileLayer*/}
-            {/*        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'*/}
-            {/*        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
-            {/*    />*/}
-            {/*    <SearchField*/}
-            {/*        provider={prov}*/}
-            {/*        showMarker={true}*/}
-            {/*        showPopup={false}*/}
-            {/*        popupFormat={({ query, result }) => result.label}*/}
-            {/*        maxMarkers={3}*/}
-            {/*        retainZoomLevel={false}*/}
-            {/*        animateZoom={true}*/}
-            {/*        autoClose={false}*/}
-            {/*        searchLabel={"Enter address, please"}*/}
-            {/*        keepResult={true}*/}
-            {/*        eventHandler={eventHandler}*/}
-            {/*    />*/}
-            {/*</MapContainer>*/}
+        <div className="window">
+            <MapContainer
+                id="map"
+                // className={classes.map}
+                center={[51.505, -0.091]}
+                zoom={13}
+                scrollWheelZoom={false}
+            >
+                {/*<TileLayer*/}
+                {/*    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'*/}
+                {/*    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
+                {/*/>*/}
+                <SearchField
+                    provider={prov}
+                    showMarker={true}
+                    showPopup={false}
+                    popupFormat={({ query, result }) => result.label}
+                    maxMarkers={3}
+                    retainZoomLevel={false}
+                    animateZoom={true}
+                    autoClose={false}
+                    searchLabel={"Enter address, please"}
+                    keepResult={true}
+                    eventHandler={eventHandler}
+                />
+            </MapContainer>
             <Typography id="range-sliderBed" gutterBottom>
                 Select Range:
             </Typography>
@@ -284,7 +285,7 @@ const FilterWindow = (props) => {
                 <option value="hostel">Hostel</option>
                 <option value="house">House</option>
             </select>
-            <Typography id="range-sliderBed" gutterBottom>
+            <Typography id="range-sliderBed">
                 Select Bed Range:
             </Typography>
             <Slider
@@ -294,7 +295,7 @@ const FilterWindow = (props) => {
                 max={10}
                 min={1}
             />
-            <Typography id="range-sliderBedroom" gutterBottom>
+            <Typography id="range-sliderBedroom">
                 Select Bedroom Range:
             </Typography>
             <Slider
@@ -304,7 +305,7 @@ const FilterWindow = (props) => {
                 max={10}
                 min={1}
             />
-            <Typography id="range-sliderBath" gutterBottom>
+            <Typography id="range-sliderBath">
                 Select Bath Range:
             </Typography>
             <Slider
@@ -314,7 +315,7 @@ const FilterWindow = (props) => {
                 max={10}
                 min={1}
             />
-            <Typography id="range-sliderArea" gutterBottom>
+            <Typography id="range-sliderArea">
                 Select Area Range:
             </Typography>
             <Slider
@@ -324,53 +325,54 @@ const FilterWindow = (props) => {
                 onChange={rangeAreaSelector}
                 valueLabelDisplay="auto"
             />
-            <Typography id="1" gutterBottom>
+            <Typography id="1" gutterBottom={true}>
                 Living Room:
             </Typography>
+            {/*<label>Living Room:</label>*/}
             <TripleToggleSwitch labels={labels} onChange={handleChangeLivingRoom} />
-            <Typography id="2" gutterBottom>
+            <Typography id="2" gutterBottom={true}>
                 Elevator:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeElevator} />
-            <Typography id="3" gutterBottom>
+            <Typography id="3" gutterBottom={true}>
                 Smoking:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeSmoking} />
-            <Typography id="4" gutterBottom>
+            <Typography id="4" gutterBottom={true}>
                 Pets:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangePets} />
-            <Typography id="5" gutterBottom>
+            <Typography id="5" gutterBottom={true}>
                 Heating:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeHeating} />
-            <Typography id="6" gutterBottom>
+            <Typography id="6" gutterBottom={true}>
                 Cooling:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeCooling} />
-            <Typography id="7" gutterBottom>
+            <Typography id="7" gutterBottom={true}>
                 TV:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeTV} />
-            <Typography id="8" gutterBottom>
+            <Typography id="8" gutterBottom={true}>
                 Events:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeEvents} />
-            <Typography id="9" gutterBottom>
+            <Typography id="9" gutterBottom={true}>
                 Parking:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeParking} />
-            <Typography id="10" gutterBottom>
+            <Typography id="10" gutterBottom={true}>
                 Internet:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeInternet} />
-            <Typography id="11" gutterBottom>
+            <Typography id="11" gutterBottom={true}>
                 Kitchen:
             </Typography>
             <TripleToggleSwitch labels={labels} onChange={handleChangeKitchen} />
 
 
-            <Button type={"submit"} onClick={handleSubmit} />
+            <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
         </div>
     );
 };

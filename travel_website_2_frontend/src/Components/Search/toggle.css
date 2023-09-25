@@ -11,6 +11,7 @@ label {
 h4 {
     margin: 0;
     font-weight: 500;
+    z-index: 10;
 }
 
 .black-font {
@@ -20,40 +21,40 @@ h4 {
 .main-container {
     display: inline-block;
     vertical-align: middle;
-    width: 250px;
-    height: 50px;
-    border-radius: 100px;
+    width: 112px; /* 250px * 0.45 */
+    height: 27px; /* 50px * 0.55 */
+    border-radius: 55px; /* 100px * 0.55 */
     background-color: #4d4d4d;
-    position: absolute;
-    top: 20%;
-    left: 45%;
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
+    /*position: absolute;*/
+    /*top: 11%;*/
+    /*left: 24.75%; !* 45% * 0.55 *!*/
+    box-shadow: 0.55px 0.55px 5.5px 0.55px rgba(0, 0, 0, 0.5); /* 1px * 0.55 */
 }
 
 .switch {
-    height: 44px;
-    width: 80px;
+    height: 27px; /* 44px * 0.55 */
+    width: 40px; /* 80px * 0.55 */
     background-color: white;
-    border-radius: 100px;
-    position: absolute;
-    left: 3px;
-    top: 3px;
+    border-radius: 44px; /* 100px * 0.44 */
+    /*position: absolute;*/
+    left: 1px; /* 3px * 0.55 */
+    top: 1px; /* 3px * 0.55 */
     transition: ease-in;
 }
 
-/*---------------- LEFT ------------------- */
+/* ---------------- LEFT ------------------- */
 .switch.left-to-center {
     animation-name: leftToCenter;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.left-to-right {
     animation-name: leftToRight;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.left-position {
-    left: 3px;
+    left: 1px; /* 3px * 0.55 */
 }
 
 .left-label {
@@ -64,146 +65,147 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 #left:checked + label {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 @keyframes leftToCenter {
     from {
-        left: 3px;
+        left: 1px; /* 3px * 0.55 */
     }
     to {
-        left: 85px;
+        left: 35px; /* 85px * 0.55 */
     }
 }
 
 @keyframes leftToRight {
     from {
-        left: 3px;
+        left: 1px; /* 3px * 0.55 */
     }
     to {
-        left: 167px;
+        left: 75px; /* 167px * 0.55 */
     }
 }
 
 /* -------------------- center ------------------ */
 .switch.center-to-left {
     animation-name: centerToLeft;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.center-to-right {
     animation-name: centerToRight;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.center-position {
-    left: 85px;
+    left: 35px; /* 85px * 0.55 */
 }
 
 .center-label {
     position: absolute;
-    left: 85px;
+    left: 35px; /* 85px * 0.55 */
 }
 
 #center + label {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 #center:checked + label {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 @keyframes centerToLeft {
     from {
-        left: 85px;
+        left: 35px; /* 85px * 0.55 */
     }
     to {
-        left: 3px;
+        left: 1px; /* 3px * 0.55 */
     }
 }
 
 @keyframes centerToRight {
     from {
-        left: 85px;
+        left: 35px; /* 85px * 0.55 */
     }
     to {
-        right: 1px;
+        right: 35px; /* 85px * 0.55 */
     }
 }
 
 /* ------------------- RIGHT ------------------- */
 .switch.right-to-left {
     animation-name: rightToLeft;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.right-to-center {
     animation-name: rightToCenter;
-    animation-duration: 0.5s;
+    animation-duration: 0.275s; /* 0.5s * 0.55 */
 }
 
 .switch.right-position {
-    left: 167px;
+    left: 75px; /* 167px * 0.55 */
 }
 
 .right-label {
-    position: absolute;
-    right: 2px;
+    /*position: absolute;*/
+    right: 1px; /* 2px * 0.55 */
 }
 
 #right + label {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 #right:checked + label {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 80px;
-    border-radius: 100px;
+    height: 27px; /* 50px * 0.55 */
+    width: 44px; /* 80px * 0.55 */
+    border-radius: 44px; /* 100px * 0.44 */
 }
 
 @keyframes rightToLeft {
     from {
-        left: 167px;
+        left: 75px; /* 167px * 0.55 */
     }
     to {
-        left: 3px;
+        left: 1px; /* 3px * 0.55 */
     }
 }
 
 @keyframes rightToCenter {
     from {
-        left: 167px;
+        left: 75px; /* 167px * 0.55 */
     }
     to {
-        right: 85px;
+        right: 35px; /* 85px * 0.55 */
     }
 }
+

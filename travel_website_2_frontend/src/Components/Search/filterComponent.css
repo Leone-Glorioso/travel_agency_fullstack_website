@@ -1,0 +1,48 @@
+.window {
+    height: 2000px;
+    width: 200px;
+    align-self: self-start;
+    background-color: #000000;
+    /*opacity: 40%;*/
+}
+p {
+    color: white;
+}
+
+/* Base button styles */
+.submit {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px; /* Adjust border radius as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Default button style */
+.button-default {
+    background-color: #333; /* Black */
+    color: #fff; /* White text */
+}
+
+/* Hover style for default button */
+.button-default:hover {
+    background-color: #0074e4; /* Blue on hover */
+}
+
+/* You can add additional button styles if needed */
+
+/* Example secondary button style */
+.button-secondary {
+    background-color: #0074e4; /* Blue */
+    color: #fff; /* White text */
+}
+
+/* Hover style for secondary button */
+.button-secondary:hover {
+    background-color: #333; /* Black on hover */
+}
