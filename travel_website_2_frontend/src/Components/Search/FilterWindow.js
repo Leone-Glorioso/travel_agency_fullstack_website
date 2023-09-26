@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Container} from "semantic-ui-react";
+import {Button, Container, Table} from "semantic-ui-react";
 import {ApiConnector} from "../Other/ApiConnector";
 import L from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
@@ -10,6 +10,7 @@ import {MapContainer, TileLayer} from "react-leaflet";
 import './filterComponent.css';
 import './toggle.css';
 import './toggle_2.css'
+import TableOfChosenElements from "./TableOfChosenElements";
 
 // const useStyles = makeStyles(() => ({
 //     map: { height: "300px" }
@@ -133,6 +134,9 @@ const FilterWindow = (props) => {
             if(flags.includes('livingRoom') == true)
                 flags.splice(flags.indexOf('livingRoom'), 1)
         }
+        console.log("entered")
+        console.log(flags)
+        console.log(livingRoom)
     }
 
     const handleChangeCooling = (event) =>
@@ -275,12 +279,12 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setEvents(event.target.value === 'true')
-            if(flags.includes('events') == false)
+            if(flags.includes('events') === false)
                 flags.push('events')
         }
         else
         {
-            if(flags.includes('events') == true)
+            if(flags.includes('events') === true)
                 flags.splice(flags.indexOf('events'), 1)
         }
     }
@@ -354,6 +358,36 @@ const FilterWindow = (props) => {
         catch (error)
         {
             console.log(error)
+        }
+    }
+
+   let dictionary = {
+        'smoking': smoking,
+        'pets': pets,
+        'events': events,
+        'internet': internet,
+        'cooling': cooling,
+        'heating': heating,
+        'kitchen': kitchen,
+        'tv': tv,
+        'parking': parking,
+        'elevator': elevator,
+        'livingRoom': livingRoom
+    }
+
+    const update = () => {
+        dictionary = {
+            'smoking': smoking,
+            'pets': pets,
+            'events': events,
+            'internet': internet,
+            'cooling': cooling,
+            'heating': heating,
+            'kitchen': kitchen,
+            'tv': tv,
+            'parking': parking,
+            'elevator': elevator,
+            'livingRoom': livingRoom
         }
     }
 
@@ -472,7 +506,7 @@ const FilterWindow = (props) => {
             {/*<TripleToggleSwitch labels={labels} onChange={handleChangeLivingRoom} />*/}
             <ToggleButtonGroup
                 // value={livingRoom}
-                exclusive
+                // exclusive
                 onChange={handleChangeLivingRoom}
                 aria-label="text alignment"
                 className={"toggle-btn-group"}
@@ -698,7 +732,9 @@ const FilterWindow = (props) => {
                     Yes
                 </ToggleButton>
             </ToggleButtonGroup>
+
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
+            <TableOfChosenElements flags={flags} dict={dictionary} />
         </div>
     );
 };
