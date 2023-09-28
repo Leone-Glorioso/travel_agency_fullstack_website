@@ -1,15 +1,18 @@
 
 
 import { createContext, useContext, useEffect, useState } from "react";
+// import Cookies from 'react-cookie';
+import Cookies from 'universal-cookie';
 
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const cookies = new Cookies();
 
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const storedUser = JSON.parse(sessionStorage.getItem("user"));
         if (storedUser) {
             // Check token expiry and update user state accordingly
             if (Date.now() < storedUser.exp * 1000) {
@@ -26,15 +29,23 @@ function AuthProvider({ children }) {
 
 
     const userLogin = (user, accessToken) => {
-        localStorage.setItem("user", JSON.stringify({ user, accessToken }));
+        sessionStorage.setItem("user", JSON.stringify({ user, accessToken }));
+        // let d = new Date();
+        // d.setTime(d.getTime() + (10*60*1000));
+        cookies.set('user', JSON.stringify({ user, accessToken }))
         setUser({ user, accessToken });
     };
 
 
+    const getUser = () => {
+        return cookies.get('user')
+    }
+
 
     const userLogout = () => {
         // Clear the user data from local storage
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
+        cookies.remove('user')
         setUser(null);
     };
 
@@ -43,6 +54,7 @@ function AuthProvider({ children }) {
         userIsAuthenticated,
         userLogin,
         userLogout,
+        getUser
     };
 
     return (

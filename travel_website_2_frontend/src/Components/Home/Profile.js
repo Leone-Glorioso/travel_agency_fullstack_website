@@ -5,6 +5,7 @@ import {ApiConnector} from "../Other/ApiConnector";
 import {Button, Form, Grid, Icon, Image, Input, Segment, Statistic} from "semantic-ui-react";
 
 import "./Profile.css";
+import {useNavigate} from "react-router-dom";
 
 function Profile() {
 
@@ -18,6 +19,7 @@ function Profile() {
     let [role, setRole] = useState('')
     let [photo, setPhoto] = useState([])
     const Auth = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () =>
@@ -130,6 +132,7 @@ function Profile() {
                         <Form.Button type={"submit"} onClick={submitNewImage}>Upload Image</Form.Button>
                     </Form>
                 </Grid.Column>
+                <Button onClick={() => navigate("/new_room")} />
                 {/*<Grid.Column>*/}
                 {/*    */}
                 {/*</Grid.Column>*/}

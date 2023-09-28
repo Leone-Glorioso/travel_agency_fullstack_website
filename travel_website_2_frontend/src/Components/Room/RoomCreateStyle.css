@@ -1,5 +1,5 @@
 /* Styles for the container window */
-.container {
+.one {
     /*height: 1500px;*/
     width: 500px;
     background-color: #ffffff; /* Change the background color to your preference */
@@ -12,13 +12,7 @@
 }
 
 /* Styles for input elements */
-.container input[type="text"],
-.container input[type="number"],
-.container input[type="email"],
-.container input[type="password"],
-.container input[type="checkbox"],
-.container input[type="radio"],
-.container textarea {
+.two {
     width: 90%; /* Make input fields span the full width of the container */
     padding: 10px; /* Add padding to input fields */
     margin-bottom: 15px; /* Add some spacing between input fields */
@@ -26,8 +20,18 @@
     border-radius: 4px; /* Add rounded corners to input fields */
 }
 
+/*.five {*/
+/*    width: 500px; !* Make input fields span the full width of the container *!*/
+/*    height: 2000px;*/
+/*    padding: 10px; !* Add padding to input fields *!*/
+/*    margin-bottom: 15px; !* Add some spacing between input fields *!*/
+/*    border: 1px solid #ccc; !* Add a border to input fields *!*/
+/*    border-radius: 4px; !* Add rounded corners to input fields *!*/
+/*}*/
+
+
 /* Styles for select elements */
-.container select {
+.three {
     width: 100%; /* Make select elements span the full width of the container */
     padding: 10px; /* Add padding to select elements */
     margin-bottom: 15px; /* Add some spacing between select elements */
@@ -36,7 +40,7 @@
 }
 
 /* Style for the submit button (if you have one) */
-.container button[type="submit"] {
+.four {
     background-color: #007bff; /* Change the button background color to your preference */
     color: #fff; /* Change the button text color to your preference */
     padding: 10px 15px; /* Add padding to the button */
@@ -47,6 +51,7 @@
 
 label {
     color: #282c34;
+    display: block;
 }
 
 .tile {
