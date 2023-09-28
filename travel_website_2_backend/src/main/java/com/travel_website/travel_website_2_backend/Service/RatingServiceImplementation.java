@@ -19,17 +19,24 @@ public class RatingServiceImplementation implements RatingService{
 
     private final RatingRepository ratingRepository;
 
+
     @Override
-    public void validateAngGetRatingById(int id)
+    public List<Rating> allRatings()
     {
-        ratingRepository.findById(id)
+        return ratingRepository.findAll();
+    }
+
+    @Override
+    public Rating validateAndGetRatingById(int id)
+    {
+        return ratingRepository.findById(id)
                 .orElseThrow(() -> new Exception_RatingDoesNotExist("Rating with id " + id + " does not exist"));
     }
 
     @Override
-    public void validateAndGetRatingByRoomAndUser(int room, int user)
+    public Rating validateAndGetRatingByRoomAndUser(int room, int user)
     {
-        ratingRepository.findByRoomAndUser(room, user)
+        return ratingRepository.findByRoomAndUser(room, user)
                 .orElseThrow(() -> new Exception_RatingDoesNotExist("Rating of room " + room + " by user with id " + user + " does not exist"));
     }
 
@@ -46,6 +53,19 @@ public class RatingServiceImplementation implements RatingService{
         }
         float average = sum / list.size();
         return average;
+    }
+
+    @Override
+    public List<Rating> getRatingsOfUser(int user)
+    {
+        return ratingRepository.findByUser(user);
+    }
+
+
+    @Override
+    public List<Rating> getRatingsOfRoom(int room)
+    {
+        return ratingRepository.findByRoom(room);
     }
 
 //    @Override
@@ -73,4 +93,17 @@ public class RatingServiceImplementation implements RatingService{
     {
         return ratingRepository.findByUserAndRatingBetween(user, 0, top);
     }
+
+    @Override
+    public Rating saveRating(Rating rating)
+    {
+        return ratingRepository.save(rating);
+    }
+
+    @Override
+    public void deleteRating(Rating rating)
+    {
+        ratingRepository.delete(rating);
+    }
+
 }

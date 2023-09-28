@@ -1,17 +1,22 @@
 package com.travel_website.travel_website_2_backend.Service;
 
 import com.travel_website.travel_website_2_backend.Models.Rating;
-import com.travel_website.travel_website_2_backend.Models.Room;
 
 import java.util.List;
 
 public interface RatingService {
 
-    void validateAngGetRatingById(int id);
+    List<Rating> allRatings();
 
-    void validateAndGetRatingByRoomAndUser(int room, int user);
+    Rating validateAndGetRatingById(int id);
+
+    Rating validateAndGetRatingByRoomAndUser(int room, int user);
 
     float getRatingOfRoom(int room);
+
+    List<Rating> getRatingsOfUser(int user);
+
+    List<Rating> getRatingsOfRoom(int room);
 
 //    List<Rating> getRatingsOfRoom(int room, String type);
 
@@ -19,4 +24,8 @@ public interface RatingService {
 
 
     List<Rating> getRatingsOfUserBelow(int user, int top);
+
+    Rating saveRating(Rating rating);
+
+    void deleteRating(Rating rating);
 }
