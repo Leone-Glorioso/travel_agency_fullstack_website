@@ -39,6 +39,7 @@ public class RoomController {
     private final CalendarService calendarService;
     private final DateHelper dateHelper;
     private final RequestService requestService;
+//    private boolean[][] map1 = new ;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")

@@ -1,6 +1,6 @@
 import { useMap } from "react-leaflet";
 import { GeoSearchControl } from "leaflet-geosearch";
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import L from "leaflet";
 // import "react-leaflet-geosearch/lib/react-leaflet-geosearch.css";
 // important to import css for leaflet-geosearch in the html head
@@ -22,6 +22,16 @@ const SearchField = (props) => {
     //   provider: new OpenStreetMapProvider()
     // });
 
+    // const [latitude, setLatitude] = useState(-50.0);
+    // const [longitude, setLongitude] = useState(-50.0);
+
+    const eventHandler = (result) =>
+    {
+        props.setLatitude(result.location.y)
+        props.setLongitude(result.location.x)
+    }
+
+
     useEffect(() => {
         const searchControl = new GeoSearchControl({
             provider: props.provider,
@@ -39,7 +49,7 @@ const SearchField = (props) => {
             autoCompleteDelay: 250, // optional: number      - default 250
             ...props
         });
-        map.on('geosearch/showlocation', props.eventHandler)
+        map.on('geosearch/showlocation', eventHandler)
         map.addControl(searchControl);
         return () => map.removeControl(searchControl);
     }, [map, props]);

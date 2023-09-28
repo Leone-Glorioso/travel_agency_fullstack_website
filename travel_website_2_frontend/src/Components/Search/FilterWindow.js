@@ -301,12 +301,6 @@ const FilterWindow = (props) => {
         setTypeofroom(value.join(", "));
     };
 
-    const eventHandler = (e) =>
-    {
-        const marker = e.target.markers[0]
-        setLatitude(marker.y)
-        setLongitude(marker.x)
-    }
 
     const handleSetRange = (value) =>
     {
@@ -415,7 +409,8 @@ const FilterWindow = (props) => {
                     autoClose={false}
                     searchLabel={"Enter address, please"}
                     keepResult={true}
-                    eventHandler={eventHandler}
+                    setLatitude={setLatitude}
+                    setLongitude={setLongitude}
                 />
             </MapContainer>
             <Typography id="range-sliderBed" gutterBottom>
