@@ -51,3 +51,16 @@ p {
     background: white;
     font-palette: dark;
 }
+
+/*.open-user-map .leaflet-geosearch-bar form {*/
+/*    background-color: red;*/
+/*}*/
+
+/*.open-user-map .leaflet-control-geosearch a.reset {*/
+/*    background-color: red;*/
+/*}*/
+
+/*.open-user-map .leaflet-control-geosearch .results {*/
+/*    background: none;*/
+/*    color: white;*/
+/*}*/

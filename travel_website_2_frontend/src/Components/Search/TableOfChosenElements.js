@@ -5,6 +5,10 @@ import './stylesOfChosen.css';
 const TableOfChosenElements = ({flags, dict}) => {
 
     let list = flags.map(flag => {
+
+        if(flag === 'dates' || flag === 'location' || flag === 'bedrooms' || flag === 'beds' || flag === 'baths' || flag === 'area')
+            return null
+
         return(
             <Table.Row key={flag}>
                 {(dict[flag] == true) && <Table.Cell className={"chosen"}>{flag}</Table.Cell>}

@@ -2,6 +2,7 @@ import { useMap } from "react-leaflet";
 import { GeoSearchControl } from "leaflet-geosearch";
 import React, {useEffect, useState} from "react";
 import L from "leaflet";
+import FilterWindow from "./FilterWindow";
 // import "react-leaflet-geosearch/lib/react-leaflet-geosearch.css";
 // important to import css for leaflet-geosearch in the html head
 // https://github.com/smeijer/leaflet-geosearch/issues/160
@@ -27,8 +28,10 @@ const SearchField = (props) => {
 
     const eventHandler = (result) =>
     {
-        props.setLatitude(result.location.y)
-        props.setLongitude(result.location.x)
+        props.setLat(result.location.y)
+        props.setLong(result.location.x)
+        props.setFlags('location')
+        console.log(FilterWindow.latitude, FilterWindow.longitude)
     }
 
 

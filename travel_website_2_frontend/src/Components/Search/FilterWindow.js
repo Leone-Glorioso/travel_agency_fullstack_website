@@ -16,12 +16,15 @@ import TableOfChosenElements from "./TableOfChosenElements";
 //     map: { height: "300px" }
 // }));
 
+// let latitude = 0.01;
+// let longitude = 0.01;
+
 const FilterWindow = (props) => {
     const [startDate,setStartDate]=useState(new Date())
     const [endDate,setEndDate]=useState(new Date())
     const [numOfGuests,setNumOfGuests]=useState(2)
-    const [latitude, setLatitude] = useState(-50.0);
-    const [longitude, setLongitude] = useState(-50.0);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     const [range, setRange] = useState(10);
     const [typeofroom, setTypeofroom] = useState("private_room");
     const [start_numOfBeds, setStart_numOfBeds] = useState(1);
@@ -30,20 +33,23 @@ const FilterWindow = (props) => {
     const [end_numOfBaths, setEnd_numOfBaths] = useState(5);
     const [start_numOfBedrooms, setStart_numOfBedrooms] = useState(1);
     const [end_numOfBedrooms, setEnd_numOfBedrooms] = useState(10);
-    const [livingRoom, setLivingRoom] = useState(true);
+    const [livingRoom, setLivingRoom] = useState();
     const [start_area, setStart_area] = useState(100);
     const [end_area, setEnd_area] = useState(1000);
-    const [smoking, setSmoking] = useState(true);
-    const [pets, setPets] = useState(true);
-    const [events, setEvents] = useState(true);
-    const [internet, setInternet] = useState(true);
-    const [cooling, setCooling] = useState(true);
-    const [heating, setHeating] = useState(true);
-    const [kitchen, setKitchen] = useState(true);
-    const [tv, setTV] = useState(true);
-    const [parking, setParking] = useState(true);
-    const [elevator, setElevator] = useState(true);
+    const [smoking, setSmoking] = useState();
+    const [pets, setPets] = useState();
+    const [events, setEvents] = useState();
+    const [internet, setInternet] = useState();
+    const [cooling, setCooling] = useState();
+    const [heating, setHeating] = useState();
+    const [kitchen, setKitchen] = useState();
+    const [tv, setTV] = useState();
+    const [parking, setParking] = useState();
+    const [elevator, setElevator] = useState();
     const [flags, setFlags] = useState([]);
+
+    if(flags.includes('dates') === false)
+        flags.push('dates')
 
 
 
@@ -101,24 +107,50 @@ const FilterWindow = (props) => {
     {
         setStart_numOfBeds(newValue[0])
         setEnd_numOfBeds(newValue[1])
+        if(flags.includes('beds') === true && start_numOfBeds === 1 && end_numOfBeds === 10)
+            flags.splice(flags.indexOf('beds'), 1)
+        else if(flags.includes('beds') === false && (start_numOfBeds !== 1 || end_numOfBeds !== 10))
+            flags.push('beds')
+    }
+
+    const setLat = (value) =>
+    {
+        setLatitude(value)
+    }
+
+    const setLong = (value) =>
+    {
+        setLongitude(value)
     }
 
     const rangeBedroomSelector = (event, newValue) =>
     {
         setStart_numOfBedrooms(newValue[0])
         setEnd_numOfBedrooms(newValue[1])
+        if(flags.includes('bedrooms') === true && start_numOfBedrooms === 1 && end_numOfBedrooms === 10)
+            flags.splice(flags.indexOf('bedrooms'), 1)
+        else if(flags.includes('bedrooms') === false && (start_numOfBedrooms !== 1 || end_numOfBedrooms !== 10))
+            flags.push('bedrooms')
     }
 
     const rangeBathSelector = (event, newValue) =>
     {
         setStart_numOfBaths(newValue[0])
         setEnd_numOfBaths(newValue[1])
+        if(flags.includes('baths') === true && start_numOfBaths === 1 && end_numOfBaths === 10)
+            flags.splice(flags.indexOf('baths'), 1)
+        else if(flags.includes('baths') === false && (start_numOfBaths !== 1 || end_numOfBaths !== 10))
+            flags.push('baths')
     }
 
     const rangeAreaSelector = (event, newValue) =>
     {
         setStart_area(newValue[0])
         setEnd_area(newValue[1])
+        if(flags.includes('area') === true && start_area === 100 && end_area === 1000)
+            flags.splice(flags.indexOf('area'), 1)
+        else if(flags.includes('area') === false && (start_area !== 100 || end_area !== 1000))
+            flags.push('area')
     }
 
     const handleChangeLivingRoom = (event) =>
@@ -126,12 +158,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setLivingRoom(event.target.value === 'true')
-            if(flags.includes('livingRoom') == false)
+            if(flags.includes('livingRoom') === false)
                 flags.push('livingRoom')
         }
         else
         {
-            if(flags.includes('livingRoom') == true)
+            setLivingRoom(undefined)
+            if(flags.includes('livingRoom') === true)
                 flags.splice(flags.indexOf('livingRoom'), 1)
         }
         console.log("entered")
@@ -139,17 +172,23 @@ const FilterWindow = (props) => {
         console.log(livingRoom)
     }
 
+    const pushToFlags = (value) => {
+        if(flags.includes(value) === false)
+            flags.push(value)
+    }
+
     const handleChangeCooling = (event) =>
     {
         if(event.target.value !== 'none')
         {
             setCooling(event.target.value === 'true')
-            if(flags.includes('cooling') == false)
+            if(flags.includes('cooling') === false)
                 flags.push('cooling')
         }
         else
         {
-            if(flags.includes('cooling') == true)
+            setCooling(undefined)
+            if(flags.includes('cooling') === true)
                 flags.splice(flags.indexOf('cooling'), 1)
         }
     }
@@ -159,12 +198,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setHeating(event.target.value === 'true')
-            if(flags.includes('heating') == false)
+            if(flags.includes('heating') === false)
                 flags.push('heating')
         }
         else
         {
-            if(flags.includes('heating') == true)
+            setHeating(undefined)
+            if(flags.includes('heating') === true)
                 flags.splice(flags.indexOf('heating'), 1)
         }
     }
@@ -174,12 +214,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setTV(event.target.value === 'true')
-            if(flags.includes('tv') == false)
+            if(flags.includes('tv') === false)
                 flags.push('tv')
         }
         else
         {
-            if(flags.includes('tv') == true)
+            setTV(undefined)
+            if(flags.includes('tv') === true)
                 flags.splice(flags.indexOf('tv'), 1)
         }
     }
@@ -189,12 +230,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setParking(event.target.value === 'true')
-            if(flags.includes('parking') == false)
+            if(flags.includes('parking') === false)
                 flags.push('parking')
         }
         else
         {
-            if(flags.includes('parking') == true)
+            setParking(undefined)
+            if(flags.includes('parking') === true)
                 flags.splice(flags.indexOf('parking'), 1)
         }
     }
@@ -204,12 +246,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setSmoking(event.target.value === 'true')
-            if(flags.includes('smoking') == false)
+            if(flags.includes('smoking') === false)
                 flags.push('smoking')
         }
         else
         {
-            if(flags.includes('smoking') == true)
+            setSmoking(undefined)
+            if(flags.includes('smoking') === true)
                 flags.splice(flags.indexOf('smoking'), 1)
         }
     }
@@ -219,12 +262,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setPets(event.target.value === 'true')
-            if(flags.includes('pets') == false)
+            if(flags.includes('pets') === false)
                 flags.push('pets')
         }
         else
         {
-            if(flags.includes('pets') == true)
+            setPets(undefined)
+            if(flags.includes('pets') === true)
                 flags.splice(flags.indexOf('pets'), 1)
         }
     }
@@ -234,12 +278,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setElevator(event.target.value === 'true')
-            if(flags.includes('elevator') == false)
+            if(flags.includes('elevator') === false)
                 flags.push('elevator')
         }
         else
         {
-            if(flags.includes('elevator') == true)
+            setElevator(undefined)
+            if(flags.includes('elevator') === true)
                 flags.splice(flags.indexOf('elevator'), 1)
         }
     }
@@ -249,12 +294,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setKitchen(event.target.value === 'true')
-            if(flags.includes('kitchen') == false)
+            if(flags.includes('kitchen') === false)
                 flags.push('kitchen')
         }
         else
         {
-            if(flags.includes('kitchen') == true)
+            setKitchen(undefined)
+            if(flags.includes('kitchen') === true)
                 flags.splice(flags.indexOf('kitchen'), 1)
         }
     }
@@ -264,12 +310,13 @@ const FilterWindow = (props) => {
         if(event.target.value !== 'none')
         {
             setInternet(event.target.value === 'true')
-            if(flags.includes('internet') == false)
+            if(flags.includes('internet') === false)
                 flags.push('internet')
         }
         else
         {
-            if(flags.includes('internet') == true)
+            setInternet(undefined)
+            if(flags.includes('internet') === true)
                 flags.splice(flags.indexOf('internet'), 1)
         }
     }
@@ -284,6 +331,7 @@ const FilterWindow = (props) => {
         }
         else
         {
+            setEvents(undefined)
             if(flags.includes('events') === true)
                 flags.splice(flags.indexOf('events'), 1)
         }
@@ -298,6 +346,9 @@ const FilterWindow = (props) => {
                 value.push(options[i].value);
             }
         }
+        if(options.size !== 0 && flags.includes('typeofroom') === false)
+            flags.push('typeofroom')
+
         setTypeofroom(value.join(", "));
     };
 
@@ -313,6 +364,8 @@ const FilterWindow = (props) => {
         const first_element=1
         const last_element=20
         const flags_2= flags.join(', ')
+        console.log("v8")
+        console.log(latitude, longitude)
 
         const searchRequest={
             "latitude": latitude,
@@ -390,7 +443,7 @@ const FilterWindow = (props) => {
             <MapContainer
                 id="map"
                 // className={classes.map}
-                center={[51.505, -0.091]}
+                // center={[51.505, -0.091]}
                 zoom={13}
                 scrollWheelZoom={false}
             >
@@ -400,7 +453,7 @@ const FilterWindow = (props) => {
                 {/*/>*/}
                 <SearchField
                     provider={prov}
-                    showMarker={true}
+                    showMarker={false}
                     showPopup={false}
                     popupFormat={({ query, result }) => result.label}
                     maxMarkers={3}
@@ -409,8 +462,9 @@ const FilterWindow = (props) => {
                     autoClose={false}
                     searchLabel={"Enter address, please"}
                     keepResult={true}
-                    setLatitude={setLatitude}
-                    setLongitude={setLongitude}
+                    setLat={setLat}
+                    setLong={setLong}
+                    setFlags={pushToFlags}
                 />
             </MapContainer>
             <Typography id="range-sliderBed" gutterBottom>
