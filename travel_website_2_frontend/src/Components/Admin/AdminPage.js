@@ -8,7 +8,8 @@ import {Container} from "semantic-ui-react";
 
 function AdminPage(){
     const Auth = useAuth()
-    const user = Auth.user.user
+    const user1 = Auth.getUser()
+    const user = user1.user
     // console.log(Auth.user)
 
     const [users, setUsers] = useState([])
@@ -64,7 +65,7 @@ function AdminPage(){
     const handleGetUsers = async () => {
         setIsUsersLoading(true)
         try {
-            const response = await ApiConnector.getUsers(user)
+            const response = await ApiConnector.getUsers(user.user)
             console.log(response.data)
             setUsers(response.data)
         } catch (error) {

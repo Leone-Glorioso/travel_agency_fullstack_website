@@ -37,31 +37,31 @@ function SearchPage () {
 
     return (
         <div className="search-page">
-            <div className="search-filters">
-                {/* Add filter inputs here */}
-                <input
-                    type="number"
-                    name="minPrice"
-                    value={filters.minPrice}
-                    onChange={handleFilterChange}
-                    placeholder="Min Price"
-                />
-                <input
-                    type="number"
-                    name="maxPrice"
-                    value={filters.maxPrice}
-                    onChange={handleFilterChange}
-                    placeholder="Max Price"
-                />
-                <input
-                    type="number"
-                    name="minGuests"
-                    value={filters.minGuests}
-                    onChange={handleFilterChange}
-                    placeholder="Min Guests"
-                />
-                {/* Add more filter inputs as needed */}
-            </div>
+            {/*<div className="search-filters">*/}
+            {/*    /!* Add filter inputs here *!/*/}
+            {/*    <input*/}
+            {/*        type="number"*/}
+            {/*        name="minPrice"*/}
+            {/*        value={filters.minPrice}*/}
+            {/*        onChange={handleFilterChange}*/}
+            {/*        placeholder="Min Price"*/}
+            {/*    />*/}
+            {/*    <input*/}
+            {/*        type="number"*/}
+            {/*        name="maxPrice"*/}
+            {/*        value={filters.maxPrice}*/}
+            {/*        onChange={handleFilterChange}*/}
+            {/*        placeholder="Max Price"*/}
+            {/*    />*/}
+            {/*    <input*/}
+            {/*        type="number"*/}
+            {/*        name="minGuests"*/}
+            {/*        value={filters.minGuests}*/}
+            {/*        onChange={handleFilterChange}*/}
+            {/*        placeholder="Min Guests"*/}
+            {/*    />*/}
+            {/*    /!* Add more filter inputs as needed *!/*/}
+            {/*</div>*/}
 
             <div className="search-results">
                 <h2>Search Results</h2>

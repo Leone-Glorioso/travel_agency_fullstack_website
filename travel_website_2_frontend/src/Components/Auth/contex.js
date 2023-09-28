@@ -11,20 +11,21 @@ function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const cookies = new Cookies();
 
-    useEffect(() => {
-        const storedUser = JSON.parse(sessionStorage.getItem("user"));
-        if (storedUser) {
-            // Check token expiry and update user state accordingly
-            if (Date.now() < storedUser.exp * 1000) {
-                setUser(storedUser);
-            } else {
-                userLogout();
-            }
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedUser = JSON.parse(sessionStorage.getItem("user"));
+    //     if (storedUser) {
+    //         // Check token expiry and update user state accordingly
+    //         if (Date.now() < storedUser.exp * 1000000) {
+    //             setUser(storedUser);
+    //         } else {
+    //             userLogout();
+    //         }
+    //     }
+    // }, []);
 
     const userIsAuthenticated = () => {
-        return user !== null;
+        // console.log(cookies.getAll().user.user)
+        return cookies.get('user') !== undefined;
     };
 
 
@@ -38,6 +39,7 @@ function AuthProvider({ children }) {
 
 
     const getUser = () => {
+        console.log(cookies.get('user'))
         return cookies.get('user')
     }
 

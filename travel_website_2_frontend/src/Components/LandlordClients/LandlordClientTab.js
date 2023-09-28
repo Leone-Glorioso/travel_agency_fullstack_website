@@ -3,6 +3,7 @@ import { Tab } from 'semantic-ui-react'
 import ReservationsTableFromLandlordClient from "./MyReservationsTable";
 import ReservationsTableToLandlordClient from "./ReservationsOfMyRoomsTable";
 import RoomsTableLandlordClient from "./RoomsTable";
+import {useNavigate} from "react-router-dom";
 
 function LandlordTab(props) {
     const { handleInputChange } = props
@@ -11,6 +12,7 @@ function LandlordTab(props) {
         handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient ,
         handleGetReservations } = props
     const { isReservationsLoading_from, reservations_from, reservationIdSearch_from, handleSearchReservation_from, handleGetReservations_from } = props
+    const navigate = useNavigate()
 
     const panes = [
         {
@@ -59,6 +61,12 @@ function LandlordTab(props) {
                         handleGetReservations={handleGetReservations_from}
                     />
                 </Tab.Pane>
+            )
+        },
+        {
+            menuItem: { key: 'newRoom', icon: 'bookmark', content: 'newRoom' },
+            render: () => (
+                navigate("/new_room")
             )
         }
     ]

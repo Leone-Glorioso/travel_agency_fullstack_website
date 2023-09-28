@@ -74,7 +74,7 @@ function Login() {
         // else if(role === "LandlordClient")
         //     return <Navigate to={'/landlordclient'} />;
         // else
-        return <Navigate to={'/profile'} />;
+        return <Navigate to={'/'} />;
     }
 
     return (

@@ -9,7 +9,8 @@ import LandlordClientTab from "./LandlordClientTab";
 function LandlordClientPage()
 {
     const Auth = useAuth()
-    const user = Auth.user.user
+    const user1 = Auth.getUser()
+    const user = user1.user
     // console.log(Auth.user)
 
     const [reservations, setReservations] = useState([])

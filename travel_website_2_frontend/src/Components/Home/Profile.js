@@ -19,15 +19,16 @@ function Profile() {
     let [role, setRole] = useState('')
     let [photo, setPhoto] = useState([])
     const Auth = useAuth()
+    const user = Auth.getUser()
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () =>
         {
             console.log("test 1")
-            console.log(Auth.user.user)
+            console.log(user.user)
             // console.log(parseJwt(Auth.user.user))
-            const response = await ApiConnector.getUserMe(Auth.user.user)
+            const response = await ApiConnector.getUserMe(user.user)
             const data = response.data
             setUsername(data.username)
             setName(data.name)
@@ -39,7 +40,7 @@ function Profile() {
         }
         fetchData().catch(console.error)
 
-    }, [Auth.user.user]);
+    }, [user.user]);
 
     const imageChange = event =>
     {
@@ -132,7 +133,7 @@ function Profile() {
                         <Form.Button type={"submit"} onClick={submitNewImage}>Upload Image</Form.Button>
                     </Form>
                 </Grid.Column>
-                <Button onClick={() => navigate("/new_room")} />
+                {/*<Button onClick={() => navigate("/new_room")} />*/}
                 {/*<Grid.Column>*/}
                 {/*    */}
                 {/*</Grid.Column>*/}

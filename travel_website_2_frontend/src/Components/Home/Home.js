@@ -10,6 +10,7 @@ import SearchBanner from './SearchBanner'
 import Card from "./Card"
 import RoomTypes from "./RoomTypes";
 import "./Home.css"
+import NavBar from "../NavBar/NavBar";
 
 function Home(){
     const [numberOfUsers,setNumberOfUsers]=useState(0)
@@ -50,6 +51,7 @@ function Home(){
     return (
         <Container text>
             <Header/>
+            <NavBar />
             <Grid stackable columns={2}>
                 <Grid.Row>
                     <Grid.Column textAlign='center'>

@@ -13,7 +13,23 @@
     text-decoration: none;
 }
 
+.navbar button {
+    /*float: left;*/
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: #007BFF;
+    border-collapse: collapse;
+}
+
 /* Hover effect for navbar links */
 .navbar a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.navbar button:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }

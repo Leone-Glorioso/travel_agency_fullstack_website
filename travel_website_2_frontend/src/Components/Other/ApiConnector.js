@@ -51,7 +51,8 @@ export const ApiConnector={
     acceptRequest,
     rejectRequest,
     uploadImage,
-    uploadUserImage
+    uploadUserImage,
+    getRole
 }
 
 function authenticate(username,password){
@@ -494,6 +495,15 @@ function uploadUserImage(user, username, request)
         headers:{
             'Authorization': bearerAuth(user),
             // 'Content-type': 'image/png'
+        }
+    })
+}
+
+function getRole(user)
+{
+    return instance.get('/api/users/role', {
+        headers:{
+            'Authorization': bearerAuth(user)
         }
     })
 }
