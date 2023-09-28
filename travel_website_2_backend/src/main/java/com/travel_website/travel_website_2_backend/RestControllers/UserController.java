@@ -120,4 +120,22 @@ public class UserController {
             directory.mkdir();
         }
     }
+
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/role")
+    public String getRole(@AuthenticationPrincipal Data_UserDetails currentUser)
+    {
+        User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
+        if(user.getRole().equals(UserCategories.Administrator))
+            return "admin";
+        else if(user.getRole().equals(UserCategories.Landlord))
+            return "landlord";
+        else if(user.getRole().equals(UserCategories.Client))
+            return "client";
+        else if(user.getRole().equals(UserCategories.LandlordClient))
+            return "landlordclient";
+        else
+            return "noname";
+    }
 }

@@ -1,0 +1,19 @@
+.navbar {
+    background-color: #007BFF; /* Blue background color */
+    overflow: hidden;
+}
+
+/* Style for navbar links */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Hover effect for navbar links */
+.navbar a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
