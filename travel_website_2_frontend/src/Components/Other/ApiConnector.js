@@ -52,7 +52,14 @@ export const ApiConnector={
     rejectRequest,
     uploadImage,
     uploadUserImage,
-    getRole
+    getRole,
+    allRatings,
+    allRatingOfRoom,
+    allRatingsByUser,
+    rate,
+    ratingOfRoom,
+    deleteRating,
+    getRating
 }
 
 function authenticate(username,password){
@@ -502,6 +509,63 @@ function uploadUserImage(user, username, request)
 function getRole(user)
 {
     return instance.get('/api/users/role', {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allRatings(user)
+{
+    return instance.get('/api/ratings/all',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allRatingsByUser(user, username)
+{
+    return instance.get(`/api/ratings/user/${username}`,{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allRatingOfRoom(room)
+{
+    return instance.get(`/api/ratings/room/${room}`)
+}
+
+function ratingOfRoom(room)
+{
+    return instance.get(`/api/ratings/room/${room}/rating`)
+}
+
+function rate(user, room, rating)
+{
+    return instance.post(`/api/ratings/${room}`, rating, {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function deleteRating(user, id)
+{
+    return instance.delete(`/api/ratings/${id}`,  {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function getRating(user, id)
+{
+    return instance.get(`/api/ratings/get/${id}`,  {
         headers:{
             'Authorization': bearerAuth(user)
         }

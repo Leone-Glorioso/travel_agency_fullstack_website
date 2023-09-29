@@ -4,6 +4,7 @@ import RequestsTable from "./RequestsTable";
 import ReservationsTable from "./ReservationsTable";
 import RoomsTable from "./RoomsTable";
 import UsersTable from "./UsersTable";
+import RatingsTable from "./RatingsTable";
 
 function AdminTab(props) {
     const { handleInputChange } = props
@@ -13,6 +14,8 @@ function AdminTab(props) {
     const { isReservationsLoading, reservations, reservationIdSearch, reservationRoomSearch, reservationClientSearch, reservationLandlordSearch,
         handleDeleteReservation, handleSearchReservationId , handleSearchReservationRoom , handleSearchReservationClient , handleSearchReservationLandlord,
         handleGetReservations} = props
+    const { isRatingsLoading, ratings, handleGetRatings, ratingIdSearch, ratingRoomSearch,
+        ratingClientSearch, handleSearchRatingId , handleSearchRatingRoom , handleSearchRatingClient, handleDeleteRating} = props
 
     const panes = [
         {
@@ -84,6 +87,25 @@ function AdminTab(props) {
                         handleAccept={handleAccept}
                         handleReject={handleReject}
                         />
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: { key: 'ratings', icon: 'address book', content: 'Ratings' },
+            render: () => (
+                <Tab.Pane loading={isRatingsLoading}>
+                    <RatingsTable
+                        ratings={ratings}
+                        ratingClientSearch={ratingClientSearch}
+                        ratingIdSearch={ratingIdSearch}
+                        ratingRoomSearch={ratingRoomSearch}
+                        handleDeleteRating={handleDeleteRating}
+                        handleInputChange={handleInputChange}
+                        handleGetRatings={handleGetRatings}
+                        handleSearchRatingClient={handleSearchRatingClient}
+                        handleSearchRatingId={handleSearchRatingId}
+                        handleSearchRatingRoom={handleSearchRatingRoom}
+                    />
                 </Tab.Pane>
             )
         }

@@ -10,20 +10,20 @@ public interface RatingService {
 
     Rating validateAndGetRatingById(int id);
 
-    Rating validateAndGetRatingByRoomAndUser(int room, int user);
+    Rating validateAndGetRatingByRoomAndUser(String room, String user);
 
-    float getRatingOfRoom(int room);
+    float getRatingOfRoom(String room);
 
-    List<Rating> getRatingsOfUser(int user);
+    List<Rating> getRatingsOfUser(String user);
 
-    List<Rating> getRatingsOfRoom(int room);
+    List<Rating> getRatingsOfRoom(String room);
 
 //    List<Rating> getRatingsOfRoom(int room, String type);
 
-    List<Rating> getRatingsOfUserAbove(int user, int bottom);
+    List<Rating> getRatingsOfUserAbove(String user, int bottom);
 
 
-    List<Rating> getRatingsOfUserBelow(int user, int top);
+    List<Rating> getRatingsOfUserBelow(String user, int top);
 
     Rating saveRating(Rating rating);
 

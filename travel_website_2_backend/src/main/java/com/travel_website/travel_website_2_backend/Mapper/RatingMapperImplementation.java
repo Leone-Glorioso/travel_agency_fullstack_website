@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class RatingMapperImplementation implements RatingMapper{
 
     @Override
-    public Rating createRating(CreateRating rating, int user, int room)
+    public Rating createRating(CreateRating rating, String user, String room)
     {
         if(rating == null)
             return null;

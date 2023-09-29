@@ -28,13 +28,13 @@ public class Rating {
 
     @Column(name = "user")
     @NotBlank
-    private int user;
+    private String user;
 
     @Column(name = "room")
     @NotBlank
-    private int room;
+    private String room;
 
-    public Rating(int rating, String description, int user, int room) {
+    public Rating(int rating, String description, String user, String room) {
         this.rating = rating;
         this.description = description;
         this.user = user;
@@ -69,19 +69,19 @@ public class Rating {
         this.description = description;
     }
 
-    public int getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
-    public int getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 

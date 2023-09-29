@@ -7,6 +7,4 @@ public class CreateRating {
 
     String description;
     int rating;
-//    int room;
-//    int user;
 }

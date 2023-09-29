@@ -52,7 +52,7 @@ function RoomsTable({ rooms, roomIdSearch, roomLandlordSearch, handleInputChange
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchRoomId'
-                    placeholder='Search'
+                    placeholder='Search by Id'
                     value={roomIdSearch}
                     onChange={handleInputChange}
                 />
@@ -61,7 +61,7 @@ function RoomsTable({ rooms, roomIdSearch, roomLandlordSearch, handleInputChange
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchRoomLandlord'
-                    placeholder='Search'
+                    placeholder='Search by Landlord Username'
                     value={roomLandlordSearch}
                     onChange={handleInputChange}
                 />

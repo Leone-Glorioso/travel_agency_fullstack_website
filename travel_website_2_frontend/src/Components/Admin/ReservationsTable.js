@@ -39,7 +39,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationId'
-                    placeholder='Search'
+                    placeholder='Search by Id'
                     value={reservationIdSearch}
                     onChange={handleInputChange}
                 />
@@ -48,7 +48,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationRoom'
-                    placeholder='Search'
+                    placeholder='Search by Room Name'
                     value={reservationRoomSearch}
                     onChange={handleInputChange}
                 />
@@ -57,7 +57,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationClient'
-                    placeholder='Search'
+                    placeholder='Search by Client Username'
                     value={reservationClientSearch}
                     onChange={handleInputChange}
                 />
@@ -66,7 +66,7 @@ function ReservationsTable({ reservations, reservationIdSearch, reservationRoomS
                 <Input
                     action={<Button type={"submit"}> Submit</Button>}
                     name='SearchReservationLandlord'
-                    placeholder='Search'
+                    placeholder='Search by Landlrod Username'
                     value={reservationLandlordSearch}
                     onChange={handleInputChange}
                 />

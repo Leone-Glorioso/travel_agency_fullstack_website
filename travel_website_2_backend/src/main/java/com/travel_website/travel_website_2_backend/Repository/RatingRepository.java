@@ -12,14 +12,14 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
     Optional<Rating> findById(int id);
 
-    List<Rating> findByRoom(int room);
+    List<Rating> findByRoom(String room);
 
-    List<Rating> findByUser(int user);
+    List<Rating> findByUser(String user);
 
-    Optional<Rating> findByRoomAndUser(int room, int user);
+    Optional<Rating> findByRoomAndUser(String room, String user);
 
     List<Rating> findByRatingBetween(int start, int end);
 
-    List<Rating> findByUserAndRatingBetween(int user, int start_rating, int end_rating);
+    List<Rating> findByUserAndRatingBetween(String user, int start_rating, int end_rating);
 
 }

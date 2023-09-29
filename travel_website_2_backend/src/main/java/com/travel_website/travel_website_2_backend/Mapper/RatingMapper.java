@@ -6,7 +6,7 @@ import com.travel_website.travel_website_2_backend.Models.Rating;
 
 public interface RatingMapper {
 
-    Rating createRating(CreateRating rating, int user, int room);
+    Rating createRating(CreateRating rating, String user, String room);
 
     RatingDTO toRatingDto(Rating rating);
 

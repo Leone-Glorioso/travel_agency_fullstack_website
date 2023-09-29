@@ -14,6 +14,7 @@ function AdminPage(){
 
     const [users, setUsers] = useState([])
     const [requests, setRequests] = useState([])
+    const [ratings, setRatings] = useState([])
     const [rooms, setRooms] = useState([])
     const [reservations, setReservations] = useState([])
     const [userUsernameSearch, setUserUsernameSearch] = useState('')
@@ -23,10 +24,14 @@ function AdminPage(){
     const [reservationRoomSearch, setReservationRoomSearch] = useState('')
     const [reservationClientSearch, setReservationClientSearch] = useState('')
     const [reservationLandlordSearch, setReservationLandlordSearch] = useState('')
+    const [ratingIdSearch, setRatingIdSearch] = useState('')
+    const [ratingRoomSearch, setRatingRoomSearch] = useState('')
+    const [ratingClientSearch, setRatingClientSearch] = useState('')
     const [isAdmin, setIsAdmin] = useState(true)
     const [isUsersLoading, setIsUsersLoading] = useState(false)
     const [isRequestsLoading, setIsRequestsLoading] = useState(false)
     const [isRoomsLoading, setIsRoomsLoading] = useState(false)
+    const [isRatingsLoading, setIsRatingsLoading] = useState(false)
     const [isReservationsLoading, setIsReservationsLoading] = useState(false)
 
     useEffect(() => {
@@ -35,6 +40,7 @@ function AdminPage(){
         handleGetRequests()
         handleGetRooms()
         handleGetReservations()
+        handleGetRatings()
     }, [])
 
 
@@ -59,6 +65,15 @@ function AdminPage(){
         }
         else if (name === 'SearchReservationLandlord') {
             setReservationLandlordSearch(value)
+        }
+        else if (name === 'SearchRatingId') {
+            setRatingIdSearch(value)
+        }
+        else if (name === 'SearchRatingRoom') {
+            setRatingRoomSearch(value)
+        }
+        else if (name === 'SearchRatingClient') {
+            setRatingClientSearch(value)
         }
     }
 
@@ -321,6 +336,68 @@ function AdminPage(){
         }
     }
 
+    const handleSearchRatingId = async () => {
+        const id = parseInt(ratingIdSearch)
+        try {
+            const response = await ApiConnector.getRating(user, id)
+            const data = response.data
+            const ratings = data instanceof Array ? data : [data]
+            setRatings(ratings)
+            // console.log(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRatings([])
+        }
+    }
+    const handleSearchRatingRoom = async () => {
+        const name = ratingRoomSearch
+        try {
+            const response = await ApiConnector.allRatingOfRoom(name)
+            const data = response.data
+            const ratings = data instanceof Array ? data : [data]
+            setRatings(ratings)
+            // console.log(response.data)
+        } catch (error) {
+            handleLogError(error)
+            setRatings([])
+        }
+    }
+
+    const handleSearchRatingClient = async () => {
+        const name = ratingClientSearch
+        try {
+            const response = await ApiConnector.allRatingsByUser(user, name)
+            const data = response.data
+            const ratings = data instanceof Array ? data : [data]
+            setRatings(ratings)
+        } catch (error) {
+            handleLogError(error)
+            setRatings([])
+        }
+    }
+
+    const handleGetRatings = async () => {
+        setIsRatingsLoading(true)
+        try {
+            const response = await ApiConnector.allRatings(user)
+            console.log(response.data)
+            setRatings(response.data)
+        } catch (error) {
+            handleLogError(error)
+        } finally {
+            setIsRatingsLoading(false)
+        }
+    }
+
+    const handleDeleteRating = async (id) => {
+        try {
+            await ApiConnector.deleteRating(user, id)
+            handleGetRatings()
+        } catch (error) {
+            handleLogError(error)
+        }
+    }
+
 
 
     if (!isAdmin) {
@@ -368,6 +445,16 @@ function AdminPage(){
                 handleSearchReservationLandlord={handleSearchReservationLandlord}
                 handleSearchReservationRoom={handleSearchReservationRoom}
                 handleGetReservations={handleGetReservations}
+                isRatingsLoading={isRatingsLoading}
+                ratings={ratings}
+                ratingClientSearch={ratingClientSearch}
+                ratingIdSearch={ratingIdSearch}
+                ratingRoomSearch={ratingRoomSearch}
+                handleDeleteRating={handleDeleteRating}
+                handleGetRatings={handleGetRatings}
+                handleSearchRatingClient={handleSearchRatingClient}
+                handleSearchRatingId={handleSearchRatingId}
+                handleSearchRatingRoom={handleSearchRatingRoom}
             />
         </Container>
     )

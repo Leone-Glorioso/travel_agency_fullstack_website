@@ -34,14 +34,14 @@ public class RatingServiceImplementation implements RatingService{
     }
 
     @Override
-    public Rating validateAndGetRatingByRoomAndUser(int room, int user)
+    public Rating validateAndGetRatingByRoomAndUser(String room, String user)
     {
         return ratingRepository.findByRoomAndUser(room, user)
                 .orElseThrow(() -> new Exception_RatingDoesNotExist("Rating of room " + room + " by user with id " + user + " does not exist"));
     }
 
     @Override
-    public float getRatingOfRoom(int room)
+    public float getRatingOfRoom(String room)
     {
         List<Integer> list = new ArrayList<>();
         List<Rating> ratings = ratingRepository.findByRoom(room);
@@ -56,14 +56,14 @@ public class RatingServiceImplementation implements RatingService{
     }
 
     @Override
-    public List<Rating> getRatingsOfUser(int user)
+    public List<Rating> getRatingsOfUser(String user)
     {
         return ratingRepository.findByUser(user);
     }
 
 
     @Override
-    public List<Rating> getRatingsOfRoom(int room)
+    public List<Rating> getRatingsOfRoom(String room)
     {
         return ratingRepository.findByRoom(room);
     }
@@ -83,13 +83,13 @@ public class RatingServiceImplementation implements RatingService{
 //    }
 
     @Override
-    public List<Rating> getRatingsOfUserAbove(int user, int bottom)
+    public List<Rating> getRatingsOfUserAbove(String user, int bottom)
     {
         return ratingRepository.findByUserAndRatingBetween(user, bottom, 6);
     }
 
     @Override
-    public List<Rating> getRatingsOfUserBelow(int user, int top)
+    public List<Rating> getRatingsOfUserBelow(String user, int top)
     {
         return ratingRepository.findByUserAndRatingBetween(user, 0, top);
     }

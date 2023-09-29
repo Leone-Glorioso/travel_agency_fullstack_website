@@ -37,34 +37,41 @@ public class RatingController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/user/{id}")
-    public List<RatingDTO> allRatingsByUser(@PathVariable int id)
+    @GetMapping("/get/{id}")
+    public RatingDTO getRating(@PathVariable int id)
     {
-        return ratingService.getRatingsOfUser(id).stream().map(ratingMapper::toRatingDto).collect(Collectors.toList());
+        return ratingMapper.toRatingDto(ratingService.validateAndGetRatingById(id));
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/room/{id}")
-    public List<RatingDTO> allRatingsOfRoom(@PathVariable int id)
+    @GetMapping("/user/{username}")
+    public List<RatingDTO> allRatingsByUser(@PathVariable String username)
     {
-        return ratingService.getRatingsOfRoom(id).stream().map(ratingMapper::toRatingDto).collect(Collectors.toList());
+        return ratingService.getRatingsOfUser(username).stream().map(ratingMapper::toRatingDto).collect(Collectors.toList());
+    }
+
+    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
+    @GetMapping("/room/{room_name}")
+    public List<RatingDTO> allRatingsOfRoom(@PathVariable String room_name)
+    {
+        return ratingService.getRatingsOfRoom(room_name).stream().map(ratingMapper::toRatingDto).collect(Collectors.toList());
     }
 
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/room/{id}/rating")
-    public float ratingOfRoom(@PathVariable int id)
+    @GetMapping("/room/{room_name}/rating")
+    public float ratingOfRoom(@PathVariable String room_name)
     {
-        return ratingService.getRatingOfRoom(id);
+        return ratingService.getRatingOfRoom(room_name);
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @PostMapping("/{id}")
-    public RatingDTO rate(@Valid @RequestBody CreateRating createRating, @AuthenticationPrincipal Data_UserDetails currentUser, @PathVariable int roomId)
+    @PostMapping("/{room_name}")
+    public RatingDTO rate(@Valid @RequestBody CreateRating createRating, @AuthenticationPrincipal Data_UserDetails currentUser, @PathVariable String room_name)
     {
         userService.validateClient(userService.validateAndGetUserByUsername(currentUser.getUsername()));
-        reservationService.validateClientHasReservedRoom(userService.validateAndGetUserByUsername(currentUser.getUsername()), roomService.validateAndGetRoom(roomId));
-        return ratingMapper.toRatingDto(ratingService.saveRating(ratingMapper.createRating(createRating, currentUser.getId(), roomId)));
+        reservationService.validateClientHasReservedRoom(userService.validateAndGetUserByUsername(currentUser.getUsername()), roomService.validateAndGetRoomWithName(room_name));
+        return ratingMapper.toRatingDto(ratingService.saveRating(ratingMapper.createRating(createRating, currentUser.getUsername(), room_name)));
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
