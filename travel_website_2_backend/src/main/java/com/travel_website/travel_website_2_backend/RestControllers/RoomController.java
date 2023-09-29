@@ -150,6 +150,9 @@ public class RoomController {
                                             @Valid @RequestBody CreateReservationRequest reservationRequest,
                                             @PathVariable @NotBlank int id)
     {
+//        System.out.println(currentUser.getUsername());
+//        System.out.println(id);
+//        System.out.println(reservationRequest.toString());
         User user = userService.validateAndGetUserByUsername(currentUser.getUsername());
         userService.validateClient(user);
         Room room = roomService.validateAndGetRoom(id);

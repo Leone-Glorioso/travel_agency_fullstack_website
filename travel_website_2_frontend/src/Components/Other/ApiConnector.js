@@ -164,10 +164,9 @@ function getReservation(user,id){
 }
 
 function createReservation(user,reservation, id){
-    return instance.post(`/api/reservations/room/${id}`,reservation,{
-        // data: {id},
+    return instance.post(`/api/rooms/room/${id}`, reservation,{
         headers: {
-            // 'Content-type': 'application/json',
+            'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
         }})
 }

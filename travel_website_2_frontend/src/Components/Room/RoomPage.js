@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {ApiConnector} from "../Other/ApiConnector";
-import {Container, Form, Message} from "semantic-ui-react";
+import {Container, Form, Grid, Message} from "semantic-ui-react";
 import {useAuth} from "../Auth/contex";
 import {handleLogError} from "../Other/Helpers";
 import { useLocation } from "react-router-dom";
+import Cookies from "universal-cookie";
+import './RoomPage.css';
 
-const RoomPage = () => {
+function RoomPage() {
 
-    const [room, SetRoom] = useState(null)
+
+    const cookies = new Cookies()
+
+    const [room, SetRoom] = useState(cookies.get('room'))
     const [startDate,setStartDate]=useState(new Date())
     const [endDate,setEndDate]=useState(new Date())
     const [ppn,setPPN]=useState(0)
@@ -16,32 +21,44 @@ const RoomPage = () => {
     const [submited, setSubmited] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
-    const location = useLocation();
+
+    // const location = useLocation();
 
 
     const Auth = useAuth()
     const user = Auth.getUser()
 
     useEffect(() => {
-        const fetchdata = async () => {
-            console.log(location.state)
-            SetRoom(location.state)
-            const step = Math.floor(Math.random() * 9); // Step between 0 and 8
-            const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
-            setPPN(randomNumber)
-            const response2 = await ApiConnector.getRole(user.user)
-            setRole(response2.data)
+        // console.log(location.state)
+        // SetRoom(JSON.parse(cookies.get('room')))
+        // console.log(JSON.parse(cookies.get('room')))
+        const step = Math.floor(Math.random() * 9); // Step between 0 and 8
+        const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
+        setPPN(randomNumber)
 
+        const fetchData2 = async () => {
+            if(user !== null || user !== undefined){
+                const response2 = await ApiConnector.getRole(user.user)
+                setRole(response2.data)
+            }
         }
 
-        fetchdata()
+        fetchData2()
             .catch(console.error)
     }, []);
 
 
     const handleSubmit = async () => {
         try {
-            const response = await ApiConnector.createReservation(user.user, {startDate, endDate, ppn}, room.id)
+            console.log({
+                start: startDate.toLocaleDateString('en-GB'),
+                end: endDate.toLocaleDateString('en-GB'),
+                ppn: ppn })
+            console.log(user, room.id)
+            const response = await ApiConnector.createReservation(user.user, {
+                start: startDate.toLocaleDateString('en-GB'),
+                end: endDate.toLocaleDateString('en-GB'),
+                ppn: ppn}, room.id)
             console.log(response)
             setSubmited(true)
         }
@@ -62,69 +79,152 @@ const RoomPage = () => {
     }
 
     return (
-        <div>
-            <Container className={"main-container"}>
-                <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"}/>
+        <div  className={"room-page"}>
+            <h1 className={"room-header"}>{room.name}</h1>
+            <Container >
+                <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"} className={"room-image"}/>
             </Container>
-            <Container className={"main-container"}>
-                <label about={"name"} className={"label_special"}>Name</label>
-                <h2 id={"name"} className={"section-title-h2"}>{room.name}</h2>
-                <label about={"nob"}  className={"label_special"}>Bedrooms</label>
-                <h4 id={"nob"} className={"section-title-h4"}>{room.numOfBedrooms}</h4>
-                <label about={"nobd"}  className={"label_special"}>Beds</label>
-                <h4 id={"nobd"} className={"section-title-h4"}>{room.numOfBeds}</h4>
-                <label about={"nobt"}  className={"label_special"}>Bathrooms</label>
-                <h4 id={"nobt"} className={"section-title-h4"}>{room.numOfBaths}</h4>
-                <label about={"area"}  className={"label_special"}>Area</label>
-                <h4 id={"area"} className={"section-title-h4"}>{room.area}</h4>
-                <label about={"type"}  className={"label_special"}>Type</label>
-                <h4 id={"type"} className={"section-title-h4"}>{room.typeofroom}</h4>
-                <label about={"ppn"}  className={"label_special"}>Price Per Night</label>
-                <h4 id={"ppn"} className={"section-title-h4"}>{ppn}</h4>
+            <Grid className={"room-details"}>
+                {/*<Grid.Row >*/}
+                {/*    <Grid.Column className={"grid-cell"}>*/}
+                {/*        <label about={"name"} className={"label_special"}>Name</label>*/}
+                {/*        <h2 id={"name"} className={"section-title-h2"}>{room.name}</h2>*/}
+                {/*    </Grid.Column>*/}
+                {/*</Grid.Row>*/}
+                <Grid.Row >
+                    <Grid.Column className={"grid-cell"}>
+                        <label about={"nob"}  className={"label_special"}>Bedrooms</label>
+                        <h4 id={"nob"} className={"section-title-h4"}>{room.numofbedrooms}</h4>
+                    </Grid.Column>
+                    <Grid.Column className={"grid-cell"}>
+                        <label about={"nobd"}  className={"label_special"}>Beds</label>
+                        <h4 id={"nobd"} className={"section-title-h4"}>{room.numofbeds}</h4>
+                    </Grid.Column>
+                    <Grid.Column  className={"grid-cell"}>
+                        <label about={"nobt"}  className={"label_special"}>Bathrooms</label>
+                        <h4 id={"nobt"} className={"section-title-h4"}>{room.numofbaths}</h4>
+                    </Grid.Column>
+                    <Grid.Column className={"grid-cell"}>
+                        <label about={"area"}  className={"label_special"}>Area</label>
+                        <h4 id={"area"} className={"section-title-h4"}>{room.area}</h4>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row >
+                    <Grid.Column className={"grid-cell"}>
+                        <label about={"ppn"}  className={"label_special"}>Price Per Night</label>
+                        <h4 id={"ppn"} className={"section-title-h4"}>{ppn}</h4>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+            <Container className={"room-details"}>
+                <label about={"description"} >Description</label>
+                <p id={"description"} className={"custom"}>{room.description}</p>
             </Container>
-            <Container className={"main-container"}>
-                <label about={"description"}  className={"label_special"}>Description</label>
-                <p id={"description"} className={"section-title-h4"}>{room.description}</p>
-            </Container>
-            <Container className={"main-container"}>
-                <p> Cooling </p>
-                {room.cooling && <p color={"green"}>Yes</p>}
-                {!room.cooling && <p color={"red"}>No</p>}
-                <p> Heating </p>
-                {room.heating && <p color={"green"}>Yes</p>}
-                {!room.heating && <p color={"red"}>No</p>}
-                <p> Tv </p>
-                {room.tv && <p color={"green"}>Yes</p>}
-                {!room.tv && <p color={"red"}>No</p>}
-                <p> Parking </p>
-                {room.parking && <p color={"green"}>Yes</p>}
-                {!room.parking && <p color={"red"}>No</p>}
-                <p> Living Room </p>
-                {room.livingRoom && <p color={"green"}>Yes</p>}
-                {!room.livingRoom && <p color={"red"}>No</p>}
-                <p> Internet </p>
-                {room.internet && <p color={"green"}>Yes</p>}
-                {!room.internet && <p color={"red"}>No</p>}
-                <p> Kitchen </p>
-                {room.kitchen && <p color={"green"}>Yes</p>}
-                {!room.kitchen && <p color={"red"}>No</p>}
-                <p> Elevator </p>
-                {room.elevator && <p color={"green"}>Yes</p>}
-                {!room.elevator && <p color={"red"}>No</p>}
-            </Container>
-            <Container  className={"main-container"}>
-                <p> Smoking </p>
-                {room.smoking && <p color={"green"}>Allowed</p>}
-                {!room.smoking && <p color={"red"}>Not Allowed</p>}
-                <p> Events </p>
-                {room.events && <p color={"green"}>Allowed</p>}
-                {!room.events && <p color={"red"}>Not Allowed</p>}
-                <p> Pets </p>
-                {room.pets && <p color={"green"}>Allowed</p>}
-                {!room.pets && <p color={"red"}>Not Allowed</p>}
-            </Container>
-            {(role === "Client" || role === "Landlord/Client") && <Container className={"main-container"} >
-                <label> Give Dates: </label>
+            {/*<Container className={"amenities"}>*/}
+            {/*    <h2>Amenities</h2>*/}
+            {/*    <label className={"else"}> Cooling </label>*/}
+            {/*    {room.cooling && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.cooling && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Heating </label>*/}
+            {/*    {room.heating && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.heating && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Tv </label>*/}
+            {/*    {room.tv && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.tv && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Parking </label>*/}
+            {/*    {room.parking && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.parking && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Living Room </label>*/}
+            {/*    {room.livingRoom && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.livingRoom && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Internet </label>*/}
+            {/*    {room.internet && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.internet && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Kitchen </label>*/}
+            {/*    {room.kitchen && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.kitchen && <p className={"false"}>No</p>}*/}
+            {/*    <label className={"else"}> Elevator </label>*/}
+            {/*    {room.elevator && <p className={"true"}>Yes</p>}*/}
+            {/*    {!room.elevator && <p className={"false"}>No</p>}*/}
+            {/*</Container>*/}
+            <Grid className={"amenities"}>
+                <h2 align={"center"}>Amenities</h2>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Cooling </label>
+                    {room.cooling && <p className={"true"}>Yes</p>}
+                    {!room.cooling && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Heating </label>
+                    {room.heating && <p className={"true"}>Yes</p>}
+                    {!room.heating && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Tv </label>
+                    {room.tv && <p className={"true"}>Yes</p>}
+                    {!room.tv && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Parking </label>
+                    {room.parking && <p className={"true"}>Yes</p>}
+                    {!room.parking && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Living Room </label>
+                    {room.livingRoom && <p className={"true"}>Yes</p>}
+                    {!room.livingRoom && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Internet </label>
+                    {room.internet && <p className={"true"}>Yes</p>}
+                    {!room.internet && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Kitchen </label>
+                    {room.kitchen && <p className={"true"}>Yes</p>}
+                    {!room.kitchen && <p className={"false"}>No</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label className={"else"}> Elevator </label>
+                    {room.elevator && <p className={"true"}>Yes</p>}
+                    {!room.elevator && <p className={"false"}>No</p>}
+                </Grid.Row>
+            </Grid>
+
+            {/*<Container className={"rules"}>*/}
+            {/*    <h2  align={"center"}>Rules</h2>*/}
+            {/*    <label> Smoking </label>*/}
+            {/*    {room.smoking && <p className={"true"}>Allowed</p>}*/}
+            {/*    {!room.smoking && <p className={"false"}>Not Allowed</p>}*/}
+            {/*    <label> Events </label>*/}
+            {/*    {room.events && <p className={"true"}>Allowed</p>}*/}
+            {/*    {!room.events && <p className={"false"}>Not Allowed</p>}*/}
+            {/*    <label> Pets </label>*/}
+            {/*    {room.pets && <p className={"true"}>Allowed</p>}*/}
+            {/*    {!room.pets && <p className={"false"}>Not Allowed</p>}*/}
+            {/*</Container>*/}
+
+            <Grid className={"rules"} >
+                <h2  align={"center"}>Rules</h2>
+                <Grid.Row className={"grid-cell"}>
+                    <label> Smoking </label>
+                    {room.smoking && <p className={"true"}>Allowed</p>}
+                    {!room.smoking && <p className={"false"}>Not Allowed</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label> Events </label>
+                    {room.events && <p className={"true"}>Allowed</p>}
+                    {!room.events && <p className={"false"}>Not Allowed</p>}
+                </Grid.Row>
+                <Grid.Row className={"grid-cell"}>
+                    <label> Pets </label>
+                    {room.pets && <p className={"true"}>Allowed</p>}
+                    {!room.pets && <p className={"false"}>Not Allowed</p>}
+                </Grid.Row>
+            </Grid>
+            {(role === "client" || role === "landlordclient") && <Container className={"date-container"} >
+                <h2 align={"center"}> Booking </h2>
+                {/*<label> Give Dates: </label>*/}
                 <input
                     type="date"
                     value={startDate.toISOString().split('T')[0]}
@@ -137,7 +237,7 @@ const RoomPage = () => {
                 />
                 <button type={"submit"} onClick={handleSubmit}>Book Now</button>
             </Container>}
-            {isError && <Message negative>{errorMessage}</Message>}
+            {isError && !submited && <Message negative>{errorMessage}</Message>}
             {submited && <Message positive>Congrats!</Message>}
         </div>
     );

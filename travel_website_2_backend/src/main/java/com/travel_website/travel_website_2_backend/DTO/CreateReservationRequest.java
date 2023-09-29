@@ -11,6 +11,10 @@ import java.time.LocalDate;
 @Data
 public class CreateReservationRequest {
 
+    @Schema(example = "31/12/23")
+    @NotBlank
+    private String end;
+
     @Schema(example = "50")
     @NotBlank
     private int ppn;
@@ -19,7 +23,4 @@ public class CreateReservationRequest {
     @NotBlank
     private String start;
 
-    @Schema(example = "31/12/23")
-    @NotBlank
-    private String end;
 }

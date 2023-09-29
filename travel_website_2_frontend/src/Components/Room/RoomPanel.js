@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import './RoomPanel.css';
 import {Navigate, useNavigate} from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const RoomPanel = ({ room }) => {
     const navigate = useNavigate();
+    const cookies = new Cookies();
 
     const [check, setCheck] = useState(false)
 
@@ -16,7 +18,7 @@ const RoomPanel = ({ room }) => {
             <p  className={"card-text"}>Bedrooms: {room.numofbedrooms}</p>
             <p  className={"card-text"}>Bathrooms: {room.numofbaths}</p>
             <p  className={"card-text"}>Beds: {room.numofbeds}</p>
-            <button  onClick={() => setCheck(true)} className={"card-actions"}>Enter</button>
+            <button  onClick={() => {cookies.set('room', room);setCheck(true)}} className={"card-actions"}>Enter</button>
             {check &&  <Navigate to={'/room_page'} state={room} /> }
         </div>
     );
