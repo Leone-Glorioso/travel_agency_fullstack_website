@@ -1,24 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './RoomPanel.css';
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
-const RoomPanel = ({ name, description, area, bedrooms, bathrooms, beds }) => {
+const RoomPanel = ({ room }) => {
     const navigate = useNavigate();
 
+    const [check, setCheck] = useState(false)
+
     return (
-        <button className="room-panel" onClick={() => navigate("/room_page", {
-            state :{
-                name: name
-            }
-        })}>
-            <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"}/>
-            <h2>{name}</h2>
-            <p>Description: {description}</p>
-            <p>Area: {area} sq ft</p>
-            <p>Bedrooms: {bedrooms}</p>
-            <p>Bathrooms: {bathrooms}</p>
-            <p>Beds: {beds}</p>
-        </button>
+        <div className="room-card">
+            <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"} className={"card-image"}/>
+            <h2  className={"card-name"}>{room.name}</h2>
+            <p  className={"card-text"}>Description: {room.description}</p>
+            <p  className={"card-text"}>Area: {room.area} sq ft</p>
+            <p  className={"card-text"}>Bedrooms: {room.numofbedrooms}</p>
+            <p  className={"card-text"}>Bathrooms: {room.numofbaths}</p>
+            <p  className={"card-text"}>Beds: {room.numofbeds}</p>
+            <button  onClick={() => setCheck(true)} className={"card-actions"}>Enter</button>
+            {check &&  <Navigate to={'/room_page'} state={room} /> }
+        </div>
     );
 };
 

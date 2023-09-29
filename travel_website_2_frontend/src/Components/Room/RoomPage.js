@@ -18,16 +18,14 @@ const RoomPage = () => {
 
     const location = useLocation();
 
-    const room_name = location.state.name;
 
     const Auth = useAuth()
     const user = Auth.getUser()
 
     useEffect(() => {
         const fetchdata = async () => {
-            const response = await ApiConnector.getRoomByName(room_name)
-            SetRoom(response.data)
-            console.log(room)
+            console.log(location.state)
+            SetRoom(location.state)
             const step = Math.floor(Math.random() * 9); // Step between 0 and 8
             const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
             setPPN(randomNumber)
@@ -86,7 +84,7 @@ const RoomPage = () => {
             </Container>
             <Container className={"main-container"}>
                 <label about={"description"}  className={"label_special"}>Description</label>
-                <p id={"name"} className={"section-title-h4"}>{room.description}</p>
+                <p id={"description"} className={"section-title-h4"}>{room.description}</p>
             </Container>
             <Container className={"main-container"}>
                 <p> Cooling </p>

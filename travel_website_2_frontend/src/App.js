@@ -32,7 +32,7 @@ function App() {
                     {/*<Route path="/search-results" />*/}
                     <Route path='/search-result' element={<SearchPage/>}/>
                     <Route path='/new_room' element={<RoomCreate />} />
-                    <Route path="/room_page" element={<RoomPage />} />
+                    <Route path='/room_page' element={<RoomPage />} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}
