@@ -25,6 +25,8 @@ public interface ReservationService {
 
     void validateClientReservationConnection(User client, Reservation reservation);
 
+    void validateClientHasReservedRoom(User client, Room room);
+
     void validateRoomReservationConnection(Room room, Reservation reservation);
 
     boolean isReservationOfRoom(Reservation reservation, Room room);

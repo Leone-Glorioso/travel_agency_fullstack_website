@@ -1,5 +1,6 @@
 package com.travel_website.travel_website_2_backend.Service;
 
+import com.travel_website.travel_website_2_backend.Exception.Exception_ClientHasNotReservedRoom;
 import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationDoesNotMatchClient;
 import com.travel_website.travel_website_2_backend.Exception.Exception_ReservationNotFound;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomDoesNotMatchLandlord;
@@ -88,6 +89,15 @@ public class ReservationServiceImplementation implements ReservationService{
     public boolean isReservationByClient(Reservation reservation, User client)
     {
         return reservationRepository.existsByIdAndClient(reservation.getId(), client);
+    }
+
+    @Override
+    public void validateClientHasReservedRoom(User client, Room room)
+    {
+        List<Reservation> reservations = getReservationsOfClient(client);
+        reservations.retainAll(getReservationsOfRoom(room));
+        if(reservations.size() == 0)
+            throw new Exception_ClientHasNotReservedRoom("Room with name " + room.getName() + " has not be reserved by Client with username " + client.getUsername());
     }
 
 }

@@ -5,8 +5,7 @@ import com.travel_website.travel_website_2_backend.DTO.CreateRating;
 import com.travel_website.travel_website_2_backend.DTO.RatingDTO;
 import com.travel_website.travel_website_2_backend.Mapper.RatingMapper;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
-import com.travel_website.travel_website_2_backend.Service.RatingService;
-import com.travel_website.travel_website_2_backend.Service.UserService;
+import com.travel_website.travel_website_2_backend.Service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +25,8 @@ public class RatingController {
 
     private final RatingMapper ratingMapper;
     private final RatingService ratingService;
+    private final ReservationService reservationService;
+    private final RoomService roomService;
     private final UserService userService;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
@@ -62,6 +63,7 @@ public class RatingController {
     public RatingDTO rate(@Valid @RequestBody CreateRating createRating, @AuthenticationPrincipal Data_UserDetails currentUser, @PathVariable int roomId)
     {
         userService.validateClient(userService.validateAndGetUserByUsername(currentUser.getUsername()));
+        reservationService.validateClientHasReservedRoom(userService.validateAndGetUserByUsername(currentUser.getUsername()), roomService.validateAndGetRoom(roomId));
         return ratingMapper.toRatingDto(ratingService.saveRating(ratingMapper.createRating(createRating, currentUser.getId(), roomId)));
     }
 
