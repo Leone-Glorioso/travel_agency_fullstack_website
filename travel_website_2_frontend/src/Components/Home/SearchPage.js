@@ -39,10 +39,21 @@ function SearchPage () {
     // };
 
     return (
-        <div className={"search-page"}>
+        <div className={"float-container"}>
             <FilterWindow SetRooms={SetRooms}/>
             <RoomsPanel rooms={rooms}/>
         </div>
+    // <div>
+    //
+    //     <div>
+    //         <FilterWindow SetRooms={SetRooms}/>
+    //     </div>
+    //
+    //     <div className="grid-child green">
+    //         <RoomsPanel rooms={rooms}/>
+    //     </div>
+    //
+    // </div>
 
     );
 }

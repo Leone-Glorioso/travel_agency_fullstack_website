@@ -1,12 +1,12 @@
 .window {
-    height: 2200px;
-    width: 200px;
+    height: 12000px;
+    /*width: 250px;*/
     align-self: self-start;
     background-color: #000000;
-    /*opacity: 40%;*/
-    /*display: inline-block;*/
-    /*padding: 1rem 1rem;*/
-    /*vertical-align: middle;*/
+    width: 15%;
+    float: right;
+    /*background-color: #0043E0;*/
+    /*padding: 20px;*/
 }
 p {
     color: white;

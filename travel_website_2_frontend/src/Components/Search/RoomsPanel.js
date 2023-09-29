@@ -32,7 +32,6 @@ const RoomsPanel = ({rooms}) => {
 
     return (
         <div>
-            {/*{console.log("lol", newList)}*/}
             {list}
         </div>
     );
