@@ -43,6 +43,6 @@ public class RoomMapperImplementation implements RoomMapper{
             return null;
         return new RoomDTO(room.getId(), room.getName(), room.getTypeofroom(), room.getNumOfBeds(), room.getNumOfBaths(), room.getNumOfBedrooms(), room.getArea(), room.isLivingRoom(), room.isSmoking(),
                 room.isPets(), room.isEvents(), room.isInternet(), room.isCooling(), room.isHeating(), room.isKitchen(), room.isTv(), room.isParking(), room.isElevator(),
-                room.getDescription());
+                room.getDescription(), room.getLocation().getLatitude(), room.getLocation().getLongitude(), room.getLocation().getAddress());
     }
 }

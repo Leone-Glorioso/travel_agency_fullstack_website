@@ -22,7 +22,10 @@ public record RoomDTO(int id,
                       boolean tv,
                       boolean parking,
                       boolean elevator,
-                      String description) {
+                      String description,
+                      double latitude,
+                      double longitude,
+                      String address) {
 
 //    public record LandlordDto(String username)
 //    {

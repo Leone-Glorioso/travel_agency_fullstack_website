@@ -6,6 +6,13 @@ import {handleLogError} from "../Other/Helpers";
 import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
 import './RoomPage.css';
+import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet";
+import SearchField from "../Search/SearchField";
+import {Map} from "@mui/icons-material";
+import RoomMap from "./RoomMap";
+import RoomMapButton from "./RoomMapButton";
+
+
 
 function RoomPage() {
 
@@ -115,6 +122,12 @@ function RoomPage() {
                         <h4 id={"ppn"} className={"section-title-h4"}>{ppn}</h4>
                     </Grid.Column>
                 </Grid.Row>
+                <Grid.Row >
+                    <Grid.Column className={"grid-cell"}>
+                        <label about={"address"}  className={"label_special"}>Address</label>
+                        <h4 id={"address"} className={"section-title-h4"}>{room.address}</h4>
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
             <Container className={"room-details"}>
                 <label about={"description"} >Description</label>
@@ -222,6 +235,11 @@ function RoomPage() {
                     {!room.pets && <p className={"false"}>Not Allowed</p>}
                 </Grid.Row>
             </Grid>
+            {console.log(room)}
+            {/*<MapContainer>*/}
+            {/*    /!* Other components *!/*/}
+            {/*    <RoomMapButton room={room}/>*/}
+            {/*</MapContainer>*/}
             {(role === "client" || role === "landlordclient") && <Container className={"date-container"} >
                 <h2 align={"center"}> Booking </h2>
                 {/*<label> Give Dates: </label>*/}

@@ -239,3 +239,21 @@
 .date-container button:hover {
     background-color: #0056b3; /* Background color on hover */
 }
+
+
+.map-container {
+    width: 100%; /* Full width */
+    height: 400px; /* Set the desired height for your map */
+    margin-top: 20px; /* Spacing from the content above */
+    border: 1px solid #ccc; /* Border for the map container */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a card-like appearance */
+    z-index: -1; /* Set an appropriate z-index value */
+}
+
+.map-container-wrapper {
+    width: 100%; /* Set the width to fit your layout */
+    height: 200px; /* Set the desired height for the map container */
+    /* Add any additional styles as needed */
+    z-index: 0;
+}
