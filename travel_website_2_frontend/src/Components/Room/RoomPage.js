@@ -11,6 +11,7 @@ import SearchField from "../Search/SearchField";
 import {Map} from "@mui/icons-material";
 import RoomMap from "./RoomMap";
 import RoomMapButton from "./RoomMapButton";
+import {Rating} from "@mui/material";
 
 
 
@@ -26,7 +27,10 @@ function RoomPage() {
     const [role,setRole]=useState('')
     const [isError, setIsError] = useState(false)
     const [submited, setSubmited] = useState(false)
+    const [submitedRating, setSubmitedRating] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [rating,setRating]=useState(3)
+    const [details,setDetails]=useState('')
 
 
     // const location = useLocation();
@@ -68,6 +72,27 @@ function RoomPage() {
                 ppn: ppn}, room.id)
             console.log(response)
             setSubmited(true)
+        }
+        catch (error){
+            handleLogError(error)
+            if (error.response && error.response.data) {
+                const errorData = error.response.data
+                let errorMessage = 'Invalid fields'
+                if (errorData.status === 409) {
+                    errorMessage = errorData.message
+                } else if (errorData.status === 400) {
+                    errorMessage = errorData.errors[0].defaultMessage
+                }
+                setIsError(true)
+                setErrorMessage(errorMessage)
+            }
+        }
+    }
+    const handleSubmitRating = async () => {
+        try {
+            const response = await ApiConnector.rate(user.user, room.name, {"description": details, "rating": rating})
+            console.log(response.data)
+            setSubmitedRating(true)
         }
         catch (error){
             handleLogError(error)
@@ -256,7 +281,24 @@ function RoomPage() {
                 <button type={"submit"} onClick={handleSubmit}>Book Now</button>
             </Container>}
             {isError && !submited && <Message negative>{errorMessage}</Message>}
-            {submited && <Message positive>Congrats!</Message>}
+            {(role === "client" || role === "landlordclient") && submited &&  <Container className={"date-container"} >
+                <h2 align={"center"}> Rate Your Experience </h2>
+                {/*<label> Give Dates: </label>*/}
+                <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                        setRating(newValue);
+                    }}
+                />
+                <input
+                    type="text"
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}
+                />
+                <button type={"submit"} onClick={handleSubmitRating}>Rate Us</button>
+            </Container>}
+            {submited && submitedRating && <Message positive>Congrats!</Message>}
         </div>
     );
 };

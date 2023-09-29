@@ -21,6 +21,6 @@ public class RatingMapperImplementation implements RatingMapper{
     {
         if(rating == null)
             return null;
-        return new RatingDTO(rating.getRating(), rating.getDescription(), rating.getUser(), rating.getRoom());
+        return new RatingDTO(rating.getId(), rating.getRating(), rating.getDescription(), rating.getUser(), rating.getRoom());
     }
 }

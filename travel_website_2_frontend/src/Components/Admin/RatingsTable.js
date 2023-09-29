@@ -67,11 +67,12 @@ function RatingsTable({ ratings, handleGetRatings, ratingIdSearch, ratingRoomSea
                 <Table.Header>
                     <Table.Row>
                         {/*<Table.HeaderCell width={1} />*/}
-                        <Table.HeaderCell width={3}>Id</Table.HeaderCell>
-                        <Table.HeaderCell width={3}>Rating</Table.HeaderCell>
-                        <Table.HeaderCell width={11}>Description</Table.HeaderCell>
-                        <Table.HeaderCell width={3}>User Username</Table.HeaderCell>
-                        <Table.HeaderCell width={4}>Room Name</Table.HeaderCell>
+                        <Table.HeaderCell width={1}>Id</Table.HeaderCell>
+                        <Table.HeaderCell width={1}>Rating</Table.HeaderCell>
+                        <Table.HeaderCell width={2}>Description</Table.HeaderCell>
+                        <Table.HeaderCell width={1}>User Username</Table.HeaderCell>
+                        <Table.HeaderCell width={1}>Room Name</Table.HeaderCell>
+                        <Table.HeaderCell width={1}>Delete</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
