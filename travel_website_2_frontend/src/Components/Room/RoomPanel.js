@@ -18,7 +18,7 @@ const RoomPanel = ({ room }) => {
             <div className={"white-box"}>
                 <h2  className={"card-name"}>{room.name}</h2>
                 {/*<p  className={"card-text"}>Description: {room.description}</p>*/}
-                <p  className={"card-text"}>Area: {room.area} sq ft</p>
+                <p  className={"card-text"}>Area: {room.area} m<sup>2</sup></p>
                 <p  className={"card-text"}>Bedrooms: {room.numofbedrooms}</p>
                 <p  className={"card-text"}>Bathrooms: {room.numofbaths}</p>
                 <p  className={"card-text"}>Beds: {room.numofbeds}</p>

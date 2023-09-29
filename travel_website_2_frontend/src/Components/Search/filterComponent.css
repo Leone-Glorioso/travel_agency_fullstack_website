@@ -2,14 +2,16 @@
     height: 12000px;
     /*width: 250px;*/
     align-self: self-start;
-    background-color: #000000;
+    background-color: rgba(20, 0, 90, 0.1);
+    border: 10px solid #000000; /* 10px black border */
+    /*border-width: 10px;*/
     width: 15%;
     float: right;
     /*background-color: #0043E0;*/
     /*padding: 20px;*/
 }
 p {
-    color: white;
+    color: black;
 }
 
 /* Base button styles */
@@ -24,6 +26,12 @@ p {
     border-radius: 5px; /* Adjust border radius as needed */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit:hover {
+    background-color: #007bff; /* Change the background color on hover (adjust as needed) */
+    color: #ffffff; /* Change the text color on hover (adjust as needed) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow on hover (adjust as needed) */
 }
 
 /* Default button style */

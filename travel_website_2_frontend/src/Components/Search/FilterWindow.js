@@ -75,27 +75,27 @@ const FilterWindow = ({SetRooms}) => {
     const marks = [
         {
             value: 10,
-            label: '10km',
+            label: '',
         },
         {
             value: 50,
-            label: '50km',
+            label: '',
         },
         {
             value: 100,
-            label: '100km',
+            label: '',
         },
         {
             value: 200,
-            label: '200km',
+            label: '',
         },
         {
             value: 500,
-            label: '500km',
+            label: '',
         },
         {
             value: 1000,
-            label: '1000km',
+            label: '',
         },
     ];
 
@@ -434,6 +434,22 @@ const FilterWindow = ({SetRooms}) => {
         }
     }
 
+    const handleClear =  () => {
+        setStartDate(new Date())
+        setEndDate(new Date())
+        setFlags(['dates'])
+        setRange(10)
+        setStart_area(1)
+        setEnd_area(2000)
+        setStart_numOfBeds(1)
+        setEnd_numOfBeds(10)
+        setStart_numOfBedrooms(1)
+        setEnd_numOfBedrooms(10)
+        setStart_numOfBaths(1)
+        setEnd_numOfBaths(10)
+        setTypeofroom('')
+    }
+
     const update = () => {
         dictionary = {
             'smoking': smoking,
@@ -480,7 +496,7 @@ const FilterWindow = ({SetRooms}) => {
                 />
             </MapContainer>
             <Typography id="range-sliderBed" gutterBottom>
-                Select Range:
+                Select Range in Kilometers:
             </Typography>
             <Slider
                 value={range}
@@ -796,6 +812,7 @@ const FilterWindow = ({SetRooms}) => {
 
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
             <Button type={"submit"} onClick={testSubmit} className={"submit"}>Test</Button>
+            <Button type={"submit"} onClick={handleClear} className={"submit"}>Clear</Button>
             <TableOfChosenElements flags={flags} dict={dictionary} />
         </div>
     );
