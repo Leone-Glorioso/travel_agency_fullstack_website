@@ -65,7 +65,7 @@ function AdminPage(){
     const handleGetUsers = async () => {
         setIsUsersLoading(true)
         try {
-            const response = await ApiConnector.getUsers(user.user)
+            const response = await ApiConnector.getUsers(user)
             console.log(response.data)
             setUsers(response.data)
         } catch (error) {

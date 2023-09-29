@@ -11,6 +11,7 @@ const RoomPage = () => {
     const [startDate,setStartDate]=useState(new Date())
     const [endDate,setEndDate]=useState(new Date())
     const [ppn,setPPN]=useState(0)
+    const [role,setRole]=useState('')
     const [isError, setIsError] = useState(false)
     const [submited, setSubmited] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -30,6 +31,9 @@ const RoomPage = () => {
             const step = Math.floor(Math.random() * 9); // Step between 0 and 8
             const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
             setPPN(randomNumber)
+            const response2 = await ApiConnector.getRole(user.user)
+            setRole(response2.data)
+
         }
 
         fetchdata()
@@ -121,7 +125,7 @@ const RoomPage = () => {
                 {room.pets && <p color={"green"}>Allowed</p>}
                 {!room.pets && <p color={"red"}>Not Allowed</p>}
             </Container>
-            <Container className={"main-container"} >
+            {(role === "Client" || role === "Landlord/Client") && <Container className={"main-container"} >
                 <label> Give Dates: </label>
                 <input
                     type="date"
@@ -134,7 +138,7 @@ const RoomPage = () => {
                     onChange={(e) => setEndDate(new Date(e.target.value))}
                 />
                 <button type={"submit"} onClick={handleSubmit}>Book Now</button>
-            </Container>
+            </Container>}
             {isError && <Message negative>{errorMessage}</Message>}
             {submited && <Message positive>Congrats!</Message>}
         </div>
