@@ -3,8 +3,9 @@ import {ApiConnector} from "../Other/ApiConnector";
 import {Container, Form, Message} from "semantic-ui-react";
 import {useAuth} from "../Auth/contex";
 import {handleLogError} from "../Other/Helpers";
+import { useLocation } from "react-router-dom";
 
-const RoomPage = ({room_name}) => {
+const RoomPage = () => {
 
     const [room, SetRoom] = useState(null)
     const [startDate,setStartDate]=useState(new Date())
@@ -14,20 +15,25 @@ const RoomPage = ({room_name}) => {
     const [submited, setSubmited] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
+    const location = useLocation();
+
+    const room_name = location.state.name;
+
     const Auth = useAuth()
     const user = Auth.getUser()
 
-    useEffect(async () => {
-        try {
+    useEffect(() => {
+        const fetchdata = async () => {
             const response = await ApiConnector.getRoomByName(room_name)
             SetRoom(response.data)
             console.log(room)
             const step = Math.floor(Math.random() * 9); // Step between 0 and 8
             const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
             setPPN(randomNumber)
-        } catch (error){
-            console.error(error)
         }
+
+        fetchdata()
+            .catch(console.error)
     }, []);
 
 

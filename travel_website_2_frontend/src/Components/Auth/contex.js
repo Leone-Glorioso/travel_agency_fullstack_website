@@ -33,7 +33,9 @@ function AuthProvider({ children }) {
         sessionStorage.setItem("user", JSON.stringify({ user, accessToken }));
         // let d = new Date();
         // d.setTime(d.getTime() + (10*60*1000));
-        cookies.set('user', JSON.stringify({ user, accessToken }))
+        cookies.set('user', JSON.stringify({ user, accessToken }), {
+            expires: new Date(Date.now() + 1000000)
+        })
         setUser({ user, accessToken });
     };
 

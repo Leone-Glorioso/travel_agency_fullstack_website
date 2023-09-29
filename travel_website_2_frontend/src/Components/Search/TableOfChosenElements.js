@@ -6,7 +6,7 @@ const TableOfChosenElements = ({flags, dict}) => {
 
     let list = flags.map(flag => {
 
-        if(flag === 'dates' || flag === 'location' || flag === 'bedrooms' || flag === 'beds' || flag === 'baths' || flag === 'area')
+        if(flag === 'dates' || flag === 'location' || flag === 'bedrooms' || flag === 'beds' || flag === 'baths' || flag === 'area' || flag === 'typeofroom')
             return null
 
         return(

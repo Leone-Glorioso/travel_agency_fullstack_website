@@ -19,7 +19,7 @@ import TableOfChosenElements from "./TableOfChosenElements";
 // let latitude = 0.01;
 // let longitude = 0.01;
 
-const FilterWindow = (props) => {
+const FilterWindow = ({SetRooms}) => {
     const [startDate,setStartDate]=useState(new Date())
     const [endDate,setEndDate]=useState(new Date())
     const [numOfGuests,setNumOfGuests]=useState(2)
@@ -401,6 +401,7 @@ const FilterWindow = (props) => {
         try {
             const response = ApiConnector.search(searchRequest);
             console.log(searchRequest)
+            SetRooms(response.data)
         }
         catch (error)
         {
@@ -420,6 +421,17 @@ const FilterWindow = (props) => {
         'parking': parking,
         'elevator': elevator,
         'livingRoom': livingRoom
+    }
+
+    const testSubmit = async () => {
+        try {
+            const response = await ApiConnector.getRooms()
+            SetRooms(response.data)
+        }
+        catch (error)
+        {
+            console.log(error)
+        }
     }
 
     const update = () => {
@@ -783,6 +795,7 @@ const FilterWindow = (props) => {
             </ToggleButtonGroup>
 
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
+            <Button type={"submit"} onClick={testSubmit} className={"submit"}>Test</Button>
             <TableOfChosenElements flags={flags} dict={dictionary} />
         </div>
     );
