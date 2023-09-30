@@ -588,9 +588,9 @@ function allMessages(user)
     })
 }
 
-function allMessagesBySender(user, username)
+function allMessagesBySender(user)
 {
-    return instance.get(`/api/messages/sender/${username}`,{
+    return instance.get(`/api/messages/sender`,{
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user)
@@ -598,9 +598,9 @@ function allMessagesBySender(user, username)
     })
 }
 
-function allMessagesByReceiver(user, username)
+function allMessagesByReceiver(user)
 {
-    return instance.get(`/api/messages/receiver/${username}`,{
+    return instance.get(`/api/messages/receiver`,{
         headers: {
             'Content-type': 'application/json',
             'Authorization': bearerAuth(user)

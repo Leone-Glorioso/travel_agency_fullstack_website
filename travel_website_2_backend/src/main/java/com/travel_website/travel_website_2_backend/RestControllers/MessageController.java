@@ -43,17 +43,17 @@ public class MessageController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/sender/{username}")
-    public List<MessageDTO> allMessagesBySender(@PathVariable String username)
+    @GetMapping("/sender")
+    public List<MessageDTO> allMessagesBySender(@AuthenticationPrincipal Data_UserDetails currentUser)
     {
-        return messageService.getMessagesBySender(username).stream().map(messageMapper::toMessageDto).collect(Collectors.toList());
+        return messageService.getMessagesBySender(currentUser.getUsername()).stream().map(messageMapper::toMessageDto).collect(Collectors.toList());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @GetMapping("/receiver/{username}")
-    public List<MessageDTO> allMessagesByReceiver(@PathVariable String username)
+    @GetMapping("/receiver")
+    public List<MessageDTO> allMessagesByReceiver(@AuthenticationPrincipal Data_UserDetails currentUser)
     {
-        return messageService.getMessagesByReceiver(username).stream().map(messageMapper::toMessageDto).collect(Collectors.toList());
+        return messageService.getMessagesByReceiver(currentUser.getUsername()).stream().map(messageMapper::toMessageDto).collect(Collectors.toList());
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})

@@ -36,6 +36,7 @@ const NavBar = () => {
             {!authCheck && <a href="/signup">Signup</a>}
             {authCheck && <button onClick={onLogout}>Logout</button>}
             {authCheck && <a href="/profile">Profile</a>}
+            {authCheck && <a href="/message_page">Message</a>}
             {authCheck && (role === "admin") && <a href="/admin">Page</a>}
             {authCheck && (role === "landlord") && <a href="/landlord">Page</a>}
             {authCheck && (role === "client") && <a href="/client">Page</a>}

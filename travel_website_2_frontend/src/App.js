@@ -14,6 +14,8 @@ import LandlordClientPage from "./Components/LandlordClients/LandlordClientPage"
 import SearchPage from './Components/Home/SearchPage'
 import RoomCreate from "./Components/Room/RoomCreate";
 import RoomPage from "./Components/Room/RoomPage";
+import NewMessagePage from "./Components/CommonPage/NewMessagePage";
+import MessagePage from "./Components/CommonPage/MessagePage";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
                     <Route path='/search-result' element={<SearchPage/>}/>
                     <Route path='/new_room' element={<RoomCreate />} />
                     <Route path='/room_page' element={<RoomPage />} />
+                    <Route path='/message_page' element={<MessagePage />} />
+                    <Route path='/new_message' element={<NewMessagePage />} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
           {/*<Navbar />*/}
