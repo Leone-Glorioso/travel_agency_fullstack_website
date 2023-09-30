@@ -400,10 +400,10 @@ const FilterWindow = ({SetRooms}) => {
                 "flags": flags_2
             }
 
-            const response = ApiConnector.search(searchRequest);
+            const response = await ApiConnector.search(searchRequest);
             console.log(searchRequest)
             console.log(response)
-            SetRooms(response.data)
+            SetRooms(response)
         }
         catch (error)
         {
@@ -463,10 +463,10 @@ const FilterWindow = ({SetRooms}) => {
                 "last_element": last_element,
                 "flags": flags_2
             }
-            const response = ApiConnector.search(searchRequest2);
+            const response = await ApiConnector.search(searchRequest2);
             console.log(searchRequest2)
             console.log(response)
-            SetRooms(response.data)
+            SetRooms(response)
         }
         catch (error)
         {

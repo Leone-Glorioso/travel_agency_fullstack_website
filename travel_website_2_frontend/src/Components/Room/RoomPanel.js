@@ -11,7 +11,7 @@ const RoomPanel = ({ room }) => {
     const [check, setCheck] = useState(false)
 
     return (
-        <div  className="room-card">
+        <div className="room-card" key={room.id.toString()}>
             <div>
                 <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"} className={"card-image"}/>
             </div>
