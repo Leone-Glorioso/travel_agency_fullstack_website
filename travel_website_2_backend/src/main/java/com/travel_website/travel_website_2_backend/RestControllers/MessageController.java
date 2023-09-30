@@ -57,7 +57,7 @@ public class MessageController {
     }
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
-    @PostMapping("/{room_name}")
+    @PostMapping
     public MessageDTO sendMessage(@Valid @RequestBody CreateMessage message, @AuthenticationPrincipal Data_UserDetails currentUser)
     {
         return messageMapper.toMessageDto(messageService.saveMessage(messageMapper.createMessage(message, currentUser.getUsername())));

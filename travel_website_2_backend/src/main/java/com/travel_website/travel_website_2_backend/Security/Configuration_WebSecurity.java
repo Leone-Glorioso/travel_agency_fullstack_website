@@ -93,6 +93,7 @@ public class Configuration_WebSecurity {
                         .requestMatchers(HttpMethod.DELETE,  "/api/ratings/**").hasAuthority(ADMIN.toString())
                         .requestMatchers(HttpMethod.POST,  "/api/ratings/**").hasAnyAuthority(CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers(HttpMethod.GET, "/api/ratings/room/**").permitAll()
+                        .requestMatchers("/api/messages/**").hasAnyAuthority(ADMIN.toString(), LANDLORD.toString(), CLIENT.toString(), LANDLORDCLIENT.toString())
                         .requestMatchers("/public/**", "/auth/**").permitAll()
                         .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())

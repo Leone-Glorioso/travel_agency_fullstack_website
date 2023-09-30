@@ -59,7 +59,13 @@ export const ApiConnector={
     rate,
     ratingOfRoom,
     deleteRating,
-    getRating
+    getRating,
+    allMessagesBySender,
+    allMessagesByReceiver,
+    allMessages,
+    sendMessage,
+    deleteMessage,
+    getMessage
 }
 
 function authenticate(username,password){
@@ -565,6 +571,64 @@ function deleteRating(user, id)
 function getRating(user, id)
 {
     return instance.get(`/api/ratings/get/${id}`,  {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+
+function allMessages(user)
+{
+    return instance.get('/api/messages/all',{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allMessagesBySender(user, username)
+{
+    return instance.get(`/api/messages/sender/${username}`,{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function allMessagesByReceiver(user, username)
+{
+    return instance.get(`/api/messages/receiver/${username}`,{
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function sendMessage(user, message)
+{
+    return instance.post(`/api/messages`, message, {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function deleteMessage(user, id)
+{
+    return instance.delete(`/api/messages/${id}`,  {
+        headers:{
+            'Authorization': bearerAuth(user)
+        }
+    })
+}
+
+function getMessage(user, id)
+{
+    return instance.get(`/api/messages/get/${id}`,  {
         headers:{
             'Authorization': bearerAuth(user)
         }
