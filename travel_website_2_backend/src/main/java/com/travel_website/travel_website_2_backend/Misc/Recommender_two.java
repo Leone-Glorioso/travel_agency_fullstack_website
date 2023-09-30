@@ -145,4 +145,10 @@ public class Recommender_two {
 
     }
 
+    public double[] getUserRankingOfRooms(double[][] R, int user)
+    {
+        double[][] matrix = getMF(R);
+        return R[user];
+    }
+
 }
