@@ -5,6 +5,7 @@ import com.travel_website.travel_website_2_backend.Mapper.LocationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
 import com.travel_website.travel_website_2_backend.Misc.DateHelper;
+import com.travel_website.travel_website_2_backend.Misc.Recommender;
 import com.travel_website.travel_website_2_backend.Models.Location;
 import com.travel_website.travel_website_2_backend.Models.Reservation;
 import com.travel_website.travel_website_2_backend.Models.Room;
@@ -39,13 +40,23 @@ public class RoomController {
     private final CalendarService calendarService;
     private final DateHelper dateHelper;
     private final RequestService requestService;
+    private final Recommender recommender;
 //    private boolean[][] map1 = new ;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
     public List<RoomDTO> getRooms()
     {
-        return roomService.getRooms().stream()
+        List<Integer> rooms1 = recommender.start_system(userService.getUsers().size(), roomService.getRooms().size(), 12, roomService.getRooms().size());
+        List<Room> rooms= new ArrayList<>();
+        List<Room> allRooms = roomService.getRooms();
+        Map<Integer, Room> mapOfRooms = new HashMap<>();
+        for (int i = 0; i < allRooms.size(); i++)
+            mapOfRooms.put(i, allRooms.get(i));
+        for (int room : rooms1)
+            rooms.add(mapOfRooms.get(room));
+
+        return rooms.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
     }
@@ -241,7 +252,16 @@ public class RoomController {
             end = rooms.size();
         List<Room> roomSublist = rooms.subList(start, end);
         System.out.println(roomSublist.stream().map(Room::getId));
-        return roomSublist.stream()
+        List<Integer> rooms1 = recommender.start_system(userService.getUsers().size(), roomService.getRooms().size(), 12, roomService.getRooms().size());
+        List<Room> rooms3= new ArrayList<>();
+        Map<Integer, Room> mapOfRooms = new HashMap<>();
+        for (int i = 0; i < rooms.size(); i++)
+            mapOfRooms.put(i, rooms.get(i));
+        for (int room : rooms1)
+            rooms3.add(mapOfRooms.get(room));
+        rooms3.retainAll(rooms);
+        List<Room> roomSublist2 = rooms3.subList(start, end);
+        return roomSublist2.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
 
