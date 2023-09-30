@@ -144,18 +144,18 @@ public class Recommender_two {
 
         Pair<double[][], double[][]> pair = matrix_factorization(R, Q, P, K, steps, rate, lambda);
 
-        for(int i = 0; i < pair.a.length; i++) {
-            for (int j = 0; j < pair.a[i].length; j++) {
-                System.out.print(pair.a[i][j]);
-            }
-            System.out.println();
-        }
-        for(int i = 0; i < pair.b.length; i++) {
-            for (int j = 0; j < pair.b[i].length; j++) {
-                System.out.print(pair.b[i][j]);
-            }
-            System.out.println();
-        }
+//        for(int i = 0; i < pair.a.length; i++) {
+//            for (int j = 0; j < pair.a[i].length; j++) {
+//                System.out.print(pair.a[i][j]);
+//            }
+//            System.out.println();
+//        }
+//        for(int i = 0; i < pair.b.length; i++) {
+//            for (int j = 0; j < pair.b[i].length; j++) {
+//                System.out.print(pair.b[i][j]);
+//            }
+//            System.out.println();
+//        }
         return multiplyMatrices(pair.a, getTranspose(pair.b));
 
     }
@@ -163,7 +163,7 @@ public class Recommender_two {
     public double[] getUserRankingOfRooms(double[][] R, int user)
     {
         double[][] matrix = getMF(R);
-        return R[user];
+        return matrix[user];
     }
 
 }

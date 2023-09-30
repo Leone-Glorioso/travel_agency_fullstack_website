@@ -193,8 +193,8 @@ public class RoomController {
     @PostMapping("/search")
     public List<RoomDTO> search(@RequestBody SearchRequest request) {
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
-        List<Room> rooms = roomService.getRooms();
-//        List<Room> rooms = applyRecommendations();
+//        List<Room> rooms = roomService.getRooms();
+        List<Room> rooms = applyRecommendations();
         System.out.println(rooms.stream().map(Room::getId));
         if (flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
@@ -262,8 +262,12 @@ public class RoomController {
         List<User> usersAll = userService.getUsersByRole(UserCategories.LandlordClient);
         usersAll.addAll(userService.getUsersByRole(UserCategories.Client));
         int rows = usersAll.size();
+        System.out.println(usersAll.stream().map(User::getId).collect(Collectors.toSet()));
+        System.out.println(rows);
         List<Room> roomsAll = roomService.getRooms();
         int columns = roomsAll.size();
+        System.out.println(columns);
+        System.out.println(roomsAll.stream().map(Room::getId).collect(Collectors.toSet()));
         double[][] R = new double[rows][columns];
         Map<Integer, Room> roomMap = new HashMap<>();
         Map<Integer, User> userMap = new HashMap<>();
@@ -281,10 +285,25 @@ public class RoomController {
                     R[i][j] = ratingService.validateAndGetRatingByRoomAndUser(roomMap.get(j).getName(), userMap.get(i).getName()).getRating();
             }
         }
-        double[] listOfMatches = recommender_2.getUserRankingOfRooms(R, 3);
+
+        for(int i = 0; i < R.length; i++) {
+            for (int j = 0; j < R[i].length; j++) {
+                System.out.print(R[i][j]);
+            }
+            System.out.println();
+        }
+        double[] listOfMatches = recommender_2.getUserRankingOfRooms(R, 4);
+        //fix the interpretation
+        System.out.print("\n\n");
+        for(int i = 0; i < listOfMatches.length; i++) {
+            System.out.print(listOfMatches[i]);
+        }
         SortedMap<Double, Room> finalMap = new TreeMap<Double, Room>();
         for(int i = 0; i < listOfMatches.length; i++)
             finalMap.put(listOfMatches[i], roomsAll.get(i));
+        for(int i = 0; i < finalMap.size(); i++) {
+            System.out.print(finalMap.values().stream().map(Room::getId).collect(Collectors.toSet()));
+        }
         List<Room> rooms_final = new ArrayList<>();
         for(Room room : finalMap.values())
             rooms_final.add(room);

@@ -37,14 +37,14 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
 
             </Form>
             <Button onClick={handleGetReservations}>Get All</Button>
-            <Table compact striped selectable>
+            <Table compact striped selectable >
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell width={1} />
-                        <Table.HeaderCell width={3}>Id</Table.HeaderCell>
-                        <Table.HeaderCell width={3}>Price per Night</Table.HeaderCell>
-                        <Table.HeaderCell width={4}>Start Date</Table.HeaderCell>
-                        <Table.HeaderCell width={4}>End Date</Table.HeaderCell>
+                        {/*<Table.HeaderCell width={1} />*/}
+                        <Table.HeaderCell width={4}>Id</Table.HeaderCell>
+                        <Table.HeaderCell width={4}>Price per Night</Table.HeaderCell>
+                        <Table.HeaderCell width={2}>Start Date</Table.HeaderCell>
+                        <Table.HeaderCell width={2}>End Date</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
