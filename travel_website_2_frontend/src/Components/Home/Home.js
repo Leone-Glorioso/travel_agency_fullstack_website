@@ -49,12 +49,12 @@ function Home(){
     }
 
     return (
-        <Container text>
+        <Container text >
             <Header/>
             <NavBar />
             <Grid stackable columns={2}>
                 <Grid.Row>
-                    <Grid.Column textAlign='center'>
+                    <Grid.Column textAlign='center' className={"home"}>
                         <Segment color='violet'>
                             <Statistic>
                                 <Statistic.Value><Icon name='user' color='grey' />{numberOfUsers}</Statistic.Value>

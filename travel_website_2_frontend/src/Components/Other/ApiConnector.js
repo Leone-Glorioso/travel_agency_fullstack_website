@@ -386,10 +386,10 @@ function search(request)
     return instance.post('/api/rooms/search', request ,{
         // params:request,
         // data: {}, //{}
-        headers: {
-            // "Access-Control-Allow-Origin": "*"
-            'Content-type': 'application/json'
-        }
+        // headers: {
+        //     // "Access-Control-Allow-Origin": "*"
+        //     'content-type': "application/json"
+        // }
         // params: {
         //     "request": request
         // }

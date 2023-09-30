@@ -163,8 +163,8 @@ function SingUp() {
                         <Form.Input
                             fluid
                             name='name'
-                            icon='id card'
-                            iconPosition='left'
+                            // icon='id card'
+                            // iconPosition='left'
                             placeholder='Name'
                             value={name}
                             onChange={handleInputChange}
@@ -173,8 +173,8 @@ function SingUp() {
                         <Form.Input
                             fluid
                             name='surname'
-                            icon='id card outline'
-                            iconPosition='left'
+                            // icon='id card outline'
+                            // iconPosition='left'
                             placeholder='surname'
                             value={surname}
                             onChange={handleInputChange}

@@ -26,4 +26,6 @@ public interface CalendarService {
 
     List<Calendar> bookDates(int room, LocalDate start, LocalDate end);
 
+    Set<Integer> roomsAvailableBetweenDates(LocalDate start, LocalDate end);
+
 }

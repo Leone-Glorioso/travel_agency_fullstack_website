@@ -238,6 +238,16 @@ public class RoomController {
             rooms.retainAll(roomService.getIfElevator(request.isElevator()));
         if(flags.contains("location"))
             rooms.retainAll(roomService.getRoomsInLocalArea(request.getLatitude(), request.getLongitude(), request.getRange()));
+        if(flags.contains("dates"))
+        {
+            Set<Integer> roomIds = calendarService.roomsAvailableBetweenDates(dateHelper.stringToDate(request.getStart()), dateHelper.stringToDate(request.getEnd()));
+            List<Room> rooms1 = new ArrayList<>();
+            for(int id : roomIds)
+            {
+                rooms1.add(roomService.validateAndGetRoom(id));
+            }
+            rooms.retainAll(rooms1);
+        }
         if(flags.contains("typeofroom"))
             rooms.retainAll(roomService.getRoomsByTypes(request.getTypeofroom()));
         if(rooms.size() == 0)
@@ -261,6 +271,7 @@ public class RoomController {
             rooms3.add(mapOfRooms.get(room));
         rooms3.retainAll(rooms);
         List<Room> roomSublist2 = rooms3.subList(start, end);
+        System.out.println(roomSublist2.stream().map(Room::getId).collect(Collectors.toList()));
         return roomSublist2.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());

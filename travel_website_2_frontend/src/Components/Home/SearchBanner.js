@@ -17,9 +17,9 @@ function SearchBanner () {
                 <h1>Live your Myth in our modern homes</h1>
                 <h2>Plan your vacations worldwide</h2>
             </div>
-                <IconButton variant={'outlined'}>
-                    Explore Nearby
-                </IconButton>
+                {/*<IconButton variant={'outlined'}>*/}
+                {/*    Explore Nearby*/}
+                {/*</IconButton>*/}
         </div>
     )
 }

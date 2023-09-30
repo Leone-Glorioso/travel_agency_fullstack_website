@@ -16,16 +16,16 @@ function Header(){
                  alt={"Web site logo"}
             />
 
-            <div className={'header_center'}>
-                <input type={"text"}/>
-                {<SearchIcon/>}
-            </div>
+            {/*<div className={'header_center'}>*/}
+            {/*    <input type={"text"}/>*/}
+            {/*    {<SearchIcon/>}*/}
+            {/*</div>*/}
 
-            <div className={'header_right'}>
-                <p>Become a LandLord</p>
-                <ExpandClick/>
-                <Avatar/>
-            </div>
+            {/*<div className={'header_right'}>*/}
+            {/*    <p>Become a LandLord</p>*/}
+            {/*    <ExpandClick/>*/}
+            {/*    <Avatar/>*/}
+            {/*</div>*/}
         </div>
 
 

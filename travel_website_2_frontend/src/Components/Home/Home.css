@@ -12,3 +12,8 @@
     font-size:25px;
     color:cadetblue;
 }
+
+.home {
+    align-items: center;
+    width: auto;
+}

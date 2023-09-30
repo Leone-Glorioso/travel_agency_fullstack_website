@@ -2,14 +2,17 @@ package com.travel_website.travel_website_2_backend.Service;
 
 import com.travel_website.travel_website_2_backend.Exception.Exception_CalendarEntryDoesNotExist;
 import com.travel_website.travel_website_2_backend.Exception.Exception_RoomIsBookedOnPeriod;
+import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
 import com.travel_website.travel_website_2_backend.Misc.DateHelper;
 import com.travel_website.travel_website_2_backend.Models.Calendar;
+import com.travel_website.travel_website_2_backend.Models.Room;
 import com.travel_website.travel_website_2_backend.Repository.CalendarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,6 +20,7 @@ public class CalendarServiceImplementation implements CalendarService{
 
     private final CalendarRepository calendarRepository;
     private final DateHelper dateHelper;
+    private final RoomService roomService;
 
     @Override
     public Calendar validateAndGetEntry(int room, LocalDate date)
@@ -34,6 +38,19 @@ public class CalendarServiceImplementation implements CalendarService{
             rooms.add(entry.getRoom());
         }
         return rooms;
+    }
+
+    @Override
+    public Set<Integer> roomsAvailableBetweenDates(LocalDate start, LocalDate end)
+    {
+        List<Calendar> entries = calendarRepository.findByDateBetween(start, end);
+        Set<Integer> rooms = new HashSet<>();
+        for (Calendar entry: entries) {
+            rooms.add(entry.getRoom());
+        }
+        Set<Integer> allRooms = roomService.getRooms().stream().map(Room::getId).collect(Collectors.toSet());
+        allRooms.removeAll(rooms);
+        return allRooms;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Recommender {
 //        int numItems = 4;
 
         // Define hyperparameters
-        int latentFactors = 1; // Number of latent factors
+        int latentFactors = 10; // Number of latent factors
         double learningRate = 0.01;
         double regularization = 0.1;
         int numIterations = 1000;

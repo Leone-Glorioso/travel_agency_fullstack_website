@@ -361,46 +361,48 @@ const FilterWindow = ({SetRooms}) => {
 
     const handleSubmit = async () =>
     {
-        const first_element=1
-        const last_element=20
-        const flags_2= flags.join(', ')
-        console.log("v8")
-        console.log(latitude, longitude)
-
-        const searchRequest={
-            "latitude": latitude,
-            "longitude": longitude,
-            "range": range,
-            "start": startDate.toLocaleDateString('en-GB'),
-            "end": endDate.toLocaleDateString('en-GB'),
-            "typeofroom": typeofroom,
-            "start_numOfBeds": start_numOfBeds,
-            "end_numOfBeds": end_numOfBeds,
-            "start_numOfBaths": start_numOfBaths,
-            "end_numOfBaths": end_numOfBaths,
-            "start_numOfBedrooms": start_numOfBedrooms,
-            "end_numOfBedrooms": end_numOfBedrooms,
-            "livingRoom": livingRoom,
-            "start_area": start_area,
-            "end_area": end_area,
-            "smoking": smoking,
-            "pets": pets,
-            "events": events,
-            "internet": internet,
-            "cooling": cooling,
-            "heating": heating,
-            "kitchen": kitchen,
-            "tv": tv,
-            "parking": parking,
-            "elevator": elevator,
-            "first_element": first_element,
-            "last_element": last_element,
-            "flags": flags_2
-        }
 
         try {
+            const first_element=1
+            const last_element=20
+            const flags_2= flags.join(', ')
+            console.log("v8")
+            console.log(latitude, longitude)
+
+            const searchRequest={
+                "latitude": latitude,
+                "longitude": longitude,
+                "range": range,
+                "start": startDate.toLocaleDateString('en-GB'),
+                "end": endDate.toLocaleDateString('en-GB'),
+                "typeofroom": typeofroom,
+                "start_numOfBeds": start_numOfBeds,
+                "end_numOfBeds": end_numOfBeds,
+                "start_numOfBaths": start_numOfBaths,
+                "end_numOfBaths": end_numOfBaths,
+                "start_numOfBedrooms": start_numOfBedrooms,
+                "end_numOfBedrooms": end_numOfBedrooms,
+                "livingRoom": livingRoom,
+                "start_area": start_area,
+                "end_area": end_area,
+                "smoking": smoking,
+                "pets": pets,
+                "events": events,
+                "internet": internet,
+                "cooling": cooling,
+                "heating": heating,
+                "kitchen": kitchen,
+                "tv": tv,
+                "parking": parking,
+                "elevator": elevator,
+                "first_element": first_element,
+                "last_element": last_element,
+                "flags": flags_2
+            }
+
             const response = ApiConnector.search(searchRequest);
             console.log(searchRequest)
+            console.log(response)
             SetRooms(response.data)
         }
         catch (error)
@@ -434,20 +436,43 @@ const FilterWindow = ({SetRooms}) => {
         }
     }
 
-    const handleClear =  () => {
-        setStartDate(new Date())
-        setEndDate(new Date())
-        setFlags(['dates'])
-        setRange(10)
-        setStart_area(1)
-        setEnd_area(2000)
-        setStart_numOfBeds(1)
-        setEnd_numOfBeds(10)
-        setStart_numOfBedrooms(1)
-        setEnd_numOfBedrooms(10)
-        setStart_numOfBaths(1)
-        setEnd_numOfBaths(10)
-        setTypeofroom('')
+    const handleClear =  async () => {
+
+        try {
+            // setStartDate(new Date())
+            // setEndDate(new Date())
+            setFlags(['dates'])
+            setRange(10)
+            setStart_area(1)
+            setEnd_area(2000)
+            setStart_numOfBeds(1)
+            setEnd_numOfBeds(10)
+            setStart_numOfBedrooms(1)
+            setEnd_numOfBedrooms(10)
+            setStart_numOfBaths(1)
+            setEnd_numOfBaths(10)
+            setTypeofroom('')
+            const first_element=1
+            const last_element=20
+            const flags_2= flags.join(', ')
+
+            const searchRequest2={
+                "start": startDate.toLocaleDateString('en-GB'),
+                "end": endDate.toLocaleDateString('en-GB'),
+                "first_element": first_element,
+                "last_element": last_element,
+                "flags": flags_2
+            }
+            const response = ApiConnector.search(searchRequest2);
+            console.log(searchRequest2)
+            console.log(response)
+            SetRooms(response.data)
+        }
+        catch (error)
+        {
+            console.log(error)
+        }
+
     }
 
     const update = () => {
