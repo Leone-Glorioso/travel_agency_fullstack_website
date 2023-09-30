@@ -8,6 +8,7 @@ import RatingsTable from "../Admin/RatingsTable";
 import SentTable from "./SentTable";
 import ReceivedTable from "./ReceivedTable";
 import {useNavigate} from "react-router-dom";
+import './messageStyling.css';
 
 const MessageTab = (props) => {
     const {sent, received} = props
@@ -44,7 +45,7 @@ const MessageTab = (props) => {
     ]
 
     return (
-        <Tab menu={{ attached: 'top' }} panes={panes} />
+        <Tab menu={{ attached: 'top' }} panes={panes}  className={"custom-tab"}/>
     )
 };
 

@@ -4,6 +4,7 @@ import ReservationsTableFromLandlordClient from "./MyReservationsTable";
 import ReservationsTableToLandlordClient from "./ReservationsOfMyRoomsTable";
 import RoomsTableLandlordClient from "./RoomsTable";
 import {useNavigate} from "react-router-dom";
+import '../CommonPage/messageStyling.css';
 
 function LandlordTab(props) {
     const { handleInputChange } = props
@@ -72,7 +73,7 @@ function LandlordTab(props) {
     ]
 
     return (
-        <Tab menu={{ attached: 'top' }} panes={panes} />
+        <Tab menu={{ attached: 'top' }} panes={panes}  className={"custom-tab"} />
     )
 }
 

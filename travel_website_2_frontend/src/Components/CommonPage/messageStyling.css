@@ -1,0 +1,51 @@
+/* Custom styling for the entire Tab component */
+.custom-tab {
+    background-color: #f0f0f0; /* Faded gray background */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+}
+
+/* Custom styling for the tab menu */
+.custom-tab .menu {
+    background-color: #007bff; /* Main blue color */
+    border: none;
+}
+
+/* Custom styling for individual tab items */
+.custom-tab .menu .item {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #fff; /* White text color */
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom styling for the active tab item */
+.custom-tab .menu .item.active {
+    background-color: #fff; /* White background for active tab */
+    color: #007bff; /* Blue text color for active tab */
+}
+
+/* Custom styling for the tab content */
+.custom-tab .ui.tab.segment {
+    padding: 16px;
+    background-color: #fff; /* White background for tab content */
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Custom styling for the Table component within each tab */
+.custom-tab .ui.tab.segment .ui.table {
+    background-color: transparent; /* Make the table background transparent */
+    border: none; /* Remove table border if needed */
+    box-shadow: none; /* Remove table box-shadow if needed */
+    /* Add additional styling for the Table component here */
+}
+
+/* Custom styling for the Tab.Pane content */
+.custom-tab .ui.tab.segment .ui.tab.pane {
+    /* Add custom styling for the Tab.Pane content here */
+}

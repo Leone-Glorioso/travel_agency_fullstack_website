@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import MyReservationsTableClient from "./MyReservationsTable";
+// import '../CommonPage/messageStyling.css';
 
 function ClientTab(props) {
     const { handleInputChange } = props
@@ -25,7 +26,7 @@ function ClientTab(props) {
     ]
 
     return (
-        <Tab menu={{ attached: 'top' }} panes={panes} />
+        <Tab menu={{ attached: 'top' }} panes={panes}/>
     )
 }
 

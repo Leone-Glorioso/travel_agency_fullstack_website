@@ -5,6 +5,7 @@ import ReservationsTable from "./ReservationsTable";
 import RoomsTable from "./RoomsTable";
 import UsersTable from "./UsersTable";
 import RatingsTable from "./RatingsTable";
+import '../CommonPage/messageStyling.css';
 
 function AdminTab(props) {
     const { handleInputChange } = props
@@ -112,7 +113,7 @@ function AdminTab(props) {
     ]
 
     return (
-        <Tab menu={{ attached: 'top' }} panes={panes} />
+        <Tab menu={{ attached: 'top' }} panes={panes}  className={"custom-tab"} />
     )
 }
 

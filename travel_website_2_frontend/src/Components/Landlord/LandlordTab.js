@@ -3,6 +3,7 @@ import {Button, Tab} from 'semantic-ui-react'
 import ReservationsTableToLandlord from "./ReservationsOfMyRoomsTable";
 import RoomsTableLandlord from "./RoomsTable";
 import {useNavigate} from "react-router-dom";
+import '../CommonPage/messageStyling.css';
 
 function LandlordTab(props) {
     const { handleInputChange } = props
@@ -56,7 +57,7 @@ function LandlordTab(props) {
     ]
 
     return (
-        <Tab menu={{ attached: 'top' }} panes={panes} />
+        <Tab menu={{ attached: 'top' }} panes={panes}  className={"custom-tab"} />
     )
 }
 

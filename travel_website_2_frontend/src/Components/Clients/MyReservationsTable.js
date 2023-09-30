@@ -25,13 +25,16 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
     return (
         <>
             <Form onSubmit={handleSearchReservation}>
-                <Input
-                    action={{ icon: 'search' }}
+                <Form.Input
+                    action={<Button type="submit" primary>
+                        Submit
+                    </Button>}
                     name='reservationSearch'
                     placeholder='Search'
                     value={reservationIdSearch}
                     onChange={handleInputChange}
                 />
+
             </Form>
             <Button onClick={handleGetReservations}>Get All</Button>
             <Table compact striped selectable>

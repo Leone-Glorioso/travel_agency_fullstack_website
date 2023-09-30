@@ -50,7 +50,7 @@ function RoomsTableLandlord({ rooms, roomIdSearch, handleInputChange, handleDele
         <>
             <Form onSubmit={handleSearchRoomId}>
                 <Input
-                    action={{ icon: 'search' }}
+                    action={<Button type={"submit"}> Submit</Button>}
                     name='SearchRoomId'
                     placeholder='Search'
                     value={roomIdSearch}
