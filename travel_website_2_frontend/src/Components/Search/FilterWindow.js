@@ -47,6 +47,10 @@ const FilterWindow = ({SetRooms}) => {
     const [parking, setParking] = useState();
     const [elevator, setElevator] = useState();
     const [flags, setFlags] = useState([]);
+    const [first_element, setFirst_element] = useState(1);
+    const [last_element, setLast_element] = useState(20);
+    // const [length, setLength] = useState(1);
+    const [counter, setCounter] = useState(0);
 
     if(flags.includes('dates') === false)
         flags.push('dates')
@@ -358,16 +362,27 @@ const FilterWindow = ({SetRooms}) => {
         setRange(value)
     }
 
+    const handleSubmitPrev = async () =>{
+        const price = counter
+        setCounter(price-1)
+        await handleSubmit()
+    }
+
+    const handleSubmitNext = async () =>{
+        const price = counter
+        setCounter(price+1)
+        await handleSubmit()
+    }
+
 
     const handleSubmit = async () =>
     {
 
         try {
-            const first_element=1
-            const last_element=20
+            setFirst_element(1 + (counter*20))
+            setLast_element(20+ (counter*20))
             const flags_2= flags.join(', ')
-            console.log("v8")
-            console.log(latitude, longitude)
+            console.log(first_element, last_element, counter)
 
             const searchRequest={
                 "latitude": latitude,
@@ -452,8 +467,9 @@ const FilterWindow = ({SetRooms}) => {
             setStart_numOfBaths(1)
             setEnd_numOfBaths(10)
             setTypeofroom('')
-            const first_element=1
-            const last_element=20
+            setFirst_element(1)
+            setLast_element(20)
+
             const flags_2= flags.join(', ')
 
             const searchRequest2={
@@ -493,6 +509,8 @@ const FilterWindow = ({SetRooms}) => {
 
     return (
         <div className="window">
+            {(counter !== 0) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitPrev}>Prev</Button>}
+            {(last_element === ((counter+1)*20)) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitNext}>Next</Button>}
             <MapContainer
                 id="map"
                 // className={classes.map}
