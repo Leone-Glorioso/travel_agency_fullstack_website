@@ -41,10 +41,18 @@ public class RatingServiceImplementation implements RatingService{
     }
 
     @Override
+    public boolean IsByRoomAndUser(String room, String user)
+    {
+        return ratingRepository.existsByRoomAndUser(room, user);
+    }
+
+    @Override
     public float getRatingOfRoom(String room)
     {
         List<Integer> list = new ArrayList<>();
         List<Rating> ratings = ratingRepository.findByRoom(room);
+        if(ratings.size() == 0)
+            return 0;
         int sum = 0;
         for(Rating rating : ratings)
         {

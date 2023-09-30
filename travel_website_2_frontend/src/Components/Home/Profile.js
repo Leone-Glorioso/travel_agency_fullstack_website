@@ -127,12 +127,12 @@ function Profile() {
                 <Grid.Column>
                     <Segment><strong>Role</strong> {role}</Segment>
                 </Grid.Column>
-                <Grid.Column>
-                    <Form >
-                        <Form.Input type={"file"} onChange={imageChange} />
-                        <Form.Button type={"submit"} onClick={submitNewImage}>Upload Image</Form.Button>
-                    </Form>
-                </Grid.Column>
+                {/*<Grid.Column>*/}
+                {/*    <Form >*/}
+                {/*        <Form.Input type={"file"} onChange={imageChange} />*/}
+                {/*        <Form.Button type={"submit"} onClick={submitNewImage}>Upload Image</Form.Button>*/}
+                {/*    </Form>*/}
+                {/*</Grid.Column>*/}
                 {/*<Button onClick={() => navigate("/new_room")} />*/}
                 {/*<Grid.Column>*/}
                 {/*    */}

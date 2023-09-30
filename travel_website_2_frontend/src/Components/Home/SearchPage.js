@@ -4,56 +4,22 @@ import Card from "./Card"
 import FilterWindow from "../Search/FilterWindow";
 import RoomsPanel from "../Search/RoomsPanel";
 import {Grid} from "semantic-ui-react";
+import Cookies from "universal-cookie";
 function SearchPage () {
 
-    // Define state variables for search results and filters
-    const {state}=useLocation()
-    const {data}=state
-    console.log(data)
     const [rooms, SetRooms] = useState([])
+    const cookies = new Cookies();
 
-
-    // const [searchResults, setSearchResults] = useState([]);
-    // const [filters, setFilters] = useState({
-    //     // Define your initial filter options here
-    //     minPrice: 0,
-    //     maxPrice: 1000,
-    //     minGuests: 1,
-    //     // Add more filters as needed
-    // });
-
-    // const cards={}
-    // for(let value in data){
-    //     cards.append(<Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={value.description} price={value.ppn} />)
-    // }
-    // data.forEach((value) => {
-    //     cards.append(<Card src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdXNlJTIwb3V0ZG9yJTIwbW9kZXJufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"} title={"takis"} description={value.description} price={value.ppn} />)
-    // })
-
-
-
-    // Define a function to update filters
-    // const handleFilterChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFilters({ ...filters, [name]: value });
-    // };
+    useEffect(() => {
+        SetRooms(cookies.get('rooms'))
+        // cookies.remove('rooms')
+    }, []);
 
     return (
         <div className={"float-container"}>
             <FilterWindow SetRooms={SetRooms}/>
             <RoomsPanel rooms={rooms}/>
         </div>
-    // <div>
-    //
-    //     <div>
-    //         <FilterWindow SetRooms={SetRooms}/>
-    //     </div>
-    //
-    //     <div className="grid-child green">
-    //         <RoomsPanel rooms={rooms}/>
-    //     </div>
-    //
-    // </div>
 
     );
 }

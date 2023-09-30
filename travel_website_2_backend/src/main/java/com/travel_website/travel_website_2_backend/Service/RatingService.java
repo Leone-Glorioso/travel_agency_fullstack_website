@@ -3,6 +3,7 @@ package com.travel_website.travel_website_2_backend.Service;
 import com.travel_website.travel_website_2_backend.Models.Rating;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RatingService {
 
@@ -11,6 +12,8 @@ public interface RatingService {
     Rating validateAndGetRatingById(int id);
 
     Rating validateAndGetRatingByRoomAndUser(String room, String user);
+
+    boolean IsByRoomAndUser(String room, String user);
 
     float getRatingOfRoom(String room);
 

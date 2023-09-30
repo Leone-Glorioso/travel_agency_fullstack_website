@@ -22,4 +22,6 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
     List<Rating> findByUserAndRatingBetween(String user, int start_rating, int end_rating);
 
+    boolean existsByRoomAndUser(String room, String user);
+
 }

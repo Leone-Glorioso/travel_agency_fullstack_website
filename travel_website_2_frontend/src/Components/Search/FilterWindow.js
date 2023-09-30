@@ -509,8 +509,8 @@ const FilterWindow = ({SetRooms}) => {
 
     return (
         <div className="window">
-            {(counter !== 0) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitPrev}>Prev</Button>}
-            {(last_element === ((counter+1)*20)) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitNext}>Next</Button>}
+            {/*{(counter !== 0) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitPrev}>Prev</Button>}*/}
+            {/*{(last_element === ((counter+1)*20)) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitNext}>Next</Button>}*/}
             <MapContainer
                 id="map"
                 // className={classes.map}
@@ -854,7 +854,7 @@ const FilterWindow = ({SetRooms}) => {
             </ToggleButtonGroup>
 
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
-            <Button type={"submit"} onClick={testSubmit} className={"submit"}>Test</Button>
+            {/*<Button type={"submit"} onClick={testSubmit} className={"submit"}>Test</Button>*/}
             <Button type={"submit"} onClick={handleClear} className={"submit"}>Clear</Button>
             <TableOfChosenElements flags={flags} dict={dictionary} />
         </div>

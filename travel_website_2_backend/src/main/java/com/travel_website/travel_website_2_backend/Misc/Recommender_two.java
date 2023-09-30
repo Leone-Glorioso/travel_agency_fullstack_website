@@ -2,12 +2,17 @@ package com.travel_website.travel_website_2_backend.Misc;
 
 import java.util.*;
 
+
+import com.travel_website.travel_website_2_backend.Service.RoomService;
+import com.travel_website.travel_website_2_backend.Service.UserService;
 import org.apache.commons.math3.linear.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import static java.lang.Math.pow;
 
 //import static org.apache.commons.math3.fitting.leastsquares.GaussNewtonOptimizer.Decomposition.SVD;
-
+@Service
 public class Recommender_two {
 
     public record Pair<A, B>(A a, B b) {
@@ -63,11 +68,11 @@ public class Recommender_two {
                 for(int j = 0; j < R[i].length; j++)
                 {
 
-                    double error = R[i][j] - prediction(P[i], getColumn(Qt, j));
+                    double error = R[i][j] - prediction(P[i], getColumn(Qt, j, K));
 
                     for(int k = 0; k < K; k++)
                     {
-                        P[i][k] = P[i][k] + rate * (2 * error * Q[k][j] - lambda * P[i][k]);
+                        P[i][k] = P[i][k] + rate * (2 * error * Qt[k][j] - lambda * P[i][k]);
                         Qt[k][j] = Qt[k][j] + rate * (2 * error * P[i][k] - lambda * Qt[k][j]);
                     }
 
@@ -82,12 +87,12 @@ public class Recommender_two {
                 {
                     if(R[i][j] > 0)
                     {
-                        e = e + pow(R[i][j] - prediction(P[i], getColumn(Qt, j)), 2);
+                        e = e + pow(R[i][j] - prediction(P[i], getColumn(Qt, j, K)), 2);
                     }
 
                     for(int k = 0; k < K; k++)
                     {
-                        e = e + (lambda/2) * (pow(P[i][k],2) + pow(Q[k][j],2));
+                        e = e + (lambda/2) * (pow(P[i][k],2) + pow(Qt[k][j],2));
                     }
                 }
 
@@ -99,9 +104,9 @@ public class Recommender_two {
         return new Pair<>(P, getTranspose(Qt));
     }
 
-    public static double[] getColumn(double[][] array, int index){
-        double[] column = new double[array[0].length];
-        for(int i=0; i<column.length; i++){
+    public static double[] getColumn(double[][] array, int index, int rows){
+        double[] column = new double[rows];
+        for(int i=0; i<rows; i++){
             column[i] = array[i][index];
         }
         return column;
@@ -139,8 +144,18 @@ public class Recommender_two {
 
         Pair<double[][], double[][]> pair = matrix_factorization(R, Q, P, K, steps, rate, lambda);
 
-        System.out.println(pair.a);
-        System.out.println(pair.b);
+        for(int i = 0; i < pair.a.length; i++) {
+            for (int j = 0; j < pair.a[i].length; j++) {
+                System.out.print(pair.a[i][j]);
+            }
+            System.out.println();
+        }
+        for(int i = 0; i < pair.b.length; i++) {
+            for (int j = 0; j < pair.b[i].length; j++) {
+                System.out.print(pair.b[i][j]);
+            }
+            System.out.println();
+        }
         return multiplyMatrices(pair.a, getTranspose(pair.b));
 
     }

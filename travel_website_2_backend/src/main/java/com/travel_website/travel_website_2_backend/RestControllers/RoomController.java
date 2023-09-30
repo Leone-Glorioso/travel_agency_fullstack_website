@@ -6,16 +6,15 @@ import com.travel_website.travel_website_2_backend.Mapper.ReservationMapper;
 import com.travel_website.travel_website_2_backend.Mapper.RoomMapper;
 import com.travel_website.travel_website_2_backend.Misc.DateHelper;
 import com.travel_website.travel_website_2_backend.Misc.Recommender;
-import com.travel_website.travel_website_2_backend.Models.Location;
-import com.travel_website.travel_website_2_backend.Models.Reservation;
-import com.travel_website.travel_website_2_backend.Models.Room;
-import com.travel_website.travel_website_2_backend.Models.User;
+import com.travel_website.travel_website_2_backend.Misc.Recommender_two;
+import com.travel_website.travel_website_2_backend.Models.*;
 import com.travel_website.travel_website_2_backend.Security.Data_UserDetails;
 import com.travel_website.travel_website_2_backend.Service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -41,22 +40,15 @@ public class RoomController {
     private final DateHelper dateHelper;
     private final RequestService requestService;
     private final Recommender recommender;
+    private final RatingService ratingService;
+    private final Recommender_two recommender_2;
 //    private boolean[][] map1 = new ;
 
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @GetMapping("/all")
     public List<RoomDTO> getRooms()
     {
-        List<Integer> rooms1 = recommender.start_system(userService.getUsers().size(), roomService.getRooms().size(), 12, roomService.getRooms().size());
-        List<Room> rooms= new ArrayList<>();
-        List<Room> allRooms = roomService.getRooms();
-        Map<Integer, Room> mapOfRooms = new HashMap<>();
-        for (int i = 0; i < allRooms.size(); i++)
-            mapOfRooms.put(i, allRooms.get(i));
-        for (int room : rooms1)
-            rooms.add(mapOfRooms.get(room));
-
-        return rooms.stream()
+        return roomService.getRooms().stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
     }
@@ -200,12 +192,10 @@ public class RoomController {
     @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @PostMapping("/search")
     public List<RoomDTO> search(@RequestBody SearchRequest request) {
-        System.out.println("Received request: " + request);
-        System.out.println(request.getFlags());
         List<String> flags = Arrays.asList(request.getFlags().split(", "));
-        System.out.println(flags);
-        System.out.println(request.getTypeofroom());
         List<Room> rooms = roomService.getRooms();
+//        List<Room> rooms = applyRecommendations();
+        System.out.println(rooms.stream().map(Room::getId));
         if (flags.contains("beds"))
             rooms.retainAll(roomService.getRoomsByNumOfBeds(request.getStart_numOfBeds(), request.getEnd_numOfBeds()));
         if (flags.contains("bedrooms"))
@@ -256,25 +246,49 @@ public class RoomController {
                     .map(roomMapper::toRoomDTO)
                     .collect(Collectors.toList());
         }
-        int start = (request.getFirst_element() > rooms.size()) ? 1 : request.getFirst_element();
-        int end = request.getLast_element();
-        if(end > rooms.size())
-            end = rooms.size();
-        List<Room> roomSublist = rooms.subList(start, end);
-        System.out.println(roomSublist.stream().map(Room::getId));
-        List<Integer> rooms1 = recommender.start_system(userService.getUsers().size(), roomService.getRooms().size(), 12, roomService.getRooms().size());
-        List<Room> rooms3= new ArrayList<>();
-        Map<Integer, Room> mapOfRooms = new HashMap<>();
-        for (int i = 0; i < rooms.size(); i++)
-            mapOfRooms.put(i, rooms.get(i));
-        for (int room : rooms1)
-            rooms3.add(mapOfRooms.get(room));
-        rooms3.retainAll(rooms);
-        List<Room> roomSublist2 = rooms3.subList(start, end);
-        System.out.println(roomSublist2.stream().map(Room::getId).collect(Collectors.toList()));
-        return roomSublist2.stream()
+//        int start = (request.getFirst_element() > rooms.size()) ? 1 : request.getFirst_element();
+//        int end = request.getLast_element();
+//        if(end > rooms.size())
+//            end = rooms.size();
+//        List<Room> roomSublist = rooms.subList(start, end);
+        return rooms.stream()
                 .map(roomMapper::toRoomDTO)
                 .collect(Collectors.toList());
 
+    }
+
+    public List<Room> applyRecommendations()
+    {
+        List<User> usersAll = userService.getUsersByRole(UserCategories.LandlordClient);
+        usersAll.addAll(userService.getUsersByRole(UserCategories.Client));
+        int rows = usersAll.size();
+        List<Room> roomsAll = roomService.getRooms();
+        int columns = roomsAll.size();
+        double[][] R = new double[rows][columns];
+        Map<Integer, Room> roomMap = new HashMap<>();
+        Map<Integer, User> userMap = new HashMap<>();
+        for(int i = 0; i < rows; i++)
+            userMap.put(i, usersAll.get(i));
+        for(int i = 0; i < columns; i++)
+            roomMap.put(i, roomsAll.get(i));
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                if(!ratingService.IsByRoomAndUser(roomMap.get(j).getName(), userMap.get(i).getName()))
+                    R[i][j] = ratingService.getRatingOfRoom(roomMap.get(j).getName())*(1/2);
+                else
+                    R[i][j] = ratingService.validateAndGetRatingByRoomAndUser(roomMap.get(j).getName(), userMap.get(i).getName()).getRating();
+            }
+        }
+        double[] listOfMatches = recommender_2.getUserRankingOfRooms(R, 3);
+        SortedMap<Double, Room> finalMap = new TreeMap<Double, Room>();
+        for(int i = 0; i < listOfMatches.length; i++)
+            finalMap.put(listOfMatches[i], roomsAll.get(i));
+        List<Room> rooms_final = new ArrayList<>();
+        for(Room room : finalMap.values())
+            rooms_final.add(room);
+        System.out.println(rooms_final.stream().map(Room::getId));
+        return rooms_final;
     }
 }
