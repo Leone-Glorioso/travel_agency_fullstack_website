@@ -15,6 +15,7 @@ import SearchField from "../Search/SearchField";
 import {MapContainer} from "react-leaflet";
 import {OpenStreetMapProvider} from "leaflet-geosearch";
 import Cookies from "universal-cookie";
+import {useAuth} from "../Auth/contex";
 
 
 
@@ -32,6 +33,8 @@ function Search(){
     const navigate=useNavigate()
     const prov = new OpenStreetMapProvider();
     const cookies = new Cookies();
+
+    const Auth = useAuth()
 
     const marks = [
         {
@@ -98,7 +101,11 @@ function Search(){
                 "flags": flags
             }
             console.log(searchRequest)
-            const response = await ApiConnector.search(searchRequest);
+            let response = []
+            if(Auth.userIsAuthenticated())
+                response = await ApiConnector.searchAuth(searchRequest, Auth.getUser().user);
+            else
+                response = await ApiConnector.search(searchRequest)
             cookies.set('rooms', response);
             console.log(response)
             navigate('/search-result')

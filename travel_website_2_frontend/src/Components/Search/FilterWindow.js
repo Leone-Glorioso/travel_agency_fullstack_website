@@ -11,6 +11,8 @@ import './filterComponent.css';
 import './toggle.css';
 import './toggle_2.css'
 import TableOfChosenElements from "./TableOfChosenElements";
+import {request} from "axios";
+import {useAuth} from "../Auth/contex";
 
 // const useStyles = makeStyles(() => ({
 //     map: { height: "300px" }
@@ -51,6 +53,8 @@ const FilterWindow = ({SetRooms}) => {
     const [last_element, setLast_element] = useState(20);
     // const [length, setLength] = useState(1);
     const [counter, setCounter] = useState(0);
+
+    const Auth = useAuth()
 
     if(flags.includes('dates') === false)
         flags.push('dates')
@@ -414,8 +418,11 @@ const FilterWindow = ({SetRooms}) => {
                 "last_element": last_element,
                 "flags": flags_2
             }
-
-            const response = await ApiConnector.search(searchRequest);
+            let response = []
+            if(Auth.userIsAuthenticated())
+                response = await ApiConnector.searchAuth(searchRequest, Auth.getUser().user);
+            else
+                response = await ApiConnector.search(searchRequest)
             console.log(searchRequest)
             console.log(response)
             SetRooms(response)
@@ -440,16 +447,16 @@ const FilterWindow = ({SetRooms}) => {
         'livingRoom': livingRoom
     }
 
-    const testSubmit = async () => {
-        try {
-            const response = await ApiConnector.getRooms()
-            SetRooms(response.data)
-        }
-        catch (error)
-        {
-            console.log(error)
-        }
-    }
+    // const testSubmit = async () => {
+    //     try {
+    //         const response = await ApiConnector.getRooms()
+    //         SetRooms(response.data)
+    //     }
+    //     catch (error)
+    //     {
+    //         console.log(error)
+    //     }
+    // }
 
     const handleClear =  async () => {
 
@@ -479,7 +486,11 @@ const FilterWindow = ({SetRooms}) => {
                 "last_element": last_element,
                 "flags": flags_2
             }
-            const response = await ApiConnector.search(searchRequest2);
+            let response = []
+            if(Auth.userIsAuthenticated())
+                response = await ApiConnector.searchAuth(searchRequest2, Auth.getUser().user);
+            else
+                response = await ApiConnector.search(searchRequest2)
             console.log(searchRequest2)
             console.log(response)
             SetRooms(response)

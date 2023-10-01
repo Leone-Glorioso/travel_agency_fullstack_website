@@ -65,7 +65,8 @@ export const ApiConnector={
     allMessages,
     sendMessage,
     deleteMessage,
-    getMessage
+    getMessage,
+    searchAuth
 }
 
 function authenticate(username,password){
@@ -389,6 +390,30 @@ function search(request)
         headers: {
             // "Access-Control-Allow-Origin": "*"
             'content-type': "application/json"
+        }
+        // params: {
+        //     "request": request
+        // }
+    })
+        .then((response)=>{
+            return response.data;
+        })
+        .catch((error)=> {
+            console.error('Error',error);
+            throw error;
+        })
+}
+
+function searchAuth(request,user)
+{
+
+    return instance.post('/api/rooms/search/auth', request ,{
+        // params:request,
+        // data: {}, //{}
+        headers: {
+            // "Access-Control-Allow-Origin": "*"
+            'content-type': "application/json",
+            'Authorization': bearerAuth(user)
         }
         // params: {
         //     "request": request
