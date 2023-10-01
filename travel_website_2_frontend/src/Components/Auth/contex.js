@@ -9,6 +9,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [rooms, setRooms] = useState([]);
     const cookies = new Cookies();
 
     // useEffect(() => {
@@ -53,12 +54,36 @@ function AuthProvider({ children }) {
         setUser(null);
     };
 
+    const roomsSetter = (room) => {
+        console.log(room)
+        const a = JSON.stringify(room)
+        console.log(JSON.stringify(room))
+        console.log(JSON.parse(a))
+        cookies.set('rooms', JSON.stringify(room))
+        setRooms(room);
+    };
+
+
+    const roomsGetter = () => {
+        // console.log(cookies.get('rooms'))
+        return JSON.parse(cookies.get('rooms'));
+    };
+
+    const roomsExists = () => {
+        // console.log(cookies.getAll().user.user)
+        return cookies.get('rooms') !== undefined;
+    };
+
     const contextValue = {
         user,
         userIsAuthenticated,
         userLogin,
         userLogout,
-        getUser
+        getUser,
+        rooms,
+        roomsSetter,
+        roomsGetter,
+        roomsExists
     };
 
     return (

@@ -16,6 +16,7 @@ import {MapContainer} from "react-leaflet";
 import {OpenStreetMapProvider} from "leaflet-geosearch";
 import Cookies from "universal-cookie";
 import {useAuth} from "../Auth/contex";
+// import {useRoomsCookies} from "../Search/SearchCookieManager";
 
 
 
@@ -32,8 +33,8 @@ function Search(){
     const [numOfBeds, setNumOfBeds] = useState(2);
     const navigate=useNavigate()
     const prov = new OpenStreetMapProvider();
-    const cookies = new Cookies();
-
+    // const cookies = Cookies();
+    // const RoomProv = useRoomsCookies()
     const Auth = useAuth()
 
     const marks = [
@@ -70,22 +71,10 @@ function Search(){
         setRange(event.target.value);
     };
 
-    // const handleSetNumOfBeds = (value) => {
-    //     const parsedValue = parseInt(value, 10);
-    //
-    //     // Check if the parsed value is within the allowed range
-    //     if (!isNaN(parsedValue) && parsedValue >= 1 && parsedValue <= 10) {
-    //         setNumOfBeds(parsedValue)
-    //         const value2 = (parsedValue > 1 ) ? parsedValue - 1 : parsedValue
-    //         setStart_numOfBeds(value2);
-    //         const value1 = (parsedValue < 10 ) ? parsedValue + 1 : parsedValue
-    //         setEnd_numOfBeds(value1);
-    //     }
-    // };
     const handleSearch = async () => {
         try {
-            const first_element=1
-            const last_element=20
+            // const first_element=1
+            // const last_element=20
             const flags="beds, dates, location"
 
             const searchRequest={
@@ -96,8 +85,8 @@ function Search(){
                 "end": endDate.toLocaleDateString('en-GB'),
                 "start_numOfBeds": people,
                 "end_numOfBeds": people+1,
-                "first_element": first_element,
-                "last_element": last_element,
+                // "first_element": first_element,
+                // "last_element": last_element,
                 "flags": flags
             }
             console.log(searchRequest)
@@ -106,8 +95,8 @@ function Search(){
                 response = await ApiConnector.searchAuth(searchRequest, Auth.getUser().user);
             else
                 response = await ApiConnector.search(searchRequest)
-            cookies.set('rooms', response);
             console.log(response)
+            Auth.roomsSetter(response)
             navigate('/search-result')
         } catch (error) {
             console.error("Error searching for rooms: edw", error);

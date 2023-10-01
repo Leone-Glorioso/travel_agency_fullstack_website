@@ -5,13 +5,17 @@ import FilterWindow from "../Search/FilterWindow";
 import RoomsPanel from "../Search/RoomsPanel";
 import {Grid} from "semantic-ui-react";
 import Cookies from "universal-cookie";
+// import {useRoomsCookies} from "../Search/SearchCookieManager";
+import {useAuth} from "../Auth/contex";
 function SearchPage () {
 
     const [rooms, SetRooms] = useState([])
-    const cookies = new Cookies();
+    // const RoomProv = useRoomsCookies()
+    // const cookies = new Cookies();
+    const Auth = useAuth()
 
     useEffect(() => {
-        SetRooms(cookies.get('rooms'))
+        SetRooms(Auth.rooms)
         // cookies.remove('rooms')
     }, []);
 
