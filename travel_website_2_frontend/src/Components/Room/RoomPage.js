@@ -33,16 +33,10 @@ function RoomPage() {
     const [details,setDetails]=useState('')
 
 
-    // const location = useLocation();
-
-
     const Auth = useAuth()
     const user = Auth.getUser()
 
     useEffect(() => {
-        // console.log(location.state)
-        // SetRoom(JSON.parse(cookies.get('room')))
-        // console.log(JSON.parse(cookies.get('room')))
         const step = Math.floor(Math.random() * 9); // Step between 0 and 8
         const randomNumber = 30 + step * 5; // Random number between 30 and 70 with a step of 5
         setPPN(randomNumber)
@@ -117,12 +111,6 @@ function RoomPage() {
                 <img src={"https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg"} className={"room-image"}/>
             </Container>
             <Grid className={"room-details"}>
-                {/*<Grid.Row >*/}
-                {/*    <Grid.Column className={"grid-cell"}>*/}
-                {/*        <label about={"name"} className={"label_special"}>Name</label>*/}
-                {/*        <h2 id={"name"} className={"section-title-h2"}>{room.name}</h2>*/}
-                {/*    </Grid.Column>*/}
-                {/*</Grid.Row>*/}
                 <Grid.Row >
                     <Grid.Column className={"grid-cell"}>
                         <label about={"nob"}  className={"label_special"}>Bedrooms</label>
@@ -158,33 +146,6 @@ function RoomPage() {
                 <label about={"description"} >Description</label>
                 <p id={"description"} className={"custom"}>{room.description}</p>
             </Container>
-            {/*<Container className={"amenities"}>*/}
-            {/*    <h2>Amenities</h2>*/}
-            {/*    <label className={"else"}> Cooling </label>*/}
-            {/*    {room.cooling && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.cooling && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Heating </label>*/}
-            {/*    {room.heating && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.heating && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Tv </label>*/}
-            {/*    {room.tv && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.tv && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Parking </label>*/}
-            {/*    {room.parking && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.parking && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Living Room </label>*/}
-            {/*    {room.livingRoom && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.livingRoom && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Internet </label>*/}
-            {/*    {room.internet && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.internet && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Kitchen </label>*/}
-            {/*    {room.kitchen && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.kitchen && <p className={"false"}>No</p>}*/}
-            {/*    <label className={"else"}> Elevator </label>*/}
-            {/*    {room.elevator && <p className={"true"}>Yes</p>}*/}
-            {/*    {!room.elevator && <p className={"false"}>No</p>}*/}
-            {/*</Container>*/}
             <Grid className={"amenities"}>
                 <h2 align={"center"}>Amenities</h2>
                 <Grid.Row className={"grid-cell"}>
@@ -229,19 +190,6 @@ function RoomPage() {
                 </Grid.Row>
             </Grid>
 
-            {/*<Container className={"rules"}>*/}
-            {/*    <h2  align={"center"}>Rules</h2>*/}
-            {/*    <label> Smoking </label>*/}
-            {/*    {room.smoking && <p className={"true"}>Allowed</p>}*/}
-            {/*    {!room.smoking && <p className={"false"}>Not Allowed</p>}*/}
-            {/*    <label> Events </label>*/}
-            {/*    {room.events && <p className={"true"}>Allowed</p>}*/}
-            {/*    {!room.events && <p className={"false"}>Not Allowed</p>}*/}
-            {/*    <label> Pets </label>*/}
-            {/*    {room.pets && <p className={"true"}>Allowed</p>}*/}
-            {/*    {!room.pets && <p className={"false"}>Not Allowed</p>}*/}
-            {/*</Container>*/}
-
             <Grid className={"rules"} >
                 <h2  align={"center"}>Rules</h2>
                 <Grid.Row className={"grid-cell"}>
@@ -260,14 +208,8 @@ function RoomPage() {
                     {!room.pets && <p className={"false"}>Not Allowed</p>}
                 </Grid.Row>
             </Grid>
-            {console.log(room)}
-            {/*<MapContainer>*/}
-            {/*    /!* Other components *!/*/}
-            {/*    <RoomMapButton room={room}/>*/}
-            {/*</MapContainer>*/}
             {(role === "client" || role === "landlordclient") && <Container className={"date-container"} >
                 <h2 align={"center"}> Booking </h2>
-                {/*<label> Give Dates: </label>*/}
                 <input
                     type="date"
                     value={startDate.toISOString().split('T')[0]}

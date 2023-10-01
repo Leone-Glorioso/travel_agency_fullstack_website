@@ -31,7 +31,6 @@ function App() {
                     <Route path='/client' element={<ProtectedRoute> <ClientPage/> </ProtectedRoute>} />
                     <Route path='/landlord' element={<ProtectedRoute> <LandlordPage/> </ProtectedRoute>} />
                     <Route path='/landlordclient' element={<ProtectedRoute> <LandlordClientPage/> </ProtectedRoute>} />
-                    {/*<Route path="/search-results" />*/}
                     <Route path='/search-result' element={<SearchPage/>}/>
                     <Route path='/new_room' element={<RoomCreate />} />
                     <Route path='/room_page' element={<RoomPage />} />

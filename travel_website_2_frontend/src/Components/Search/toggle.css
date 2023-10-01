@@ -25,9 +25,6 @@ h4 {
     height: 27px; /* 50px * 0.55 */
     border-radius: 55px; /* 100px * 0.55 */
     background-color: #4d4d4d;
-    /*position: absolute;*/
-    /*top: 11%;*/
-    /*left: 24.75%; !* 45% * 0.55 *!*/
     box-shadow: 0.55px 0.55px 5.5px 0.55px rgba(0, 0, 0, 0.5); /* 1px * 0.55 */
 }
 
@@ -36,7 +33,6 @@ h4 {
     width: 40px; /* 80px * 0.55 */
     background-color: white;
     border-radius: 44px; /* 100px * 0.44 */
-    /*position: absolute;*/
     left: 1px; /* 3px * 0.55 */
     top: 1px; /* 3px * 0.55 */
     transition: ease-in;

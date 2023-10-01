@@ -10,7 +10,6 @@ function ClientPage(){
     const Auth = useAuth()
     const user1 = Auth.getUser()
     const user = user1.user
-    // console.log(Auth.user)
 
     const [reservations, setReservations] = useState([])
     const [reservationSearch, setReservationSearch] = useState('')
@@ -42,15 +41,6 @@ function ClientPage(){
         }
     }
 
-    // const handleDeleteReservation = async (id) => {
-    //     try {
-    //         await ApiConnector.deleteReservation(user, id)
-    //         handleGetUsers()
-    //     } catch (error) {
-    //         handleLogError(error)
-    //     }
-    // }
-
     const handleSearchReservation = async () => {
         const id = parseInt(reservationSearch)
         try {
@@ -64,11 +54,6 @@ function ClientPage(){
             setReservations([])
         }
     }
-
-
-    // if (!isCLient) {
-    //     return <Navigate to='/' />
-    // }
 
     return (
         <Container>

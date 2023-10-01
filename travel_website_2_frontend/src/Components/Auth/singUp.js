@@ -21,9 +21,6 @@ function SingUp() {
     const [email, setEmail] = useState('')
     const [telephone, setTelephone] = useState('')
     const [country, setCountry] = useState('')
-    // const [photo, setPhoto] = useState()
-    // const [photoName, setPhotoName] = useState('')
-    // const [photoPreview, setPhotoPreview] = useState()
     const [role, setRole] = useState('')
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -44,43 +41,10 @@ function SingUp() {
         } else if (name === 'country') {
             setCountry(value)
         }
-        // else if (name === 'photo') {
-        //     setPhoto(value)
-        // }
         else if (name === 'role') {
             setRole(value)
         }
     }
-
-    // const handleImageChange = (event) => {
-    //     if (event.target.files.length > 0) {
-    //         setPhoto(event.target.files[0]);
-    //         setPhotoName(event.target.files[0].name);
-    //     }
-    // }
-    // useEffect(() => {
-    //     if (!photo) {
-    //         setPhotoPreview(undefined)
-    //         return
-    //     }
-    //
-    //     const objectUrl = URL.createObjectURL(photo)
-    //     setPhotoPreview(objectUrl)
-    //
-    //     // free memory when ever this component is unmounted
-    //     return () => URL.revokeObjectURL(objectUrl)
-    // }, [photo])
-
-    // const handleImageChange = e => {
-    //     if (!e.target.files || e.target.files.length === 0) {
-    //         setPhoto(undefined)
-    //         return
-    //     }
-    //
-    //     // I've kept this example simple by using the first image instead of multiple
-    //     setPhoto(e.target.files[0])
-    //     setPhotoName(e.target.files[0].name)
-    // }
 
     const handleRoleChange = (selectedRole) => {
         setRole(selectedRole);
@@ -163,8 +127,6 @@ function SingUp() {
                         <Form.Input
                             fluid
                             name='name'
-                            // icon='id card'
-                            // iconPosition='left'
                             placeholder='Name'
                             value={name}
                             onChange={handleInputChange}
@@ -173,8 +135,6 @@ function SingUp() {
                         <Form.Input
                             fluid
                             name='surname'
-                            // icon='id card outline'
-                            // iconPosition='left'
                             placeholder='surname'
                             value={surname}
                             onChange={handleInputChange}
@@ -212,70 +172,10 @@ function SingUp() {
                             className={"input-container"}
                         />
 
-                        {/*<Form.Input*/}
-                        {/*    fluid*/}
-                        {/*    name='photo'*/}
-                        {/*    icon='photo'*/}
-                        {/*    iconPosition='left'*/}
-                        {/*    // placeholder='photo'*/}
-                        {/*    onChange={handleImageChange}*/}
-                        {/*    type={"file"}*/}
-                        {/*    // className={"input-container"}*/}
-                        {/*/>*/}
-
-                        {/*<UploadImage name={"person"}/>*/}
-
                         <Form.Field>
                             <label>Select Role</label>
                             <DropdownMenu onSelect={handleRoleChange} />
                         </Form.Field>
-
-                        {/*<Dropdown*/}
-                        {/*    placeholder={'Select Role'}*/}
-                        {/*    fluid*/}
-                        {/*    selection*/}
-                        {/*    options={[*/}
-                        {/*    {key:'admin',text:'Admin',value:'admin'},*/}
-                        {/*    {key:'user',text:'User',value:'user'},*/}
-                        {/*    {key:'admin',text:'Admin',value:'admin'}*/}
-                        {/*]}*/}
-                        {/*    value={role}*/}
-                        {/*    onChange={handleRoleChange}*/}
-                        {/*/>*/}
-
-                        {/*<Form.Input*/}
-                        {/*    fluid*/}
-                        {/*    name='role'*/}
-                        {/*    icon='world'*/}
-                        {/*    iconPosition='left'*/}
-                        {/*    placeholder='role'*/}
-                        {/*    value={role}*/}
-                        {/*    onChange={handleInputChange}*/}
-                        {/*    className={"input-container"}*/}
-                        {/*/>*/}
-                        {/*<Dropdown*/}
-                        {/*    floating*/}
-                        {/*    selection*/}
-                        {/*    fluid*/}
-                        {/*    placeholder = 'Role'*/}
-                        {/*    value = {role}*/}
-                        {/*    options = {roleOptions}*/}
-                        {/*    onChange={handleInputChange}>*/}
-                        {/*</Dropdown>*/}
-                        {/*<Dropdown*/}
-                        {/*    placeholder='Select Role(s)'*/}
-                        {/*    fluid*/}
-                        {/*    selection*/}
-                        {/*    options={roleOptions}*/}
-                        {/*/>*/}
-                        {/*<Dropdown placeholder='Roles' fluid selection options={roleOptions} value={role} className={"test"}/>*/}
-                        {/*<Dropdown.Menu>*/}
-                        {/*    <Dropdown.Item text='ReactJS' icon='react' />*/}
-                        {/*    <Dropdown.Item text='AngularJS' icon='angular'/>*/}
-                        {/*    <Dropdown.Item text='HTML5' icon='html5' />*/}
-                        {/*    <Dropdown.Item text='JavaScript' icon='js' />*/}
-                        {/*    <Dropdown.Item text='NodeJS' icon='node'/>*/}
-                        {/*</Dropdown.Menu>*/}
                         <Button color='violet' fluid size='large' className={"button-container"}>Signup</Button>
                     </Segment>
                 </Form>

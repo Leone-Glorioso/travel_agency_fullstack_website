@@ -11,7 +11,6 @@ function LandlordPage()
     const Auth = useAuth()
     const user1 = Auth.getUser()
     const user = user1.user
-    // console.log(Auth.user)
 
     const [reservations, setReservations] = useState([])
     const [rooms, setRooms] = useState([])
@@ -70,9 +69,6 @@ function LandlordPage()
         const id = parseInt(reservationIdSearch)
         try {
             const response = await ApiConnector.getReservationOfMyRooms(user, id)
-            // console.log(response.data)
-            // const data = response.data
-            // const reservations = data instanceof Array ? data : [data]
             setReservations([response.data])
         } catch (error) {
             handleLogError(error)
@@ -84,7 +80,6 @@ function LandlordPage()
         const name = reservationClientSearch
         try {
             const response = await ApiConnector.getReservationsOfMyRoomsByClient(user, name)
-            console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
@@ -98,7 +93,6 @@ function LandlordPage()
         const id = parseInt(reservationRoomSearch)
         try {
             const response = await ApiConnector.getReservationsOfMyRoom(user, id)
-            console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
@@ -112,7 +106,6 @@ function LandlordPage()
         setIsRoomsLoading(true)
         try {
             const response = await ApiConnector.getMyRooms(user)
-            // console.log(response.data)
             setRooms(response.data)
         } catch (error) {
             handleLogError(error)
@@ -134,7 +127,6 @@ function LandlordPage()
         const id = parseInt(roomIdSearch)
         try {
             const response = await ApiConnector.getRoom(id)
-            console.log(response.data)
             const data = response.data
             const rooms = data instanceof Array ? data : [data]
             setRooms(rooms)
@@ -157,7 +149,6 @@ function LandlordPage()
                 isReservationsLoading={isReservationsLoading}
                 reservations={reservations}
                 reservationIdSearch={reservationIdSearch}
-                handleInputChange={handleInputChange}
                 handleGetReservations={handleGetReservations}
                 handleDeleteReservation={handleDeleteReservation}
                 handleSearchReservationId={handleSearchReservationId}

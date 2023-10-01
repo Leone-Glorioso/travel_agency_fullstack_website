@@ -2,7 +2,6 @@
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /*flex-direction:row;*/
 }
 
 .search-page h1 {
@@ -37,40 +36,26 @@
 
 .left-component {
     float: left;
-    /*width: 50%;*/
 }
 
 .right-component {
     float: right;
-    /*width: 50%;*/
 }
 
 .parent {
-    /*border: 1px solid black;*/
     margin: 1rem;
     padding: 2rem 2rem;
     text-align: center;
 }
 .child {
     display: inline-block;
-    /*border: 1px solid red;*/
     padding: 1rem 1rem;
     vertical-align: middle;
 }
 
 .float-container {
-    /*border: 3px solid #fff;*/
     padding: 20px;
 }
-
-/*.float-child-1 {*/
-/*    width: 15%;*/
-/*    float: left;*/
-/*    padding: 20px;*/
-/*    height: 2200px;*/
-/*    align-self: self-start;*/
-/*    background-color: #007BFF;*/
-/*}*/
 
 .float-child-2 {
     width: 80%;

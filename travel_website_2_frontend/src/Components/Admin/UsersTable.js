@@ -45,7 +45,6 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
                     value={userUsernameSearch}
                     onChange={handleInputChange}
                 />
-                {/*<Form.Button type={"submit"}> Submit </Form.Button>*/}
             </Form>
             <Button onClick={handleGetUsers}>Get All</Button>
             <Button onClick={handleGetLandlords}>Get Landlords</Button>
@@ -54,7 +53,6 @@ function UsersTable({ users, userUsernameSearch, handleInputChange, handleDelete
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
-                        {/*<Table.HeaderCell width={2} />*/}
                         <Table.HeaderCell>Id</Table.HeaderCell>
                         <Table.HeaderCell>Username</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Name</Table.HeaderCell>

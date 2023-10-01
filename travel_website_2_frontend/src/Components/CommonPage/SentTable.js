@@ -25,7 +25,6 @@ const SentTable = ({messages}) => {
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
-                        {/*<Table.HeaderCell width={1} />*/}
                         <Table.HeaderCell width={1}>Receiver</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Body</Table.HeaderCell>
                     </Table.Row>

@@ -40,7 +40,6 @@ function MyReservationsTableClient({ reservations, reservationIdSearch, handleIn
             <Table compact striped selectable >
                 <Table.Header>
                     <Table.Row>
-                        {/*<Table.HeaderCell width={1} />*/}
                         <Table.HeaderCell width={4}>Id</Table.HeaderCell>
                         <Table.HeaderCell width={4}>Price per Night</Table.HeaderCell>
                         <Table.HeaderCell width={2}>Start Date</Table.HeaderCell>

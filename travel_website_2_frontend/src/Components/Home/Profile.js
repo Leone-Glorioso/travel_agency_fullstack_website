@@ -8,8 +8,6 @@ import "./Profile.css";
 import {useNavigate} from "react-router-dom";
 
 function Profile() {
-
-    // let [userMe, setUserMe] = useState(null)
     let [name, setName] = useState('')
     let [surname, setSurname] = useState('')
     let [username, setUsername] = useState('')
@@ -64,48 +62,9 @@ function Profile() {
 
 
     return (
-        // <Grid stackable columns={2}>
-        //     <Grid.Row>
-        //         <Grid.Column textAlign='center'>
-        //             <Segment color='violet'>
-        //                 <Statistic>
-        //                     <Statistic.Label>Name</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{name}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Surname</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{surname}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Username</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{username}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Email</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{email}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Telephone</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{telephone}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Country</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{country}</Statistic.Value>
-        //                 </Statistic>
-        //                 <Statistic>
-        //                     <Statistic.Label>Role</Statistic.Label>
-        //                     <Statistic.Value><Icon name='user' color='grey' />{role}</Statistic.Value>
-        //                 </Statistic>
-        //             </Segment>
-        //         </Grid.Column>
-        //     </Grid.Row>
-        // </Grid>
 
         <Grid className={"app-profile"} >
             <Grid.Row>
-                {/*<Grid.Column>*/}
-                {/*    <img src={URL.createObjectURL(photo[0])}/>*/}
-                {/*</Grid.Column>*/}
                 <Grid.Column>
                     <Segment><strong>Username</strong> {username}</Segment>
                 </Grid.Column>

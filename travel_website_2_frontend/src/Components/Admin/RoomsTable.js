@@ -70,7 +70,6 @@ function RoomsTable({ rooms, roomIdSearch, roomLandlordSearch, handleInputChange
             <Table compact striped selectable>
                 <Table.Header>
                     <Table.Row>
-                        {/*<Table.HeaderCell width={1} />*/}
                         <Table.HeaderCell width={3}>Id</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Name</Table.HeaderCell>
                         <Table.HeaderCell width={3}>Type Of Room</Table.HeaderCell>

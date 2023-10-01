@@ -14,13 +14,6 @@ import TableOfChosenElements from "./TableOfChosenElements";
 import {request} from "axios";
 import {useAuth} from "../Auth/contex";
 
-// const useStyles = makeStyles(() => ({
-//     map: { height: "300px" }
-// }));
-
-// let latitude = 0.01;
-// let longitude = 0.01;
-
 const FilterWindow = ({SetRooms}) => {
     const [startDate,setStartDate]=useState(new Date())
     const [endDate,setEndDate]=useState(new Date())
@@ -51,7 +44,6 @@ const FilterWindow = ({SetRooms}) => {
     const [flags, setFlags] = useState([]);
     const [first_element, setFirst_element] = useState(1);
     const [last_element, setLast_element] = useState(20);
-    // const [length, setLength] = useState(1);
     const [counter, setCounter] = useState(0);
 
     const Auth = useAuth()
@@ -175,9 +167,6 @@ const FilterWindow = ({SetRooms}) => {
             if(flags.includes('livingRoom') === true)
                 flags.splice(flags.indexOf('livingRoom'), 1)
         }
-        console.log("entered")
-        console.log(flags)
-        console.log(livingRoom)
     }
 
     const pushToFlags = (value) => {
@@ -386,7 +375,6 @@ const FilterWindow = ({SetRooms}) => {
             setFirst_element(1 + (counter*20))
             setLast_element(20+ (counter*20))
             const flags_2= flags.join(', ')
-            console.log(first_element, last_element, counter)
 
             const searchRequest={
                 "latitude": latitude,
@@ -423,8 +411,6 @@ const FilterWindow = ({SetRooms}) => {
                 response = await ApiConnector.searchAuth(searchRequest, Auth.getUser().user);
             else
                 response = await ApiConnector.search(searchRequest)
-            console.log(searchRequest)
-            console.log(response)
             SetRooms(response)
         }
         catch (error)
@@ -447,22 +433,9 @@ const FilterWindow = ({SetRooms}) => {
         'livingRoom': livingRoom
     }
 
-    // const testSubmit = async () => {
-    //     try {
-    //         const response = await ApiConnector.getRooms()
-    //         SetRooms(response.data)
-    //     }
-    //     catch (error)
-    //     {
-    //         console.log(error)
-    //     }
-    // }
-
     const handleClear =  async () => {
 
         try {
-            // setStartDate(new Date())
-            // setEndDate(new Date())
             setFlags(['dates'])
             setRange(10)
             setStart_area(1)
@@ -491,8 +464,6 @@ const FilterWindow = ({SetRooms}) => {
                 response = await ApiConnector.searchAuth(searchRequest2, Auth.getUser().user);
             else
                 response = await ApiConnector.search(searchRequest2)
-            console.log(searchRequest2)
-            console.log(response)
             SetRooms(response)
         }
         catch (error)
@@ -520,19 +491,11 @@ const FilterWindow = ({SetRooms}) => {
 
     return (
         <div className="window">
-            {/*{(counter !== 0) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitPrev}>Prev</Button>}*/}
-            {/*{(last_element === ((counter+1)*20)) && <Button type={"submit"}  className={"submit"} onClick={handleSubmitNext}>Next</Button>}*/}
             <MapContainer
                 id="map"
-                // className={classes.map}
-                // center={[51.505, -0.091]}
                 zoom={13}
                 scrollWheelZoom={false}
             >
-                {/*<TileLayer*/}
-                {/*    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'*/}
-                {/*    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
-                {/*/>*/}
                 <SearchField
                     provider={prov}
                     showMarker={false}
@@ -575,16 +538,7 @@ const FilterWindow = ({SetRooms}) => {
             <h4>
                 Number of guests
             </h4>
-            {/*<label>Number of guests:</label>*/}
-            {/*<input*/}
-            {/*    min={0}*/}
-            {/*    value={numOfGuests}*/}
-            {/*    defaultValue={2}*/}
-            {/*    type={"number"}*/}
-            {/*    onChange={(e)=>setNumOfGuests(e.target.value)}*/}
-            {/*/>*/}
             <label htmlFor="typeOfRoom">Choose type of room:</label>
-            {/*<select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)} multiple>*/}
             <select name="typeOfRoom" id="typeOfRoom" onChange={handleSetTypeOfRoom} multiple size="1">
                 <option value="private_room">Private Room</option>
                 <option value="hostel">Hostel</option>
@@ -633,11 +587,7 @@ const FilterWindow = ({SetRooms}) => {
             <Typography id="1" gutterBottom={true}>
                 Living Room:
             </Typography>
-            {/*<label>Living Room:</label>*/}
-            {/*<TripleToggleSwitch labels={labels} onChange={handleChangeLivingRoom} />*/}
             <ToggleButtonGroup
-                // value={livingRoom}
-                // exclusive
                 onChange={handleChangeLivingRoom}
                 aria-label="text alignment"
                 className={"toggle-btn-group"}
@@ -657,7 +607,6 @@ const FilterWindow = ({SetRooms}) => {
                 Cooling:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeCooling}
                 aria-label="text alignment"
@@ -678,7 +627,6 @@ const FilterWindow = ({SetRooms}) => {
                 Elevator:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeElevator}
                 aria-label="text alignment"
@@ -699,7 +647,6 @@ const FilterWindow = ({SetRooms}) => {
                 Smoking:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeSmoking}
                 aria-label="text alignment"
@@ -720,7 +667,6 @@ const FilterWindow = ({SetRooms}) => {
                 Pets:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangePets}
                 aria-label="text alignment"
@@ -741,7 +687,6 @@ const FilterWindow = ({SetRooms}) => {
                 Heating:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeHeating}
                 aria-label="text alignment"
@@ -762,7 +707,6 @@ const FilterWindow = ({SetRooms}) => {
                 TV:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeTV}
                 aria-label="text alignment"
@@ -783,7 +727,6 @@ const FilterWindow = ({SetRooms}) => {
                 Events:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeEvents}
                 aria-label="text alignment"
@@ -804,7 +747,6 @@ const FilterWindow = ({SetRooms}) => {
                 Parking:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeParking}
                 aria-label="text alignment"
@@ -825,7 +767,6 @@ const FilterWindow = ({SetRooms}) => {
                 Internet:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeInternet}
                 aria-label="text alignment"
@@ -846,7 +787,6 @@ const FilterWindow = ({SetRooms}) => {
                 Kitchen:
             </Typography>
             <ToggleButtonGroup
-                // value={livingRoom}
                 exclusive
                 onChange={handleChangeKitchen}
                 aria-label="text alignment"
@@ -865,7 +805,6 @@ const FilterWindow = ({SetRooms}) => {
             </ToggleButtonGroup>
 
             <Button type={"submit"} onClick={handleSubmit} className={"submit"}>Submit</Button>
-            {/*<Button type={"submit"} onClick={testSubmit} className={"submit"}>Test</Button>*/}
             <Button type={"submit"} onClick={handleClear} className={"submit"}>Clear</Button>
             <TableOfChosenElements flags={flags} dict={dictionary} />
         </div>

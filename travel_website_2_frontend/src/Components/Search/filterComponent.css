@@ -1,14 +1,10 @@
 .window {
     height: 12000px;
-    /*width: 250px;*/
     align-self: self-start;
     background-color: rgba(20, 0, 90, 0.1);
     border: 10px solid #000000; /* 10px black border */
-    /*border-width: 10px;*/
     width: 15%;
     float: right;
-    /*background-color: #0043E0;*/
-    /*padding: 20px;*/
 }
 p {
     color: black;
@@ -62,16 +58,3 @@ p {
     background: white;
     font-palette: dark;
 }
-
-/*.open-user-map .leaflet-geosearch-bar form {*/
-/*    background-color: red;*/
-/*}*/
-
-/*.open-user-map .leaflet-control-geosearch a.reset {*/
-/*    background-color: red;*/
-/*}*/
-
-/*.open-user-map .leaflet-control-geosearch .results {*/
-/*    background: none;*/
-/*    color: white;*/
-/*}*/

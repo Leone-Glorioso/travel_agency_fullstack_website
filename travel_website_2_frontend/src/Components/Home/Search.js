@@ -16,7 +16,6 @@ import {MapContainer} from "react-leaflet";
 import {OpenStreetMapProvider} from "leaflet-geosearch";
 import Cookies from "universal-cookie";
 import {useAuth} from "../Auth/contex";
-// import {useRoomsCookies} from "../Search/SearchCookieManager";
 
 
 
@@ -28,13 +27,10 @@ function Search(){
     const [latitude, setLatitude] = useState(-50.0);
     const [longitude, setLongitude] = useState(-50.0);
     const [range, setRange] = useState(100);
-    // const [start_numOfBeds, setStart_numOfBeds] = useState(1);
     const [people, setPeople] = useState(2);
     const [numOfBeds, setNumOfBeds] = useState(2);
     const navigate=useNavigate()
     const prov = new OpenStreetMapProvider();
-    // const cookies = Cookies();
-    // const RoomProv = useRoomsCookies()
     const Auth = useAuth()
 
     const marks = [
@@ -85,8 +81,6 @@ function Search(){
                 "end": endDate.toLocaleDateString('en-GB'),
                 "start_numOfBeds": people,
                 "end_numOfBeds": people+1,
-                // "first_element": first_element,
-                // "last_element": last_element,
                 "flags": flags
             }
             console.log(searchRequest)

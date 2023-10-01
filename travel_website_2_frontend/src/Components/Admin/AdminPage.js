@@ -10,7 +10,6 @@ function AdminPage(){
     const Auth = useAuth()
     const user1 = Auth.getUser()
     const user = user1.user
-    // console.log(Auth.user)
 
     const [users, setUsers] = useState([])
     const [requests, setRequests] = useState([])
@@ -129,9 +128,6 @@ function AdminPage(){
     const handleGetClients = async () => {
         try {
             const response = await ApiConnector.getClients(user)
-            // console.log(response.data)
-            // const data = response.data
-            // const users = data instanceof Array ? data : [data]
             setUsers(response.data)
         } catch (error) {
             handleLogError(error)
@@ -142,9 +138,6 @@ function AdminPage(){
     const handleGetLandlordClients = async () => {
         try {
             const response = await ApiConnector.getLandlordClients(user)
-            // console.log(response.data)
-            // const data = response.data
-            // const users = data instanceof Array ? data : [data]
             setUsers(response.data)
         } catch (error) {
             handleLogError(error)
@@ -156,7 +149,6 @@ function AdminPage(){
         setIsRequestsLoading(true)
         try {
             const response = await ApiConnector.allRequests(user)
-            // console.log(response.data)
             setRequests(response.data)
         } catch (error) {
             handleLogError(error)
@@ -241,7 +233,6 @@ function AdminPage(){
             const data = response.data
             const rooms = data instanceof Array ? data : [data]
             setRooms(rooms)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRooms([])
@@ -255,7 +246,6 @@ function AdminPage(){
             const data = response.data
             const rooms = data instanceof Array ? data : [data]
             setRooms(rooms)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRooms([])
@@ -290,7 +280,6 @@ function AdminPage(){
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setReservations([])
@@ -303,7 +292,6 @@ function AdminPage(){
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setReservations([])
@@ -343,7 +331,6 @@ function AdminPage(){
             const data = response.data
             const ratings = data instanceof Array ? data : [data]
             setRatings(ratings)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRatings([])
@@ -356,7 +343,6 @@ function AdminPage(){
             const data = response.data
             const ratings = data instanceof Array ? data : [data]
             setRatings(ratings)
-            // console.log(response.data)
         } catch (error) {
             handleLogError(error)
             setRatings([])

@@ -15,7 +15,6 @@ function ClientTab(props) {
                     <MyReservationsTableClient
                         reservations={reservations}
                         reservationIdSearch={reservationIdSearch}
-                        // handleDeleteReservation={handleDeleteReservation}
                         handleInputChange={handleInputChange}
                         handleSearchReservation={handleSearchReservation}
                         handleGetReservations={handleGetReservations}

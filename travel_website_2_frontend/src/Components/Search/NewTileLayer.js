@@ -10,7 +10,6 @@ function NewTileLayer() {
             "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             {
                 tileSize: 16,
-                // zoomOffset: -1,
                 dragging: false
             }
         ).addTo(map);

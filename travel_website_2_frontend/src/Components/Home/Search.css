@@ -16,7 +16,6 @@
 .search>button{
     position: absolute;
     left:0;
-    /*right:30px;*/
     align-self: auto;
     text-transform: inherit;
     background-color: white;

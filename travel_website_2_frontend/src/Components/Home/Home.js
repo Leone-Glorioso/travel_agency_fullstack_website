@@ -3,7 +3,6 @@ import {ApiConnector} from "../Other/ApiConnector";
 import {handleLogError} from "../Other/Helpers";
 import {Statistic, Icon, Grid, Container, Image, Segment, Dimmer, Loader} from 'semantic-ui-react'
 import WebSiteLogo from '../../logo_1.png'
-//import WebSiteLogo from 'file:///C:/Users/GIGABYTE/Documents/GitHub/travel_website_2/misc/logo_1.png';
 import {Link} from "react-router-dom"; // Adjust the path accordingly
 import Header from './Header'
 import SearchBanner from './SearchBanner'
@@ -24,11 +23,7 @@ function Home(){
                 const respUsers=await ApiConnector.numberOfUsers()
                 const numberOfUsers=respUsers.data
 
-                // const respReservations=await ApiConnector.numberOfReservations()
-                // const numberOfReservations=respReservations.data
-
                 setNumberOfUsers(numberOfUsers)
-                // setNumberOfReservations(numberOfReservations)
             } catch (error){
                 handleLogError(error)
             } finally{
@@ -89,24 +84,12 @@ function Home(){
                             description={"Luxury modern House for unforgettable vacations"} price={"500$"} />
                         </div>
                     </div>
-
-
-
-
-                    {/*<Grid.Column textAlign='center'>*/}
-                    {/*    <Segment color='violet'>*/}
-                    {/*        <Statistic>*/}
-                    {/*            <Statistic.Value><Icon name='laptop' color='grey' />{numberOfReservations}</Statistic.Value>*/}
-                    {/*            <Statistic.Label>Reservations</Statistic.Label>*/}
-                    {/*        </Statistic>*/}
-                    {/*    </Segment>*/}
-                    {/*</Grid.Column>*/}
                 </Grid.Row>
             </Grid>
 
-            {/*<Image src={'https://github.com/Leone-Glorioso/travel_website_2/blob/master/misc/logo_1.png'} style={{marginTop: '10px'}} />*/}
-            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />*/}
-            {/*<Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />*/}
+            <Image src={'https://github.com/Leone-Glorioso/travel_website_2/blob/master/misc/logo_1.png'} style={{marginTop: '10px'}} />
+            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />
+            <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
         </Container>
 
     )

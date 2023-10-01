@@ -10,13 +10,10 @@ import {useAuth} from "../Auth/contex";
 function SearchPage () {
 
     const [rooms, SetRooms] = useState([])
-    // const RoomProv = useRoomsCookies()
-    // const cookies = new Cookies();
     const Auth = useAuth()
 
     useEffect(() => {
         SetRooms(Auth.rooms)
-        // cookies.remove('rooms')
     }, []);
 
     return (

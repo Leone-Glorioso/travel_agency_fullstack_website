@@ -11,7 +11,6 @@ function LandlordClientPage()
     const Auth = useAuth()
     const user1 = Auth.getUser()
     const user = user1.user
-    // console.log(Auth.user)
 
     const [reservations, setReservations] = useState([])
     const [rooms, setRooms] = useState([])
@@ -77,9 +76,6 @@ function LandlordClientPage()
         const id = parseInt(reservationIdSearch)
         try {
             const response = await ApiConnector.getReservationOfMyRooms(user, id)
-            // console.log(response.data)
-            // const data = response.data
-            // const reservations = data instanceof Array ? data : [data]
             setReservations([response.data])
         } catch (error) {
             handleLogError(error)
@@ -91,7 +87,6 @@ function LandlordClientPage()
         const name = reservationClientSearch
         try {
             const response = await ApiConnector.getReservationsOfMyRoomsByClient(user, name)
-            console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
@@ -105,7 +100,6 @@ function LandlordClientPage()
         const id = parseInt(reservationRoomSearch)
         try {
             const response = await ApiConnector.getReservationsOfMyRoom(user, id)
-            console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservations(reservations)
@@ -119,7 +113,6 @@ function LandlordClientPage()
         setIsRoomsLoading(true)
         try {
             const response = await ApiConnector.getMyRooms(user)
-            // console.log(response.data)
             setRooms(response.data)
         } catch (error) {
             handleLogError(error)
@@ -141,7 +134,6 @@ function LandlordClientPage()
         const id = parseInt(roomIdSearch)
         try {
             const response = await ApiConnector.getRoom(id)
-            console.log(response.data)
             const data = response.data
             const rooms = data instanceof Array ? data : [data]
             setRooms(rooms)
@@ -155,7 +147,6 @@ function LandlordClientPage()
         setIsReservationsFromLoading(true)
         try {
             const response = await ApiConnector.getMyReservations(user)
-            console.log(response.data)
             setReservationsFrom(response.data)
         } catch (error) {
             handleLogError(error)
@@ -168,7 +159,6 @@ function LandlordClientPage()
         const id = parseInt(reservationSearch)
         try {
             const response = await ApiConnector.getMyReservation(user, id)
-            console.log(response.data)
             const data = response.data
             const reservations = data instanceof Array ? data : [data]
             setReservationsFrom(reservations)

@@ -24,7 +24,6 @@ const NewMessagePage = () => {
         try {
             // console.log(roomRequest)
             const response = await ApiConnector.sendMessage(user.user, message)
-            // console.log(response)
             setSubmited(true)
         }
         catch (error){
@@ -52,7 +51,6 @@ const NewMessagePage = () => {
                     value={receiver}
                     onChange={(e) => setReceiver(e.target.value)}
                     className={"two"}
-                    // size={100}
                 />
                 <label>Description</label>
                 <input

@@ -1,9 +1,6 @@
 .grid-container2 {
     display: grid;
     grid-template-columns: auto auto auto;
-    /*grid: auto;*/
-    /*background-color: #2196F3;*/
-    /*float: right;*/
     padding: 10px;
 }
 .grid-item {

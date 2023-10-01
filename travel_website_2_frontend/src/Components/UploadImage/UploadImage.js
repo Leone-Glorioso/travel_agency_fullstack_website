@@ -28,7 +28,6 @@ function UploadImage(name)
                     Add Image
                 </Button>
                 <input type="file" id="file" hidden onChange={fileChange} />
-                {/*<Button type="submit" onClick={onFormSubmit}>Upload</Button>*/}
             </Form.Field>
     )
 }

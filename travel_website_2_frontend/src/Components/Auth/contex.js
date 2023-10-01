@@ -1,7 +1,6 @@
 
 
 import { createContext, useContext, useEffect, useState } from "react";
-// import Cookies from 'react-cookie';
 import Cookies from 'universal-cookie';
 
 
@@ -12,28 +11,13 @@ function AuthProvider({ children }) {
     const [rooms, setRooms] = useState([]);
     const cookies = new Cookies();
 
-    // useEffect(() => {
-    //     const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    //     if (storedUser) {
-    //         // Check token expiry and update user state accordingly
-    //         if (Date.now() < storedUser.exp * 1000000) {
-    //             setUser(storedUser);
-    //         } else {
-    //             userLogout();
-    //         }
-    //     }
-    // }, []);
-
     const userIsAuthenticated = () => {
-        // console.log(cookies.getAll().user.user)
         return cookies.get('user') !== undefined;
     };
 
 
     const userLogin = (user, accessToken) => {
         sessionStorage.setItem("user", JSON.stringify({ user, accessToken }));
-        // let d = new Date();
-        // d.setTime(d.getTime() + (10*60*1000));
         cookies.set('user', JSON.stringify({ user, accessToken }), {
             expires: new Date(Date.now() + 1000000)
         })
@@ -42,7 +26,6 @@ function AuthProvider({ children }) {
 
 
     const getUser = () => {
-        console.log(cookies.get('user'))
         return cookies.get('user')
     }
 
@@ -55,22 +38,16 @@ function AuthProvider({ children }) {
     };
 
     const roomsSetter = (room) => {
-        console.log(room)
-        const a = JSON.stringify(room)
-        console.log(JSON.stringify(room))
-        console.log(JSON.parse(a))
         cookies.set('rooms', JSON.stringify(room))
         setRooms(room);
     };
 
 
     const roomsGetter = () => {
-        // console.log(cookies.get('rooms'))
         return JSON.parse(cookies.get('rooms'));
     };
 
     const roomsExists = () => {
-        // console.log(cookies.getAll().user.user)
         return cookies.get('rooms') !== undefined;
     };
 
@@ -101,68 +78,3 @@ export function useAuth() {
 
 export { AuthProvider };
 
-
-// const AuthContext=createContext()
-//
-// function AuthProvider({children}){
-//
-//     const [user,setUser]=useState(null)
-//
-//     useEffect(()=>{
-//         const storedUser=JSON.parse(localStorage.getItem('user'))
-//         setUser(storedUser)
-//     }, [])
-//
-//     const getUser = () => {
-//         return JSON.parse(localStorage.getItem('user'))
-//     }
-//
-//     const userIsAuthenticated = () => {
-//         let storedUser=localStorage.getItem('user')
-//         console.log(user)
-//         if (!storedUser){
-//             console.log('cy@')
-//             return false
-//         }
-//         storedUser=JSON.parse(storedUser)
-//
-//         if (Date.now() > storedUser.data.exp * 1000){
-//             userLogout()
-//             return false
-//         }
-//         return true
-//     }
-//
-//     const userLogin=user => {
-//         localStorage.setItem('user',JSON.stringify(user))
-//         setUser(user)
-//     }
-//
-//     const userLogout=() => {
-//         localStorage.removeItem('user')
-//         setUser(null)
-//     }
-//
-//     const contextValue = {
-//         user,
-//         getUser,
-//         userIsAuthenticated,
-//         userLogin,
-//         userLogout,
-//     }
-//
-//     return (
-//         <AuthContext.Provider value={contextValue}>
-//             {children}
-//         </AuthContext.Provider>
-//     )
-//
-// }
-//
-// export default AuthContext
-//
-// export function useAuth(){
-//     return useContext(AuthContext)
-// }
-//
-// export {AuthProvider}

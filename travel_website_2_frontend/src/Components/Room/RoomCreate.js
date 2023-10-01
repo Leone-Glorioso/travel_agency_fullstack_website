@@ -71,9 +71,7 @@ const RoomCreate = () => {
             "address": address
         }
         try {
-            console.log(roomRequest)
             const response = await ApiConnector.createRoom(user.user, roomRequest)
-            console.log(response)
             setSubmited(true)
         }
         catch (error){
@@ -111,7 +109,6 @@ const RoomCreate = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className={"two"}
-                    // size={100}
                 />
                 <label>Description</label>
                 <input
@@ -253,7 +250,6 @@ const RoomCreate = () => {
                     <option value="false">no</option>
                 </select>
                 <label htmlFor="typeOfRoom">Choose type of room:</label>
-                {/*<select name="typeOfRoom" id="typeOfRoom" onChange={(e) => handleSetTypeOfRoom(e.target.value)} multiple>*/}
                 <select name="typeOfRoom" id="typeOfRoom" onChange={(e) => setTypeOfRoom(e.target.value)} size="1">
                     <option value="private_room">Private Room</option>
                     <option value="hostel">Hostel</option>

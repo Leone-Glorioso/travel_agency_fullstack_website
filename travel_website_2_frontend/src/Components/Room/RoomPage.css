@@ -16,27 +16,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/*!* Styles for the room details section *!*/
-/*.room-details {*/
-/*    margin-top: 20px;*/
-/*    background-color: #fff;*/
-/*    padding: 20px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 5px;*/
-/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*.room-details h2 {*/
-/*    font-size: 24px;*/
-/*    margin-bottom: 10px;*/
-/*    color: #007bff;*/
-/*}*/
-
-/*.room-details h4 {*/
-/*    font-size: 18px;*/
-/*    color: #444;*/
-/*}*/
-
 /* Styles for the room details section */
 .room-details {
     margin-top: 20px;
@@ -45,33 +24,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /*display: flex; !* Use flexbox for horizontal layout *!*/
-    /*flex-wrap: wrap; !* Wrap elements to the next line if necessary *!*/
-    /*justify-content: center; !* Center items horizontally *!*/
-    /*align-items: center; !* Center items vertically *!*/
-    /*text-align: center; !* Center the content *!*/
 }
 .custom {
     color: #282c34;
 }
-
-/*.room-details h2 {*/
-/*    font-size: 24px;*/
-/*    margin-bottom: 10px;*/
-/*    color: #007bff;*/
-/*}*/
-
-/*.room-details h4,*/
-/*.room-details p {*/
-/*    font-size: 16px;*/
-/*    line-height: 1.5;*/
-/*    margin: 5px; !* Add some spacing around elements *!*/
-/*    text-align: center; !* Center the content *!*/
-/*}*/
-
-/*.room-details h4 {*/
-/*    color: #444;*/
-/*}*/
 
 /* Styles for amenities section */
 .amenities {

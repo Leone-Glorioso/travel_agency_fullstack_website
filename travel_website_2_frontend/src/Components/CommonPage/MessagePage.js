@@ -10,7 +10,6 @@ const MessagePage = () => {
     const Auth = useAuth()
     const user1 = Auth.getUser()
     const user = user1.user
-    // console.log(Auth.user)
 
     const [received, setReceived] = useState([])
     const [sent, setSent] = useState([])
@@ -40,7 +39,6 @@ const MessagePage = () => {
         setIsSent(true)
         try {
             const response = await ApiConnector.allMessagesBySender(user)
-            // console.log(response.data)
             setSent(response.data)
         } catch (error) {
             handleLogError(error)
