@@ -48,32 +48,7 @@ function Login() {
         }
     };
 
-
-
-    // useEffect(() => {
-    //     const checkRole = async () =>
-    //     {
-    //         if(isLogged) {
-    //             const response = await ApiConnector.getUserMe(Auth.user.user)
-    //             const data = response.data
-    //             console.log(response.data)
-    //             setRole(data.role)
-    //         }
-    //     }
-    //     checkRole().catch(console.error)
-    // }, []);
-
     if (isLogged) {
-        // console.log(role)
-        // if(role === "Administrator")
-        //     return <Navigate to={'/admin'} />;
-        // else if(role === "Client")
-        //     return <Navigate to={'/client'} />;
-        // else if(role === "Landlord")
-        //     return <Navigate to={'/landlord'} />;
-        // else if(role === "LandlordClient")
-        //     return <Navigate to={'/landlordclient'} />;
-        // else
         return <Navigate to={'/'} />;
     }
 
