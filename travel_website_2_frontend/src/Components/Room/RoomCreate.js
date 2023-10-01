@@ -35,6 +35,9 @@ const RoomCreate = () => {
     const [isError, setIsError] = useState(false)
     const [submited, setSubmited] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    let [latitude, setLatitude] = useState(0.0)
+    let [longitude, setLongitude] = useState(0.0)
+    let [address, setAddress] = useState('')
 
     const prov = new OpenStreetMapProvider()
 
@@ -62,7 +65,10 @@ const RoomCreate = () => {
             "tv": tv,
             "elevator": elevator,
             "parking": parking,
-            "typeofroom": typeOfRoom
+            "typeofroom": typeOfRoom,
+            "latitude": latitude,
+            "longitude": longitude,
+            "address": address
         }
         try {
             console.log(roomRequest)
@@ -86,30 +92,18 @@ const RoomCreate = () => {
         }
     }
 
+    const setLat = (value) =>
+    {
+        setLatitude(value)
+    }
 
+    const setLong = (value) =>
+    {
+        setLongitude(value)
+    }
 
     return (
         <>
-            {/*<MapContainer*/}
-            {/*    id="map"*/}
-            {/*    // className={classes.map}*/}
-            {/*    center={[51.505, -0.091]}*/}
-            {/*    zoom={13}*/}
-            {/*    scrollWheelZoom={false}*/}
-            {/*>*/}
-            {/*    <SearchField*/}
-            {/*        provider={prov}*/}
-            {/*        showMarker={true}*/}
-            {/*        showPopup={false}*/}
-            {/*        popupFormat={({ query, result }) => result.label}*/}
-            {/*        maxMarkers={3}*/}
-            {/*        retainZoomLevel={false}*/}
-            {/*        animateZoom={true}*/}
-            {/*        autoClose={false}*/}
-            {/*        searchLabel={"Enter address, please"}*/}
-            {/*        keepResult={true}*/}
-            {/*    />*/}
-            {/*</MapContainer>*/}
             <Container className={"one"}>
                 <label>Name</label>
                 <input
@@ -127,27 +121,36 @@ const RoomCreate = () => {
                     className={"two"}
 
                 />
-                {/*<MapContainer*/}
-                {/*    id="map"*/}
-                {/*    // className={classes.map}*/}
-                {/*    center={[51.505, -0.091]}*/}
-                {/*    zoom={13}*/}
-                {/*    scrollWheelZoom={false}*/}
-                {/*>*/}
-                {/*    <NewTileLayer />*/}
-                {/*    <SearchField*/}
-                {/*        provider={prov}*/}
-                {/*        showMarker={true}*/}
-                {/*        showPopup={false}*/}
-                {/*        popupFormat={({ query, result }) => result.label}*/}
-                {/*        maxMarkers={3}*/}
-                {/*        retainZoomLevel={false}*/}
-                {/*        animateZoom={true}*/}
-                {/*        autoClose={false}*/}
-                {/*        searchLabel={"Enter address, please"}*/}
-                {/*        keepResult={true}*/}
-                {/*    />*/}
-                {/*</MapContainer>*/}
+                <label>Address</label>
+                <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className={"two"}
+
+                />
+
+                <MapContainer
+                    id="map"
+                    zoom={13}
+                    scrollWheelZoom={false}
+                >
+                    <SearchField
+                        provider={prov}
+                        showMarker={false}
+                        showPopup={false}
+                        popupFormat={({ query, result }) => result.label}
+                        maxMarkers={3}
+                        retainZoomLevel={false}
+                        animateZoom={true}
+                        autoClose={false}
+                        searchLabel={"Enter address, please"}
+                        keepResult={true}
+                        setLat={setLat}
+                        setLong={setLong}
+                        setFlags={()=>{console.log()}}
+                    />
+                </MapContainer>
                 <label>Beds</label>
                 <input
                     type="number"
