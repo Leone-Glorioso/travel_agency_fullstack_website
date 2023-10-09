@@ -88,8 +88,8 @@ function Home(){
             </Grid>
 
             <Image src={'https://github.com/Leone-Glorioso/travel_website_2/blob/master/misc/logo_1.png'} style={{marginTop: '10px'}} />
-            <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />
-            <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
+            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />*/}
+            {/*<Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />*/}
         </Container>
 
     )
