@@ -168,7 +168,7 @@ function Search(){
                         type="number"
                         min={1}
                         max={10}
-                        value={numOfBeds}
+                        value={people}
                         onChange={(e) => setPeople(e.target.value)}
                     />
 
