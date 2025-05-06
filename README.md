@@ -33,6 +33,6 @@ The app consists of the following parts:
 * **Database:** Was created using MySQL and is a complete database with intact relational logic and complete entity management
 * **Recommendations System:** In Java that, although not using machine learning methods, is highly effected when tested on a sample of rooms.
 
-***Note:*** Additional Info can be found on the *readme.pdf* file in the database_README folder.
+***Note:*** Additional Info can be found on the *readme.pdf* file in the Database_README folder.
 
 <p align="right">(<a href="#readme-top">Back to the top</a>)</p>
